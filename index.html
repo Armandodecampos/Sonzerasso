@@ -1171,12 +1171,12 @@
         z-index: 1;
         position: fixed;
         margin: 0 auto;
-        top: 50%;
-        bottom: 50%;
+        bottom: 40%;
         left: 0;
         right: 0;
-        width: 150px;
-        height: 150px;
+        width: 20%;
+		max-width:200px;
+        aspect-ratio:1/1;
         animation: spinner-8k6ao5md 3s infinite;
         border-radius: 50%;
         background-color: #ff7700;
@@ -1195,6 +1195,16 @@
         100% {
           transform: perspective(224px) rotateY(2880deg);
         }
+      }
+	  .spinnertext {
+        z-index: 1;
+        position: fixed;
+        margin: 0 auto;
+		bottom: 20%;
+        left: 0;
+        right: 0;
+        color:#fa0;
+		font-size:25px;
       }
       .waitline {
         position: fixed;
@@ -1223,6 +1233,7 @@
   <body>
     <div class="carregamentoinicial" id="carregamentoinicial">
       <div class="spinner"></div>
+	  <div class="spinnertext">Carregando</div>
     </div>
     <div class="simp-coverteste2" id="simpcoverteste2"></div>
     <div id="wrapper">
