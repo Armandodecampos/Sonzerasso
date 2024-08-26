@@ -1267,7 +1267,7 @@
           next();
         };
       </script>
-      <a href="#top"><button class="botaovoltaraotopodasmusicas" id="botaovoltaraotopodasmusicas"></button></a>
+      <a href="#top"><button class="botaovoltaraotopodasmusicas" id="botaovoltaraotopodasmusicas" onclick="toque()"></button></a>
       <div class="suportevinil"></div>
       <div class="embaixovinil" id="embaixovinil">
         <div class="vinil" id="vinil"></div>
@@ -1277,8 +1277,8 @@
       </div>
       <div class="faixabordasuperior">
         <div class="pesquisa" id="pesquisa">
-          <input type="text" class="searchbar" id="searchbar" placeholder="Pesquisar" onfocus="changetextsearch();aparecerdicapesquisa()" onfocusout="changetextsearch2();fechardicapesquisa()" tabindex="1" autocomplete="off"><a href="#voltaraotopodasmusicas"><button class="enviar" onclick="search_animal()">Enviar</button></a>
-          <button class="limpar" id="limpar" onclick="clearInputField();">Limpar</button>
+          <input type="text" class="searchbar" id="searchbar" placeholder="Pesquisar" onfocus="changetextsearch();aparecerdicapesquisa()" onfocusout="changetextsearch2();fechardicapesquisa()" onclick="toque()" tabindex="1" autocomplete="off"><a href="#voltaraotopodasmusicas"><button class="enviar" onclick="search_animal();toque()">Enviar</button></a>
+          <button class="limpar" id="limpar" onclick="clearInputField();toque()">Limpar</button>
           <div class="dicapesquisa" id="dicapesquisa">Pesquise por artista/banda ou m&uacute;sica ou album</div>
         </div>
         <script>
@@ -1385,18 +1385,18 @@
           <p> &#128073; Contribuir com um pix de qualquer valor.
             <br>Chave pix: "contribuacomosite@gmail.com".<br>Benefici&#225;rio: Armando de Campos J&uacute;nior.
           </p>
-          <button class="btn4" onclick="copy('contribuacomosite@gmail.com')">Copiar chave Pix</button><br><br>
+          <button class="btn4" onclick="copy('contribuacomosite@gmail.com');toque()">Copiar chave Pix</button><br><br>
           <hr>
           <p>&#128073; Contribuir com o PayPal:
           <p>
           <form action="https://www.paypal.com/donate" method="post" target="_blank" rel="noopener noreferrer">
             <input type="hidden" name="hosted_button_id" value="EAVYNVVQQYK6S" />
-            <button class="btn4" onclick="">Contribuir</button>
+            <button class="btn4" onclick="toque()">Contribuir</button>
           </form>
           <br>
           <hr>
           <p>&#128073; Divulgar nas redes sociais com amigos e familiares.</p>
-          <button class="btn4" onclick="copy('https://sonzerasso.online/')">Copiar URL do site</button><br>
+          <button class="btn4" onclick="copy('https://sonzerasso.online/');toque()">Copiar URL do site</button><br>
           <input id="cb" type="text" hidden>
           <br>
           </center>
@@ -1413,15 +1413,15 @@
       <div class="faixabordainferior">
         <div class="boxcontroles">
           <input type="checkbox" id="aleatorio" value="aleatorio" checked>
-          <label for="aleatorio" class="aleatorio" onclick=""></label>
+          <label for="aleatorio" class="aleatorio" onclick="toque()"></label>
           <input type="checkbox" id="musicaanterior" value="musicaanterior">
-          <label for="musicaanterior" class="musicaanterior" onclick=""></label>
+          <label for="musicaanterior" class="musicaanterior" onclick="toque()"></label>
           <input type="checkbox" id="playpause" value="playpause">
-          <label for="playpause" class="playpause" onclick=""></label>
+          <label for="playpause" class="playpause" onclick="toque()"></label>
           <input type="checkbox" id="proximamusica" value="proximamusica">
-          <label for="proximamusica" class="proximamusica" onclick=""></label>
+          <label for="proximamusica" class="proximamusica" onclick="toque()"></label>
           <input type="checkbox" id="sequencial" value="sequencial">
-          <label for="sequencial" class="sequencial" onclick=""></label>
+          <label for="sequencial" class="sequencial" onclick="toque()"></label>
         </div>
       </div>
       <input class="progresso" id="progresso" type="range" min="0" max="100" value="0" disabled />
@@ -33104,6 +33104,11 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           }
         }
       </script>
+      <script>
+	function toque() {
+	  window.navigator.vibrate(50);
+	}
+     </script>
     </div>
   </body>
 </html>
