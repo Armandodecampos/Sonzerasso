@@ -71,6 +71,7 @@
         aspect-ratio: 4 / 1;
         background: url(https://dl.dropbox.com/scl/fi/4q0jg02jmm4kywhwtzrg5/Sonzerasso-logo.png?rlkey=ejwkc9z3n4f591fojgi4xlo9r&st=53i5z9w0&dl=0) no-repeat;
         background-size: 100%;
+		z-index:2;
       }
       .progresso {
         width: 50%;
@@ -864,7 +865,6 @@
         height: 100%;
         width: 100%;
         filter: blur(200px) saturate(200%) contrast(100%);
-		overflow-y;
       }
       .box-artistas {
         position: relative;
@@ -1100,13 +1100,6 @@
           transform: translateY(-10px)
         }
       }
-      .heart {
-        background-image: url("https://dl.dropbox.com/scl/fi/wkwkihb1k14xh3xp1a5ae/contribua.png?rlkey=d0xtpqkdh1thq8gaufqgla2fs&st=n1bpmq1s&dl=0");
-        background-size: 100%;
-        margin-bottom: -50px;
-        width: 100px;
-        aspect-ratio: 1 / 1;
-      }
       .copiarmusica {
         margin: 0 auto;
         left: 0;
@@ -1170,7 +1163,7 @@
         z-index: 1;
         position: fixed;
         margin: 0 auto;
-        bottom: 40%;
+        bottom: 30%;
         left: 0;
         right: 0;
         width: 30%;
@@ -1180,7 +1173,7 @@
         border-radius: 50%;
         background-color: #ff7700;
         transform-origin: center;
-        background: url("https://dl.dropbox.com/scl/fi/bbdcwtnm8tsqibl2j4mr3/pngegg.png?rlkey=jafo20v0qeeoxwf7paiq3sz6n&st=wnqlowwv&dl=0") no-repeat;
+        background: url("https://dl.dropbox.com/scl/fi/hkwroaq7bt7ag4pnqm7g6/guitar.png?rlkey=29aor0uheuijmzaqm11kjwl0k&st=xhhzppcm&dl=0") no-repeat;
         background-size: 100%;
       }
       @keyframes spinner-8k6ao5md {
@@ -1215,7 +1208,8 @@
         width: 6em;
         aspect-ratio: 1 / 1;
         opacity: 13;
-        border-radius: 50% background-color: #ff7700;
+        border-radius: 50%;
+		background-color: #ff7700;
         background: url("https://dl.dropbox.com/scl/fi/bbdcwtnm8tsqibl2j4mr3/pngegg.png?rlkey=jafo20v0qeeoxwf7paiq3sz6n&st=wnqlowwv&dl=0") no-repeat;
         background-size: 100%;
       }
@@ -1353,33 +1347,29 @@
         </script>
         <br><br><br><br>
         <div class="informacao" translate="yes">
-          <h3>Instale o aplicativo</h3>
-          <ol>Usuários do Windows, Linux e Chromebook podem adicionar o site como um aplicativo no Chrome. Para fazer isso, siga as instru&ccedil;&otilde;es:</ul>
-            <br>
-            <br>
-            <li>Abra o Chrome.</li>
-            <li>Navegue até o site.</li>
-            <li>No canto superior direito, clique em "Mais". <img src="https://dl.dropbox.com/scl/fi/jcp1hyatkf0316tcm6nkh/more.png?rlkey=g91vbatm43kdcqsunpw2bvpd4&st=m36tmjdg&dl=0" alt="Girl in a jacket" width="20px" height="20px" style="filter: invert(100%);"></li>
-            <li>Clique em "Adicionar &agrave; tela inicial" ou em "Salvar e compartilhar" e depois em "Instalar p&aacute;gina como app..."</li>
-            <li>Digite um nome para o aplicativo e clique em Instalar.</li>
-          </ol>
-		  Pronto. Agora voc&ecirc; tem um aplicativo do Sonzerasso!
-          <br><br>
+		  <h3>Instale o aplicativo</h3>
+		  <img style="width:80px;height:80px;filter: invert(0%);" src="https://dl.dropbox.com/scl/fi/8duwdfba0ddem1hgo2m6k/mobile-app.png?rlkey=rtohp61zc09s1bj2r3a8a7qrk&st=tojnizuf&dl=0">
+          <p>Usuários do Windows, Linux e Chromebook podem adicionar o site como um aplicativo no Chrome. Para fazer isso, siga as instru&ccedil;&otilde;es:</p>
+		  <p>&#128073; Abra o Chrome.</p>
+		  <p>&#128073; Navegue até o site.</p>
+		  <p>&#128073; No canto superior direito, clique em "Mais". <img width="20px" height="20px" style="filter: invert(100%);" src="https://dl.dropbox.com/scl/fi/jcp1hyatkf0316tcm6nkh/more.png?rlkey=g91vbatm43kdcqsunpw2bvpd4&st=m36tmjdg&dl=0"></p>
+		  <p>&#128073; Clique em "Adicionar &agrave; tela inicial" ou em "Salvar e compartilhar" e depois em "Instalar p&aacute;gina como app..."</p>
+		  <p>&#128073; Digite um nome para o aplicativo e clique em Instalar.</p>
+		  <p>Pronto. Agora voc&ecirc; tem um aplicativo do Sonzerasso!</p>
+          <br>
+		  <br>
           <h3>Controles (teclado):</h3>
-          <ul>
-            <li>&uarr;: Reproduzir m&uacute;sica e pausar m&uacute;sica.</li>
-            <li>&rarr;: Pr&#243;xima m&uacute;sica.</li>
-            <li>&larr;: M&uacute;sica anterior.</li>
-            <li><span translate="no">Esc:</span> Abrir e fechar a lista de m&uacute;sicas.</li>
-            <li><span translate="no">Enter:</span> Pesquisar na lista de m&uacute;sicas.</li>
-            <li><span translate="no">Delete:</span> Limpar o campo de pesquisa.</li>
-          </ul>
-          <center>
-            <div class="heart"></div>
-          </center>
-          <center>
+		  <img style="width:80px;height:80px;filter: invert(0%);" src="https://dl.dropbox.com/scl/fi/6dvtemrlmswnam6fbaih2/content.png?rlkey=kubusajrnc098r3n6ch9pl2n5&st=aoxxvkro&dl=0">
+		  <p>&#128073; &uarr;: Reproduzir m&uacute;sica e pausar m&uacute;sica.</p>
+          <p>&#128073; &rarr;: Pr&#243;xima m&uacute;sica.</p>
+		  <p>&#128073; &larr;: M&uacute;sica anterior.</p>
+		  <p>&#128073; <span translate="no">Esc:</span> Abrir e fechar a lista de m&uacute;sicas.</p>
+		  <p>&#128073; <span translate="no">Enter:</span> Pesquisar na lista de m&uacute;sicas.</p>
+		  <p>&#128073; <span translate="no">Delete:</span> Limpar o campo de pesquisa.</p>
+		  <br>
+		  <br>
             <h1>Contribua!</h1>
-          </center>
+		  <img style="width:80px;height:80px;filter: invert(0%);" src="https://dl.dropbox.com/scl/fi/euahrhewrlbcz3wicaxbl/handshake.png?rlkey=d7fdpxcrs4jbh6iqjoeheicxx&st=c2xa3oap&dl=0">
           <h4 style="font-size:19px;">Caro ouvinte, sua ajuda &eacute; muito importante para o crescimento desse site e a adi&ccedil;&atilde;o de novas m&uacute;sicas. Para contribuir, voc&ecirc; pode:</h4>
           <hr>
           <p> &#128073; Contribuir com um pix de qualquer valor.
@@ -1406,6 +1396,7 @@
           <br><br><br>
           <br>
           <center>
+			<img style="width:100px;aspect-ratio:1/1;" src="https://dl.dropbox.com/scl/fi/4vj4f0yjc9ytxij2mwnod/rock.png?rlkey=dwrzf3ls7o14bl2fnr5ttu6mg&st=v323mikn&dl=0">
             <h5>Cria&#231;&#227;o e manuten&#231;&#227;o do site:<br>Armando de Campos J&#250;nior:</h5>
           </center>
         </div>
