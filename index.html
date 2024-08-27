@@ -1234,7 +1234,6 @@
       <div class="spinner"></div>
 	  <div class="spinnertext" translate="yes">Carregando</div>
     </div>
-    <div class="simp-coverteste2" id="simpcoverteste2"></div>
     <div id="wrapper">
       <div class="carregando" id="carregando" translate="no">
         <span style="--i:1">S</span>
@@ -1248,6 +1247,8 @@
         <span style="--i:9">s</span>
         <span style="--i:10">o</span>
       </div>
+	  <div class="simp-coverteste2" id="simpcoverteste2"></div>
+	  <input id="invisivel">
       <div class="waitline" id="waitline"></div>
       <script>
         window.onload = function() {
@@ -1353,15 +1354,16 @@
         <br><br><br><br>
         <div class="informacao" translate="yes">
           <h3>Instale o aplicativo</h3>
-          <ol>Usuários do Windows, Linux e Chromebook podem adicionar o atalho de aplicativo no Chrome para o site:</ul>
+          <ol>Usuários do Windows, Linux e Chromebook podem adicionar o site como um aplicativo no Chrome. Para fazer isso, siga as instru&ccedil;&otilde;es:</ul>
             <br>
             <br>
             <li>Abra o Chrome.</li>
             <li>Navegue até o site.</li>
-            <li>No canto superior direito, clique em "Mais" <img src="https://dl.dropbox.com/scl/fi/jcp1hyatkf0316tcm6nkh/more.png?rlkey=g91vbatm43kdcqsunpw2bvpd4&st=m36tmjdg&dl=0" alt="Girl in a jacket" width="20px" height="20px" style="filter: invert(100%);">.</li>
-            <li>Clique em "Adicionar &agrave; tela inicial" ou "Criar atalho".</li>
-            <li>Digite um nome para o atalho e clique em Criar.</li>
+            <li>No canto superior direito, clique em "Mais". <img src="https://dl.dropbox.com/scl/fi/jcp1hyatkf0316tcm6nkh/more.png?rlkey=g91vbatm43kdcqsunpw2bvpd4&st=m36tmjdg&dl=0" alt="Girl in a jacket" width="20px" height="20px" style="filter: invert(100%);"></li>
+            <li>Clique em "Adicionar &agrave; tela inicial" ou em "Salvar e compartilhar" e depois em "Instalar p&aacute;gina como app..."</li>
+            <li>Digite um nome para o aplicativo e clique em Isntalar.</li>
           </ol>
+		  Pronto. Agora voc&ecirc; tem um aplicativo do Sonzerasso!
           <br><br>
           <h3>Controles (teclado):</h3>
           <ul>
@@ -5535,6 +5537,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           if (event.keyCode == 38) {
             document.getElementById('volume-control').blur();
             document.getElementById('progresso').blur();
+			document.getElementById('invisivel').focus();
             let toggleButton = document.getElementById("playpause");
             if (toggleButton.checked) {
               document.getElementById('playpause').focus();
