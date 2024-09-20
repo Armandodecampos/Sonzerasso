@@ -789,7 +789,7 @@
         width: 60%;
         top: 20px;
         aspect-ratio: 1/1;
-        max-width: 300px;
+        max-width: 400px;
         margin: 0 auto;
         margin-bottom: 90px;
         border: 2px solid #333;
@@ -862,9 +862,9 @@
       .simp-coverteste2 {
         position: fixed;
         z-index: 1;
-        height: 100%;
-        width: 100%;
-        filter: blur(200px) saturate(200%) contrast(100%);
+        height: 200%;
+        width: 200%;
+        filter: blur(300px) saturate(200%) contrast(100%);
       }
       .box-artistas {
         position: relative;
@@ -1178,14 +1178,14 @@
       }
       @keyframes spinner-8k6ao5md {
         0% {
-          transform: perspective(224px) rotateY(0deg);
+          transform: perspective(224px) rotateY(0deg) rotateX(0deg);bottom: 30%;
         }
         10% {
-          transform: perspective(224px) rotateY(-65deg);
+          transform: perspective(224px) rotateY(-65deg) rotateX(50deg);;bottom: 70%;
         }
         90%,
         100% {
-          transform: perspective(224px) rotateY(2880deg);
+          transform: perspective(224px) rotateY(2880deg) rotateX(0deg);;bottom: 30%;
         }
       }
 	  .spinnertext {
@@ -1197,6 +1197,20 @@
         right: 0;
         color:#fa0;
 		font-size:25px;
+        animation: spinner-8k6ao5md2 10s infinite;
+        opacity:0.8;
+        font-weight:bold;
+      }
+      @keyframes spinner-8k6ao5md2 {
+        0% {
+          opacity:0.8;
+        }
+        50% {
+            opacity:0.2;
+        }
+        100% {
+            opacity:0.8;
+        }
       }
       .waitline {
         position: fixed;
@@ -1221,12 +1235,23 @@
           left: 100%
         }
       }
+      .mural{
+        z-index:-1;
+        position:fixed;
+        background: url("https://dl.dropbox.com/scl/fi/19jconraqp85qrydpp07i/Mural.png?rlkey=q5cas87olazm3okbhrek31zdk&st=weml9gsn&dl=0") no-repeat;
+        background-size: 100%; 
+        margin:0 auto;
+        top:10%;
+        aspect-ratio:1/1;
+        left:0;
+        right:0; 
+      }
     </style>
   </head>
   <body>
     <div class="carregamentoinicial" id="carregamentoinicial">
       <div class="spinner"></div>
-	  <div class="spinnertext" translate="yes">Carregando</div>
+	  <div class="spinnertext" translate="yes">C a r r e g a n d o</div>
     </div>
     <div id="wrapper">
       <div class="carregando" id="carregando" translate="no">
@@ -1304,7 +1329,9 @@
           }
         </script>
       </div>
+      <div class="mural"></div>
       <div class="espacobranco" id="espacobranco">
+        
         <div class="titulo"></div>
         <script>
           var timer = setInterval(next, 30000);
@@ -5445,7 +5472,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
         }
         function simp_setAlbum(index) {
           simp_cover.innerHTML = simp_a_url[index].dataset.cover ? '<div style="background:url(' + simp_a_url[index].dataset.cover + ') no-repeat;background-size:cover;width:100%;aspect-ratio:1 / 1;"></div>' : '<i>Falha ao carregar</i>';
-          simp_cover2.innerHTML = simp_a_url[index].dataset.cover ? '<div style="background:url(' + simp_a_url[index].dataset.cover + ');background-size: cover;width:100%;height:100%;"></div>' : '<i>Falha ao carregar</i>';
+          simp_cover2.innerHTML = simp_a_url[index].dataset.cover ? '<div style="background:url(' + simp_a_url[index].dataset.cover + ');background-position: center;width:200%;height:200%;"></div>' : '<i>Falha ao carregar</i>';
           simp_title.innerHTML = simp_source[index].querySelector('.xyz').innerHTML;
         }
         function simp_changeAudio(elem) {
