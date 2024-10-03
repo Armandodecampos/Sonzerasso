@@ -228,7 +228,7 @@
         background: #ddd;
         width: 85%;
         max-width: 400px;
-        padding: 15px;
+        padding: 10px;
         padding-bottom: 55px;
         box-shadow: 0px 0px 3px 1px black;
         background: #222;
@@ -1105,13 +1105,13 @@
         }
       }
       .copiarmusica {
-        margin: 0 auto;
+
         left: 0;
         right: 0;
         background: url("https://dl.dropbox.com/scl/fi/7ztpgbnc1ojlcsbg1o45a/copy.png?rlkey=7592ewududsaewisastqsqtfr&st=5vkicjpj&dl=0") no-repeat;
         background-size: 100%;
         width: 50px;
-        left: 300px;
+        left: 20px;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
         position: absolute;
@@ -1135,7 +1135,7 @@
         background: url("https://dl.dropbox.com/scl/fi/3jn1ye3cfnp7gnljzcb3t/up-arrow.png?rlkey=t5zfoai10hek40mh4zl2nos9k&st=x30tinrk&dl=0") no-repeat;
         background-size: 100%;
         border: 0;
-        border-radius: 5px;
+        border-radius: 50%;
         filter: invert(0%);
         box-shadow: 0px 0px 3px 1px black;
         background-color: #ccc;
@@ -1185,7 +1185,7 @@
           transform: perspective(224px) rotateY(0deg) rotateZ(0deg);bottom: 30%;
         }
         5% {
-          transform: perspective(224px) rotateY(-65deg) rotateZ(20deg);bottom: 31%;
+          transform: perspective(224px) rotateY(-65deg) rotateZ(20deg);bottom: 30%;
         }
         10% {
           transform: perspective(224px) rotateY(-65deg) rotateZ(20deg) rotateX(20deg);bottom: 30%;
@@ -6041,6 +6041,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
         document.getElementById('sequencial').onclick = function() {
           if (this.checked) {
             console.log('Checked');
+            document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
             document.getElementById("simp-playlist").style.visibility = "visible";
             document.getElementById("pesquisa").style.display = "block";
             document.body.scrollTop = document.documentElement.scrollTop = 0;
