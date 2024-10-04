@@ -722,12 +722,12 @@
         font-size: 19px;
         text-align: left;
         overflow: hidden;
-        overflow-y: hidden;
+        overflow-y: scroll;
         position: fixed;
         margin: 0 auto;
-        top: 1.85em;
-        bottom: 10.2em;
-        border-left: 1px solid #111;
+        top: 1.8em;
+        bottom: 10.3em;
+        border-left:25px solid #111;
       }
       .espacobranco::-webkit-scrollbar {
         width: 25px;
@@ -1248,17 +1248,17 @@
           left: 100%
         }
       }
-      .muralx{
-        z-index:-1;
-        position:fixed;
+      .mural{
+        z-index:1;
+        position:relative;
         background: url("https://dl.dropbox.com/scl/fi/19jconraqp85qrydpp07i/Mural.png?rlkey=q5cas87olazm3okbhrek31zdk&st=weml9gsn&dl=0") no-repeat;
         background-size: 100%; 
         margin:0 auto;
-height:100%;
+        width:100%;
+        aspect-ratio:2 / 1;
         top:0;
-        opacity:0.3;
-        left:-30px;
-        right:-30px;
+        opacity:1;
+
       }
     </style>
   </head>
@@ -1269,7 +1269,6 @@ height:100%;
 }
 </script>
     <div class="carregamentoinicial" id="carregamentoinicial">
-        <div class="mural"></div>
       <div class="spinner"></div>
 	  <div class="spinnertext" translate="yes">C a r r e g a n d o</div>
     </div>
@@ -1394,6 +1393,7 @@ height:100%;
         </script>
         <br><br><br><br>
         <div class="informacao" translate="yes">
+            <div class="mural"></div>
 		  <h3>Instale o aplicativo</h3>
 		  <img style="width:80px;height:80px;filter: invert(0%);" src="https://dl.dropbox.com/scl/fi/8duwdfba0ddem1hgo2m6k/mobile-app.png?rlkey=rtohp61zc09s1bj2r3a8a7qrk&st=tojnizuf&dl=0">
           <p>Usuários do Windows, Linux e Chromebook podem adicionar o site como um aplicativo no Chrome. Para fazer isso, siga as instru&ccedil;&otilde;es:</p>
