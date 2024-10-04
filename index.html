@@ -260,7 +260,7 @@
         left: 0;
         bottom: 0;
         max-width: 800px;
-        margin-top: 50px;
+        margin-top: 30px;
         margin-bottom: 200px;
         background: #222;
       }
@@ -1354,7 +1354,7 @@
           function next() {
             if (document.getElementById("carregando").style.display == 'block') {
               document.getElementById("waitline").style.animation = "waitline 30s infinite";
-              document.getElementById("simpcoverteste").style.animation = "troca 1s";
+              document.getElementById("boxtitulomusica").style.animation = "troca 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index + 1;
               simp_audio.removeEventListener('timeupdate', simp_initTime);
@@ -1370,7 +1370,7 @@
           }
         </script>
         <div class="titulo"></div>
-        <div class="boxtitulomusica">
+        <div class="boxtitulomusica" id="boxtitulomusica">
         <div class="simp-coverteste" id="simpcoverteste"></div>
         <center>
           <div class="titulomusica" id="titulomusica" translate="no"></div>
@@ -5878,7 +5878,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           if (simp_audio.currentTime == simp_audio.duration) {
             document.getElementById("carregando").style.display = "block";
             document.getElementById("embaixovinil").style.bottom = "4em";
-            document.getElementById("simpcoverteste").style.animation = "troca 1s";
+            document.getElementById("boxtitulomusica").style.animation = "troca 1s";
             reset_animation_waitline();
             simp_audio.removeEventListener('timeupdate', simp_initTime);
             if (simp_isNext) { //auto load next audio
@@ -6096,7 +6096,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             reset_animation_waitline();
             document.getElementById("carregando").style.display = "block";
             document.getElementById("waitline").style.display = "block";
-            document.getElementById("simpcoverteste").style.animation = "troca 1s";
+            document.getElementById("boxtitulomusica").style.animation = "troca 1s";
             document.getElementById("titulomusica").style.animation = "troca5 3s";
             document.getElementById("embaixovinil").style.bottom = "4em";
             simp_a_index = simp_a_index + 1;
@@ -6109,7 +6109,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             reset_animation_waitline();
             document.getElementById("carregando").style.display = "block";
             document.getElementById("waitline").style.display = "block";
-            document.getElementById("simpcoverteste").style.animation = "troca2 1s";
+            document.getElementById("boxtitulomusica").style.animation = "troca2 1s";
             document.getElementById("titulomusica").style.animation = "troca6 3s";
             document.getElementById("embaixovinil").style.bottom = "4em";
             simp_a_index = simp_a_index + 1;
@@ -6127,7 +6127,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             reset_animation_waitline();
             document.getElementById("carregando").style.display = "block";
             document.getElementById("waitline").style.display = "block";
-            document.getElementById("simpcoverteste").style.animation = "troca3 1s";
+            document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
             document.getElementById("titulomusica").style.animation = "troca5 3s";
             document.getElementById("embaixovinil").style.bottom = "4em";
             simp_a_index = simp_a_index - 1;
@@ -6144,7 +6144,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             reset_animation_waitline();
             document.getElementById("carregando").style.display = "block";
             document.getElementById("waitline").style.display = "block";
-            document.getElementById("simpcoverteste").style.animation = "troca4 1s";
+            document.getElementById("boxtitulomusica").style.animation = "troca4 1s";
             document.getElementById("titulomusica").style.animation = "troca6 3s";
             document.getElementById("embaixovinil").style.bottom = "4em";
             simp_a_index = simp_a_index - 1;
@@ -6261,7 +6261,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               reset_animation_waitline();
               document.getElementById("carregando").style.display = "block";
               document.getElementById("waitline").style.display = "block";
-              document.getElementById("simpcoverteste").style.animation = "troca 1s";
+              document.getElementById("boxtitulomusica").style.animation = "troca 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
               document.getElementById("embaixovinil").style.bottom = "4em";
               simp_a_index = simp_a_index + 1;
@@ -6273,7 +6273,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               reset_animation_waitline();
               document.getElementById("carregando").style.display = "block";
               document.getElementById("waitline").style.display = "block";
-              document.getElementById("simpcoverteste").style.animation = "troca 1s";
+              document.getElementById("boxtitulomusica").style.animation = "troca 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
               document.getElementById("embaixovinil").style.bottom = "4em";
               simp_a_index = simp_a_index + 1;
@@ -6291,7 +6291,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               reset_animation_waitline();
               document.getElementById("carregando").style.display = "block";
               document.getElementById("waitline").style.display = "block";
-              document.getElementById("simpcoverteste").style.animation = "troca3 1s";
+              document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
               document.getElementById("embaixovinil").style.bottom = "4em";
               simp_a_index = simp_a_index - 1;
@@ -6307,7 +6307,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               reset_animation_waitline();
               document.getElementById("carregando").style.display = "block";
               document.getElementById("waitline").style.display = "block";
-              document.getElementById("simpcoverteste").style.animation = "troca3 1s";
+              document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
               document.getElementById("embaixovinil").style.bottom = "4em";
               simp_a_index = simp_a_index - 1;
