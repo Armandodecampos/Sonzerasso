@@ -18,9 +18,6 @@
         body {
           zoom: 0.7;
         }
-        .embaixovinil {
-          margin-right: 35%;
-        }
         .espacobranco {
             overflow-y: scroll;
         }
@@ -49,7 +46,7 @@
       }
       body::-webkit-scrollbar-thumb {
         -webkit-appearance: none;
-        background: #bbb;
+        background: #bbb; 
         height: 50px;
         box-shadow: 0px 0px 3px 1px black;
         border-left: 1px solid black;
@@ -77,10 +74,12 @@
 		margin-top:20px;
       }
       .boxprogresso{
+          position:relative;
           width: 50%;
         max-width: 13em;
         margin: auto;
         display: flex;
+        top: 20px;
         left: 0;
         right: 0;
       }
@@ -121,24 +120,25 @@
       }
       .simp-time {
         z-index: 9;
-        position: fixed;
+
         font-size: 19px;
         pointer-events: none;
         text-align: center;
-        width: 250px;
+        width: 50%;
         height: fit-content;
         margin: auto;
         left: 0;
         right: 0;
-        bottom: 100px;
+        top: 100px;
+       
         color: #fff;
         text-shadow: 1px 1px 1px #fa0, 0 0 1em #fa0, 0 0 0.1em #fa0;
         border-radius: 50px 50px 50px 50px;
-        padding: 0.7em;
+        padding: 3px;
         background: #191816;
         box-shadow: 0px 0px 3px 1px black;
         border: 2px solid #333;
-        background: radial-gradient(#4f4941, #000) fixed;
+        background: radial-gradient(#211f1c, #000) fixed;
       }
       .simp-volume {
         position: fixed;
@@ -230,13 +230,13 @@
         margin:0 auto;
         font-size: 19px;
         word-break: break-all;
-        background: #ddd;
         width: 80%;
         max-width: 400px;
         padding: 10px;
-        padding-bottom: 30px;
+        padding-bottom: 60px;
         box-shadow: 0px 2px 3px 1px black;
         background: #222;
+        background: radial-gradient(#4f4941, #000) fixed;
         font-size: 17px;
         margin-top:20px;
         border-radius:5px;
@@ -266,6 +266,7 @@
         margin-top: 30px;
         margin-bottom: 200px;
         background: #222;
+        background: linear-gradient(#4f4941, #000) fixed;
         border-radius:5px;
       }
       .faixabordainferior {
@@ -285,7 +286,7 @@
         background: #dfdbd7;
         background: #dfdbd7;
         box-shadow: 0px 2px 3px 1px black;
-        border-top: 33px double #111;
+        border-top: 2px solid #333;
         background: #221f1c;
         background: radial-gradient(#de5700, #4b0202);
         background: radial-gradient(#4f4941, #000) fixed;
@@ -446,6 +447,7 @@
         appearance: none;
         margin: 0 auto;
         display:block;
+        top:20px;
         left: 0;
         right: 0;
         z-index: 12;
@@ -485,7 +487,7 @@
         position:relative;
         z-index: 15;
         margin-right:5px;
-        bottom: 4px;
+        top:15px;
         height: 25px;
         width: 25px;
         background: url("https://dl.dropbox.com/scl/fi/j0tst0q076jqoyzxj8yfb/speaker-filled-audio-tool.png?rlkey=d5optfkqbzwxqzw7rxvxc4yru&st=mpmxqbco&dl=0") no-repeat;
@@ -511,7 +513,7 @@
         position: fixed;
         margin: 0 auto;
         top: 4.25em;
-        bottom: 136px;
+        bottom: 106px;
         left: 0;
         right: 0;
         color: #000;
@@ -641,61 +643,7 @@
         background: #f00;
         color: #510;
       }
-      .suportevinil {
-        margin: 0 auto;
-        left: 0;
-        right: 0;
-        position: relative;
-        z-index: 4;
-        position: fixed;
-        border-radius: 50%;
-        border: 2px solid #999;
-        box-shadow: 0px 0px 3px 1px black;
-        background: linear-gradient(to right, #11100f, #191816, #2a2825, #191816, #11100f);
-        background: #191816;
-        bottom: 100px;
-        width: 6em;
-        aspect-ratio: 1 / 1;
-        background: radial-gradient(#4f4941, #000) fixed;
-      }
-      .embaixovinil {
-        z-index: 5;
-        margin: auto;
-        position: fixed;
-        bottom: 0px;
-        width: fit-content;
-        margin: 0 auto;
-        left: 0px;
-        right: 0px;
-        text-align: center;
-        border-radius: 50%;
-        transition: bottom 1s ease 0s;
-        background-color: rgba(0, 0, 0, 0.0);
-      }
-      .vinil {
-        margin: auto;
-        display: block;
-        width: 6em;
-        aspect-ratio: 1 / 1;
-        animation: animate2 0.4s linear 1;
-        transition: visibility 0s 0.9s, opacity 0.2s linear;
-        background: url("https://dl.dropbox.com/scl/fi/bbdcwtnm8tsqibl2j4mr3/pngegg.png?rlkey=jafo20v0qeeoxwf7paiq3sz6n&st=wnqlowwv&dl=0") no-repeat;
-        background-size: 100%;
-        clip-path: circle(50% at 50% 50%);
-        z-index: 1;
-      }
-      @keyframes animate {
-        0% {}
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      @keyframes animate2 {
-        0% {}
-        100% {
-          transform: rotate(360deg);
-        }
-      }
+
       .btn {
         position: relative;
         margin-left: 1em;
@@ -727,7 +675,7 @@
         position: fixed;
         margin: 0 auto;
         top: 1.8em;
-        bottom: 136px;
+        bottom: 106px;
         border-left:10px solid #111;
       }
       .espacobranco::-webkit-scrollbar {
@@ -1071,44 +1019,35 @@
         border-right: 1px solid black;
         border-radius: 0px;
       }
-      .carregando {
-        display: none;
-        z-index: 10;
+      .carregando{
         position: fixed;
-        font-size: 19px;
-        pointer-events: none;
-        text-align: center;
-        width: 250px;
+        top: 0;
+        width: 100%;
         height: fit-content;
-        margin: auto;
-        left: 0;
-        right: 0;
-        bottom: 100px;
-        color: #fff;
-        text-shadow: 1px 1px 1px #fa0, 0 0 1em #fa0, 0 0 0.1em #fa0;
-        border-radius: 50px 50px 50px 50px;
-        padding: 0.7em;
-        background: #191816;
-        border: 2px solid #333;
-        background: radial-gradient(#4f4941, #000) fixed;
+        left: 0px;
+        font-weight: bolder;
+        font-style: normal;
+        z-index: 10;
+        background: #111;
+        border-bottom: 2px solid #333;
+        padding: 5px;
+        box-shadow: 0px 2px 3px 1px black;
+      
       }
-      .carregando span {
-        position: relative;
-        display: inline-block;
-        text-transform: uppercase;
-        animation: waviy 2.7s infinite;
-        animation-delay: calc(.1s * var(--i));
+      .carregandofrase {
+        white-space: nowrap;
+        letter-spacing: 2px;
+        right: 50px;
+        transition: 0.1s;
+        width: fit-content;
+        -moz-animation: frase 5s linear infinite;
+        -webkit-animation: frase 5s linear infinite;
+        animation: frase 5s linear infinite;
+        filter: invert(0%);
+        color: #ccc;
+        font-size: 19px;
       }
-      @keyframes waviy {
-        0%,
-        40%,
-        100% {
-          transform: translateY(0)
-        }
-        20% {
-          transform: translateY(-10px)
-        }
-      }
+
       .copiarmusica {
         margin:0 auto;
         left:0;
@@ -1123,7 +1062,7 @@
     
         filter: invert(0%);
         transition: 0.3s;
-        filter: invert(30%);
+        filter: invert(10%);
         cursor: pointer;
         border: 0px solid #000;
         z-index: 1;
@@ -1133,7 +1072,7 @@
         z-index: 2;
         display: none;
         position: fixed;
-        bottom: 150px;
+        bottom: 120px;
         left: 1em;
         width: 50px;
         aspect-ratio: 1/1;
@@ -1168,39 +1107,22 @@
         text-align: center;
       }
       .spinner {
-        z-index: 1;
         position: fixed;
         margin: 0 auto;
-        bottom: 30%;
-        left: 0;
-        right: 0;
-        width: 30%;
-		max-width:200px;
-        aspect-ratio:1/1;
-        animation: spinner-8k6ao5md 3s infinite;
+        display:block;
+        z-index: 10;
+        margin: 0 auto;
+left:0;
+right:0;
+bottom:40%;
+        width: 30px;
+        aspect-ratio: 1 / 1;
+        opacity: 13;
         border-radius: 50%;
-        background-color: #ff7700;
-        transform-origin: center;
-        background: url("https://dl.dropbox.com/scl/fi/bbdcwtnm8tsqibl2j4mr3/pngegg.png?rlkey=jafo20v0qeeoxwf7paiq3sz6n&st=wnqlowwv&dl=0") no-repeat;
-        background-size: 100%;
+        border:40px dotted #fa0;
+        animation: waitline 10s infinite;
       }
-      @keyframes spinner-8k6ao5md {
-        0% {
-          transform: perspective(224px) rotateY(0deg) rotateZ(0deg);bottom: 30%;
-        }
-        5% {
-          transform: perspective(224px) rotateY(-65deg) rotateZ(20deg);bottom: 30%;
-        }
-        10% {
-          transform: perspective(224px) rotateY(-65deg) rotateZ(20deg) rotateX(20deg);bottom: 30%;
-        }  
-		90% {
-			transform: perspective(224px) rotateY(2880deg) rotateX(0deg);bottom: 30%;	
-		}
-        100% {
-          transform: perspective(224px) rotateY(2880deg) rotateZ(0deg) rotateX(0deg);bottom: 30%;
-        }
-      }
+
 	  .spinnertext {
         z-index: 1;
         position: fixed;
@@ -1227,25 +1149,23 @@
       }
       .waitline {
         position: fixed;
-        z-index: 7;
-        background: #fa0;
+        z-index: 10;
         margin: 0 auto;
-        bottom: 100px;
-        left: 0px;
-        width: 6em;
+        top: 5px;
+        left: 10px;
+        width: 10px;
         aspect-ratio: 1 / 1;
         opacity: 13;
         border-radius: 50%;
-		background-color: #ff7700;
-        background: url("https://dl.dropbox.com/scl/fi/bbdcwtnm8tsqibl2j4mr3/pngegg.png?rlkey=jafo20v0qeeoxwf7paiq3sz6n&st=wnqlowwv&dl=0") no-repeat;
+        border:10px dotted #fa0;
         background-size: 100%;
       }
       @keyframes waitline {
         from {
-          left: -6em;
+			transform: rotate(0deg);
         }
         to {
-          left: 100%
+        	transform: rotate(360deg);
         }
       }
       .mural{
@@ -1273,17 +1193,10 @@
 	  <div class="spinnertext" translate="yes">C a r r e g a n d o</div>
     </div>
     <div id="wrapper">
-      <div class="carregando" id="carregando" translate="no">
-        <span style="--i:1">S</span>
-        <span style="--i:2">o</span>
-        <span style="--i:3">n</span>
-        <span style="--i:4">z</span>
-        <span style="--i:5">e</span>
-        <span style="--i:6">r</span>
-        <span style="--i:7">a</span>
-        <span style="--i:8">s</span>
-        <span style="--i:9">s</span>
-        <span style="--i:10">o</span>
+      <div class="carregando" id="carregando">
+      <div class="carregandofrase">
+Carregando...
+      </div>
       </div>
 	  <div class="simp-coverteste2" id="simpcoverteste2"></div>
 	  <input id="invisivel">
@@ -1305,10 +1218,6 @@
         };
       </script>
       <a href="#top"><button class="botaovoltaraotopodasmusicas" id="botaovoltaraotopodasmusicas" onclick="toque()"></button></a>
-      <div class="suportevinil"></div>
-      <div class="embaixovinil" id="embaixovinil">
-        <div class="vinil" id="vinil"></div>
-      </div>
       <div class="embaixofrase">
         <div class="frase" translate="yes">Ou&#231;a m&#250;sicas selecionadas de qualidade! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Rock, metal, blues, Jazz, Pop, folk e mais! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Mais de 4.000 m&uacute;sicas!&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Contribua com o crescimento do site e a adi&ccedil;&atilde;o de novas m&uacute;sicas.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Para que as pr&oacute;ximas m&uacute;sicas n&atilde;o parem de tocar, &eacute; recomend&aacute;vel deixar a tela acesa quando acessar o site em um dispositivo m&oacute;vel. Caso queira ouvir com a tela apagada e sem interrup&ccedil;&atilde;o, instale o aplicativo.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
       </div>
@@ -1353,7 +1262,7 @@
           var timer = setInterval(next, 30000);
           function next() {
             if (document.getElementById("carregando").style.display == 'block') {
-              document.getElementById("waitline").style.animation = "waitline 30s infinite";
+              document.getElementById("waitline").style.animation = "waitline 10s infinite";
               document.getElementById("boxtitulomusica").style.animation = "troca 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index + 1;
@@ -1377,6 +1286,7 @@
         </center>
         <button class="copiarmusica" id="botaocopiarmusica" onClick="CopyToClipboard('titulomusica')"></button>
         <br>
+        <div class="simp-time" id="simp-time"><span class="start-time">00:00</span><span class="simp-slash">&#160;/&#160;</span><span class="end-time">00:00</span></div>
         <div class="boxprogresso">
         <div class="simbolorelogio"></div>
         <input class="progresso" id="progresso" type="range" min="0" max="100" value="0" disabled />
@@ -1472,7 +1382,7 @@
           <label for="sequencial" class="sequencial" onclick="toque()"></label>
         </div>
       </div>
-      <div class="simp-time" id="simp-time"><span class="start-time">00:00</span><span class="simp-slash">&#160;/&#160;</span><span class="end-time">00:00</span></div>
+      
 
       <script>
         function aparecerbotaovoltaraotop() {
@@ -5866,7 +5776,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           }
           if (val > 0) {
             document.getElementById("carregando").style.display = "none";
-            document.getElementById("embaixovinil").style.bottom = "100px";
             document.getElementById("waitline").style.display = "none";
           }
           s = val;
@@ -5884,7 +5793,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           // ended of the audio
           if (simp_audio.currentTime == simp_audio.duration) {
             document.getElementById("carregando").style.display = "block";
-            document.getElementById("embaixovinil").style.bottom = "0px";
             document.getElementById("boxtitulomusica").style.animation = "troca 1s";
             reset_animation_waitline();
             simp_audio.removeEventListener('timeupdate', simp_initTime);
@@ -5991,12 +5899,10 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               reset_animation_waitline();
               document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
               document.getElementById("espacobranco").scrollTop = 0;
-              document.getElementById("vinil").style.animation = "animate 3s linear infinite";
               document.getElementById("simp-playlist").style.visibility = "hidden";
               document.getElementById("pesquisa").style.display = "none";
               document.getElementById("carregando").style.display = "block";
               document.getElementById("waitline").style.display = "block";
-              document.getElementById("embaixovinil").style.bottom = "4em";
               let toggleButton = document.getElementById("sequencial");
               if (toggleButton.checked) {
                 toggleButton.checked = false;
@@ -6105,7 +6011,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             document.getElementById("waitline").style.display = "block";
             document.getElementById("boxtitulomusica").style.animation = "troca 1s";
             document.getElementById("titulomusica").style.animation = "troca5 3s";
-            document.getElementById("embaixovinil").style.bottom = "4em";
             simp_a_index = simp_a_index + 1;
             simp_audio.removeEventListener('timeupdate', simp_initTime);
             simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6118,7 +6023,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             document.getElementById("waitline").style.display = "block";
             document.getElementById("boxtitulomusica").style.animation = "troca2 1s";
             document.getElementById("titulomusica").style.animation = "troca6 3s";
-            document.getElementById("embaixovinil").style.bottom = "4em";
             simp_a_index = simp_a_index + 1;
             simp_audio.removeEventListener('timeupdate', simp_initTime);
             simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6136,7 +6040,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             document.getElementById("waitline").style.display = "block";
             document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
             document.getElementById("titulomusica").style.animation = "troca5 3s";
-            document.getElementById("embaixovinil").style.bottom = "4em";
             simp_a_index = simp_a_index - 1;
             simp_audio.removeEventListener('timeupdate', simp_initTime);
             simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6153,7 +6056,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             document.getElementById("waitline").style.display = "block";
             document.getElementById("boxtitulomusica").style.animation = "troca4 1s";
             document.getElementById("titulomusica").style.animation = "troca6 3s";
-            document.getElementById("embaixovinil").style.bottom = "4em";
             simp_a_index = simp_a_index - 1;
             simp_audio.removeEventListener('timeupdate', simp_initTime);
             simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6170,12 +6072,10 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             simp_audio.play();
             console.log('Checked');
             simp_isPlaying = true;
-            document.getElementById("vinil").style.animation = "animate 3s linear infinite";
           } else {
             console.log('Not checked');
             simp_audio.pause();
             simp_isPlaying = false;
-            document.getElementById("vinil").style.animation = "animate2 0.4s linear 1";
           }
         };
       </script>
@@ -6270,7 +6170,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               document.getElementById("waitline").style.display = "block";
               document.getElementById("boxtitulomusica").style.animation = "troca 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
-              document.getElementById("embaixovinil").style.bottom = "4em";
               simp_a_index = simp_a_index + 1;
               simp_audio.removeEventListener('timeupdate', simp_initTime);
               simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6282,7 +6181,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               document.getElementById("waitline").style.display = "block";
               document.getElementById("boxtitulomusica").style.animation = "troca 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
-              document.getElementById("embaixovinil").style.bottom = "4em";
               simp_a_index = simp_a_index + 1;
               simp_audio.removeEventListener('timeupdate', simp_initTime);
               simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6300,7 +6198,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               document.getElementById("waitline").style.display = "block";
               document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
-              document.getElementById("embaixovinil").style.bottom = "4em";
               simp_a_index = simp_a_index - 1;
               simp_audio.removeEventListener('timeupdate', simp_initTime);
               simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6316,7 +6213,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               document.getElementById("waitline").style.display = "block";
               document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
-              document.getElementById("embaixovinil").style.bottom = "4em";
               simp_a_index = simp_a_index - 1;
               simp_audio.removeEventListener('timeupdate', simp_initTime);
               simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6337,14 +6233,12 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               console.log('Not checked');
               simp_audio.pause();
               simp_isPlaying = false;
-              document.getElementById("vinil").style.animation = "animate2 0.4s linear 1";
             } else {
               document.getElementById('playpause').focus();
               toggleButton.checked = true;
               simp_audio.play();
               console.log('Checked');
               simp_isPlaying = true;
-              document.getElementById("vinil").style.animation = "animate 3s linear infinite";
             }
           };
         };
