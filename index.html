@@ -168,7 +168,7 @@
         left: 0px;
         font-weight: bolder;
         font-style: normal;
-        z-index: 10;
+        z-index: 9;
         background: #111;
         padding: 5px;
         box-shadow: 0px 0px 2px 1px black;
@@ -221,7 +221,7 @@
         word-break: break-all;
         width: 80%;
         max-width: 400px;
-      
+        padding:10px;
         padding-bottom: 18px;
         box-shadow: 0px 0px 2px 1px black;
         font-size: 17px;
@@ -313,6 +313,7 @@
       }
       input[type=checkbox]:checked+.playpause {
         background: url("https://dl.dropbox.com/scl/fi/6amjk7kpmca6pgpgu9jp5/pause-teste.png?rlkey=v9noetbdl8ptjeeklfg35yeg1&dl=0");
+        background-size: 100%;
         background-color: #fa0;
         filter: invert(0%);
         outline: 3px solid #fa0;
@@ -735,6 +736,7 @@
         background-size: 100%;
         background-position: center;
         background: #222;
+
       }
       @keyframes troca {
         0% {
@@ -1146,11 +1148,14 @@ bottom:30%;
         background-size: 100%;
       }
       @keyframes waitline {
-        from {
+        0% {
 			transform: rotate(0deg);
         }
-        to {
-        	transform: rotate(360deg);
+        50% {
+        	transform: rotate(700deg);
+        }
+        100% {
+			transform: rotate(0deg);
         }
       }
       .mural{
