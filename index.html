@@ -161,7 +161,7 @@
       }
       .embaixofrase {
         position: fixed;
-        top: 0;
+        bottom: 100px;
         width: 100%;
         height: fit-content;
         left: 0px;
@@ -170,7 +170,6 @@
         z-index: 9;
         background: #111;
         padding: 5px;
-        box-shadow: 0px 0px 2px 1px black;
       }
       .frase {
         white-space: nowrap;
@@ -485,14 +484,14 @@
         filter: invert(60%);
       }
       .simp-playlist {
-        z-index: 1;
+        z-index: 11;
         visibility: hidden;
         overflow: hidden;
         overflow-y: scroll;
         position: fixed;
         margin: 0 auto;
-        top: 75px;
-        bottom: 106px;
+        top: 45px;
+        bottom: 130px;
         left: 0;
         right: 0;
         color: #000;
@@ -524,7 +523,7 @@
       .pesquisa {
         z-index: 10;
         position: fixed;
-        top: 32.1px;
+        top: 0;
         margin: 0 auto;
         left: 0;
         right: 0;
@@ -550,9 +549,11 @@
         background: #111;
       }
       .dicapesquisa {
-        position: absolute;
+        position: fixed;
+        z-index:13;
         display: none;
-        top: 2.5em;
+        top: 46px;
+        weight:100%;
         left: 0;
         right: 0;
         font-size: 19px;
@@ -652,9 +653,9 @@
         overflow-y: scroll;
         position: fixed;
         margin: 0 auto;
-        top: 1.6em;
+        top: 0;
         bottom: 106px;
-        border-left:10px solid #111;
+        border-left:10px solid transparent;
       }
       .espacobranco::-webkit-scrollbar {
         width: 10px;
@@ -996,7 +997,7 @@
       }
       .carregando{
         position: fixed;
-        top: 0;
+        bottom: 100px;
         width: 100%;
         height: fit-content;
         left: 0px;
@@ -1061,8 +1062,6 @@
         border:0px;
       }
       #wrapper {
-        text-align: center;
-        background: #222;
         visibility: hidden;
         opacity: 0;
         transition: visibility 0s, opacity 0.5s linear;
@@ -1135,13 +1134,14 @@ bottom:30%;
         position: fixed;
         z-index: 10;
         margin: 0 auto;
-        top: 4px;
-        left: 5px;
+        bottom: 100px;
+        right:0px;
+        left: 0px;
         width: 15px;
         aspect-ratio: 1 / 1;
         opacity: 13;
         border-radius: 50%;
-        border:4px dotted #fa0;
+        border:4px dotted #fff;
         background-size: 100%;
       }
       @keyframes waitline {
@@ -1186,7 +1186,6 @@ Carregando
       </div>
       </div>
 	  <div class="simp-coverteste2" id="simpcoverteste2"></div>
-	  <input id="invisivel">
       <div class="waitline" id="waitline"></div>
       <script>
         window.onload = function() {
@@ -1212,8 +1211,9 @@ Carregando
         <div class="pesquisa" id="pesquisa">
           <input type="text" class="searchbar" id="searchbar" placeholder="Pesquise" onfocus="changetextsearch();aparecerdicapesquisa()" onfocusout="changetextsearch2();fechardicapesquisa()" onclick="toque()" tabindex="1" autocomplete="off"><a href="#voltaraotopodasmusicas"><button class="enviar" onclick="search_animal();toque()">Enviar</button></a>
           <button class="limpar" id="limpar" onclick="clearInputField();toque()">Limpar</button>
-          <div class="dicapesquisa" id="dicapesquisa" translate="yes">Pesquise por artista/banda ou m&uacute;sica ou album</div>
+          
         </div>
+        
         <script>
           function clearInputField() {
             let x = document.getElementsByClassName('filtro');
@@ -1244,6 +1244,7 @@ Carregando
           }
         </script>
       </div>
+      <div class="dicapesquisa" id="dicapesquisa" translate="yes">Pesquise por artista/banda ou m&uacute;sica ou album</div>
       <div class="espacobranco" id="espacobranco">
         <script>
           var timer = setInterval(next, 30000);
@@ -6211,7 +6212,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           if (event.keyCode == 38) {
             document.getElementById('volume-control').blur();
             document.getElementById('progresso').blur();
-			document.getElementById('invisivel').focus();
             let toggleButton = document.getElementById("playpause");
             if (toggleButton.checked) {
               document.getElementById('playpause').focus();
