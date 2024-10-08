@@ -79,7 +79,7 @@
         max-width: 13em;
         margin: auto;
         display: flex;
-        top: 20px;
+        top: -20px;
         left: 0;
         right: 0;
       }
@@ -124,8 +124,7 @@
         text-align: right;
         margin:0 auto;
         width: 90%;
-
-        margin-top: 30px;
+        margin-top: -10px;
        
         color: #ccc;
 
@@ -183,7 +182,7 @@
         -webkit-animation: frase 45s linear infinite;
         animation: frase 45s linear infinite;
         filter: invert(0%);
-        color: #ccc;
+        color: #ddd;
         font-size: 19px;
       }
       @-moz-keyframes frase {
@@ -231,12 +230,10 @@
         border:2px solid #000;
       }
       .titulomusica {
-        margin:0 auto;
         word-break: break-all;
-        width: 80%;
+        width: 100%;
         margin-top: -80px;
         font-size: 17px;
-        padding:5px;
       }
       .informacao {
         background: #ddd;
@@ -304,7 +301,7 @@
         position: absolute;
         filter: invert(0%);
         transition: 0.3s;
-        background-color: #ccc;
+        background-color: #fff;
         filter: invert(0%);
         cursor: pointer;
         outline: 3px solid #000;
@@ -333,7 +330,7 @@
         position: absolute;
         filter: invert(0%);
         transition: 0.3s;
-        background-color: #ccc;
+        background-color: #fff;
         filter: invert(0%);
         cursor: pointer;
         outline: 3px solid #000;
@@ -361,7 +358,7 @@
         position: absolute;
         filter: invert(0%);
         transition: 0.3s;
-        background-color: #ccc;
+        background-color: #fff;
         cursor: pointer;
         outline: 3px solid #000;
         box-shadow: 0px 0px 2px 1px black;
@@ -385,7 +382,7 @@
         position: absolute;
         filter: invert(0%);
         transition: 0.3s;
-        background-color: #ccc;
+        background-color: #fff;
         cursor: pointer;
         outline: 3px solid #000;
         box-shadow: 0px 0px 2px 1px black;
@@ -430,7 +427,7 @@
         appearance: none;
         margin: 0 auto;
         display:block;
-        top:20px;
+        top:-20px;
         left: 0;
         right: 0;
         z-index: 12;
@@ -469,7 +466,7 @@
         position:relative;
         z-index: 15;
         margin-right:5px;
-        top:15px;
+        top:-25px;
         height: 25px;
         width: 25px;
         background: url("https://dl.dropbox.com/scl/fi/j0tst0q076jqoyzxj8yfb/speaker-filled-audio-tool.png?rlkey=d5optfkqbzwxqzw7rxvxc4yru&st=mpmxqbco&dl=0") no-repeat;
@@ -851,9 +848,9 @@
         margin: 3px;
         letter-spacing: 1px;
         color: #000;
-        background: #fa0;
+        background: #ddd;
         text-align: center;
-        border-radius: 50px;
+        border-radius: 10px;
         font-size: 19px;
         border: 2px solid #333;
         box-shadow: 0px 0px 2px 1px black;
@@ -1006,7 +1003,7 @@
         font-weight: bolder;
         font-style: normal;
         z-index: 10;
-        background: #000;
+        background: #111;
         padding: 5px;
       }
       .carregandofrase {
@@ -1019,14 +1016,14 @@
         -webkit-animation: frase 5s linear infinite;
         animation: frase 5s linear infinite;
         filter: invert(0%);
-        color: #ccc;
+        color: #fa0;
         font-size: 19px;
       }
 
       .copiarmusica {
         margin:0 auto;
-        left:0;
-        right:0;
+
+        margin-right:0;
         display:block;
         background: url("https://dl.dropbox.com/scl/fi/pv43325dki2k5gcm3zfsg/copy-1.png?rlkey=ksc808kb8k22dlw5illylx05v&st=g8rerjqq&dl=0") no-repeat;
         background-size: 100%;
@@ -1090,23 +1087,23 @@
 left:0;
 right:0;
 bottom:30%;
-        width: 30px;
+        width: 70px;
         aspect-ratio: 1 / 1;
         opacity: 13;
         border-radius: 50%;
         border:10px dotted #fa0;
-        animation: spinner 10s infinite;
+        animation: spinner 30s infinite;
       }
            @keyframes spinner {
         0% {
-			transform: rotate(0deg);width: 30px;
+			transform: rotate(0deg);width: 50px;
         }
         50% {
-        	transform: rotate(1360deg);
+        	transform: rotate(1360deg);width: 50px;
         
         }
         100% {
-			transform: rotate(0deg);width: 30px;
+			transform: rotate(0deg);width: 50px;
         }
       }
 
@@ -1138,13 +1135,13 @@ bottom:30%;
         position: fixed;
         z-index: 10;
         margin: 0 auto;
-        top: 5px;
-        left: 10px;
-        width: 10px;
+        top: 4px;
+        left: 5px;
+        width: 15px;
         aspect-ratio: 1 / 1;
         opacity: 13;
         border-radius: 50%;
-        border:10px dotted #fa0;
+        border:4px dotted #fa0;
         background-size: 100%;
       }
       @keyframes waitline {
@@ -1185,7 +1182,7 @@ bottom:30%;
     <div id="wrapper">
       <div class="carregando" id="carregando">
       <div class="carregandofrase">
-Carregando...
+Carregando
       </div>
       </div>
 	  <div class="simp-coverteste2" id="simpcoverteste2"></div>
@@ -1209,7 +1206,7 @@ Carregando...
       </script>
       <a href="#top"><button class="botaovoltaraotopodasmusicas" id="botaovoltaraotopodasmusicas" onclick="toque()"></button></a>
       <div class="embaixofrase">
-        <div class="frase" translate="yes">Ou&#231;a m&#250;sicas selecionadas de qualidade! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Rock, metal, blues, Jazz, Pop, folk e mais! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Mais de 4.000 m&uacute;sicas!&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Contribua com o crescimento do site e a adi&ccedil;&atilde;o de novas m&uacute;sicas.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Para que as pr&oacute;ximas m&uacute;sicas n&atilde;o parem de tocar, &eacute; recomend&aacute;vel deixar a tela acesa quando acessar o site em um dispositivo m&oacute;vel. Caso queira ouvir com a tela apagada e sem interrup&ccedil;&atilde;o, instale o aplicativo.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
+        <div class="frase" translate="yes">Ou&#231;a m&#250;sicas selecionadas de qualidade! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Rock, metal, blues, Jazz, Pop, folk e mais! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Mais de 4.000 m&uacute;sicas!&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Contribua com o crescimento do site e a adi&ccedil;&atilde;o de novas m&uacute;sicas.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Para que as pr&oacute;ximas m&uacute;sicas n&atilde;o parem de tocar, &eacute; recomend&aacute;vel deixar a tela acesa quando acessar o site em um dispositivo m&oacute;vel. Caso queira ouvir com a tela apagada e sem interrup&ccedil;&atilde;o, instale o aplicativo.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
       </div>
       <div class="faixabordasuperior">
         <div class="pesquisa" id="pesquisa">
