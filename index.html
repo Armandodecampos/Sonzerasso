@@ -67,11 +67,19 @@
       a {
         -webkit-tap-highlight-color: transparent;
       }
+      .boxtitulo{
+      width:60%;
+      max-width:350px;
+      display:flex;
+      margin: auto;
+        left: 0px;
+        right: 0px;
+      }
       .titulo {
         position: relative;
-        width: 65%;
+        width: 300px;
         max-width: 300px;
-        margin: auto;
+              margin: auto;
         left: 0px;
         right: 0px;
         aspect-ratio: 4 / 1;
@@ -81,6 +89,10 @@
 		margin-top:20px;
 		-webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
+      }
+            .notamusical{
+font-size:25px;
+filter: grayscale(100%);
       }
       .boxprogresso{
           position:relative;
@@ -821,8 +833,9 @@
             left:0;
             right:0;
             bottom:0;
-        filter: blur(500px) saturate(200%) contrast(100%);
+        filter: blur(100px) saturate(200%);
         margin: -1000px -1000px -1000px -1000px;
+        image-rendering: pixelated;
       }
       .box-artistas {
         position: relative;
@@ -1291,7 +1304,10 @@ Carregando
             timer = setInterval(next, 30000);
           }
         </script>
+        <div class="boxtitulo">
         <div class="titulo"></div>
+        <div class="notamusical">&#127925;</div>
+        </div>
         <div class="boxtitulomusica" id="boxtitulomusica">
         <div class="simp-coverteste" id="simpcoverteste"></div>
         <center>
@@ -5772,7 +5788,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
         }
         function simp_setAlbum(index) {
           simp_cover.innerHTML = simp_a_url[index].dataset.cover ? '<div style="background:url(' + simp_a_url[index].dataset.cover + ') no-repeat;background-size:cover;width:100%;aspect-ratio:1 / 1;"></div>' : '<i>Falha ao carregar</i>';
-          simp_cover2.innerHTML = simp_a_url[index].dataset.cover ? '<div style="background:url(' + simp_a_url[index].dataset.cover + ');background-position: center;width:200%;height:200%;"></div>' : '<i>Falha ao carregar</i>';
+          simp_cover2.innerHTML = simp_a_url[index].dataset.cover ? '<div style="background:url(' + simp_a_url[index].dataset.cover + ') no-repeat;background-size:cover;width:200%;height:200%;"></div>' : '<i>Falha ao carregar</i>';
           simp_title.innerHTML = simp_source[index].querySelector('.xyz').innerHTML;
         }
         function simp_changeAudio(elem) {
