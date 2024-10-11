@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap" rel="stylesheet">
     <title>Sonzerasso</title>
-    <link rel="icon" href="https://dl.dropbox.com/scl/fi/bbdcwtnm8tsqibl2j4mr3/pngegg.png?rlkey=jafo20v0qeeoxwf7paiq3sz6n&dl=0">
+    <link rel="icon" href="https://dl.dropbox.com/scl/fi/52s95f9yf8nsowg78214e/Sonz-2.png?rlkey=lu9lu6ti6zvzx9j9zaa2c5247&st=nzykj91k&dl=0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
       @media (orientation: landscape) {
@@ -89,6 +89,19 @@
 		margin-top:20px;
 		-webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
+      }
+            .s {
+        position: fixed;
+        width: 85px;
+              margin: auto;
+        left: 0px;
+        right: 0px;
+        aspect-ratio: 1 / 1;
+        background: url(https://dl.dropbox.com/scl/fi/52s95f9yf8nsowg78214e/Sonz-2.png?rlkey=lu9lu6ti6zvzx9j9zaa2c5247&st=0fxqjh7s&dl=0) no-repeat;
+        background-size: 100%;
+		z-index:2;
+		bottom:220px;
+
       }
             .notamusical{
 
@@ -1113,24 +1126,25 @@ height:fit-content;
         margin: 0 auto;
 left:0;
 right:0;
-bottom:30%;
-        width: 70px;
+bottom:230px;
+        width: 550px;
         aspect-ratio: 1 / 1;
         opacity: 13;
         border-radius: 50%;
-        border:10px dotted #fa0;
+        border:7px dotted #fff;
         animation: spinner 30s infinite;
+        
       }
            @keyframes spinner {
         0% {
-			transform: rotate(0deg);width: 50px;border:10px dotted #111;
+			transform: rotate(0deg);width: 50px;
         }
         50% {
-        	transform: rotate(1360deg);width: 50px;border:10px dotted #fa0;
+        	transform: rotate(1360deg);width: 50px;
         
         }
         100% {
-			transform: rotate(0deg);width: 50px;border:10px dotted #111;
+			transform: rotate(0deg);width: 50px;
         }
       }
 
@@ -1138,12 +1152,12 @@ bottom:30%;
         z-index: 1;
         position: fixed;
         margin: 0 auto;
-		bottom: 20%;
+		bottom:190px;
         left: 0;
         right: 0;
         color:#fff;
 		font-size:25px;
-        animation: spinner-8k6ao5md2 10s infinite;
+        animation: spinner-8k6ao5md2 4s infinite;
         opacity:0.8;
         font-weight:bold;
       }
@@ -1204,6 +1218,7 @@ bottom:30%;
 }
 </script>
     <div class="carregamentoinicial" id="carregamentoinicial">
+        <div class="s"></div>
       <div class="spinner"></div>
 	  <div class="spinnertext" translate="yes">C a r r e g a n d o</div>
     </div>
