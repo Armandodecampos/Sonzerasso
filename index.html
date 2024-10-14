@@ -76,17 +76,32 @@
         right: 0px;
       }
       .informativotemporario{
+          z-index:10;
+          position:fixed;
+          bottom: 126px;
       margin:0 auto;
       display:block;
-      width:100%
       left:0;
       right:0;
       height:fit-content;
       color:#000;
       background:#fa0;
       padding:10px;
-      font-weight:strong;
-      
+      font-weight:bold;
+      text-align:center;
+      word-break: break-all;
+            overflow: hidden;
+        overflow-y: scroll;
+        max-height:100px;
+      }
+                  .informativotemporario::-webkit-scrollbar {
+        width: 10px;
+        background: transparent;
+      }
+      .informativotemporario::-webkit-scrollbar-thumb {
+        -webkit-appearance: none;
+        height: 20px;
+        background: #000
       }
       .titulo {
         position: relative;
