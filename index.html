@@ -1256,16 +1256,7 @@ Carregando
       </div>
 	  <div class="simp-coverteste2" id="simpcoverteste2"></div>
       <div class="waitline" id="waitline"></div>
-      <script>
-        window.onload = function() {
-          document.getElementById("carregando").style.display = "block";
-          document.querySelector('.proximamusica').style.outline = "3px solid #fa0";
-          document.getElementById("wrapper").style.visibility = "visible";
-          document.getElementById("wrapper").style.opacity = "1";
-          document.getElementById("carregamentoinicial").style.display = "none";
-          next();
-        };
-      </script>
+
       
       <div class="embaixofrase">
         <div class="frase" translate="yes">Ou&#231;a m&#250;sicas selecionadas de qualidade! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Rock, metal, blues, Jazz, Pop, folk e mais! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Mais de 4.000 m&uacute;sicas!&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Contribua com o crescimento do site e a adi&ccedil;&atilde;o de novas m&uacute;sicas.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Para que as pr&oacute;ximas m&uacute;sicas n&atilde;o parem de tocar, &eacute; recomend&aacute;vel deixar a tela acesa quando acessar o site em um dispositivo m&oacute;vel. Caso queira ouvir com a tela apagada e sem interrup&ccedil;&atilde;o, instale o aplicativo.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
@@ -5734,6 +5725,11 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           if (val > 0) {
             document.getElementById("carregando").style.display = "none";
             document.getElementById("waitline").style.display = "none";
+                      document.getElementById("carregando").style.display = "block";
+          document.querySelector('.proximamusica').style.outline = "3px solid #fa0";
+          document.getElementById("wrapper").style.visibility = "visible";
+          document.getElementById("wrapper").style.opacity = "1";
+          document.getElementById("carregamentoinicial").style.display = "none";
           }
           s = val;
           val = (h > 0) ? h + ':' : '';
