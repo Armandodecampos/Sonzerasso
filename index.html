@@ -1258,12 +1258,6 @@ Carregando
       <div class="waitline" id="waitline"></div>
       <script>
         window.onload = function() {
-          preloads = "https://dl.dropbox.com/scl/fi/3jn1ye3cfnp7gnljzcb3t/up-arrow.png?rlkey=t5zfoai10hek40mh4zl2nos9k&st=x30tinrk&dl=0,https://dl.dropbox.com/scl/fi/6amjk7kpmca6pgpgu9jp5/pause-teste.png?rlkey=v9noetbdl8ptjeeklfg35yeg1&dl=0,https://dl.dropbox.com/scl/fi/xi4ypb27ry91ukij1rdvv/repetir-todas.png?rlkey=qwqqwcqgaj7u6iliom4lrkdvy&st=13e3avtx&dl=0".split(",")
-          var tempImg = []
-          for (var x = 0; x < preloads.length; x++) {
-            tempImg[x] = new Image()
-            tempImg[x].src = preloads[x]
-          }
           document.getElementById("carregando").style.display = "block";
           document.querySelector('.proximamusica').style.outline = "3px solid #fa0";
           document.getElementById("wrapper").style.visibility = "visible";
