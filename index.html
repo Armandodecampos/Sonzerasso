@@ -93,6 +93,7 @@
             overflow: hidden;
         overflow-y: scroll;
         max-height:100px;
+        box-shadow: 0px 0px 2px 1px black;
       }
                   .informativotemporario::-webkit-scrollbar {
         width: 10px;
@@ -799,7 +800,7 @@
         background-size: 100%;
         background-position: center;
         background: #222;
-
+        margin-top:10px;
       }
       @keyframes troca {
         0% {
@@ -1198,17 +1199,15 @@ bottom:230px;
         }
       }
       .waitline {
-        position: fixed;
+        position: relative;
         z-index: 10;
         margin: 0 auto;
-        top: 5px;
         left: 0px;
         right:0px;
         width: 15px;
         aspect-ratio: 1 / 1;
-        opacity: 13;
         border-radius: 50%;
-        border:4px dotted #fff;
+        border:4px dotted #fa0;
         background-size: 100%;
       }
       @keyframes waitline {
@@ -1255,7 +1254,7 @@ Carregando
       </div>
       </div>
 	  <div class="simp-coverteste2" id="simpcoverteste2"></div>
-      <div class="waitline" id="waitline"></div>
+      
 
       
       <div class="embaixofrase">
@@ -1329,6 +1328,7 @@ Carregando
         <div class="notamusical"></div>
         </div>
         <div class="boxtitulomusica" id="boxtitulomusica">
+            <div class="waitline" id="waitline"></div>
         <div class="simp-coverteste" id="simpcoverteste"></div>
         <center>
           <div class="titulomusica" id="titulomusica" translate="no" onClick="CopyToClipboard('titulomusica')"></div>
