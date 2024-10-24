@@ -726,11 +726,13 @@
       .espacobranco::-webkit-scrollbar {
         width: 10px;
         background: #111;
+        box-shadow: 0px 0px 2px 1px black;
       }
       .espacobranco::-webkit-scrollbar-thumb {
         -webkit-appearance: none;
         height: 60px;
         background: radial-gradient(#f6e6cf, #777) fixed;
+        box-shadow: 0px 0px 2px 1px black;
       }
       .baixarmusicas {
         z-index: 1;
@@ -1067,33 +1069,7 @@
         border-right: 1px solid black;
         border-radius: 0px;
       }
-      .carregando{
-        position: fixed;
-        top: 0px;
-        width: 100%;
-        height: fit-content;
-        left: 0px;
-        font-weight: bolder;
-        font-style: normal;
-        z-index: 10;
-        background: #111;
-        padding: 5px;
-        border-bottom:3px solid #333;
-        box-shadow: 0px 0px 2px 1px black;
-      }
-      .carregandofrase {
-        white-space: nowrap;
-        letter-spacing: 6px;
-        right: 50px;
-        transition: 0.1s;
-        width: fit-content;
-        -moz-animation: frase 5s linear infinite;
-        -webkit-animation: frase 5s linear infinite;
-        animation: frase 5s linear infinite;
-        filter: invert(0%);
-        color: #fa0;
-        font-size: 19px;
-      }
+
 
       .copiarmusica {
         margin:0 auto;
@@ -1198,19 +1174,15 @@ bottom:230px;
             opacity:0.8;
         }
       }
-      .waitline {
+      .carregando {
         position: relative;
         z-index: 10;
         margin: 0 auto;
         left: 0px;
         right:0px;
-        width: 15px;
-        aspect-ratio: 1 / 1;
-        border-radius: 50%;
-        border:4px dotted #fa0;
-        background-size: 100%;
+        color:#fa0;
       }
-      @keyframes waitline {
+      @keyframes x {
         0% {
 			transform: rotate(0deg);
         }
@@ -1248,11 +1220,7 @@ bottom:230px;
     <div id="wrapper">
         <a href="#top"><div class="botaovoltaraotopodasmusicas" id="botaovoltaraotopodasmusicas">&#11014;</div></a>
         <div class="degrade"></div>
-      <div class="carregando" id="carregando">
-      <div class="carregandofrase">
-Carregando
-      </div>
-      </div>
+
 	  <div class="simp-coverteste2" id="simpcoverteste2"></div>
       
 
@@ -1304,7 +1272,6 @@ Carregando
           var timer = setInterval(next, 30000);
           function next() {
             if (document.getElementById("carregando").style.display == 'block') {
-              document.getElementById("waitline").style.animation = "waitline 10s infinite";
               document.getElementById("boxtitulomusica").style.animation = "troca 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index + 1;
@@ -1328,7 +1295,7 @@ Carregando
         <div class="notamusical"></div>
         </div>
         <div class="boxtitulomusica" id="boxtitulomusica">
-            <div class="waitline" id="waitline"></div>
+            <div class="carregando" id="carregando">Carregando...</div>
         <div class="simp-coverteste" id="simpcoverteste"></div>
         <center>
           <div class="titulomusica" id="titulomusica" translate="no" onClick="CopyToClipboard('titulomusica')"></div>
@@ -5724,7 +5691,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           }
           if (val > 0) {
             document.getElementById("carregando").style.display = "none";
-            document.getElementById("waitline").style.display = "none";
                       document.getElementById("carregando").style.display = "block";
           document.querySelector('.proximamusica').style.outline = "3px solid #fa0";
           document.getElementById("wrapper").style.visibility = "visible";
@@ -5747,7 +5713,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           if (simp_audio.currentTime == simp_audio.duration) {
             document.getElementById("carregando").style.display = "block";
             document.getElementById("boxtitulomusica").style.animation = "troca 1s";
-            reset_animation_waitline();
             simp_audio.removeEventListener('timeupdate', simp_initTime);
             if (simp_isNext) { //auto load next audio
               var elem;
@@ -5849,13 +5814,11 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             if (item.classList.contains('simp-active')) simp_a_index = index; //playlist contains '.simp-active'
             item.addEventListener('click', function() {
               restartnext();
-              reset_animation_waitline();
               document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
               document.getElementById("espacobranco").scrollTop = 0;
               document.getElementById("simp-playlist").style.visibility = "hidden";
               document.getElementById("pesquisa").style.display = "none";
               document.getElementById("carregando").style.display = "block";
-              document.getElementById("waitline").style.display = "block";
               let toggleButton = document.getElementById("sequencial");
               if (toggleButton.checked) {
                 toggleButton.checked = false;
@@ -5959,9 +5922,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
         document.getElementById('proximamusica').onclick = function() {
           if (this.checked) {
             restartnext();
-            reset_animation_waitline();
             document.getElementById("carregando").style.display = "block";
-            document.getElementById("waitline").style.display = "block";
             document.getElementById("boxtitulomusica").style.animation = "troca 1s";
             document.getElementById("titulomusica").style.animation = "troca5 3s";
             simp_a_index = simp_a_index + 1;
@@ -5971,9 +5932,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           } else {
             console.log('Not checked');
             restartnext();
-            reset_animation_waitline();
             document.getElementById("carregando").style.display = "block";
-            document.getElementById("waitline").style.display = "block";
             document.getElementById("boxtitulomusica").style.animation = "troca2 1s";
             document.getElementById("titulomusica").style.animation = "troca6 3s";
             simp_a_index = simp_a_index + 1;
@@ -5988,9 +5947,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           if (this.checked) {
             simp_isRandom = false;
             restartnext();
-            reset_animation_waitline();
             document.getElementById("carregando").style.display = "block";
-            document.getElementById("waitline").style.display = "block";
             document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
             document.getElementById("titulomusica").style.animation = "troca5 3s";
             simp_a_index = simp_a_index - 1;
@@ -6004,9 +5961,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             simp_isRandom = false;
             console.log('Not checked');
             restartnext();
-            reset_animation_waitline();
             document.getElementById("carregando").style.display = "block";
-            document.getElementById("waitline").style.display = "block";
             document.getElementById("boxtitulomusica").style.animation = "troca4 1s";
             document.getElementById("titulomusica").style.animation = "troca6 3s";
             simp_a_index = simp_a_index - 1;
@@ -6077,17 +6032,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
         }
       </script>
       <script>
-        function reset_animation_waitline() {
-          let circle = document.querySelector(".waitline");
-          circle.style.animationName = "none";
-          requestAnimationFrame(() => {
-            setTimeout(() => {
-              circle.style.animationName = "waitline"
-            }, 0);
-          });
-        }
-      </script>
-      <script>
         window.onkeydown = function(event) {
           if (event.keyCode == 13) {
             search_animal();
@@ -6118,9 +6062,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             let toggleButton = document.getElementById("proximamusica");
             if (toggleButton.checked) {
               restartnext();
-              reset_animation_waitline();
               document.getElementById("carregando").style.display = "block";
-              document.getElementById("waitline").style.display = "block";
               document.getElementById("boxtitulomusica").style.animation = "troca 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index + 1;
@@ -6129,9 +6071,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               simp_setAlbum(simp_a_index);
             } else {
               restartnext();
-              reset_animation_waitline();
               document.getElementById("carregando").style.display = "block";
-              document.getElementById("waitline").style.display = "block";
               document.getElementById("boxtitulomusica").style.animation = "troca 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index + 1;
@@ -6146,9 +6086,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             if (toggleButton.checked) {
               simp_isRandom = false;
               restartnext();
-              reset_animation_waitline();
               document.getElementById("carregando").style.display = "block";
-              document.getElementById("waitline").style.display = "block";
               document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index - 1;
@@ -6161,9 +6099,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             } else {
               simp_isRandom = false;
               restartnext();
-              reset_animation_waitline();
               document.getElementById("carregando").style.display = "block";
-              document.getElementById("waitline").style.display = "block";
               document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
               document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index - 1;
