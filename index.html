@@ -122,7 +122,7 @@
       }
                   .s2 {
         position: relative;
-        width: 200px;
+        width: 100px;
               margin: auto;
         left: 0px;
         right: 0px;
@@ -804,7 +804,6 @@
         background-size: 100%;
         background-position: center;
         background: #222;
-        margin-top:10px;
       }
       @keyframes troca {
         0% {
@@ -1184,16 +1183,20 @@ bottom:230px;
         right:0px;
         color:#fa0;
         padding:10px;
+        font-weight:bold;
+
+        animation: carregando 2s infinite;
       }
-      @keyframes x {
+
+      @keyframes carregando {
         0% {
-			transform: rotate(0deg);
+          opacity:0.8;
         }
         50% {
-        	transform: rotate(700deg);
+            opacity:0.2;
         }
         100% {
-			transform: rotate(0deg);
+            opacity:0.8;
         }
       }
       .mural{
