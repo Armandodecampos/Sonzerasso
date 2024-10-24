@@ -419,7 +419,6 @@
       }
       input[type=checkbox]:checked+.proximamusica {
         background-image: url("https://dl.dropbox.com/scl/fi/i2jdg58q6t6uddbuijmmt/proximateste.png?rlkey=ru8pdoyy4fekx6aty5xy1kuq3&dl=0");
-        outline: 3px solid #fa0;
       }
       /*-------------------musicaanterior----------------------*/
       input[type=checkbox] {
@@ -1182,6 +1181,7 @@ bottom:230px;
         left: 0px;
         right:0px;
         color:#fa0;
+        padding:10px;
       }
       @keyframes x {
         0% {
@@ -1211,7 +1211,7 @@ bottom:230px;
   <body>
 <script>
     window.onbeforeunload = function(){
-    return "Tem certeza que deseja fechar esta p&#225;gina?";
+    return "Tem certeza que deseja fechar esta p&#225;gina?"
 }
 </script>
     <div class="carregamentoinicial" id="carregamentoinicial">
@@ -1390,7 +1390,7 @@ bottom:230px;
           <label for="musicaanterior" class="musicaanterior" onclick="toque()"></label>
           <input type="checkbox" id="playpause" value="playpause">
           <label for="playpause" class="playpause" onclick="toque()"></label>
-          <input type="checkbox" id="proximamusica" value="proximamusica" checked>
+          <input type="checkbox" id="proximamusica" value="proximamusica">
           <label for="proximamusica" class="proximamusica" onclick="toque()"></label>
           <input type="checkbox" id="sequencial" value="sequencial">
           <label for="sequencial" class="sequencial" onclick="toque()"></label>
@@ -5695,6 +5695,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           document.getElementById("wrapper").style.visibility = "visible";
           document.getElementById("wrapper").style.opacity = "1";
           document.getElementById("carregamentoinicial").style.display = "none";
+          document.querySelector('.proximamusica').style.outline = "3px solid #fa0";
           }
           s = val;
           val = (h > 0) ? h + ':' : '';
