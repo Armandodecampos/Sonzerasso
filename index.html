@@ -137,12 +137,15 @@
             .notamusical{
 
       }
+      .boxmais{
+          display:none;
+      }
       .boxprogresso{
           position:relative;
           width: 90%;
         margin: auto;
+        margin-top:40px;
         display: flex;
-        top: 10px;
         left: 0;
         right: 0;
       }
@@ -381,7 +384,7 @@
         margin-top: 5%;
         right: 0%;
         aspect-ratio: 1 / 1;
-        border-radius: 50%;
+        border-radius: 20%;
         position: absolute;
         filter: invert(0%);
         transition: 0.3s;
@@ -454,7 +457,7 @@
         margin-top: 5%;
         left: 0%;
         aspect-ratio: 1 / 1;
-        border-radius: 50%;
+        border-radius: 20%;
         position: absolute;
         filter: invert(0%);
         transition: 0.3s;
@@ -471,12 +474,37 @@
         background-color: #fa0;
         outline: 3px solid #fa0;
       }
+        /*-------------------mais----------------------*/
+      input[type=checkbox]+.mais {
+        background-image: url("https://dl.dropbox.com/scl/fi/e0kj2i7tajs772vlsbwji/plus-sign.png?rlkey=e6m02g360ku4g40btf0xvf1qe&st=xei7bkhv&dl=0");
+        background-size: 100%;
+        width: 30px;
+        display:block;
+        margin:0 auto;
+        left:0;
+        right:0;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        filter: invert(0%);
+        transition: 0.3s;
+        background-color: #fff;
+        filter: invert(0%);
+        cursor: pointer;
+        outline: 3px solid #000;
+        box-shadow: 0px 0px 2px 1px black;
+      }
+      input[type=checkbox]:checked+.mais {
+        background-image: url("https://dl.dropbox.com/scl/fi/hq9s5iz1b0jrtdrmnzgq7/minus-sign.png?rlkey=f7i4c5lxwj55wfxw0nmt6casq&st=mdo3tya4&dl=0");
+        background-size: 100%;
+        filter: invert(0%);
+        background-color: #fa0;
+        outline: 3px solid #fa0;
+      }
       .boxvolume{
-          position:fixed;
-          bottom:0;
         width: 50%;
         max-width: 13em;
         margin: auto;
+        margin-top:40px;
         display: flex;
         left: 0;
         right: 0;
@@ -1095,7 +1123,7 @@
       .botaovoltaraotopodasmusicas {
         z-index: 12;
         display: none;
-        position: fixed;
+        position: absolute;
         bottom: 120px;
         left: 0px;
         width: fit-content;
@@ -1202,11 +1230,11 @@ bottom:230px;
       .mural{
         z-index:1;
         position:relative;
-        background: url("https://dl.dropbox.com/scl/fi/19jconraqp85qrydpp07i/Mural.png?rlkey=q5cas87olazm3okbhrek31zdk&st=weml9gsn&dl=0") no-repeat;
+        background: url("") no-repeat;
         background-size: 100%; 
         margin:0 auto;
         width:100%;
-        aspect-ratio:3 / 1;
+        aspect-ratio:0 / 0;
         top:0;
         opacity:1;
         margin-bottom:30px;
@@ -1308,13 +1336,22 @@ bottom:230px;
         </center>
 
 
-        
+        <div class="boxmais" id="boxmais">
                 <div class="boxprogresso">
         <div class="simbolorelogio"></div>
         <input class="progresso" id="progresso" type="range" min="0" max="100" value="0" disabled />
         </div>
         <div class="simp-time" id="simp-time"><span class="start-time">00:00</span><span class="simp-slash">&#160;/&#160;</span><span class="end-time">00:00</span></div>
+        <div class="boxvolume">
+        <div class="simbolovolume"></div>
+        <input type="range" name="range" class="volume-control" id="volume-control" min="0" max="100" value="100" />
         </div>
+        </div>
+            <br>
+<input type="checkbox" id="mais" value="mais">
+          <label for="mais" class="mais" onclick="toque()"></label>
+        </div>
+        
         <script>
           function CopyToClipboard(containerid) {
             const textarea = document.createElement('textarea');
@@ -1400,10 +1437,7 @@ bottom:230px;
           <input type="checkbox" id="sequencial" value="sequencial">
           <label for="sequencial" class="sequencial" onclick="toque()"></label>
         </div>
-        <div class="boxvolume">
-        <div class="simbolovolume"></div>
-        <input type="range" name="range" class="volume-control" id="volume-control" min="0" max="100" value="100" />
-        </div>
+
       </div>
       
 
@@ -5873,6 +5907,18 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           simp_startScript();
         }
       </script>
+      <script>
+        document.getElementById('mais').onclick = function() {
+          if (this.checked) {
+            console.log('Checked');
+            document.getElementById("boxmais").style.display = "block";
+          } else {
+            console.log('Not checked');
+            document.getElementById("boxmais").style.display = "none";
+          }
+        };
+      </script>
+      
       <script>
         document.getElementById('sequencial').onclick = function() {
           if (this.checked) {
