@@ -371,7 +371,6 @@
         background-size: 100%;
         background-color: #fa0;
         filter: invert(0%);
-        outline: 3px solid #fa0;
       }
       /*------------------aleatorio---------------------------*/
       input[type=checkbox] {
@@ -400,7 +399,6 @@
         background-color: #fa0;
 
         filter: invert(0%);
-        outline: 3px solid #fa0;
       }
       /*------------------proxima---------------------------*/
       input[type=checkbox] {
@@ -472,7 +470,6 @@
         background-size: 100%;
         filter: invert(0%);
         background-color: #fa0;
-        outline: 3px solid #fa0;
       }
         /*-------------------mais----------------------*/
       input[type=checkbox]+.mais {
@@ -480,25 +477,24 @@
         background-size: 100%;
         width: 30px;
         display:block;
-        margin:0 auto;
-        left:0;
+        position:relative;
+        margin:auto;
         right:0;
         aspect-ratio: 1 / 1;
-        border-radius: 50%;
+        border-radius: 20%;
         filter: invert(0%);
         transition: 0.3s;
-        background-color: #fff;
+        background-color: #aaa;
         filter: invert(0%);
         cursor: pointer;
         outline: 3px solid #000;
         box-shadow: 0px 0px 2px 1px black;
       }
       input[type=checkbox]:checked+.mais {
-        background-image: url("https://dl.dropbox.com/scl/fi/hq9s5iz1b0jrtdrmnzgq7/minus-sign.png?rlkey=f7i4c5lxwj55wfxw0nmt6casq&st=mdo3tya4&dl=0");
+        background-image: url("https://dl.dropbox.com/scl/fi/27zktc4jec5q67sxzegm3/minus.png?rlkey=3obpp1w3yr1bz95jzrpqm2st5&st=yn4lc3wx&dl=0");
         background-size: 100%;
         filter: invert(0%);
-        background-color: #fa0;
-        outline: 3px solid #fa0;
+        background-color: #d70;
       }
       .boxvolume{
         width: 50%;
@@ -5734,7 +5730,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           document.getElementById("wrapper").style.visibility = "visible";
           document.getElementById("wrapper").style.opacity = "1";
           document.getElementById("carregamentoinicial").style.display = "none";
-          document.querySelector('.proximamusica').style.outline = "3px solid #fa0";
           }
           s = val;
           val = (h > 0) ? h + ':' : '';
@@ -5941,11 +5936,9 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           if (this.checked) {
             console.log('Checked');
             simp_isRandom = true;
-            document.querySelector('.proximamusica').style.outline = "3px solid #fa0";
           } else {
             console.log('Not checked');
             simp_isRandom = false;
-            document.querySelector('.proximamusica').style.outline = "3px solid #000";
           }
         };
       </script>
