@@ -42,7 +42,7 @@
         font-family: Verdana, sans-serif;
         font-family: "Times New Roman", Times, serif;
         font-family: Arial, Helvetica, sans-serif;
-        background: #111;
+        background-image: linear-gradient(to bottom right, #111, #444);
       }
       body::-webkit-scrollbar {
         -webkit-appearance: none;
@@ -141,7 +141,7 @@
           position:relative;
           width: 90%;
         margin: auto;
-        margin-top:40px;
+        margin-top:20px;
         display: flex;
         left: 0;
         right: 0;
@@ -467,13 +467,14 @@ box-shadow: 0px 0px 2px 1px black;
         display:block;
         position:relative;
         margin:auto;
+        margin-top:10px;
         right:0;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
         filter: invert(100%);
         transition: 0.3s;
         cursor: pointer;
-
+    
       }
       input[type=checkbox]:checked+.mais {
         background-image: url("https://dl.dropbox.com/scl/fi/ndu0qvxjjv7gmxpjksypa/seta.png?rlkey=p4dr61fvl7i0iiscwlggg5sli&st=6dy36k61&dl=0");
@@ -1236,7 +1237,7 @@ bottom:230px;
         <a href="#top"><div class="botaovoltaraotopodasmusicas" id="botaovoltaraotopodasmusicas">&#11014;</div></a>
         <div class="degrade"></div>
 
-	  <div class="simp-coverteste2" id="simpcoverteste2"></div>
+	  <div class="simp-coverteste2x" id="simpcoverteste2"></div>
       
 
       
@@ -1306,30 +1307,27 @@ bottom:230px;
         <!-- Digite Algo -->
         </div>
         <div class="boxtitulo">
-        <div class="titulo"></div>
+            <div class="titulo"></div>
         </div>
         <div class="boxtitulomusica" id="boxtitulomusica">
             <div class="carregando" id="carregando">Carregando...</div>
-        <div class="simp-coverteste" id="simpcoverteste"></div>
-        <center>
-          <div class="titulomusica" id="titulomusica" translate="no" onClick="CopyToClipboard('titulomusica')"></div>
-        </center>
-
-      <div class="boxmais" id="boxmais">
+            <div class="simp-coverteste" id="simpcoverteste"></div>
+            <center>
+                <div class="titulomusica" id="titulomusica" translate="no" onClick="CopyToClipboard('titulomusica')"></div>
+            </center>
+            <input type="checkbox" id="mais" value="mais">
+            <label for="mais" class="mais" onclick="toque()"></label>
+            <div class="boxmais" id="boxmais">
                 <div class="boxprogresso">
-        <div class="simbolorelogio"></div>
-        <input class="progresso" id="progresso" type="range" min="0" max="100" value="0" disabled />
-        </div>
-        <div class="simp-time" id="simp-time"><span class="start-time">00:00</span><span class="simp-slash">&#160;/&#160;</span><span class="end-time">00:00</span></div>
-        <div class="boxvolume">
-        <div class="simbolovolume"></div>
-        <input type="range" name="range" class="volume-control" id="volume-control" min="0" max="100" value="100" />
-        </div>
-        </div>
-        
-            <br>
-<input type="checkbox" id="mais" value="mais">
-          <label for="mais" class="mais" onclick="toque()"></label>
+                    <div class="simbolorelogio"></div>
+                    <input class="progresso" id="progresso" type="range" min="0" max="100" value="0" disabled />
+                    </div>
+                <div class="simp-time" id="simp-time"><span class="start-time">00:00</span><span class="simp-slash">&#160;/&#160;</span><span class="end-time">00:00</span></div>
+                <div class="boxvolume">
+                    <div class="simbolovolume"></div>
+                    <input type="range" name="range" class="volume-control" id="volume-control" min="0" max="100" value="100" />
+                </div>
+            </div>
         </div>
         
         <script>
@@ -5826,7 +5824,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           ap_simp = document.querySelector('#simp');
           simp_audio = ap_simp.querySelector('#audio');
           simp_cover = document.querySelector('.simp-coverteste');
-          simp_cover2 = document.querySelector('.simp-coverteste2');
+          simp_cover2 = document.querySelector('.simp-coverteste2x');
           simp_title = document.querySelector('.titulomusica');
           simp_progress = document.querySelector('.progresso');
           simp_auto_load = simp_config.auto_load; //auto load audio file
