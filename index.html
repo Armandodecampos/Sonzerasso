@@ -80,7 +80,7 @@
           position:fixed;
           bottom: 126px;
       margin:0 auto;
-      display:block;
+      display:none;
       left:0;
       right:10px;
       height:fit-content;
@@ -133,9 +133,6 @@
 		bottom:10px;
 		-webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
-      }
-            .notamusical{
-
       }
       .boxmais{
           display:none;
@@ -223,10 +220,10 @@
         font-weight: bolder;
         font-style: normal;
         z-index: 9;
-        background: #111;
+box-shadow: 0px 0px 2px 1px black;
         padding: 5px;
-        border-bottom:3px solid #333;
-        box-shadow: 0px 0px 2px 1px black;
+        background:rgba(0,0,0,0.5);
+
       }
       .frase {
         white-space: nowrap;
@@ -283,8 +280,8 @@
         margin-top:20px;
         border-radius:5px;
         background: #222;
-        border:2px solid #000;
         cursor: pointer;
+        background:rgba(0,0,0,0.6);
       }
       .titulomusica {
         word-break: break-all;
@@ -313,28 +310,19 @@
         background: #222;
         border:2px solid #000;
         box-shadow: 0px 0px 2px 1px black;
+        background:rgba(0,0,0,0.5);
       }
       .faixabordainferior {
         position: fixed;
-        background: #ccc;
-        height: 126px;
+        height: 116px;
         bottom: 0em;
         width: 100%;
         margin: 0 auto;
         right: 0;
         left: 0;
         z-index: 8;
-        background-color: #000;
-        background: #191816;
-        background-color: #191816;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='322' height='322' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%232F2F2E' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%232F2F2E' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E");
-        background: #dfdbd7;
-        background: #dfdbd7;
-        border-top:3px solid #333;
         box-shadow: 0px 0px 2px 1px black;
-
-        background: #111;
-
+        background:rgba(0,0,0,0.5);
       }
       .boxcontroles {
         position: relative;
@@ -473,7 +461,7 @@
       }
         /*-------------------mais----------------------*/
       input[type=checkbox]+.mais {
-        background-image: url("https://dl.dropbox.com/scl/fi/e0kj2i7tajs772vlsbwji/plus-sign.png?rlkey=e6m02g360ku4g40btf0xvf1qe&st=xei7bkhv&dl=0");
+        background-image: url("https://dl.dropbox.com/scl/fi/ndu0qvxjjv7gmxpjksypa/seta.png?rlkey=p4dr61fvl7i0iiscwlggg5sli&st=6dy36k61&dl=0");
         background-size: 100%;
         width: 30px;
         display:block;
@@ -481,20 +469,22 @@
         margin:auto;
         right:0;
         aspect-ratio: 1 / 1;
-        border-radius: 20%;
+        border-radius: 50%;
         filter: invert(0%);
         transition: 0.3s;
-        background-color: #aaa;
+        background-color: #fff;
         filter: invert(0%);
         cursor: pointer;
         outline: 3px solid #000;
         box-shadow: 0px 0px 2px 1px black;
+        padding:3px;
+        background-origin: content-box;
       }
       input[type=checkbox]:checked+.mais {
-        background-image: url("https://dl.dropbox.com/scl/fi/27zktc4jec5q67sxzegm3/minus.png?rlkey=3obpp1w3yr1bz95jzrpqm2st5&st=yn4lc3wx&dl=0");
+        background-image: url("https://dl.dropbox.com/scl/fi/ndu0qvxjjv7gmxpjksypa/seta.png?rlkey=p4dr61fvl7i0iiscwlggg5sli&st=6dy36k61&dl=0");
         background-size: 100%;
         filter: invert(0%);
-        background-color: #d70;
+        transform:rotate(180deg);
       }
       .boxvolume{
         width: 50%;
@@ -576,7 +566,7 @@
         position: fixed;
         margin: 0 auto;
         top: 45px;
-        bottom: 126px;
+        bottom: 116px;
         left: 0;
         right: 0;
         color: #000;
@@ -586,8 +576,8 @@
         text-align: left;
         user-select: none;
         cursor: pointer;
-        border-top: 2px solid #333;
-        border-bottom: 2px solid #333;
+        border-top: 2px solid #111;
+        border-bottom: 2px solid #111;
         box-shadow: 0px 0px 2px 1px black;
         background: rgba(5, 5, 5, 0.65);
         -webkit-backdrop-filter: blur(12px);
@@ -636,7 +626,7 @@
         padding-right: 220px;
         padding-left: 45px;
         background: radial-gradient(#4f4941, #000) fixed;
-        color: #ccc;
+        color: #fff;
         cursor: pointer;
         background: #111;
       }
@@ -670,7 +660,7 @@
         color: #000;
       }
       ::placeholder {
-        color: #ccc;
+        color: #fff;
         border: none;
         outline: none;
       }
@@ -683,7 +673,7 @@
         text-align: center;
         font-family: Verdana, sans-serif;
         padding: 0.3em;
-        color: #ccc;
+        color: #fff;
         border-radius: 5px;
         border: 2px solid #333;
         font-weight: bold;
@@ -704,7 +694,7 @@
         text-align: center;
         font-family: Verdana, sans-serif;
         padding: 0.3em;
-        color: #ccc;
+        color: #fff;
         border-radius: 5px;
         border: 2px solid #333;
         font-weight: bold;
@@ -745,9 +735,11 @@
         overflow-y: scroll;
         position: fixed;
         margin: 0 auto;
-        top: 35px;
-        bottom: 126px;
+        top: 34px;
+        bottom: 116px;
         border-left:10px solid transparent;
+        border:0px solid #000;
+        box-shadow: 0px 0px 2px 1px transparent;
       }
       .espacobranco::-webkit-scrollbar {
         width: 10px;
@@ -823,7 +815,6 @@
         z-index: 2;
         margin: 0 auto;
         margin-bottom: 90px;
-        border: 2px solid #333;
         box-shadow: 0px 0px 2px 1px black;
         background-size: 100%;
         background-position: center;
@@ -898,7 +889,7 @@
             left:0;
             right:0;
             bottom:0;
-        filter: blur(300px) saturate(200%);
+        filter: blur(300px) saturate(100%);
         margin: -1000px -1000px -1000px -1000px;
         image-rendering: pixelated;
       }
@@ -1118,7 +1109,7 @@
       }
       .botaovoltaraotopodasmusicas {
         z-index: 12;
-        display: none;
+        visibility: hidden;
         position: absolute;
         bottom: 120px;
         left: 0px;
@@ -1322,7 +1313,6 @@ bottom:230px;
         </div>
         <div class="boxtitulo">
         <div class="titulo"></div>
-        <div class="notamusical"></div>
         </div>
         <div class="boxtitulomusica" id="boxtitulomusica">
             <div class="carregando" id="carregando">Carregando...</div>
@@ -1331,8 +1321,7 @@ bottom:230px;
           <div class="titulomusica" id="titulomusica" translate="no" onClick="CopyToClipboard('titulomusica')"></div>
         </center>
 
-
-        <div class="boxmais" id="boxmais">
+      <div class="boxmais" id="boxmais">
                 <div class="boxprogresso">
         <div class="simbolorelogio"></div>
         <input class="progresso" id="progresso" type="range" min="0" max="100" value="0" disabled />
@@ -1343,6 +1332,7 @@ bottom:230px;
         <input type="range" name="range" class="volume-control" id="volume-control" min="0" max="100" value="100" />
         </div>
         </div>
+        
             <br>
 <input type="checkbox" id="mais" value="mais">
           <label for="mais" class="mais" onclick="toque()"></label>
@@ -1419,6 +1409,9 @@ bottom:230px;
           </center>
         </div>
       </div>
+      
+
+      
       <div class="faixabordainferior">
           
         <div class="boxcontroles">
@@ -1439,10 +1432,10 @@ bottom:230px;
 
       <script>
         function aparecerbotaovoltaraotop() {
-          if ((document.getElementById("simp-playlist").scrollTop > 200) && (document.getElementById("simp-playlist").style.display = "block")) {
-            document.getElementById("botaovoltaraotopodasmusicas").style.display = "block";
+          if (document.getElementById("simp-playlist").scrollTop > 200) {
+            document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "visible";
           } else {
-            document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
+            document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
           }
         }
       </script>
@@ -5848,7 +5841,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             if (item.classList.contains('simp-active')) simp_a_index = index; //playlist contains '.simp-active'
             item.addEventListener('click', function() {
               restartnext();
-              document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
+              document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
               document.getElementById("espacobranco").scrollTop = 0;
               document.getElementById("simp-playlist").style.visibility = "hidden";
               document.getElementById("pesquisa").style.display = "none";
@@ -5918,14 +5911,16 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
         document.getElementById('sequencial').onclick = function() {
           if (this.checked) {
             console.log('Checked');
-            document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
+            document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
             document.getElementById("simp-playlist").style.visibility = "visible";
+            document.getElementById("simp-playlist").style.position = "fixed";
             document.getElementById("pesquisa").style.display = "block";
             document.body.scrollTop = document.documentElement.scrollTop = 0;
           } else {
             console.log('Not checked');
-            document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
+            document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
             document.getElementById("simp-playlist").style.visibility = "hidden";
+            document.getElementById("simp-playlist").style.position = "relative";
             document.getElementById("pesquisa").style.display = "none";
             document.body.scrollTop = document.documentElement.scrollTop = 0;
           }
@@ -6087,7 +6082,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           if (event.keyCode == 27) {
             let toggleButton = document.getElementById("sequencial");
             if (toggleButton.checked) {
-              document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
+              document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
               document.getElementById("simp-playlist").style.visibility = "hidden";
               document.getElementById("pesquisa").style.display = "none";
               document.body.scrollTop = document.documentElement.scrollTop = 0;
