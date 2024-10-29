@@ -42,7 +42,7 @@
         font-family: Verdana, sans-serif;
         font-family: "Times New Roman", Times, serif;
         font-family: Arial, Helvetica, sans-serif;
-        background-image: linear-gradient(to bottom right, #111, #444);
+        background-image: linear-gradient(to bottom, #c1bab3, #857f7a);
       }
       body::-webkit-scrollbar {
         -webkit-appearance: none;
@@ -117,8 +117,8 @@
         background-size: 100%;
 		z-index:2;
 		margin-top:20px;
-		-webkit-filter: drop-shadow(0px 3px 3px #000);
-  filter: drop-shadow(0px 3px 3px #000);
+		-webkit-filter: drop-shadow(0px 1px 1px #000);
+  filter: drop-shadow(0px 1px 1px #000);
       }
                   .s2 {
         position: relative;
@@ -131,8 +131,8 @@
         background-size: 100%;
 		z-index:2;
 		bottom:10px;
-		-webkit-filter: drop-shadow(5px 5px 5px #000);
-  filter: drop-shadow(5px 5px 5px #000);
+		-webkit-filter: drop-shadow(0px 1px 1px #000);
+  filter: drop-shadow(0px 1px 1px #000);
       }
       .boxmais{
           display:none;
@@ -190,7 +190,7 @@
         width: 90%;
         margin-top: 10px;
        
-        color: #ccc;
+        color: #000;
 
       }
 
@@ -275,27 +275,23 @@ box-shadow: 0px 0px 2px 1px black;
         max-width: 400px;
         padding:10px;
         padding-bottom: 18px;
-        box-shadow: 0px 0px 2px 1px black;
         font-size: 17px;
         margin-top:20px;
         border-radius:5px;
-        background: #222;
-        cursor: pointer;
-        background:rgba(0,0,0,0.5);
       }
       .titulomusica {
         word-break: break-all;
         width: 100%;
-        margin-top: -80px;
+ 
         font-size: 17px;
       }
       .informacao {
-        background: #ddd;
+
         width: 80%;
         height: fit-content;
         padding: 25px;
-        background: rgba(0, 0, 0, 0.6);
-        color: #fff;
+
+        color: #000;
         margin: 0 auto;
         right: 0;
         left: 0;
@@ -303,13 +299,9 @@ box-shadow: 0px 0px 2px 1px black;
         max-width: 800px;
         margin-top: 30px;
         margin-bottom: 200px;
-        background: #222;
-        background: linear-gradient(#4f4941, #000) fixed;
-        background: #443d34;
+
         border-radius:5px;
-        background: #222;
-        box-shadow: 0px 0px 2px 1px black;
-        background:rgba(0,0,0,0.5);
+
       }
       .faixabordainferior {
         position: fixed;
@@ -470,7 +462,7 @@ box-shadow: 0px 0px 2px 1px black;
         right:0;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
-        filter: invert(100%);
+        filter: invert(0%);
         transition: 0.3s;
         cursor: pointer;
     
@@ -540,7 +532,7 @@ box-shadow: 0px 0px 2px 1px black;
         width: 25px;
         background: url("https://dl.dropbox.com/scl/fi/j0tst0q076jqoyzxj8yfb/speaker-filled-audio-tool.png?rlkey=d5optfkqbzwxqzw7rxvxc4yru&st=mpmxqbco&dl=0") no-repeat;
         background-size: 100%;
-        filter: invert(60%);
+        filter: invert(0%);
       }
       .simbolorelogio {
         position:relative;
@@ -550,7 +542,7 @@ box-shadow: 0px 0px 2px 1px black;
         width: 25px;
         background: url("https://dl.dropbox.com/scl/fi/wspcpqn77p4vbwdq7mow4/clock.png?rlkey=gvl8a068na1muzjhqfsam4h1c&st=hbneqfo2&dl=0") no-repeat;
         background-size: 100%;
-        filter: invert(60%);
+        filter: invert(0%);
       }
       .simp-playlist {
         z-index: 11;
@@ -573,7 +565,7 @@ box-shadow: 0px 0px 2px 1px black;
         border-top: 2px solid #111;
         border-bottom: 2px solid #111;
         box-shadow: 0px 0px 2px 1px black;
-        background: rgba(5, 5, 5, 0.65);
+        background: rgba(180, 180, 180, 0.75);
         -webkit-backdrop-filter: blur(12px);
         backdrop-filter: blur(12px);
       }
@@ -807,11 +799,13 @@ box-shadow: 0px 0px 2px 1px black;
       .simp-coverteste {
         z-index: 2;
         margin: 0 auto;
-        margin-bottom: 90px;
-        box-shadow: 0px 0px 2px 1px black;
+        margin-bottom: 10px;
+        box-shadow: 0px 0px 2px 4px black;
         background-size: 100%;
         background-position: center;
         background: #222;
+        border:1px solid #000;
+        outline:3px solid #222;
       }
       @keyframes troca {
         0% {
@@ -889,6 +883,7 @@ box-shadow: 0px 0px 2px 1px black;
       .box-artistas {
         position: relative;
         margin: 0 auto;
+        margin-bottom:100px;
         display: flex;
         flex-direction: column;
         text-align: left;
@@ -896,18 +891,20 @@ box-shadow: 0px 0px 2px 1px black;
         letter-spacing: 2px;
         border-radius: 5px;
         padding: 10px;
-        color: #fa0;
+        color: #000;
+        font-weight:bold;
+        text-shadow: 0px 1px #fff;
       }
       a:link {
         text-decoration: none;
-        color: #fa0;
+        color: #000;
         padding: 3px;
         margin: 10px;
         width: 100%;
         margin: 0 auto;
       }
       a:visited {
-        color: #fa0;
+        color: #000;
         padding: 3px;
         margin: 10px;
         width: 100%;
@@ -996,24 +993,25 @@ box-shadow: 0px 0px 2px 1px black;
         text-transform: capitalize;
         font-weight: bold;
         font-size: 30px;
-        color: #f66;
+        color: #a30;
       }
       .t2 {
         font-size: 30px;
-        color: #fff;
+        color: #000;
       }
       .x {
         text-transform: uppercase;
-        color: #fff
+        color: #000
       }
       .y {
         text-transform: capitalize;
-        color: #fff
+        color: #000
       }
       .z {
         text-transform: uppercase;
         font-weight: bold;
-        color: #fa0;
+        color: #f0;
+        text-shadow: 0px 1px #fff;
       }
       .reproduzindoagora {
         font-size: 15px;
@@ -1110,7 +1108,7 @@ box-shadow: 0px 0px 2px 1px black;
 height:fit-content;
         cursor: pointer;
     font-size:70px;
-color:#fff;
+color:#000;
  
       }
       #wrapper {
@@ -1305,13 +1303,13 @@ text-align:center;
         <div class="informativotemporario">
         <!-- Digite Algo -->
         </div>
-        <div class="simp-coverteste2" id="simpcoverteste2"></div>
+
         <div class="boxtitulo">
             <div class="titulo"></div>
         </div>
         <div class="boxtitulomusica" id="boxtitulomusica">
-            <div class="carregando" id="carregando">Carregando...</div>
             <div class="simp-coverteste" id="simpcoverteste"></div>
+            <div class="carregando" id="carregando">Carregando...</div>
             <center>
                 <div class="titulomusica" id="titulomusica" translate="no" onClick="CopyToClipboard('titulomusica')"></div>
             </center>
@@ -1352,7 +1350,7 @@ text-align:center;
           <p>Usuários do Windows, Linux e Chromebook podem adicionar o site como um aplicativo no Chrome. Para fazer isso, siga as instru&ccedil;&otilde;es:</p>
 		  <p>&#128312; Abra o Chrome.</p>
 		  <p>&#128312; Navegue até o site.</p>
-		  <p>&#128312; No canto superior direito, clique em "Mais". <img width="20px" height="20px" style="filter: invert(100%);" src="https://dl.dropbox.com/scl/fi/jcp1hyatkf0316tcm6nkh/more.png?rlkey=g91vbatm43kdcqsunpw2bvpd4&st=m36tmjdg&dl=0"></p>
+		  <p>&#128312; No canto superior direito, clique em "Mais". <img width="20px" height="20px" style="filter: invert(0%);" src="https://dl.dropbox.com/scl/fi/jcp1hyatkf0316tcm6nkh/more.png?rlkey=g91vbatm43kdcqsunpw2bvpd4&st=m36tmjdg&dl=0"></p>
 		  <p>&#128312; Clique em "Adicionar &agrave; tela inicial" ou em "Salvar e compartilhar" e depois em "Instalar p&aacute;gina como app..."</p>
 		  <p>&#128312; Digite um nome para o aplicativo e clique em Instalar.</p>
 		  <p>Pronto. Agora voc&ecirc; tem um aplicativo do Sonzerasso!</p>
@@ -1433,9 +1431,10 @@ text-align:center;
       </script>
       <div class="simple-audio-player" id="simp" data-config='{"auto_load":true}'>
         <div class="simp-playlist" id="simp-playlist" onscroll="aparecerbotaovoltaraotop(); desativarlista()">
+            <p class="t2" style="font-size:19px;">Selecione o que deseja ouvir: </p>
           <div class="box-artistas" id="box-artistas">
             <p id="top"></p>
-            <p class="t2" style="font-size:19px;">Selecione o que deseja ouvir: </p>
+            
             <a class="filtro" href="#acdc" translate="no">- AC/DC</a>
             <a class="filtro" href="#aerosmith" translate="no">- Aerosmith</a>
 	    <a class="filtro" href="#audioslave" translate="no">- Audioslave</a>
@@ -5667,7 +5666,7 @@ text-align:center;
 
             <!-- fim das musicas -->
           </ul>
-          <span  class="conteudo" style="position:relative;margin:0 auto;margin-bottom:10em;display:block;color:#fff;padding:40px;">*Limpe o campo de pesquisa para aparecer todas as op&ccedil;&otilde;es.</span>
+          <span  class="conteudo" style="position:relative;margin:0 auto;margin-bottom:10em;display:block;color:#000;padding:40px;">*Limpe o campo de pesquisa para aparecer todas as op&ccedil;&otilde;es.</span>
         </div>
       </div>
       <script src="./js/script.js"></script>
@@ -5797,7 +5796,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
         }
         function simp_setAlbum(index) {
           simp_cover.innerHTML = simp_a_url[index].dataset.cover ? '<div style="background:url(' + simp_a_url[index].dataset.cover + ') no-repeat;background-size:cover;width:100%;aspect-ratio:1 / 1;"></div>' : '<i>Falha ao carregar</i>';
-          simp_cover2.innerHTML = simp_a_url[index].dataset.cover ? '<div style="background:url(' + simp_a_url[index].dataset.cover + ') no-repeat;background-size:cover;width:200%;height:200%;"></div>' : '<i>Falha ao carregar</i>';
           simp_title.innerHTML = simp_source[index].querySelector('.xyz').innerHTML;
         }
         function simp_changeAudio(elem) {
@@ -5824,7 +5822,6 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
           ap_simp = document.querySelector('#simp');
           simp_audio = ap_simp.querySelector('#audio');
           simp_cover = document.querySelector('.simp-coverteste');
-          simp_cover2 = document.querySelector('.simp-coverteste2');
           simp_title = document.querySelector('.titulomusica');
           simp_progress = document.querySelector('.progresso');
           simp_auto_load = simp_config.auto_load; //auto load audio file
