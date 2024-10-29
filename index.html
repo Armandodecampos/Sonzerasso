@@ -42,7 +42,7 @@
         font-family: Verdana, sans-serif;
         font-family: "Times New Roman", Times, serif;
         font-family: Arial, Helvetica, sans-serif;
-        background-image: linear-gradient(to bottom, #c1bab3, #857f7a);
+        background:#c1bab3;
       }
       body::-webkit-scrollbar {
         -webkit-appearance: none;
@@ -74,6 +74,7 @@
       margin: auto;
         left: 0px;
         right: 0px;
+        
       }
       .informativotemporario{
           z-index:13;
@@ -107,7 +108,7 @@
       }
       .titulo {
         position: relative;
-        width: 300px;
+        width:95%;
         max-width: 300px;
               margin: auto;
         left: 0px;
@@ -190,7 +191,7 @@
         width: 90%;
         margin-top: 10px;
        
-        color: #000;
+        color: #ddd;
 
       }
 
@@ -278,6 +279,8 @@ box-shadow: 0px 0px 2px 1px black;
         font-size: 17px;
         margin-top:20px;
         border-radius:5px;
+        background:#111;
+        box-shadow: 0px 0px 2px 1px black;
       }
       .titulomusica {
         word-break: break-all;
@@ -462,7 +465,7 @@ box-shadow: 0px 0px 2px 1px black;
         right:0;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
-        filter: invert(0%);
+        filter: invert(80%);
         transition: 0.3s;
         cursor: pointer;
     
@@ -532,7 +535,7 @@ box-shadow: 0px 0px 2px 1px black;
         width: 25px;
         background: url("https://dl.dropbox.com/scl/fi/j0tst0q076jqoyzxj8yfb/speaker-filled-audio-tool.png?rlkey=d5optfkqbzwxqzw7rxvxc4yru&st=mpmxqbco&dl=0") no-repeat;
         background-size: 100%;
-        filter: invert(0%);
+        filter: invert(80%);
       }
       .simbolorelogio {
         position:relative;
@@ -542,7 +545,7 @@ box-shadow: 0px 0px 2px 1px black;
         width: 25px;
         background: url("https://dl.dropbox.com/scl/fi/wspcpqn77p4vbwdq7mow4/clock.png?rlkey=gvl8a068na1muzjhqfsam4h1c&st=hbneqfo2&dl=0") no-repeat;
         background-size: 100%;
-        filter: invert(0%);
+        filter: invert(80%);
       }
       .simp-playlist {
         z-index: 11;
@@ -558,25 +561,24 @@ box-shadow: 0px 0px 2px 1px black;
         color: #000;
         padding: 30px;
         font-size: 19px;
-        background: #dfdbd7;
+        background: #444;
         text-align: left;
         user-select: none;
         cursor: pointer;
         border-top: 2px solid #111;
         border-bottom: 2px solid #111;
         box-shadow: 0px 0px 2px 1px black;
-        background: rgba(180, 180, 180, 0.75);
-        -webkit-backdrop-filter: blur(12px);
-        backdrop-filter: blur(12px);
+        background: #111;
       }
       .simp-playlist::-webkit-scrollbar {
         width: 50px;
-        background: #111;
+        background: #c1bab3;
       }
       .simp-playlist::-webkit-scrollbar-thumb {
         -webkit-appearance: none;
+
         height: 60px;
-        background: radial-gradient(#f6e6cf, #777) fixed;
+        background: #111;
       }
       #simp ul li.simp-active {
         text-decoration: underline #F00;
@@ -728,14 +730,13 @@ box-shadow: 0px 0px 2px 1px black;
       }
       .espacobranco::-webkit-scrollbar {
         width: 10px;
-        background: #111;
-        box-shadow: 0px 0px 2px 1px black;
+        background: #c1bab3;
+
       }
       .espacobranco::-webkit-scrollbar-thumb {
         -webkit-appearance: none;
         height: 60px;
-        background: radial-gradient(#f6e6cf, #777) fixed;
-        box-shadow: 0px 0px 2px 1px black;
+        background: #111;
       }
       .baixarmusicas {
         z-index: 1;
@@ -867,19 +868,7 @@ box-shadow: 0px 0px 2px 1px black;
           opacity: 100%;
         }
       }
-      .simp-coverteste2 {
-        position: absolute;
-        z-index: -1;
-            margin:0 auto;
-            display:block;
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
-        filter: blur(100px) saturate(100%) brightness(100%);
-        margin: -1000px -1000px -1000px -1000px;
-        opacity:0.5;
-      }
+ 
       .box-artistas {
         position: relative;
         margin: 0 auto;
@@ -891,20 +880,19 @@ box-shadow: 0px 0px 2px 1px black;
         letter-spacing: 2px;
         border-radius: 5px;
         padding: 10px;
-        color: #000;
+        color: #fff;
         font-weight:bold;
-        text-shadow: 0px 1px #fff;
       }
       a:link {
         text-decoration: none;
-        color: #000;
+        color: #fa0;
         padding: 3px;
         margin: 10px;
         width: 100%;
         margin: 0 auto;
       }
       a:visited {
-        color: #000;
+        color: #fa0;
         padding: 3px;
         margin: 10px;
         width: 100%;
@@ -997,21 +985,20 @@ box-shadow: 0px 0px 2px 1px black;
       }
       .t2 {
         font-size: 30px;
-        color: #000;
+        color: #eee;
       }
       .x {
         text-transform: uppercase;
-        color: #000
+        color: #eee
       }
       .y {
         text-transform: capitalize;
-        color: #000
+        color: #eee
       }
       .z {
         text-transform: uppercase;
         font-weight: bold;
-        color: #f0;
-        text-shadow: 0px 1px #fff;
+        color: #fa0;
       }
       .reproduzindoagora {
         font-size: 15px;
@@ -1108,7 +1095,7 @@ box-shadow: 0px 0px 2px 1px black;
 height:fit-content;
         cursor: pointer;
     font-size:70px;
-color:#000;
+color:#ddd;
  
       }
       #wrapper {
@@ -5666,7 +5653,7 @@ text-align:center;
 
             <!-- fim das musicas -->
           </ul>
-          <span  class="conteudo" style="position:relative;margin:0 auto;margin-bottom:10em;display:block;color:#000;padding:40px;">*Limpe o campo de pesquisa para aparecer todas as op&ccedil;&otilde;es.</span>
+          <span  class="conteudo" style="position:relative;margin:0 auto;margin-bottom:10em;display:block;color:#fff;padding:40px;">*Limpe o campo de pesquisa para aparecer todas as op&ccedil;&otilde;es.</span>
         </div>
       </div>
       <script src="./js/script.js"></script>
