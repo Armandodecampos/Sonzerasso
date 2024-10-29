@@ -72,8 +72,7 @@
       max-width:350px;
       display:flex;
       margin: auto;
-        left: 0px;
-        right: 0px;
+ 
         
       }
       .informativotemporario{
@@ -195,23 +194,7 @@
 
       }
 
-      .faixabordasuperior {
-        z-index: 10;
-        position: fixed;
-        margin: 0 auto;
-        left: 0;
-        right: 0;
-        top: 0em;
-        width: 100%;
-        height: 3.9em;
-        left: 0px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        font-size: 19px;
-        font-weight: bolder;
-        font-style: normal;
-        color: #aaa;
-      }
+
       .embaixofrase {
         position: fixed;
         top: 0px;
@@ -572,13 +555,14 @@ box-shadow: 0px 0px 2px 1px black;
       }
       .simp-playlist::-webkit-scrollbar {
         width: 50px;
-        background: #c1bab3;
+        background: transparent;
       }
       .simp-playlist::-webkit-scrollbar-thumb {
         -webkit-appearance: none;
 
         height: 60px;
-        background: #111;
+        background: #ddd;
+        border-radius:50px 0px 0px 50px;
       }
       #simp ul li.simp-active {
         text-decoration: underline #F00;
@@ -631,13 +615,11 @@ box-shadow: 0px 0px 2px 1px black;
         font-family: Verdana, sans-serif;
         padding: 0.5em;
         border: none;
-        font-weight: bold;
         background: #191816;
         box-shadow: 0px 0px 2px 1px black;
-        background: radial-gradient(#4f4941, #000) fixed;
-        color: #fa0;
+        color: #fff;
         pointer-events: none;
-        opacity: 0.9;
+
       }
       .searchbar:focus {
         border: none;
@@ -737,6 +719,7 @@ box-shadow: 0px 0px 2px 1px black;
         -webkit-appearance: none;
         height: 60px;
         background: #111;
+        border-radius:50px 0px 0px 50px;
       }
       .baixarmusicas {
         z-index: 1;
@@ -1228,7 +1211,6 @@ text-align:center;
       <div class="embaixofrase">
         <div class="frase" translate="yes">Ou&#231;a m&#250;sicas selecionadas de qualidade! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Rock, metal, blues, Jazz, Pop, folk e mais! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Mais de 4.000 m&uacute;sicas!&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Contribua com o crescimento do site e a adi&ccedil;&atilde;o de novas m&uacute;sicas.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Para que as pr&oacute;ximas m&uacute;sicas n&atilde;o parem de tocar, &eacute; recomend&aacute;vel deixar a tela acesa quando acessar o site em um dispositivo m&oacute;vel. Caso queira ouvir com a tela apagada e sem interrup&ccedil;&atilde;o, instale o aplicativo.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
       </div>
-      <div class="faixabordasuperior">
         <div class="pesquisa" id="pesquisa">
             <div class="lupa">&#128270;</div>
           <input type="text" class="searchbar" id="searchbar" placeholder="Pesquise" onfocus="changetextsearch();aparecerdicapesquisa()" onfocusout="changetextsearch2();fechardicapesquisa()" onclick="toque()" tabindex="1" autocomplete="off"><a href="#voltaraotopodasmusicas"><button class="enviar" onclick="search_animal();toque()">Enviar</button></a>
@@ -1265,7 +1247,7 @@ text-align:center;
             document.getElementById("dicapesquisa").style.display = "none";
           }
         </script>
-      </div>
+
       <div class="dicapesquisa" id="dicapesquisa" translate="yes">Pesquise por artista/banda ou m&uacute;sica ou album</div>
       <div class="espacobranco" id="espacobranco">
         <script>
