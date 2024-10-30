@@ -135,7 +135,18 @@
   filter: drop-shadow(0px 1px 1px #000);
       }
       .boxmais{
-          display:none;
+        position: fixed;
+        display:none;
+        bottom: 156px;
+        width: 90%;
+        max-width:500px;
+        margin: 0 auto;
+        right: 0;
+        left: 0;
+        z-index: 16;
+        box-shadow: 0px 0px 2px 1px black;
+        background:#111;
+        border-radius:10px 10px 0px 0px;
       }
       .boxprogresso{
           position:relative;
@@ -152,7 +163,7 @@
         height: 0.5em;
         cursor: pointer;
         border-radius: 0px;
-        background: #fa0;
+        background: #000;
         border-radius: 0px;
         border: 2px solid #333;
         box-shadow: 0px 0px 2px 1px black;
@@ -291,7 +302,7 @@ box-shadow: 0px 0px 2px 1px black;
       }
       .faixabordainferior {
         position: fixed;
-        height: 116px;
+        height: 156px;
         bottom: 0em;
         width: 100%;
         margin: 0 auto;
@@ -479,7 +490,7 @@ box-shadow: 0px 0px 2px 1px black;
         max-width: 13em;
         height: 0.5em;
         cursor: pointer;
-        background: #fa0;
+        background: #000;
         border-radius: 0px;
         border-radius: 0px;
         border: 2px solid #333;
@@ -513,7 +524,7 @@ box-shadow: 0px 0px 2px 1px black;
       .simbolovolume {
         position:relative;
         margin-right:5px;
-        top:-13px;
+        top:-14px;
         height: 25px;
         width: 25px;
         background: url("https://dl.dropbox.com/scl/fi/j0tst0q076jqoyzxj8yfb/speaker-filled-audio-tool.png?rlkey=d5optfkqbzwxqzw7rxvxc4yru&st=mpmxqbco&dl=0") no-repeat;
@@ -724,7 +735,7 @@ box-shadow: 0px 0px 2px 1px black;
         -webkit-appearance: none;
         height: 60px;
         background: #111;
-        border-radius:50px 0px 0px 50px;
+        border-radius:10px 0px 0px 10px;
       }
       .baixarmusicas {
         z-index: 1;
@@ -1291,19 +1302,8 @@ text-align:center;
             <center>
                 <div class="titulomusica" id="titulomusica" translate="no" onClick="CopyToClipboard('titulomusica')"></div>
             </center>
-            <input type="checkbox" id="mais" value="mais">
-            <label for="mais" class="mais" onclick="toque()"></label>
-            <div class="boxmais" id="boxmais">
-                <div class="boxprogresso">
-                    <div class="simbolorelogio"></div>
-                    <input class="progresso" id="progresso" type="range" min="0" max="100" value="0" disabled />
-                    </div>
-                <div class="simp-time" id="simp-time"><span class="start-time">00:00</span><span class="simp-slash">&#160;/&#160;</span><span class="end-time">00:00</span></div>
-                <div class="boxvolume">
-                    <div class="simbolovolume"></div>
-                    <input type="range" name="range" class="volume-control" id="volume-control" min="0" max="100" value="100" />
-                </div>
-            </div>
+            
+            
         </div>
         
         <script>
@@ -1377,7 +1377,19 @@ text-align:center;
 
       
       <div class="faixabordainferior">
-          
+          <div class="boxmais" id="boxmais">
+                <div class="boxprogresso">
+                    <div class="simbolorelogio"></div>
+                    <input class="progresso" id="progresso" type="range" min="0" max="100" value="0" disabled />
+                    </div>
+                <div class="simp-time" id="simp-time"><span class="start-time">00:00</span><span class="simp-slash">&#160;/&#160;</span><span class="end-time">00:00</span></div>
+                <div class="boxvolume">
+                    <div class="simbolovolume"></div>
+                    <input type="range" name="range" class="volume-control" id="volume-control" min="0" max="100" value="100" />
+                </div>
+            </div>
+          <input type="checkbox" id="mais" value="mais">
+            <label for="mais" class="mais" onclick="toque()"></label>
         <div class="boxcontroles">
           <input type="checkbox" id="aleatorio" value="aleatorio" checked>
           <label for="aleatorio" class="aleatorio" onclick="toque()"></label>
