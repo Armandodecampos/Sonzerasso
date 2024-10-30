@@ -1087,18 +1087,23 @@ box-shadow: 0px 0px 2px 1px black;
         z-index: 12;
         visibility: hidden;
         position: absolute;
-        bottom: 195px;
-        left: 10px;
-        width: fit-content;
-height:fit-content;
+        width:50px;
+        aspect-ratio:1/1;
+        display:block;
+        margin:auto;
+        left:0;
+        right:0;
+        bottom: 205px;
+
+
         cursor: pointer;
     font-size:55px;
 color:#111;
 background:#ddd;
-border-radius:10px;
 padding-left:10px;
 padding-right:10px;
 text-align:center;
+clip-path: polygon(50% 35%, 0% 100%, 100% 100%);
  
       }
       #wrapper {
@@ -1221,7 +1226,7 @@ text-align:center;
 	  <div class="spinnertext" translate="yes">C a r r e g a n d o</div>
     </div>
     <div id="wrapper">
-        <a href="#top"><div class="botaovoltaraotopodasmusicas" id="botaovoltaraotopodasmusicas">&#11014;</div></a>
+        <a href="#top"><div class="botaovoltaraotopodasmusicas" id="botaovoltaraotopodasmusicas"></div></a>
         <div class="degrade"></div>
 
 	  
