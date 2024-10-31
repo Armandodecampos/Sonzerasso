@@ -573,10 +573,19 @@ box-shadow: 0px 0px 2px 1px black;
 
         height: 60px;
         background: #ddd;
-        border-radius:10px 0px 0px 10px;
+        border-radius:5px 0px 0px 5px;
       }
       #simp ul li.simp-active {
         text-decoration: underline #F00;
+      }
+        .lupa{
+          position:fixed;
+          font-size: 20px;
+          z-index:10;
+          top:8px;
+          left:8px;
+          pointer-events:none;
+          user-select: none;
       }
       .pesquisa {
         z-index: 10;
@@ -589,19 +598,11 @@ box-shadow: 0px 0px 2px 1px black;
         background:#111;
         height:50px;
       }
-      .lupa{
-          position:fixed;
-          font-size: 20px;
-          z-index:10;
-          top:8px;
-          left:8px;
-          pointer-events:none;
-          user-select: none;
-      }
+
       .searchbar {
         position: absolute;
         top: 0.3em;
-        left: 4px;
+        left: 40px;
         right:217px;
         font-size: 19px;
         text-align: center;
@@ -613,8 +614,9 @@ box-shadow: 0px 0px 2px 1px black;
         font-weight: bold;
         background: #ddd;
         cursor: pointer;
-        padding-left:30px;
+
         padding-right:5px;
+        text-align:left;
       }
       .dicapesquisa {
         position: fixed;
@@ -732,7 +734,7 @@ box-shadow: 0px 0px 2px 1px black;
         -webkit-appearance: none;
         height: 60px;
         background: #ddd;
-        border-radius:10px 0px 0px 10px;
+        border-radius:5px 0px 0px 5px;
       }
       .baixarmusicas {
         z-index: 1;
