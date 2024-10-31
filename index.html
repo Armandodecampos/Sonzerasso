@@ -221,6 +221,7 @@ box-shadow: 0px 0px 2px 1px black;
 
       }
       .frase {
+          height:21px;
         white-space: nowrap;
         letter-spacing: 2px;
         right: 50px;
@@ -231,7 +232,8 @@ box-shadow: 0px 0px 2px 1px black;
         animation: frase 60s linear infinite;
         filter: invert(0%);
         color: #ddd;
-        font-size: 19px;
+        font-size: 13px;
+        
       }
       @-moz-keyframes frase {
         from {
@@ -549,7 +551,7 @@ box-shadow: 0px 0px 2px 1px black;
         position: fixed;
         margin: 0 auto;
         top: 45px;
-        bottom: 220px;
+        bottom: 223px;
         left: 0;
         right: 0;
         color: #000;
@@ -559,8 +561,6 @@ box-shadow: 0px 0px 2px 1px black;
         text-align: left;
         user-select: none;
         cursor: pointer;
-        border-top: 2px solid #111;
-        border-bottom: 2px solid #111;
         box-shadow: 0px 0px 2px 1px black;
         background: #111;
       }
@@ -720,7 +720,7 @@ box-shadow: 0px 0px 2px 1px black;
         position: fixed;
         margin: 0 auto;
         top: 0px;
-        bottom: 220px;
+        bottom: 223px;
         border:0px solid #000;
         border-left:10px solid transparent;
         box-shadow: 0px 0px 2px 1px transparent;
@@ -5893,14 +5893,12 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             console.log('Checked');
             document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
             document.getElementById("simp-playlist").style.visibility = "visible";
-            document.getElementById("simp-playlist").style.position = "fixed";
             document.getElementById("pesquisa").style.display = "block";
             document.body.scrollTop = document.documentElement.scrollTop = 0;
           } else {
             console.log('Not checked');
             document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
             document.getElementById("simp-playlist").style.visibility = "hidden";
-            document.getElementById("simp-playlist").style.position = "relative";
             document.getElementById("pesquisa").style.display = "none";
             document.body.scrollTop = document.documentElement.scrollTop = 0;
           }
