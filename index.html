@@ -18,6 +18,9 @@
         body {
           zoom: 0.8;
         }
+        .pesquisa{
+            border-radius:0px 0px 10px 10px;
+        }
       }
               .degrade{
             z-index:2;
@@ -550,7 +553,7 @@ box-shadow: 0px 0px 2px 1px black;
         overflow-y: scroll;
         position: fixed;
         margin: 0 auto;
-        top: 45px;
+        top: 44px;
         bottom: 223px;
         left: 0;
         right: 0;
@@ -562,7 +565,10 @@ box-shadow: 0px 0px 2px 1px black;
         user-select: none;
         cursor: pointer;
         box-shadow: 0px 0px 2px 1px black;
-        background: #111;
+        background:#333;
+        border:2px solid #000;
+        outline:4px solid #111;
+        max-width:900px;
       }
       .simp-playlist::-webkit-scrollbar {
         width: 50px;
@@ -579,7 +585,7 @@ box-shadow: 0px 0px 2px 1px black;
         text-decoration: underline #F00;
       }
         .lupa{
-          position:fixed;
+          position:absolute;
           font-size: 20px;
           z-index:10;
           top:8px;
@@ -596,14 +602,15 @@ box-shadow: 0px 0px 2px 1px black;
         right: 0;
         display: none;
         background:#111;
-        height:50px;
+        height:43px;
+        max-width:1000px;
       }
 
       .searchbar {
         position: absolute;
         top: 0.3em;
         left: 40px;
-        right:217px;
+        right:225px;
         font-size: 19px;
         text-align: center;
         font-family: Verdana, sans-serif;
@@ -652,7 +659,7 @@ box-shadow: 0px 0px 2px 1px black;
       .enviar {
         position: absolute;
         top: 0.3em;
-        right: 110px;
+        right: 116px;
         width: 100px;
         font-size: 19px;
         text-align: center;
@@ -673,7 +680,7 @@ box-shadow: 0px 0px 2px 1px black;
       .limpar {
         position: absolute;
         top: 0.3em;
-        right: 4px;
+        right: 10px;
         width: 100px;
         font-size: 19px;
         text-align: center;
@@ -713,17 +720,22 @@ box-shadow: 0px 0px 2px 1px black;
         left: 0;
         right: 0;
         color: #000;
+        
         font-size: 19px;
         text-align: left;
         overflow: hidden;
         overflow-y: scroll;
         position: fixed;
         margin: 0 auto;
-        top: 0px;
+        top: 1px;
         bottom: 223px;
         border:0px solid #000;
         border-left:10px solid transparent;
         box-shadow: 0px 0px 2px 1px transparent;
+        background:#333;
+        max-width:900px;
+        border:2px solid #000;
+        outline:4px solid #111;
       }
       .espacobranco::-webkit-scrollbar {
         width: 10px;
