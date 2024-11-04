@@ -46,6 +46,7 @@
         font-family: "Times New Roman", Times, serif;
         font-family: Arial, Helvetica, sans-serif;
         background:#111;
+        background:linear-gradient(#000,#fff);
       }
       body::-webkit-scrollbar {
         -webkit-appearance: none;
@@ -109,17 +110,18 @@
         background: #000
       }
       .titulo {
-        position: relative;
+        position: fixed;
         width:100%;
         max-width: 300px;
               margin: auto;
+              top:10px;
         left: 0px;
         right: 0px;
         aspect-ratio: 4 / 1;
         background: url(https://dl.dropbox.com/scl/fi/pm8yt8vmessdi1ncxkitb/sonzerasso4.png?rlkey=xd93w25bpacbj08nd2elahncu&st=xu6e221t&dl=0) no-repeat;
         background-size: 100%;
-		z-index:2;
-		margin-top:40px;
+
+		margin-top:0px;
 		-webkit-filter: drop-shadow(0px 1px 1px #000);
   filter: drop-shadow(0px 1px 1px #000);
       }
@@ -217,7 +219,7 @@
         left: 0px;
         font-weight: bolder;
         font-style: normal;
-        z-index: 9;
+        z-index: 11;
 box-shadow: 0px 0px 2px 1px black;
         padding: 5px;
         background:#fa0;
@@ -559,18 +561,30 @@ box-shadow: 0px 0px 2px 1px black;
         color: #000;
         padding: 30px;
         font-size: 19px;
-        background: #444;
+        background: #eee;
         text-align: left;
         user-select: none;
         cursor: pointer;
 
-        background:#111;
+        background:#eee;
 
         max-width:900px;
  box-shadow: 0px 0px 2px 4px black;
+background:linear-gradient(#555,#000);
+      }
+      .embaixo-simp-playlist{
+          position:fixed;
+          visibility:hidden;
+          margin:auto;
+          top:0;
+          bottom:0;
+          left:0;
+          right:0;
+          background:linear-gradient(#000,#fff);
+          z-index:10;
       }
       .simp-playlist::-webkit-scrollbar {
-        width: 50px;
+        width: 40px;
         background: transparent;
       }
       .simp-playlist::-webkit-scrollbar-thumb {
@@ -578,8 +592,8 @@ box-shadow: 0px 0px 2px 1px black;
 
         height: 60px;
         background: #ddd;
-        border-radius:10px 10px 10px 10px;
-        border:7px solid #111;
+        border-radius:50px 0px 0px 50px;
+
       }
       #simp ul li.simp-active {
         text-decoration: underline #F00;
@@ -594,16 +608,15 @@ box-shadow: 0px 0px 2px 1px black;
           user-select: none;
       }
       .pesquisa {
-        z-index: 10;
-        position: fixed;
+        z-index: 11;
+        position: absolute;
         top: 0;
         margin: 0 auto;
         left: 0;
         right: 0;
         display: none;
-        background:#111;
-        height:100px;
-        max-width:1000px;
+        height:53px;
+        max-width:950px;
       }
 
       .searchbar {
@@ -729,14 +742,16 @@ margin:auto;
         overflow-y: scroll;
         position: fixed;
         margin: 0 auto;
-        top: 10px;
+        top: 90px;
         bottom: 230px;
         border:0px solid #000;
         border-left:10px solid transparent;
 
-        background:#111;
+        background:#eee;
         max-width:900px;
 box-shadow: 0px 0px 2px 4px black;
+background:linear-gradient(#555,#000);
+
       }
       .espacobranco::-webkit-scrollbar {
         width: 10px;
@@ -748,7 +763,8 @@ box-shadow: 0px 0px 2px 4px black;
         height: 60px;
         background: #ddd;
         border-radius:10px 10px 10px 10px;
-        border:4px solid #000;
+
+        border-radius:50px 0px 0px 50px;
       }
       .baixarmusicas {
         z-index: 1;
@@ -1434,6 +1450,7 @@ text-align:center;
           }
         }
       </script>
+      <div class="embaixo-simp-playlist" id="embaixo-simp-playlist"></div>
       <div class="simple-audio-player" id="simp" data-config='{"auto_load":true}'>
         <div class="simp-playlist" id="simp-playlist" onscroll="aparecerbotaovoltaraotop(); desativarlista()">
             <p class="t2" style="font-size:19px;">Selecione o que deseja ouvir: </p>
@@ -5838,6 +5855,7 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
               document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
               document.getElementById("espacobranco").scrollTop = 0;
               document.getElementById("simp-playlist").style.visibility = "hidden";
+              document.getElementById("embaixo-simp-playlist").style.visibility = "hidden";
               document.getElementById("pesquisa").style.display = "none";
               document.getElementById("carregando").style.display = "block";
               let toggleButton = document.getElementById("sequencial");
@@ -5907,12 +5925,14 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             console.log('Checked');
             document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
             document.getElementById("simp-playlist").style.visibility = "visible";
+            document.getElementById("embaixo-simp-playlist").style.visibility = "visible";
             document.getElementById("pesquisa").style.display = "block";
             document.body.scrollTop = document.documentElement.scrollTop = 0;
           } else {
             console.log('Not checked');
             document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
             document.getElementById("simp-playlist").style.visibility = "hidden";
+            document.getElementById("embaixo-simp-playlist").style.visibility = "hidden";
             document.getElementById("pesquisa").style.display = "none";
             document.body.scrollTop = document.documentElement.scrollTop = 0;
           }
@@ -6076,12 +6096,14 @@ Example: https://www.codehim.com/demo/javascript-audio-player-with-playlist/
             if (toggleButton.checked) {
               document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
               document.getElementById("simp-playlist").style.visibility = "hidden";
+              document.getElementById("embaixo-simp-playlist").style.visibility = "hidden";
               document.getElementById("pesquisa").style.display = "none";
               document.body.scrollTop = document.documentElement.scrollTop = 0;
               console.log('Not checked');
               toggleButton.checked = false;
             } else {
               document.getElementById("simp-playlist").style.visibility = "visible";
+              document.getElementById("embaixo-simp-playlist").style.visibility = "visible";
               document.getElementById("pesquisa").style.display = "block";
               document.body.scrollTop = document.documentElement.scrollTop = 0;
               toggleButton.checked = true;
