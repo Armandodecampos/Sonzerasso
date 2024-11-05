@@ -46,7 +46,7 @@
         font-family: "Times New Roman", Times, serif;
         font-family: Arial, Helvetica, sans-serif;
         background:#111;
-        background:linear-gradient(#000,#fff);
+        background:linear-gradient(#424949,#fff);
       }
       body::-webkit-scrollbar {
         -webkit-appearance: none;
@@ -150,8 +150,9 @@
         left: 0;
         z-index: 16;
 
-        background:#111;
+        background:transparent;
         border-radius:10px 10px 0px 0px;
+        
       }
       .boxprogresso{
           position:relative;
@@ -316,7 +317,7 @@ box-shadow: 0px 0px 2px 1px black;
         left: 0;
         z-index: 16;
         box-shadow: 0px 0px 2px 1px black;
-        background:#111;
+        background:linear-gradient(#424949,#000);
       }
       .boxcontroles {
         position: relative;
@@ -351,7 +352,7 @@ box-shadow: 0px 0px 2px 1px black;
       input[type=checkbox]:checked+.playpause {
         background: url("https://dl.dropbox.com/scl/fi/6amjk7kpmca6pgpgu9jp5/pause-teste.png?rlkey=v9noetbdl8ptjeeklfg35yeg1&dl=0");
         background-size: 100%;
-        background-color: #fa0;
+        background-color: #d80;
         filter: invert(0%);
       }
       /*------------------aleatorio---------------------------*/
@@ -378,7 +379,7 @@ box-shadow: 0px 0px 2px 1px black;
       input[type=checkbox]:checked+.aleatorio {
         background: url("https://dl.dropbox.com/scl/fi/5o2fp03dr8pnh05807vzk/aleatorio2-ativado.png?rlkey=ltflbye9trfczb00b1uuuo0eo&dl=0") no-repeat;
         background-size: 100%;
-        background-color: #fa0;
+        background-color: #d80;
 
         filter: invert(0%);
       }
@@ -451,7 +452,7 @@ box-shadow: 0px 0px 2px 1px black;
         background-image: url("https://dl.dropbox.com/scl/fi/1poqebj7zk3aprg9bardk/lista.png?rlkey=urmaa7r6jyu9mppgrm62a0pc8&st=pn8kwa31&dl=0");
         background-size: 100%;
         filter: invert(0%);
-        background-color: #fa0;
+        background-color: #d80;
       }
         /*-------------------mais----------------------*/
       input[type=checkbox]+.mais {
@@ -571,7 +572,7 @@ box-shadow: 0px 0px 2px 1px black;
         max-width:900px;
  box-shadow: 0px 0px 2px 4px black;
 background:linear-gradient(#555,#111);
-background:#222;
+background:#151818;
       }
       .embaixo-simp-playlist{
           position:fixed;
@@ -582,19 +583,20 @@ background:#222;
           left:0;
           right:0;
           background:linear-gradient(#000,#fff);
+          background:linear-gradient(#424949,#fff);
           
           z-index:10;
       }
       .simp-playlist::-webkit-scrollbar {
         width: 40px;
-        background: transparent;
+        background: #111;
       }
       .simp-playlist::-webkit-scrollbar-thumb {
         -webkit-appearance: none;
 
         height: 60px;
         background: #ddd;
-        border-radius:50px 0px 0px 50px;
+
 
       }
       #simp ul li.simp-active {
@@ -751,21 +753,19 @@ margin:auto;
 
         max-width:900px;
 box-shadow: 0px 0px 2px 4px black;
-background:#222;
+background:#151818;
 
       }
       .espacobranco::-webkit-scrollbar {
         width: 10px;
-        background: transparent;
+        background: #111;
 
       }
       .espacobranco::-webkit-scrollbar-thumb {
         -webkit-appearance: none;
         height: 60px;
         background: #ddd;
-        border-radius:10px 10px 10px 10px;
 
-        border-radius:50px 0px 0px 50px;
       }
       .baixarmusicas {
         z-index: 1;
@@ -1166,7 +1166,7 @@ bottom:230px;
         aspect-ratio: 1 / 1;
         opacity: 13;
         border-radius: 50%;
-        border:7px dotted #fa0;
+        border:11px dotted #fa0;
         animation: spinner 30s infinite;
         
       }
