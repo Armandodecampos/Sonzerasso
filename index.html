@@ -341,6 +341,15 @@ box-shadow: 0px 0px 2px 1px black;
         background-size: 100%;
         background-color: #d80;
         filter: invert(0%);
+      animation: pisca2 3s linear infinite;
+        
+      }
+           @keyframes pisca2 {
+
+
+        100% {
+			transform:rotate(180deg);
+        }
       }
       /*------------------aleatorio---------------------------*/
       input[type=checkbox] {
@@ -440,6 +449,20 @@ box-shadow: 0px 0px 2px 1px black;
         background-size: 100%;
         filter: invert(0%);
         background-color: #d80;
+              animation: pisca 1s infinite;
+        
+      }
+           @keyframes pisca {
+        0% {
+			background-color: #ddd;
+        }
+        50% {
+        	background-color: #d80;
+        
+        }
+        100% {
+			background-color: #ddd;
+        }
       }
         /*-------------------mais----------------------*/
       input[type=checkbox]+.mais {
