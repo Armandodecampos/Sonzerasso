@@ -345,14 +345,19 @@ box-shadow: 0px 0px 2px 1px black;
         background-size: 100%;
         background-color: #d80;
         filter: invert(0%);
-      animation: pisca2 3s linear infinite;
-        box-shadow: 0px 0px 2px 2px white;
+                 animation: pisca 1s infinite;
+        
       }
-           @keyframes pisca2 {
-
-
+           @keyframes pisca {
+        0% {
+			background-color: #ddd;
+        }
         50% {
-			box-shadow: 0px 0px 10px 2px white;
+        	background-color: #d80;
+        
+        }
+        100% {
+			background-color: #ddd;
         }
       }
       /*------------------aleatorio---------------------------*/
@@ -453,20 +458,6 @@ box-shadow: 0px 0px 2px 1px black;
         background-size: 100%;
         filter: invert(0%);
         background-color: #d80;
-              animation: pisca 1s infinite;
-        
-      }
-           @keyframes pisca {
-        0% {
-			background-color: #ddd;
-        }
-        50% {
-        	background-color: #d80;
-        
-        }
-        100% {
-			background-color: #ddd;
-        }
       }
         /*-------------------mais----------------------*/
       input[type=checkbox]+.mais {
@@ -616,7 +607,8 @@ border-left:2px solid #111;
 
       }
       #simp ul li.simp-active {
-        background:#fd7;
+        box-shadow: -20px 0px 0px 0px #fa0;
+        border-left:20px solid transparent;
       }
         .lupa{
           position:absolute;
