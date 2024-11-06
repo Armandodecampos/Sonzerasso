@@ -72,12 +72,17 @@
         -webkit-tap-highlight-color: transparent;
       }
       .boxtitulo{
-      width:70%;
-      max-width:350px;
+          position:fixed;
+
       display:flex;
       margin: auto;
- 
-        
+box-shadow: 0px 0px 2px 1px black;
+background:#ddd;
+margin:auto;
+top:0;
+        left: 0;
+        right: 0;
+        padding:10px;
       }
       .informativotemporario{
           z-index:13;
@@ -110,7 +115,7 @@
         background: #000
       }
       .titulo {
-        position: fixed;
+ 
         width:100%;
         max-width: 300px;
               margin: auto;
@@ -608,10 +613,11 @@ box-shadow: 0px 0px 10px 1px #000;
         height: 60px;
         background: #ddd;
 border-left:2px solid #111;
+        border-right:2px solid #111;
 
       }
       #simp ul li.simp-active {
-        text-decoration: underline #F00;
+        color:#fa0;
       }
         .lupa{
           position:absolute;
@@ -752,8 +758,8 @@ margin:auto;
         z-index: 3;
         position: absolute;
         margin: 0 auto;
-        left: 20px;
-        right: 20px;
+        left: 0px;
+        right: 0px;
         color: #000;
         font-size: 19px;
         text-align: left;
@@ -762,16 +768,14 @@ margin:auto;
         position: fixed;
         margin: 0 auto;
         top: 95px;
-        bottom: 230px;
+        bottom: 221px;
         border:0px solid #000;
         border-left:10px solid transparent;
 
-        max-width:900px;
 
 background:#151818;
 background:#ddd;
-border:5px solid #111;
-box-shadow: 0px 0px 10px 1px #000;
+
       }
       .espacobranco::-webkit-scrollbar {
         width: 10px;
@@ -782,6 +786,7 @@ box-shadow: 0px 0px 10px 1px #000;
         height: 60px;
         background: #ddd;
         border-left:2px solid #111;
+        border-right:2px solid #111;
       }
       .baixarmusicas {
         z-index: 1;
