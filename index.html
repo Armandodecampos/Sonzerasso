@@ -70,6 +70,7 @@
         -webkit-tap-highlight-color: transparent;
       }
       .boxtitulo{
+          z-index:12;
           position:fixed;
 
       display:flex;
@@ -615,7 +616,10 @@ border-left:2px solid #111;
 
       }
       #simp ul li.simp-active {
-        color:#fa0;
+        background:#fff;
+        border:1px solid #000;
+          padding:10px;
+          box-shadow: 0px 0px 2px 1px black;
       }
         .lupa{
           position:absolute;
@@ -689,8 +693,8 @@ margin:auto;
         color: #000;
       }
     .searchbar:hover {
-        background: #eee;
-        color: #333;
+        background: #bbb;
+        color: #000;
       }
       ::placeholder {
         color: #333;
@@ -1489,6 +1493,7 @@ text-align:center;
       <div class="simple-audio-player" id="simp" data-config='{"auto_load":true}'>
         <div class="simp-playlist" id="simp-playlist" onscroll="aparecerbotaovoltaraotop(); desativarlista()">
             <p id="top"></p>
+<br>
             <p class="t2" style="font-size:19px;">Selecione o que deseja ouvir: </p>
           <div class="box-artistas" id="box-artistas">
             
