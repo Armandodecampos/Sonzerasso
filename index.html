@@ -147,7 +147,7 @@ top:0;
       }
       .boxprogresso{
           position:relative;
-          width: 90%;
+          width: 50%;
         margin: auto;
         margin-top:20px;
         display: flex;
@@ -166,7 +166,7 @@ top:0;
         box-shadow: 0px 0px 2px 1px black;
         appearance: none;
         border-radius:30px;
-        margin-right:20%;
+
       }
       /* Thumb: for Chrome, Safari, Edge */
       .progresso::-webkit-slider-thumb {
@@ -385,7 +385,7 @@ box-shadow: 0px 0px 2px 1px black;
       input[type=checkbox]:checked+.aleatorio {
         background: url("https://dl.dropbox.com/scl/fi/5o2fp03dr8pnh05807vzk/aleatorio2-ativado.png?rlkey=ltflbye9trfczb00b1uuuo0eo&dl=0") no-repeat;
         background-size: 100%;
-        background-color: #d80;
+background-color: #ddd;
 
         filter: invert(0%);
       }
@@ -484,13 +484,13 @@ box-shadow: 0px 0px 2px 1px black;
       }
        /*-------------------repetir----------------------*/
       input[type=checkbox]+.repetir {
-        background-image: url("https://dl.dropbox.com/scl/fi/z40rl8dj1xhmc6ghvk5uc/rotate.png?rlkey=8an76p3zzxk4jrr5y0gjzc7hr&st=48co9nor&dl=0");
+        background: url("https://dl.dropbox.com/scl/fi/neppn5norladepqz5sstw/lock-open.png?rlkey=nqhscjzt6hg3376vr5g9w9j9x&st=kd18uesq&dl=0") no-repeat;
         background-size: 100%;
-        width: 30px;
+        width: 15px;
         margin-top: 30%;
-        right: 5%;
+        right: 3px;
         aspect-ratio: 1 / 1;
-        border-radius: 50%;
+        border-radius: 20%;
         position: absolute;
         filter: invert(0%);
         transition: 0.3s;
@@ -499,13 +499,18 @@ box-shadow: 0px 0px 2px 1px black;
         cursor: pointer;
         outline: 3px solid #000;
         box-shadow: 0px 0px 2px 1px black;
-z-index:100;
+        z-index:20;
+        background-origin: content-box;
+        padding:10px;
       }
       input[type=checkbox]:checked+.repetir {
-        background-image: url("https://dl.dropbox.com/scl/fi/z40rl8dj1xhmc6ghvk5uc/rotate.png?rlkey=8an76p3zzxk4jrr5y0gjzc7hr&st=48co9nor&dl=0");
+        background: url("https://dl.dropbox.com/scl/fi/i4yxm7cevfqlj2kn7crul/lock-closed.png?rlkey=mno9168ve32qiaco9jr3veouc&st=j809r2iv&dl=0") no-repeat;
         background-size: 100%;
+        background-color: #f50;
+
         filter: invert(0%);
-        background-color: #d12925;
+        background-origin: content-box;
+        padding:10px;
       }
       
       .boxvolume{
@@ -1468,7 +1473,7 @@ text-align:center;
             <label for="mais" class="mais" onclick="toque()"></label>
         <div class="boxcontroles">
           <input type="checkbox" id="aleatorio" value="aleatorio" checked>
-          <label for="aleatorio" class="aleatorio" onclick="toque()"></label>
+          <label for="aleatorio" class="aleatorio" id="aleatorioid"onclick="toque()"></label>
           <input type="checkbox" id="musicaanterior" value="musicaanterior">
           <label for="musicaanterior" class="musicaanterior" onclick="toque()"></label>
           <input type="checkbox" id="playpause" value="playpause">
@@ -5996,6 +6001,19 @@ if (simp_audio.currentTime == simp_audio.duration) {
           }
         };
       </script>
+     <script>
+        document.getElementById('repetir').onclick = function() {
+          if (this.checked) {
+            console.log('Checked');
+            document.getElementById("aleatorioid").style.backgroundColor = "#222";
+          } else {
+            console.log('Not checked');
+            document.getElementById("aleatorioid").style.backgroundColor = "#ddd";
+          }
+        };
+      </script> 
+      
+      
       <script>
         function ativaraleatorio() {
           let toggleButton = document.getElementById("aleatorio");
