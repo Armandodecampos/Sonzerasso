@@ -880,66 +880,7 @@ background:#ddd;
         border:1px solid #000;
         outline:3px solid #222;
       }
-      @keyframes troca {
-        0% {
-          opacity: 0%;
-        }
-        50% {
-          transform: translateX(-200vw);
-        }
-        100% {
-          transform: translateX(0vw);
-        }
-      }
-      @keyframes troca2 {
-        0% {
-          opacity: 0%
-        }
-        50% {
-          transform: translateX(-200vw);
-        }
-        100% {
-          transform: translateX(0vw);
-        }
-      }
-      @keyframes troca3 {
-        0% {
-          opacity: 0%
-        }
-        50% {
-          transform: translateX(-200vw);
-        }
-        100% {
-          transform: translateX(0vw);
-        }
-      }
-      @keyframes troca4 {
-        0% {
-          opacity: 0%
-        }
-        50% {
-          transform: translateX(-200vw);
-        }
-        100% {
-          transform: translateX(0vw);
-        }
-      }
-      @keyframes troca5 {
-        from {
-          opacity: 0%;
-        }
-        to {
-          opacity: 100%;
-        }
-      }
-      @keyframes troca6 {
-        from {
-          opacity: 0%;
-        }
-        to {
-          opacity: 100%;
-        }
-      }
+
  
       .box-artistas {
         position: relative;
@@ -1355,8 +1296,6 @@ text-align:center;
           var timer = setInterval(next, 30000);
           function next() {
             if (document.getElementById("carregando").style.display == 'block') {
-              document.getElementById("boxtitulomusica").style.animation = "troca 1s";
-              document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index + 1;
               simp_audio.removeEventListener('timeupdate', simp_initTime);
               simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6039,8 +5978,6 @@ if (simp_audio.currentTime == simp_audio.duration) {
           if (this.checked) {
             restartnext();
             document.getElementById("carregando").style.display = "block";
-            document.getElementById("boxtitulomusica").style.animation = "troca 1s";
-            document.getElementById("titulomusica").style.animation = "troca5 3s";
             simp_a_index = simp_a_index + 1;
             simp_audio.removeEventListener('timeupdate', simp_initTime);
             simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6049,8 +5986,6 @@ if (simp_audio.currentTime == simp_audio.duration) {
             console.log('Not checked');
             restartnext();
             document.getElementById("carregando").style.display = "block";
-            document.getElementById("boxtitulomusica").style.animation = "troca2 1s";
-            document.getElementById("titulomusica").style.animation = "troca6 3s";
             simp_a_index = simp_a_index + 1;
             simp_audio.removeEventListener('timeupdate', simp_initTime);
             simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6064,8 +5999,6 @@ if (simp_audio.currentTime == simp_audio.duration) {
             simp_isRandom = false;
             restartnext();
             document.getElementById("carregando").style.display = "block";
-            document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
-            document.getElementById("titulomusica").style.animation = "troca5 3s";
             simp_a_index = simp_a_index - 1;
             simp_audio.removeEventListener('timeupdate', simp_initTime);
             simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6078,8 +6011,6 @@ if (simp_audio.currentTime == simp_audio.duration) {
             console.log('Not checked');
             restartnext();
             document.getElementById("carregando").style.display = "block";
-            document.getElementById("boxtitulomusica").style.animation = "troca4 1s";
-            document.getElementById("titulomusica").style.animation = "troca6 3s";
             simp_a_index = simp_a_index - 1;
             simp_audio.removeEventListener('timeupdate', simp_initTime);
             simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6181,8 +6112,6 @@ if (simp_audio.currentTime == simp_audio.duration) {
             if (toggleButton.checked) {
               restartnext();
               document.getElementById("carregando").style.display = "block";
-              document.getElementById("boxtitulomusica").style.animation = "troca 1s";
-              document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index + 1;
               simp_audio.removeEventListener('timeupdate', simp_initTime);
               simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6190,8 +6119,6 @@ if (simp_audio.currentTime == simp_audio.duration) {
             } else {
               restartnext();
               document.getElementById("carregando").style.display = "block";
-              document.getElementById("boxtitulomusica").style.animation = "troca 1s";
-              document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index + 1;
               simp_audio.removeEventListener('timeupdate', simp_initTime);
               simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6205,8 +6132,6 @@ if (simp_audio.currentTime == simp_audio.duration) {
               simp_isRandom = false;
               restartnext();
               document.getElementById("carregando").style.display = "block";
-              document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
-              document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index - 1;
               simp_audio.removeEventListener('timeupdate', simp_initTime);
               simp_changeAudio(simp_a_url[simp_a_index]);
@@ -6218,8 +6143,6 @@ if (simp_audio.currentTime == simp_audio.duration) {
               simp_isRandom = false;
               restartnext();
               document.getElementById("carregando").style.display = "block";
-              document.getElementById("boxtitulomusica").style.animation = "troca3 1s";
-              document.getElementById("titulomusica").style.animation = "troca5 3s";
               simp_a_index = simp_a_index - 1;
               simp_audio.removeEventListener('timeupdate', simp_initTime);
               simp_changeAudio(simp_a_url[simp_a_index]);
