@@ -1291,7 +1291,6 @@ text-align:center;
           var timer = setInterval(next, 30000);
           function next() {
             if (document.getElementById("carregando").style.display == 'block') {
-                document.getElementById("carregando").style.display = "none";
           document.getElementById("wrapper").style.visibility = "visible";
           document.getElementById("wrapper").style.opacity = "1";
           document.getElementById("carregamentoinicial").style.display = "none";
@@ -1307,6 +1306,14 @@ text-align:center;
             clearInterval(timer);
             timer = setInterval(next, 30000);
           }
+        </script>
+        <script>
+        setInterval(fimcarregando, 30000);
+         function fimcarregando() {
+          document.getElementById("wrapper").style.visibility = "visible";
+          document.getElementById("wrapper").style.opacity = "1";
+          document.getElementById("carregamentoinicial").style.display = "none";
+         }
         </script>
         <div class="informativotemporario">
         <!-- Digite Algo -->
