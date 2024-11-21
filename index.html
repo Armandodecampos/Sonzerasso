@@ -6504,7 +6504,7 @@ if (simp_audio.currentTime == simp_audio.duration) {
             if (item.classList.contains('simp-active')) simp_a_index = index; //playlist contains '.simp-active'
             item.addEventListener('click', function() {
               restartnext();
-              document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
+              document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
               document.getElementById("espacobranco").scrollTop = 0;
               document.getElementById("simp-playlist").style.visibility = "hidden";
               document.getElementById("embaixo-simp-playlist").style.visibility = "hidden";
