@@ -86,36 +86,7 @@ background-color: #000000;
 background-image: url("https://www.transparenttextures.com/patterns/dirty-old-black-shirt.png");
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
       }
-      .informativotemporario{
-          z-index:13;
-          position:fixed;
-          bottom: 126px;
-      margin:0 auto;
-      display:none;
-      left:0;
-      right:10px;
-      height:fit-content;
-      color:#000;
-      background:#fa0;
-      padding:0px;
-      font-weight:bold;
-      text-align:center;
-      word-break: break-all;
-            overflow: hidden;
-        overflow-y: scroll;
-        max-height:100px;
-        box-shadow: 0px 0px 2px 1px black;
-        background:linear-gradient(#fa0,#f40);
-      }
-                  .informativotemporario::-webkit-scrollbar {
-        width: 10px;
-        background: transparent;
-      }
-      .informativotemporario::-webkit-scrollbar-thumb {
-        -webkit-appearance: none;
-        height: 20px;
-        background: #000
-      }
+
       .titulo {
  
         width:80%;
@@ -276,7 +247,7 @@ box-shadow: 0px 0px 2px 4px black;
         font-size: 17px;
         margin-top:20px;
         border-radius:0px;
-        box-shadow: 0px 0px 2px 1px black;
+        box-shadow: 0px 0px 0px 0px black;
         background:#eee;
       }
       .titulomusica {
@@ -286,24 +257,35 @@ box-shadow: 0px 0px 2px 4px black;
         font-size: 17px;
       }
       .informacao {
-
-        width: 80%;
-        height: fit-content;
+        z-index:100;
+        position:fixed;
+        overflow: hidden;
+        overflow-y: scroll;
+        margin:0 auto;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
         padding: 25px;
-
         color: #000;
-        margin: 0 auto;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        max-width: 800px;
-        margin-top: 30px;
-        margin-bottom: 200px;
-        border-radius:0px;
-        box-shadow: 0px 0px 2px 1px black;
         background:#eee;
+        display:none;
+      }
+            .informacao::-webkit-scrollbar {
+        width: 40px;
+        background: #111;
+      }
+      .informacao::-webkit-scrollbar-thumb {
+        -webkit-appearance: none;
+
+        height: 60px;
+        background: #ddd;
+border-left:2px solid #111;
+        border-right:2px solid #111;
+
       }
       .faixabordainferior {
+          z-index: 16;
         position: fixed;
         height: 190px;
         bottom: 0em;
@@ -311,7 +293,7 @@ box-shadow: 0px 0px 2px 4px black;
         margin: 0 auto;
         right: 0;
         left: 0;
-        z-index: 16;
+
         box-shadow: 0px 0px 2px 4px black;
         background:#111;
 background-color: #000000;
@@ -508,11 +490,47 @@ background-color: #5f5;
         box-shadow: 0px 0px 2px 1px black;
         padding:10px;
         background-origin: content-box;
-z-index:100;
+z-index:50;
 display:none;
       }
       .repetir{display:none}
+      .fecharinformacao {
 
+        background-size: 100%;
+        width: 40px;
+top:10px;
+        right: 50px;
+        aspect-ratio: 1 / 1;
+position:fixed;
+border-radius:50%;
+        filter: invert(0%);
+        transition: 0.3s;
+        background-color: #f55;
+        filter: invert(0%);
+        cursor: pointer;
+
+        background-origin: content-box;
+        
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M8 8 L24 24 M8 24 L24 8'/%3E%3C/svg%3E");
+  background-size: 100%;
+  -webkit-filter: drop-shadow(0px 1px 1px #000);
+  filter: drop-shadow(0px 1px 1px #000);
+      }
+    .configuracao {
+
+        background: url("https://dl.dropbox.com/scl/fi/2nqvyfdlao27rqt4rp24c/information.png?rlkey=fsahio8kym9o25g42ublqcpy3&st=5t784ar8&dl=0") no-repeat;
+        background-size: 100%;
+        width: 50px;
+        bottom: 40px;
+        right: 30px;
+        aspect-ratio: 1 / 1;
+        position: absolute;
+        transition: 0.3s;
+        cursor: pointer;
+z-index:50;
+-webkit-filter: drop-shadow(0px 1px 1px #000);
+  filter: drop-shadow(0px 1px 1px #000);
+      }
       .boxvolume{
         width: 50%;
         max-width: 13em;
@@ -603,9 +621,7 @@ display:none;
         text-align: left;
         user-select: none;
         cursor: pointer;
-background-color: #e0e0e0;
-background-image: url("https://www.transparenttextures.com/patterns/billie-holiday.png");
-/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+
 
       }
       .embaixo-simp-playlist{
@@ -764,7 +780,7 @@ margin:auto;
         height: fit-content;
         border-radius: 0%;
         color: #eee;
-        background: #111;
+        background: #1111;
         font-size: 19px;
         border-radius: 50px;
         padding: 11px;
@@ -782,9 +798,10 @@ margin:auto;
         margin: 0 auto;
         top: 72px;
         bottom: 221px;
-background-color: #301609;
-background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+background-color: #fff1f0;
+background-image: url("https://www.transparenttextures.com/patterns/light-paper-fibers.png");
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+background:#eee;
           
       }
       .espacobranco {
@@ -803,8 +820,8 @@ background-image: url("https://www.transparenttextures.com/patterns/wood-pattern
         bottom: 221px;
         border:0px solid #000;
         border-left:10px solid transparent;
-        background:#222;
-        background:radial-gradient(transparent,transparent,#000);
+
+      
 
       }
       .espacobranco::-webkit-scrollbar {
@@ -937,14 +954,16 @@ background-image: url("https://www.transparenttextures.com/patterns/wood-pattern
       .btn4 {
         width: fit-content;
         padding: 10px;
+        padding-left:20px;
+        padding-right:20px;
         margin: 3px;
         letter-spacing: 1px;
-        color: #000;
-        background: #eee;
+        color: #fff;
+        background: #222;
         text-align: center;
         border-radius: 5px;
         font-size: 19px;
- 
+ border-radius:50px;
         cursor: pointer;
         font-weight:bold;
       }
@@ -1042,7 +1061,7 @@ background-image: url("https://www.transparenttextures.com/patterns/wood-pattern
         background: #222;
       }
       .embaixo-contribua {
-        z-index: 99;
+        z-index: 49;
         position: fixed;
         margin: 0 auto;
         top: 0;
@@ -1057,7 +1076,7 @@ background-image: url("https://www.transparenttextures.com/patterns/wood-pattern
       .contribua {
         overflow: hidden;
         overflow-y: scroll;
-        z-index: 100;
+        z-index: 50;
         position: fixed;
         margin: 0 auto;
         top: 6.5em;
@@ -1252,77 +1271,21 @@ text-align:center;
 	  <div class="spinnertext" translate="yes">C a r r e g a n d o</div>
     </div>
     <div id="wrapper">
-        
-        <div class="degrade"></div>
-
-	  
-      
-
-      
-      <div class="embaixofrase">
-        <div class="frase" translate="yes">Ou&#231;a m&#250;sicas selecionadas de qualidade! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Rock, metal, blues, Jazz, Pop, folk e mais! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Mais de 4.000 m&uacute;sicas!&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Contribua com o crescimento do site e a adi&ccedil;&atilde;o de novas m&uacute;sicas.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Para que as pr&oacute;ximas m&uacute;sicas n&atilde;o parem de tocar, &eacute; recomend&aacute;vel deixar a tela acesa quando acessar o site em um dispositivo m&oacute;vel. Caso queira ouvir com a tela apagada e sem interrup&ccedil;&atilde;o, instale o aplicativo.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
-      </div>
-        <div class='texturaespacobranco'></div>
-      <div class="espacobranco" id="espacobranco">
-        <script>
-          var timer = setInterval(next, 30000);
-          function next() {
-            if (document.getElementById("carregando").style.display == 'block') {
-          document.getElementById("wrapper").style.visibility = "visible";
-          document.getElementById("wrapper").style.opacity = "1";
-          document.getElementById("carregamentoinicial").style.display = "none";
-              simp_a_index = simp_a_index + 1;
-              simp_audio.removeEventListener('timeupdate', simp_initTime);
-              simp_changeAudio(simp_a_url[simp_a_index]);
-              simp_setAlbum(simp_a_index);
-            } else {
-              // do nothing
-            }
-          }
-          function restartnext() {
-            clearInterval(timer);
-            timer = setInterval(next, 30000);
-          }
-        </script>
-        <script>
-        setInterval(fimcarregando, 30000);
-         function fimcarregando() {
-          document.getElementById("wrapper").style.visibility = "visible";
-          document.getElementById("wrapper").style.opacity = "1";
-          document.getElementById("carregamentoinicial").style.display = "none";
-         }
-        </script>
-
-        <div class="boxtitulo">
-            <div class="titulo"></div>
-        </div>
-        <div class="boxtitulomusica" id="boxtitulomusica">
-            <div class="simp-coverteste" id="simpcoverteste"></div>
-            <div class="carregando" id="carregando">Carregando...</div>
-            <center>
-                <div class="titulomusica" id="titulomusica" translate="no" onClick="CopyToClipboard('titulomusica')"></div>
-            </center>
-            
-            
-        </div>
-        
-        <script>
-          function CopyToClipboard(containerid) {
-            const textarea = document.createElement('textarea');
-            textarea.id = 'temp_element';
-            textarea.style.height = 0;
-            document.body.appendChild(textarea);
-            textarea.value = document.getElementById(containerid).innerText;
-            const selector = document.querySelector('#temp_element');
-            selector.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            alert("Copiado.");
-          }
-        </script>
-        <br><br><br><br>
-        <div class="informacao" translate="yes">
+        <div class="informacao" id="informacao" translate="yes">
             <div class="mural"></div>
+            <div class="fecharinformacao" id="fecharinformacao" onclick="toque(), fecharinformacao()"></div>
+            <script>
+                function fecharinformacao() {
+                    document.getElementById("informacao").style.display = "none";
+
+          let toggleButton = document.getElementById("configuracao");
+          if (toggleButton.checked) {
+            toggleButton.checked = false;
+          } else {
+            toggleButton.checked = false;
+          }
+                }
+            </script>
 		  <h3>Instale o aplicativo</h3>
 		  <img style="width:80px;height:80px;filter: invert(0%);" src="https://dl.dropbox.com/scl/fi/8duwdfba0ddem1hgo2m6k/mobile-app.png?rlkey=rtohp61zc09s1bj2r3a8a7qrk&st=tojnizuf&dl=0">
           <p>Usuários do Windows, Linux e Chromebook podem adicionar o site como um aplicativo no Chrome. Para fazer isso, siga as instru&ccedil;&otilde;es:</p>
@@ -1371,11 +1334,56 @@ text-align:center;
           <br>
           <br><br><br>
           <br>
-          <center>
-            <h5>Cria&#231;&#227;o:<br>Armando de Campos J&#250;nior.</h5>
-          </center>
+            <h5>Cria&#231;&#227;o: Armando de Campos J&#250;nior.</h5>
+
         </div>
+
+      <div class="embaixofrase">
+        <div class="frase" translate="yes">Ou&#231;a m&#250;sicas selecionadas de qualidade! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Rock, metal, blues, Jazz, Pop, folk e mais! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Mais de 4.000 m&uacute;sicas!&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Contribua com o crescimento do site e a adi&ccedil;&atilde;o de novas m&uacute;sicas.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Para que as pr&oacute;ximas m&uacute;sicas n&atilde;o parem de tocar, &eacute; recomend&aacute;vel deixar a tela acesa quando acessar o site em um dispositivo m&oacute;vel. Caso queira ouvir com a tela apagada e sem interrup&ccedil;&atilde;o, instale o aplicativo.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
       </div>
+        <div class='texturaespacobranco'></div>
+      <div class="espacobranco" id="espacobranco">
+          
+        <script>
+        setInterval(fimcarregando, 30000);
+         function fimcarregando() {
+          document.getElementById("wrapper").style.visibility = "visible";
+          document.getElementById("wrapper").style.opacity = "1";
+          document.getElementById("carregamentoinicial").style.display = "none";
+         }
+        </script>
+
+        <div class="boxtitulo">
+            <div class="titulo"></div>
+        </div>
+        <div class="boxtitulomusica" id="boxtitulomusica">
+            <div class="simp-coverteste" id="simpcoverteste"></div>
+            <div class="carregando" id="carregando">Carregando...</div>
+            <center>
+                <div class="titulomusica" id="titulomusica" translate="no" onClick="CopyToClipboard('titulomusica')"></div>
+            </center>
+            
+            
+        </div>
+        
+        <script>
+          function CopyToClipboard(containerid) {
+            const textarea = document.createElement('textarea');
+            textarea.id = 'temp_element';
+            textarea.style.height = 0;
+            document.body.appendChild(textarea);
+            textarea.value = document.getElementById(containerid).innerText;
+            const selector = document.querySelector('#temp_element');
+            selector.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert("Copiado.");
+          }
+        </script>
+        <br><br><br><br>
+        
+        </div>
+    
       
 
       
@@ -1391,7 +1399,6 @@ text-align:center;
                     <input type="range" name="range" class="volume-control" id="volume-control" min="0" max="100" value="100" />
                 </div>
             </div>
-          <input type="checkbox" id="mais" value="mais">
             <label for="mais" class="mais" onclick="toque()"></label>
         <div class="boxcontroles">
           <input type="checkbox" id="aleatorio" value="aleatorio" checked>
@@ -1407,9 +1414,28 @@ text-align:center;
 			<div class="repetirbutton" id="repetirbutton" onclick="toque(), desativarrepetir()"></div>
           <input type="checkbox" id="repetir" value="repetir" onclick="toque(), desativarrepetir()">
           <label for="repetir" class="repetir"></label>
-
-
-
+          <input type="checkbox" id="configuracao" value="configuracao" onclick="toque(),">
+          <label for="configuracao" class="configuracao"></label>
+        <script>
+          var timer = setInterval(next, 30000);
+          function next() {
+            if (document.getElementById("carregando").style.display == 'block') {
+          document.getElementById("wrapper").style.visibility = "visible";
+          document.getElementById("wrapper").style.opacity = "1";
+          document.getElementById("carregamentoinicial").style.display = "none";
+              simp_a_index = simp_a_index + 1;
+              simp_audio.removeEventListener('timeupdate', simp_initTime);
+              simp_changeAudio(simp_a_url[simp_a_index]);
+              simp_setAlbum(simp_a_index);
+            } else {
+              // do nothing
+            }
+          }
+          function restartnext() {
+            clearInterval(timer);
+            timer = setInterval(next, 30000);
+          }
+        </script>
         </div>
 
       </div>
@@ -7174,6 +7200,17 @@ if (simp_audio.currentTime == simp_audio.duration) {
             console.log('Not checked');
             simp_audio.pause();
             simp_isPlaying = false;
+          }
+        };
+      </script>
+            <script>
+        document.getElementById('configuracao').onclick = function() {
+          if (this.checked) {
+            document.getElementById("informacao").style.display = "block";
+          }
+ else {
+            console.log('Not checked');
+            document.getElementById("informacao").style.display = "none";
           }
         };
       </script>
