@@ -331,7 +331,7 @@ border-left:2px solid #111;
         position: absolute;
         filter: invert(0%);
         transition: 0.3s;
-        background-color: #ddd;
+        background-color: #fff;
         filter: invert(0%);
         cursor: pointer;
         outline: 3px solid #000;
@@ -346,6 +346,14 @@ border-left:2px solid #111;
                  animation: pisca 1s infinite;
         
       }
+      input[type=checkbox]+.playpause:hover {
+        background-color: #aaa;  
+      }
+      input[type=checkbox]:checked+.playpause:hover {
+        background-color: #aaa;  
+      }
+      
+      
            @keyframes pisca {
         0% {
 			background-color: #ddd;
@@ -386,6 +394,12 @@ background-color: #5f5;
 
         filter: invert(0%);
       }
+            input[type=checkbox]+.aleatorio:hover {
+        background-color: #33a;  
+      }
+      input[type=checkbox]:checked+.aleatorio:hover {
+        background-color: #3a3;  
+      }
       /*------------------proxima---------------------------*/
       input[type=checkbox] {
         display: none;
@@ -401,13 +415,19 @@ background-color: #5f5;
         position: absolute;
         filter: invert(0%);
         transition: 0.3s;
-        background-color: #ddd;
+        background-color: #fff;
         cursor: pointer;
         outline: 3px solid #000;
         box-shadow: 0px 0px 2px 1px black;
       }
       input[type=checkbox]:checked+.proximamusica {
         background-image: url("https://dl.dropbox.com/scl/fi/i2jdg58q6t6uddbuijmmt/proximateste.png?rlkey=ru8pdoyy4fekx6aty5xy1kuq3&dl=0");
+      }
+      input[type=checkbox]+.proximamusica:hover {
+        background-color: #aaa;  
+      }
+      input[type=checkbox]:checked+.proximamusica:hover {
+        background-color: #aaa;  
       }
       /*-------------------musicaanterior----------------------*/
       input[type=checkbox] {
@@ -425,13 +445,19 @@ background-color: #5f5;
         position: absolute;
         filter: invert(0%);
         transition: 0.3s;
-        background-color: #ddd;
+        background-color: #fff;
         cursor: pointer;
         outline: 3px solid #000;
         box-shadow: 0px 0px 2px 1px black;
       }
       input[type=checkbox]:checked+.musicaanterior {
         background-image: url("https://dl.dropbox.com/scl/fi/i2jdg58q6t6uddbuijmmt/proximateste.png?rlkey=ru8pdoyy4fekx6aty5xy1kuq3&dl=0");
+      }
+      input[type=checkbox]+.musicaanterior:hover {
+        background-color: #aaa;  
+      }
+      input[type=checkbox]:checked+.musicaanterior:hover {
+        background-color: #aaa;  
       }
       /*-------------------sequencial----------------------*/
       input[type=checkbox]+.sequencial {
@@ -457,27 +483,11 @@ background-color: #5f5;
         filter: invert(0%);
         background-color: #d80;
       }
-        /*-------------------mais----------------------*/
-      input[type=checkbox]+.mais {
-        background-image: url("https://dl.dropbox.com/scl/fi/ndu0qvxjjv7gmxpjksypa/seta.png?rlkey=p4dr61fvl7i0iiscwlggg5sli&st=6dy36k61&dl=0");
-        background-size: 100%;
-        width: 30px;
-        display:block;
-        position:relative;
-        margin:auto;
-        margin-top:10px;
-        right:0;
-        aspect-ratio: 1 / 1;
-        border-radius: 50%;
-        filter: invert(80%);
-        transition: 0.3s;
-        cursor: pointer;
-    display:none;
+      input[type=checkbox]+.sequencial:hover {
+        background-color: #aaa;  
       }
-      input[type=checkbox]:checked+.mais {
-        background-image: url("https://dl.dropbox.com/scl/fi/ndu0qvxjjv7gmxpjksypa/seta.png?rlkey=p4dr61fvl7i0iiscwlggg5sli&st=6dy36k61&dl=0");
-        background-size: 100%;
-        transform:rotate(180deg);
+      input[type=checkbox]:checked+.sequencial:hover {
+        background-color: #b70;  
       }
        /*-------------------repetirbutton----------------------*/
       .repetirbutton {
@@ -500,6 +510,9 @@ background-color: #5f5;
         background-origin: content-box;
 z-index:50;
 display:none;
+      }
+      .repetirbutton:hover {
+        background-color: #933;  
       }
       .repetir{display:none}
       .fecharinformacao {
@@ -690,11 +703,10 @@ border-left:2px solid #111;
         position: absolute;
         top: 0;
         margin: 0 auto;
-        left: 0;
-        right: 0;
+        left: 0px;
+        right: 0px;
         display: none;
         height:53px;
-    
         box-shadow: 0px 0px 2px 1px black;
 background:#111;
       }
@@ -714,10 +726,13 @@ background:#111;
         font-weight: bold;
         background: #fff;
         cursor: pointer;
-        padding-left:15px;
-        padding-right:5px;
+        padding-left:10px;
+        padding-right:10px;
         text-align:left;
         border-radius: 50px;
+      }
+            .searchbar:hover {
+        background-color: #aaa;
       }
       .dicapesquisa {
         position: fixed;
@@ -758,7 +773,7 @@ margin:auto;
         background-size: 100%;
         width: 40px;
         right:100px;
-        margin-top: 2.0%;
+        top:7px;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
         position: absolute;
@@ -770,7 +785,7 @@ margin:auto;
         outline: 3px solid #000;
         box-shadow: 0px 0px 2px 1px black;
         z-index: 1;
-  padding:5px;
+  padding:7px;
   background-origin: content-box;
       }
       .enviar:hover {
@@ -780,8 +795,8 @@ margin:auto;
         background: url("https://dl.dropbox.com/scl/fi/qepeiovlkf5065opnh2nf/recycle-bin.png?rlkey=irczmqpd6r1i70ssrab8zfob5&st=i9aus6wy&dl=0") no-repeat;
         background-size: 100%;
         width: 40px;
-        right:50px;
-        margin-top: 2.0%;
+        right:51px;
+        top:7px;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
         position: absolute;
@@ -793,7 +808,7 @@ margin:auto;
         outline: 3px solid #000;
         box-shadow: 0px 0px 2px 1px black;
         z-index: 1;
-  padding:5px;
+  padding:7px;
   background-origin: content-box;
       }
       .limpar:hover {
@@ -805,7 +820,7 @@ z-index:10;
         width: 30px;
 top:10px;
 margin: auto;
-        right:4px;
+        right:10px;
 
         aspect-ratio: 1 / 1;
 position:absolute;
