@@ -82,9 +82,7 @@ top:0;
         left: 0;
         right: 0;
         padding:3px;
-background-color: #000000;
-background-image: url("https://www.transparenttextures.com/patterns/dirty-old-black-shirt.png");
-/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+
       }
 
       .titulo {
@@ -307,11 +305,8 @@ border-left:2px solid #111;
         right: 0;
         left: 0;
 
-        c
         background:#111;
-background-color: #000000;
-background-image: url("https://www.transparenttextures.com/patterns/dirty-old-black-shirt.png");
-/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+
       }
       .boxcontroles {
         position: relative;
@@ -510,7 +505,7 @@ display:none;
       .fecharinformacao {
 z-index:10;
         background-size: 100%;
-        width: 50px;
+        width: 35px;
 top:5px;
 margin: auto;
         right:0;
@@ -519,6 +514,31 @@ margin: auto;
 position:fixed;
 border:3px solid #111;
 
+border-radius:50%;
+        filter: invert(0%);
+        transition: 0.3s;
+        background-color: #f55;
+        filter: invert(0%);
+        cursor: pointer;
+
+        background-origin: content-box;
+        
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M8 8 L24 24 M8 24 L24 8'/%3E%3C/svg%3E");
+  background-size: 100%;
+  -webkit-filter: drop-shadow(0px 1px 1px #000);
+  filter: drop-shadow(0px 1px 1px #000);
+      }
+       .fecharsimpplaylist {
+z-index:10;
+        background-size: 100%;
+        width: 30px;
+top:9px;
+margin: auto;
+        right:3px;
+
+        aspect-ratio: 1 / 1;
+position:absolute;
+border:3px solid #111;
 border-radius:50%;
         filter: invert(0%);
         transition: 0.3s;
@@ -678,7 +698,7 @@ border-left:2px solid #111;
           font-size: 20px;
           z-index:10;
           top:12px;
-          left:8px;
+          left:3px;
           pointer-events:none;
           user-select: none;
       }
@@ -699,8 +719,8 @@ background:#111;
       .searchbar {
         position: absolute;
         top: 10px;
-        left: 40px;
-        right:225px;
+        left: 33px;
+        right:248px;
         font-size: 19px;
         text-align: center;
         font-family: Verdana, sans-serif;
@@ -753,7 +773,7 @@ margin:auto;
       .enviar {
         position: absolute;
         top: 10px;
-        right: 116px;
+        right: 143px;
         width: 100px;
         font-size: 19px;
         text-align: center;
@@ -774,7 +794,7 @@ margin:auto;
       .limpar {
         position: absolute;
         top: 10px;
-        right: 10px;
+        right: 40px;
         width: 100px;
         font-size: 19px;
         text-align: center;
@@ -1479,7 +1499,7 @@ text-align:center;
             <div class="lupa">&#128270;</div>
           <input type="text" class="searchbar" id="searchbar" placeholder="Pesquise" onfocus="changetextsearch();aparecerdicapesquisa()" onfocusout="changetextsearch2();fechardicapesquisa()" onclick="toque()" tabindex="1" autocomplete="off"><a href="#top"><button class="enviar" onclick="search_animal();toque()">Enviar</button></a>
           <button class="limpar" id="limpar" onclick="clearInputField();toque()">Limpar</button>
-          
+          <div class="fecharsimpplaylist" id="fecharsimpplaylist" onclick="toque(), fecharsimpplaylist()"></div>
         </div>
         
         <script>
@@ -7389,6 +7409,21 @@ if (simp_audio.currentTime == simp_audio.duration) {
 	  window.navigator.vibrate(50);
 	}
      </script>
+     <script>
+                function fecharsimpplaylist() {
+                    document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
+            document.getElementById("simp-playlist").style.visibility = "hidden";
+            document.getElementById("embaixo-simp-playlist").style.visibility = "hidden";
+            document.getElementById("pesquisa").style.display = "none";
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+            document.getElementById("espacobranco").scrollTop = 0;
+            let toggleButton = document.getElementById("sequencial");
+          if (toggleButton.checked) {
+            toggleButton.checked = false;
+          } else {
+            toggleButton.checked = false;
+          }
+                }
 </script>
 </div>
     </div>
