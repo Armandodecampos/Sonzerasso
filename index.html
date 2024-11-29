@@ -161,6 +161,8 @@ top:0;
         border:none;
         border-radius:30px;
       }
+
+      
       .simp-time {
         z-index: 9;
 
@@ -317,6 +319,12 @@ border-left:2px solid #111;
         display: flex;
         justify-content: center;
       }
+      @keyframes hover{
+
+        50% {
+        	filter: brightness(50%);
+        }
+      }
       /*--------------------playteste-------------------------*/
       input[type=checkbox] {
         display: none;
@@ -347,10 +355,10 @@ border-left:2px solid #111;
         
       }
       input[type=checkbox]+.playpause:hover {
-        background-color: #aaa;  
+        animation: hover 1s linear;
       }
       input[type=checkbox]:checked+.playpause:hover {
-        background-color: #aaa;  
+        animation: hover 1s linear;
       }
       
       
@@ -395,10 +403,10 @@ background-color: #5f5;
         filter: invert(0%);
       }
             input[type=checkbox]+.aleatorio:hover {
-        background-color: #33a;  
+        animation: hover 1s linear;
       }
       input[type=checkbox]:checked+.aleatorio:hover {
-        background-color: #3a3;  
+        animation: hover 1s linear;
       }
       /*------------------proxima---------------------------*/
       input[type=checkbox] {
@@ -424,10 +432,10 @@ background-color: #5f5;
         background-image: url("https://dl.dropbox.com/scl/fi/i2jdg58q6t6uddbuijmmt/proximateste.png?rlkey=ru8pdoyy4fekx6aty5xy1kuq3&dl=0");
       }
       input[type=checkbox]+.proximamusica:hover {
-        background-color: #aaa;  
+        animation: hover 1s linear;
       }
       input[type=checkbox]:checked+.proximamusica:hover {
-        background-color: #aaa;  
+        animation: hover 1s linear;
       }
       /*-------------------musicaanterior----------------------*/
       input[type=checkbox] {
@@ -454,10 +462,10 @@ background-color: #5f5;
         background-image: url("https://dl.dropbox.com/scl/fi/i2jdg58q6t6uddbuijmmt/proximateste.png?rlkey=ru8pdoyy4fekx6aty5xy1kuq3&dl=0");
       }
       input[type=checkbox]+.musicaanterior:hover {
-        background-color: #aaa;  
+        animation: hover 1s linear;
       }
       input[type=checkbox]:checked+.musicaanterior:hover {
-        background-color: #aaa;  
+        animation: hover 1s linear;
       }
       /*-------------------sequencial----------------------*/
       input[type=checkbox]+.sequencial {
@@ -484,10 +492,10 @@ background-color: #5f5;
         background-color: #d80;
       }
       input[type=checkbox]+.sequencial:hover {
-        background-color: #aaa;  
+        animation: hover 1s linear;
       }
       input[type=checkbox]:checked+.sequencial:hover {
-        background-color: #b70;  
+        animation: hover 1s linear;
       }
        /*-------------------repetirbutton----------------------*/
       .repetirbutton {
@@ -512,7 +520,7 @@ z-index:50;
 display:none;
       }
       .repetirbutton:hover {
-        background-color: #933;  
+        animation: hover 1s linear;
       }
       .repetir{display:none}
       .fecharinformacao {
@@ -546,7 +554,7 @@ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32
         cursor: pointer;
       }
             .fecharinformacao:hover {
-        background-color: #b33;
+        animation: hover 1s linear;
       }
        
 
@@ -564,6 +572,9 @@ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32
 z-index:12;
 -webkit-filter: drop-shadow(0px 1px 1px #000);
   filter: drop-shadow(0px 1px 1px #000);
+      }
+      .configuracao:hover {
+          animation: hover 1s linear;
       }
       .boxvolume{
         width: 50%;
@@ -732,7 +743,7 @@ background:#111;
         border-radius: 50px;
       }
             .searchbar:hover {
-        background-color: #aaa;
+        animation: hover 1s linear;
       }
       .dicapesquisa {
         position: fixed;
@@ -789,7 +800,7 @@ margin:auto;
   background-origin: content-box;
       }
       .enviar:hover {
-        background-color: #aaa;
+        animation: hover 1s linear;
       }
       .limpar {
         background: url("https://dl.dropbox.com/scl/fi/qepeiovlkf5065opnh2nf/recycle-bin.png?rlkey=irczmqpd6r1i70ssrab8zfob5&st=i9aus6wy&dl=0") no-repeat;
@@ -812,7 +823,7 @@ margin:auto;
   background-origin: content-box;
       }
       .limpar:hover {
-        background-color: #aaa;
+        animation: hover 1s linear;
       }
 .fecharsimpplaylist {
 z-index:10;
@@ -845,7 +856,7 @@ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32
         aspect-ratio:1 / 1;
       }
             .fecharsimpplaylist:hover {
-        background-color: #b33;
+        animation: hover 1s linear;
       }
       .btn {
         position: relative;
