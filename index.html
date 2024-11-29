@@ -527,32 +527,15 @@ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32
   background-size: 100%;
   -webkit-filter: drop-shadow(0px 1px 1px #000);
   filter: drop-shadow(0px 1px 1px #000);
-      }
-       .fecharsimpplaylist {
-z-index:10;
-        background-size: 100%;
-        width: 30px;
-top:9px;
-margin: auto;
-        right:3px;
-
-        aspect-ratio: 1 / 1;
-position:absolute;
-border:3px solid #111;
-border-radius:50%;
-        filter: invert(0%);
-        transition: 0.3s;
-        background-color: #f55;
-        filter: invert(0%);
+  border-radius: 5px;
+        border: 2px solid #000;
+        font-weight: bold;
         cursor: pointer;
-
-        background-origin: content-box;
-        
-background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M8 8 L24 24 M8 24 L24 8'/%3E%3C/svg%3E");
-  background-size: 100%;
-  -webkit-filter: drop-shadow(0px 1px 1px #000);
-  filter: drop-shadow(0px 1px 1px #000);
       }
+            .fecharinformacao:hover {
+        background-color: #b33;
+      }
+       
 
     .configuracao {
 
@@ -794,7 +777,7 @@ margin:auto;
       .limpar {
         position: absolute;
         top: 10px;
-        right: 40px;
+        right: 41px;
         width: 100px;
         font-size: 19px;
         text-align: center;
@@ -811,7 +794,38 @@ margin:auto;
         background: #2c0c0b;
         color: #ddd;
       }
+.fecharsimpplaylist {
+z-index:10;
+        background-size: 100%;
+        width: 30px;
+top:10px;
+margin: auto;
+        right:4px;
 
+        aspect-ratio: 1 / 1;
+position:absolute;
+border:3px solid #111;
+border-radius:0%;
+        filter: invert(0%);
+        transition: 0.3s;
+        background-color: #f55;
+        filter: invert(0%);
+        cursor: pointer;
+
+        background-origin: content-box;
+        
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M8 8 L24 24 M8 24 L24 8'/%3E%3C/svg%3E");
+  background-size: 100%;
+  -webkit-filter: drop-shadow(0px 1px 1px #000);
+  filter: drop-shadow(0px 1px 1px #000);
+  border-radius: 5px;
+        border: 2px solid #000;
+        font-weight: bold;
+        cursor: pointer;
+      }
+            .fecharsimpplaylist:hover {
+        background-color: #b33;
+      }
       .btn {
         position: relative;
         margin-left: 1em;
