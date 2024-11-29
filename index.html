@@ -243,7 +243,7 @@ box-shadow: 0px 0px 2px 4px black;
         width: 80%;
         max-width: 400px;
         padding:10px;
-        padding-bottom: 18px;
+        padding-top: 48px;
         font-size: 17px;
         margin-top:20px;
         border-radius:0px;
@@ -253,11 +253,21 @@ box-shadow: 0px 0px 2px 4px black;
       .titulomusica {
         word-break: break-all;
         width: 100%;
- 
-        font-size: 17px;
+    padding-top: 14px;
+        font-size: 18px;
+      }
+            .boxinformacao{
+          position:fixed;
+          display:none;
+          margin:auto;
+          top:0;
+          bottom:0;
+          left:0;
+          right:0;
+          background:radial-gradient(#fff,#ccc);
+          z-index:100;
       }
       .informacao {
-        z-index:100;
         position:fixed;
         overflow: hidden;
         overflow-y: scroll;
@@ -266,13 +276,13 @@ box-shadow: 0px 0px 2px 4px black;
         bottom:20px;
         left:10px;
         right:10px;
-        max-width:700px;
+        max-width:800px;
         padding: 25px;
         color: #000;
         background:#eee;
-        border:20px outset #555;
-        box-shadow: 0px 0px 2px 1px black;
-        display:none;
+        border:1px solid #000;
+        outline:3px solid #222;
+        box-shadow: 0px 0px 2px 4px black;
       }
             .informacao::-webkit-scrollbar {
         width: 20px;
@@ -500,7 +510,7 @@ display:none;
       .fecharinformacao {
 z-index:10;
         background-size: 100%;
-        width: 40px;
+        width: 50px;
 top:0px;
 margin: auto;
         right:0;
@@ -523,18 +533,19 @@ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32
   -webkit-filter: drop-shadow(0px 1px 1px #000);
   filter: drop-shadow(0px 1px 1px #000);
       }
+
     .configuracao {
 
         background: url("https://dl.dropbox.com/scl/fi/2nqvyfdlao27rqt4rp24c/information.png?rlkey=fsahio8kym9o25g42ublqcpy3&st=5t784ar8&dl=0") no-repeat;
         background-size: 100%;
         width: 50px;
-        bottom: 40px;
-        right: 30px;
+        bottom: 240px;
+        right: 35px;
         aspect-ratio: 1 / 1;
-        position: absolute;
+        position: fixed;
         transition: 0.3s;
         cursor: pointer;
-z-index:50;
+z-index:12;
 -webkit-filter: drop-shadow(0px 1px 1px #000);
   filter: drop-shadow(0px 1px 1px #000);
       }
@@ -617,10 +628,10 @@ z-index:50;
         overflow-y: scroll;
         position: fixed;
         margin: 0 auto;
-        top: 53px;
-        bottom: 222px;
-        left: 0px;
-        right: 0px;
+        top: 63px;
+        bottom: 234px;
+        left: 10px;
+        right: 10px;
         max-width:700px;
         color: #000;
         padding: 30px;
@@ -629,7 +640,9 @@ z-index:50;
         text-align: left;
         user-select: none;
         cursor: pointer;
-
+        border:1px solid #000;
+        outline:3px solid #222;
+        box-shadow: 0px 0px 2px 4px black;
 
       }
       .embaixo-simp-playlist{
@@ -640,10 +653,8 @@ z-index:50;
           bottom:0;
           left:0;
           right:0;
-          background:#ddd;
-          
+          background:radial-gradient(#fff,#ccc);
           z-index:14;
-          
       }
       .simp-playlist::-webkit-scrollbar {
         width: 40px;
@@ -828,9 +839,6 @@ background:#eee;
         bottom: 221px;
         border:0px solid #000;
         border-left:10px solid transparent;
-
-      
-
       }
       .espacobranco::-webkit-scrollbar {
         width: 10px;
@@ -1145,7 +1153,7 @@ background:#eee;
         margin:auto;
         left:0;
         right:0;
-        bottom: 230px;
+        bottom: 240px;
 
 
         cursor: pointer;
@@ -1279,12 +1287,35 @@ text-align:center;
 	  <div class="spinnertext" translate="yes">C a r r e g a n d o</div>
     </div>
     <div id="wrapper">
+                <input type="checkbox" id="configuracao" value="configuracao" onclick="toque(),">
+          <label for="configuracao" class="configuracao"></label>
+        <script>
+          var timer = setInterval(next, 30000);
+          function next() {
+            if (document.getElementById("carregando").style.display == 'block') {
+          document.getElementById("wrapper").style.visibility = "visible";
+          document.getElementById("wrapper").style.opacity = "1";
+          document.getElementById("carregamentoinicial").style.display = "none";
+              simp_a_index = simp_a_index + 1;
+              simp_audio.removeEventListener('timeupdate', simp_initTime);
+              simp_changeAudio(simp_a_url[simp_a_index]);
+              simp_setAlbum(simp_a_index);
+            } else {
+              // do nothing
+            }
+          }
+          function restartnext() {
+            clearInterval(timer);
+            timer = setInterval(next, 30000);
+          }
+        </script>
+        <div class="boxinformacao" id="boxinformacao">
         <div class="informacao" id="informacao" translate="yes">
             <div class="mural"></div>
             <div class="fecharinformacao" id="fecharinformacao" onclick="toque(), fecharinformacao()"></div>
             <script>
                 function fecharinformacao() {
-                    document.getElementById("informacao").style.display = "none";
+                    document.getElementById("boxinformacao").style.display = "none";
 
           let toggleButton = document.getElementById("configuracao");
           if (toggleButton.checked) {
@@ -1350,7 +1381,7 @@ text-align:center;
             <h5>Cria&#231;&#227;o: Armando de Campos J&#250;nior.</h5>
 
         </div>
-
+</div>
       <div class="embaixofrase">
         <div class="frase" translate="yes">Ou&#231;a m&#250;sicas selecionadas de qualidade! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Rock, metal, blues, Jazz, Pop, folk e mais! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Mais de 5.000 m&uacute;sicas!&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Contribua com o crescimento do site e a adi&ccedil;&atilde;o de novas m&uacute;sicas.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Para que as pr&oacute;ximas m&uacute;sicas n&atilde;o parem de tocar, &eacute; recomend&aacute;vel deixar a tela acesa quando acessar o site em um dispositivo m&oacute;vel. Caso queira ouvir com a tela apagada e sem interrup&ccedil;&atilde;o, instale o aplicativo.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
       </div>
@@ -1427,28 +1458,7 @@ text-align:center;
 			<div class="repetirbutton" id="repetirbutton" onclick="toque(), desativarrepetir()"></div>
           <input type="checkbox" id="repetir" value="repetir" onclick="toque(), desativarrepetir()">
           <label for="repetir" class="repetir"></label>
-          <input type="checkbox" id="configuracao" value="configuracao" onclick="toque(),">
-          <label for="configuracao" class="configuracao"></label>
-        <script>
-          var timer = setInterval(next, 30000);
-          function next() {
-            if (document.getElementById("carregando").style.display == 'block') {
-          document.getElementById("wrapper").style.visibility = "visible";
-          document.getElementById("wrapper").style.opacity = "1";
-          document.getElementById("carregamentoinicial").style.display = "none";
-              simp_a_index = simp_a_index + 1;
-              simp_audio.removeEventListener('timeupdate', simp_initTime);
-              simp_changeAudio(simp_a_url[simp_a_index]);
-              simp_setAlbum(simp_a_index);
-            } else {
-              // do nothing
-            }
-          }
-          function restartnext() {
-            clearInterval(timer);
-            timer = setInterval(next, 30000);
-          }
-        </script>
+  
         </div>
 
       </div>
@@ -7219,11 +7229,11 @@ if (simp_audio.currentTime == simp_audio.duration) {
             <script>
         document.getElementById('configuracao').onclick = function() {
           if (this.checked) {
-            document.getElementById("informacao").style.display = "block";
+            document.getElementById("boxinformacao").style.display = "block";
           }
  else {
             console.log('Not checked');
-            document.getElementById("informacao").style.display = "none";
+            document.getElementById("boxinformacao").style.display = "none";
           }
         };
       </script>
