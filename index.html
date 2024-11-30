@@ -479,7 +479,7 @@ background-color: #5f5;
         position: absolute;
         filter: invert(0%);
         transition: 0.3s;
-        background-color: #ddd;
+        background-color: #fff;
         filter: invert(0%);
         cursor: pointer;
         outline: 3px solid #000;
@@ -700,15 +700,7 @@ border-left:2px solid #111;
         box-shadow: -20px 0px 0px 0px #fa0;
         border-left:20px solid transparent;
       }
-        .lupa{
-          position:absolute;
-          font-size: 20px;
-          z-index:10;
-          top:12px;
-          left:3px;
-          pointer-events:none;
-          user-select: none;
-      }
+
       .pesquisa {
         z-index: 12;
         position: absolute;
@@ -725,8 +717,8 @@ background:#111;
       .searchbar {
         position: absolute;
         top: 10px;
-        left: 33px;
-        right:150px;
+        left: 10px;
+        right:145px;
         font-size: 19px;
         text-align: center;
         font-family: Verdana, sans-serif;
@@ -757,7 +749,7 @@ margin:auto;
         font-size: 17px;
         text-align: left;
         font-family: Verdana, sans-serif;
-        padding: 0.5em;
+        padding: 12px;
         border: none;
         background: #fff;
         box-shadow: 0px 0px 2px 1px black;
@@ -783,7 +775,7 @@ margin:auto;
         background: url("https://dl.dropbox.com/scl/fi/1wpbdsls5mxeganckekp2/magnifier.png?rlkey=v55foq9wujbfahc1o9nn2x4mv&st=ibsj41z9&dl=0") no-repeat;
         background-size: 100%;
         width: 40px;
-        right:100px;
+        right:98px;
         top:7px;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
@@ -1545,7 +1537,6 @@ text-align:center;
       </script>
       <div class="embaixo-simp-playlist" id="embaixo-simp-playlist">
           <div class="pesquisa" id="pesquisa">
-            <div class="lupa">&#128270;</div>
           <input type="text" class="searchbar" id="searchbar" placeholder="Pesquise" onfocus="changetextsearch();aparecerdicapesquisa()" onfocusout="changetextsearch2();fechardicapesquisa()" onclick="toque()" tabindex="1" autocomplete="off"><a href="#top"><button class="enviar" onclick="search_animal();toque()"></button></a>
           <button class="limpar" id="limpar" onclick="clearInputField();toque()"></button>
           <div class="fecharsimpplaylist" id="fecharsimpplaylist" onclick="toque(), fecharsimpplaylist()"></div>
