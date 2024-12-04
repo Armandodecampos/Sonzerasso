@@ -7385,6 +7385,7 @@ if (simp_audio.currentTime == simp_audio.duration) {
           } else {
             console.log('Not checked');
             simp_isRandom = false;
+            document.getElementById("repetirbutton").style.animation = "hover2 1s linear";
           }
         }
       </script>
@@ -7398,6 +7399,7 @@ if (simp_audio.currentTime == simp_audio.duration) {
     		toggleButton.checked = false;
   		}
         document.getElementById("repetirbutton").style.display = "none";
+        document.getElementById("repetirbutton").style.animation = "hover 1s linear";
         document.getElementById("aleatorio2").style.animation = "hover 1s linear";
       }
       </script>
