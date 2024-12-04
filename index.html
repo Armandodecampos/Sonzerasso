@@ -87,7 +87,7 @@ top:0;
 
       .titulo {
  
-        width:80%;
+        width:70%;
         max-width: 300px;
               margin: auto;
               top:10px;
@@ -190,7 +190,8 @@ top:0;
 box-shadow: 0px 0px 2px 4px black;
         padding: 5px;
         background:#fff;
-
+background-color: #111111;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='167' height='167' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%23444444' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%23444444' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E");
       }
       .frase {
           height:21px;
@@ -203,7 +204,7 @@ box-shadow: 0px 0px 2px 4px black;
         -webkit-animation: frase 60s linear infinite;
         animation: frase 60s linear infinite;
         filter: invert(0%);
-        color: #000;
+        color: #fff;
         font-size: 15px;
         
       }
@@ -325,6 +326,12 @@ border-left:2px solid #111;
         	filter: brightness(50%);
         }
       }
+      @keyframes hover2{
+
+        50% {
+        	filter: brightness(50%);
+        }
+      }
       /*--------------------playteste-------------------------*/
       input[type=checkbox] {
         display: none;
@@ -388,7 +395,6 @@ border-left:2px solid #111;
         border-radius: 20%;
         position: absolute;
         filter: invert(0%);
-        transition: 0.3s;
         background-color: #55f;
         filter: invert(0%);
         cursor: pointer;
@@ -897,7 +903,8 @@ background:#eee;
         bottom: 221px;
         border:0px solid #000;
         border-left:10px solid transparent;
-        background:#eee
+        background:#eee;
+background:linear-gradient(#ddd,#fff)
       }
       .espacobranco::-webkit-scrollbar {
         width: 10px;
@@ -1460,7 +1467,7 @@ text-align:center;
         </script>
 
         <div class="boxtitulo">
-            <div class="titulo"></div>
+            <div class="titulo" id="titulo"></div>
         </div>
         <div class="boxtitulomusica" id="boxtitulomusica">
             <div class="simp-coverteste" id="simpcoverteste"></div>
@@ -1508,7 +1515,7 @@ text-align:center;
             <label for="mais" class="mais" onclick="toque()"></label>
         <div class="boxcontroles">
           <input type="checkbox" id="aleatorio" value="aleatorio" checked>
-          <label for="aleatorio" class="aleatorio" onclick="toque(), ativarrepetir()"></label>
+          <label for="aleatorio" class="aleatorio" id="aleatorio2" onclick="toque()"></label>
           <input type="checkbox" id="musicaanterior" value="musicaanterior">
           <label for="musicaanterior" class="musicaanterior" onclick="toque()"></label>
           <input type="checkbox" id="playpause" value="playpause">
@@ -7369,18 +7376,15 @@ if (simp_audio.currentTime == simp_audio.duration) {
       </script>
       <script>
         document.getElementById('aleatorio').onclick = function() {
+            document.getElementById("aleatorio2").style.animation = "hover2 1s linear";
           if (this.checked) {
             console.log('Checked');
             simp_isRandom = true;
             document.getElementById("repetirbutton").style.display = "block";
-     
           document.getElementById("repetir").checked = true;
-      
-            
           } else {
             console.log('Not checked');
             simp_isRandom = false;
-    
           }
         }
       </script>
@@ -7394,6 +7398,7 @@ if (simp_audio.currentTime == simp_audio.duration) {
     		toggleButton.checked = false;
   		}
         document.getElementById("repetirbutton").style.display = "none";
+        document.getElementById("aleatorio2").style.animation = "hover 1s linear";
       }
       </script>
 
