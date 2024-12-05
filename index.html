@@ -1225,18 +1225,23 @@ background:linear-gradient(#ddd,#fff)
         z-index: 1;
         margin-top:10px;
       }
-      .botaovoltaraotopodasmusicas {
-        z-index: 12;
+      .boxbotaovoltaraotopodasmusicas {
+          z-index: 12;
         visibility: hidden;
-        position: absolute;
-        width:70px;
-        aspect-ratio:1/1;
-        display:block;
+        position: fixed;
         margin:auto;
         left:0;
         right:0;
-        bottom: 240px;
-
+        bottom: 300px;
+        filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));  
+      }
+      .botaovoltaraotopodasmusicas {
+        position: absolute;
+        width:55px;
+        aspect-ratio:1/1;
+        margin:auto;
+        left:0;
+        right:0;
 
         cursor: pointer;
     font-size:70px;
@@ -1245,9 +1250,7 @@ background:#fa0;
 padding-left:10px;
 padding-right:10px;
 text-align:center;
-clip-path: polygon(50% 35%, 0% 100%, 100% 100%);
-
- 
+clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
       }
       #wrapper {
         visibility: hidden;
@@ -1551,9 +1554,9 @@ text-align:center;
       <script>
         function aparecerbotaovoltaraotop() {
           if (document.getElementById("simp-playlist").scrollTop > 200) {
-            document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "visible";
+            document.getElementById("boxbotaovoltaraotopodasmusicas").style.visibility = "visible";
           } else {
-            document.getElementById("botaovoltaraotopodasmusicas").style.visibility = "hidden";
+            document.getElementById("boxbotaovoltaraotopodasmusicas").style.visibility = "hidden";
           }
         }
       </script>
@@ -1595,7 +1598,9 @@ text-align:center;
         </script>
 
       <div class="dicapesquisa" id="dicapesquisa" translate="yes">Pesquise por artista/banda ou m&uacute;sica ou album</div>
-      <a href="#top"><div class="botaovoltaraotopodasmusicas" id="botaovoltaraotopodasmusicas"></div></a>
+      <a href="#top">
+          <div class="boxbotaovoltaraotopodasmusicas" id="boxbotaovoltaraotopodasmusicas">
+          <div class="botaovoltaraotopodasmusicas" id="botaovoltaraotopodasmusicas"></div></div></a>
       <div class="simple-audio-player" id="simp" data-config='{"auto_load":true}'>
         <div class="simp-playlist" id="simp-playlist" onscroll="aparecerbotaovoltaraotop(); desativarlista()">
             
@@ -7311,7 +7316,7 @@ if (simp_audio.currentTime == simp_audio.duration) {
             if (item.classList.contains('simp-active')) simp_a_index = index; //playlist contains '.simp-active'
             item.addEventListener('click', function() {
               restartnext();
-              document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
+              document.getElementById("boxbotaovoltaraotopodasmusicas").style.display = "none";
               document.getElementById("espacobranco").scrollTop = 0;
               document.getElementById("simp-playlist").style.visibility = "hidden";
               document.getElementById("embaixo-simp-playlist").style.visibility = "hidden";
@@ -7372,7 +7377,7 @@ if (simp_audio.currentTime == simp_audio.duration) {
         document.getElementById('sequencial').onclick = function() {
           if (this.checked) {
             console.log('Checked');
-            document.getElementById("botaovoltaraotopodasmusicas").style.display = "block";
+            document.getElementById("boxbotaovoltaraotopodasmusicas").style.display = "block";
             document.getElementById("simp-playlist").style.visibility = "visible";
             document.getElementById("embaixo-simp-playlist").style.visibility = "visible";
             document.getElementById("pesquisa").style.display = "block";
@@ -7380,7 +7385,7 @@ if (simp_audio.currentTime == simp_audio.duration) {
             document.getElementById("espacobranco").scrollTop = 0
           } else {
             console.log('Not checked');
-            document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
+            document.getElementById("boxbotaovoltaraotopodasmusicas").style.display = "none";
             document.getElementById("simp-playlist").style.visibility = "hidden";
             document.getElementById("embaixo-simp-playlist").style.visibility = "hidden";
             document.getElementById("pesquisa").style.display = "none";
@@ -7580,7 +7585,7 @@ if (simp_audio.currentTime == simp_audio.duration) {
           if (event.keyCode == 27) {
             let toggleButton = document.getElementById("sequencial");
             if (toggleButton.checked) {
-              document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
+              document.getElementById("boxbotaovoltaraotopodasmusicas").style.display = "none";
               document.getElementById("simp-playlist").style.visibility = "hidden";
               document.getElementById("embaixo-simp-playlist").style.visibility = "hidden";
               document.getElementById("pesquisa").style.display = "none";
@@ -7588,7 +7593,7 @@ if (simp_audio.currentTime == simp_audio.duration) {
               console.log('Not checked');
               toggleButton.checked = false;info
             } else {
-                document.getElementById("botaovoltaraotopodasmusicas").style.display = "block";
+                document.getElementById("boxbotaovoltaraotopodasmusicas").style.display = "block";
               document.getElementById("simp-playlist").style.visibility = "visible";
               document.getElementById("embaixo-simp-playlist").style.visibility = "visible";
               document.getElementById("pesquisa").style.display = "block";
@@ -7677,7 +7682,7 @@ if (simp_audio.currentTime == simp_audio.duration) {
      </script>
      <script>
                 function fecharsimpplaylist() {
-                    document.getElementById("botaovoltaraotopodasmusicas").style.display = "none";
+                    document.getElementById("boxbotaovoltaraotopodasmusicas").style.display = "none";
             document.getElementById("simp-playlist").style.visibility = "hidden";
             document.getElementById("embaixo-simp-playlist").style.visibility = "hidden";
             document.getElementById("pesquisa").style.display = "none";
