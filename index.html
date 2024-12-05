@@ -82,7 +82,7 @@ top:0;
         left: 0;
         right: 0;
         padding:3px;
-
+background:linear-gradient(#222,#444);
       }
 
       .titulo {
@@ -274,7 +274,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
         overflow: hidden;
         overflow-y: scroll;
         margin:0 auto;
-        top:20px;
+        top:10px;
         bottom:10px;
         left:10px;
         right:10px;
@@ -530,16 +530,24 @@ display:none;
         animation: hover 1s linear;
       }
       .repetir{display:none}
-      .fecharinformacao {
-z-index:10;
-        background-size: 100%;
-        width: 35px;
-top:5px;
+      .boxfecharinformacao {
+          position:fixed;
+          z-index:10;
+      top:10px;
 margin: auto;
         right:0;
         left:0;
+        max-width:850px;
+        background::red;
+      }
+      .fecharinformacao {
+        background-size: 100%;
+        width: 35px;
+top:20px;
+margin: auto;
+        right:40px;
         aspect-ratio: 1 / 1;
-position:fixed;
+position:absolute;
 border:3px solid #111;
 
 border-radius:50%;
@@ -1043,7 +1051,7 @@ background:linear-gradient(#ddd,#fff)
         margin: 3px;
         letter-spacing: 1px;
         color: #fff;
-        background: #d80;
+        background: #111;
         text-align: center;
         border-radius: 5px;
         font-size: 19px;
@@ -1383,7 +1391,9 @@ text-align:center;
         <div class="boxinformacao" id="boxinformacao">
         <div class="informacao" id="informacao" translate="yes">
             <div class="mural"></div>
+            <div class="boxfecharinformacao">
             <div class="fecharinformacao" id="fecharinformacao" onclick="toque(), fecharinformacao()"></div>
+            </div>
             <script>
                 function fecharinformacao() {
                     document.getElementById("boxinformacao").style.display = "none";
