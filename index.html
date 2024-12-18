@@ -987,7 +987,7 @@ background:linear-gradient(#ddd,#fff)
       .simp-coverteste {
         z-index: 2;
         margin: 0 auto;
-        margin-top:70px;
+        margin-top:40px;
         margin-bottom:30px;
         box-shadow: 0px 0px 2px 4px black;
         background-size: 100%;
@@ -1291,11 +1291,11 @@ clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         margin: 0 auto;
 left:0;
 right:0;
-bottom:320px;
+bottom:0px;
       filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
       }
       .spinner {      
-position:fixed;
+        position: fixed;
         margin: 0 auto;
         display:block;
         z-index: 10;
@@ -1311,21 +1311,21 @@ clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%,
       }
            @keyframes spinner {
         0% {
-			left:100px;transform: rotate(0deg);background:#fa0;transform: rotate(1440deg);
+			left:100px;transform: rotate(0deg);bottom:230px;background:#fa0;transform: rotate(1440deg);
         }
         10% {
-        	background:#000;    
+        	bottom:300px;background:#000;    
         }
 
         50% {
-        	right:200px;transform: rotate(20deg);background:#fa0;
+        	right:200px;transform: rotate(20deg);bottom:230px;background:#fa0;
         }
         60% {
-        	background:#000;        
+        	bottom:300px;background:#000;        
         }
 
         100% {
-			left:100px;transform: rotate(0deg);background:#fa0;transform: rotate(1440deg);
+			left:100px;transform: rotate(0deg);bottom:230px;background:#fa0;transform: rotate(1440deg);
         }
       }
 
@@ -1354,19 +1354,37 @@ clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%,
         }
       }
       .carregando {
-        position: absolute;
+        position: fixed;
         z-index: 10;
         margin: 0 auto;
-        left: 0px;
-        right:0px;
-        color:#111;
+        top: 85px;
+
+        color:#eee;
         padding:10px;
+        padding-top:15px;
         font-weight:bold;
 font-size: 21px;
 text-align:center;
-        animation: carregando 2s infinite;
-        margin-bottom:20px;
+        animation: smooth-appear 1s ease forwards;
+background: #222;
+
+        cursor: pointer;
+
+        box-shadow: 0px 0px 2px 1px black;
+        margin: 0 auto;
+    right:50px;
+    left:50px;
+    max-width:200px;
+    border-radius:0px 0px 10px 10px;
       }
+      @keyframes smooth-appear {
+          from{
+             top: -100px;
+          }
+  to{
+   top: 85px; 
+  }
+}
 
       @keyframes carregando {
         0% {
@@ -1523,10 +1541,11 @@ text-align:center;
             <div class="titulo" id="titulo"></div>
         </div>
         <div class="boxtitulomusica" id="boxtitulomusica">
-            <div class="carregando" id="carregando">Carregando...</div>
+            
             <div class="simp-coverteste" id="simpcoverteste"></div>
             
             <center>
+                <div class="carregando" id="carregando">Carregando...</div>
                 <div class="titulomusica" id="titulomusica" translate="no" onClick="CopyToClipboard('titulomusica')"></div>
             </center>
             
