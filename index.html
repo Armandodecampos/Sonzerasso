@@ -16,7 +16,7 @@
     <style>
       @media (orientation: landscape) {
         body {
-          zoom: 0.8;
+          zoom: 0.9;
         }
 
       }
@@ -274,6 +274,7 @@ box-shadow: 0px 0px 4px 2px black;
           background:#eee;
           z-index:100;
           border-left:20px solid #222;
+          
       }
       .informacao {
         position:absolute;
@@ -545,6 +546,7 @@ box-shadow: 0px 0px 2px 1px black;
         background:#222;
         color:#000;
         border-radius:50px 0px 0px 50px;
+    border:3px solid #000;
       }
       .fecharinformacao {
         background-size: 100%;
@@ -593,7 +595,7 @@ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32
         cursor: pointer;
 z-index:12;
 -webkit-filter: drop-shadow(0px 1px 1px #000);
-  filter: drop-shadow(0px 1px 1px #000);
+  filter: drop-shadow(2px 4px 4px #000);
       }
       .configuracao:hover {
           animation: hover 1s linear;
@@ -837,7 +839,7 @@ margin:auto;
 z-index:10;
         background-size: 100%;
         width: 30px;
-top:7px;
+top:9px;
 margin: auto;
         right:10px;
 
@@ -1373,12 +1375,18 @@ background: #222;
 
         cursor: pointer;
 
-        box-shadow: 0px 0px 2px 1px black;
+        
         margin: 0 auto;
     right:50px;
     left:50px;
     max-width:200px;
     border-radius:0px 0px 5px 5px;
+    border-left:3px solid #222;
+    border-right:3px solid #222;
+    border-bottom:3px solid #555;
+
+        box-shadow: 0px 0px 4px 2px black;
+        pointer-events:none
       }
       @keyframes smooth-appear {
           from{
