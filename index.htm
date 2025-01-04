@@ -451,6 +451,7 @@ height:80px;
 
 #artistas {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   padding:20px;
 }
@@ -7320,8 +7321,6 @@ function criarLinksArtistas() {
       }
     });
     artistasElement.appendChild(link);
-    artistasElement.appendChild(document.createElement('br'));
-    artistasElement.appendChild(document.createElement('br'));
   });
 }
 
