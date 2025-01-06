@@ -7495,5 +7495,99 @@ document.getElementById('fechar').addEventListener('click', function() {
   document.querySelector('.box-informacoes').style.display = 'flex';
 }, 30000); // tempo de delay em milissegundos (30000 = 30 segundos)
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const audioElement = document.querySelector('audio'); // Substitua pela referência ao seu player de áudio
+
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: 'Título da Música',
+            artist: 'Artista',
+            album: 'Álbum',
+            artwork: [
+                { src: 'caminho/para/capa.jpg', sizes: '96x96', type: 'image/jpg' },
+                { src: 'caminho/para/capa.jpg', sizes: '128x128', type: 'image/jpg' },
+                { src: 'caminho/para/capa.jpg', sizes: '192x192', type: 'image/jpg' },
+                { src: 'caminho/para/capa.jpg', sizes: '256x256', type: 'image/jpg' },
+                { src: 'caminho/para/capa.jpg', sizes: '384x384', type: 'image/jpg' },
+                { src: 'caminho/para/capa.jpg', sizes: '512x512', type: 'image/jpg' },
+            ]
+        });
+
+        // Controles de mídia
+        navigator.mediaSession.setActionHandler('play', () => {
+            audioElement.play();
+        });
+
+        navigator.mediaSession.setActionHandler('pause', () => {
+            audioElement.pause();
+        });
+
+        navigator.mediaSession.setActionHandler('seekbackward', (details) => {
+            audioElement.currentTime = Math.max(audioElement.currentTime - (details.seekOffset || 10), 0);
+        });
+
+        navigator.mediaSession.setActionHandler('seekforward', (details) => {
+            audioElement.currentTime = Math.min(audioElement.currentTime + (details.seekOffset || 10), audioElement.duration);
+        });
+
+        navigator.mediaSession.setActionHandler('stop', () => {
+            audioElement.pause();
+            audioElement.currentTime = 0;
+        });
+    }
+
+    // Atualizar metadados dinamicamente
+    audioElement.addEventListener('play', () => {
+        navigator.mediaSession.playbackState = 'playing';
+    });
+
+    audioElement.addEventListener('pause', () => {
+        navigator.mediaSession.playbackState = 'paused';
+    });
+});
+
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const audioElement = document.querySelector('audio'); // Seu elemento de áudio
+    const track = audioContext.createMediaElementSource(audioElement);
+
+    // Conectando o áudio à saída do dispositivo
+    track.connect(audioContext.destination);
+
+    // Inicializando o contexto de áudio
+    document.body.addEventListener('click', () => {
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+    });
+
+    console.log('Web Audio API configurado e funcionando');
+});
+
+</script>
+<script>
+self.addEventListener('install', (event) => {
+    console.log('Service Worker instalado.');
+    self.skipWaiting();
+});
+
+self.addEventListener('fetch', (event) => {
+    console.log('Interceptando fetch:', event.request.url);
+    // Permitir que as solicitações de áudio passem
+    if (event.request.url.includes('.mp3') || event.request.url.includes('.wav')) {
+        return;
+    }
+});
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+        console.log('Service Worker registrado com sucesso:', registration.scope);
+    }).catch((error) => {
+        console.error('Falha ao registrar o Service Worker:', error);
+    });
+}
+</script>
 </body>
 </html>
