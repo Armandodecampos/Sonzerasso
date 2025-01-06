@@ -157,6 +157,7 @@ height:80px;
 }
 
 .btn3 {
+width:100%;
   background-color: #111;
     color: #fff;
     padding: 10px 20px;
@@ -574,7 +575,7 @@ height:80px;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(255, 255, 255, 0.8);
   display:none;
 }
 
@@ -582,7 +583,7 @@ height:80px;
   position: fixed;
   margin: auto;
   z-index: 2;
-  top: 120px;
+  top: 90px;
   bottom: 50px;
   left: 5%;
   right: 5%;
@@ -595,9 +596,7 @@ height:80px;
   justify-content: left;
   max-width:500px;
   border-radius: 10px; /* Bordas arredondadas */
-  box-shadow: 0 0 70px 30px rgba(255, 105, 0, 0.7),
-0 0 100px 60px rgba(255, 95, 0, 0.4),
-0 0 150px 100px rgba(255, 85, 0, 0.2);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
   border:10px solid #111;
 }
 
@@ -616,7 +615,7 @@ height:80px;
 
 #fechar {
   position: fixed;
-  top:68px;
+  top:39px;
   margin:auto;
   left:0;
   right: 0px;
@@ -626,7 +625,7 @@ height:80px;
   border: none;
 
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px 10px 0px 0px;
   font-weight: bold;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
   border: 5px solid #111;
@@ -696,7 +695,10 @@ height:80px;
           </div>
           <p style="font-size:13px;">Beneficiário: Armando de Campos Júnior.</p>
           <p>🔸 Contribuir com o PayPal:</p>
-          <button class="btn3" id="paypal">Contribuir com o paypal</button>
+          <form action="https://www.paypal.com/donate" method="post" target="_blank" rel="noopener noreferrer">
+                    <input type="hidden" name="hosted_button_id" value="EAVYNVVQQYK6S" />
+                    <button class="btn3">Contribuir</button>
+                </form>
           <p>🔸 Divulgar nas redes sociais com amigos e familiares.</p>
           <button class="btn3" id="copiarlink">Copiar link</button>
           <br>
@@ -7477,11 +7479,6 @@ document.getElementById('fechar').addEventListener('click', function() {
   setTimeout(() => {
     document.getElementById('copiarpix').innerText = 'Copiar Pix';
   }, 2000);
-});
-</script>
-<script>
-  document.getElementById('paypal').addEventListener('click', function() {
-  window.open('https://www.paypal.com/donate?token=NRrBTs-DOLkKT-pCKSO7INp9xuvvJKlbyxigHQpABgndMoFIzLd3UgQwreg7C__N_P8v_wQeVSD4wI77', '_blank');
 });
 </script>
 <script>
