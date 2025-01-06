@@ -246,26 +246,26 @@ height:80px;
 
 .playlist li.selecionada {
   background-color: #fa0; /* Cor de fundo quando selecionada */
-  color: #fff; /* Cor do texto quando selecionada */
+  color: #fff;
 }
 
 .progresso {
   display: flex;
   align-items: center;
-  justify-content: center; /* Centraliza os itens */
+  justify-content: center;
   margin-bottom: 10px;
   width: 100%;
   gap:5px;
 }
 
 .progresso-icon {
-  font-size: 18px; /* Tamanho do ícone */
-  color: #fff; /* Cor do ícone */
+  font-size: 18px;
+  color: #fff;
 }
 
 #progresso-barra {
-  max-width: 300px; /* Define uma largura máxima para a barra */
-  accent-color: #fa0; /* Cor vermelha */
+  max-width: 300px;
+  accent-color: #fa0;
   margin: 5px;
 }
 
@@ -277,7 +277,7 @@ height:80px;
 .volume {
   display: flex;
   align-items: center;
-  justify-content: center; /* Centraliza os itens no contêiner */
+  justify-content: center;
   width: 100%;
   gap:5px;
 }
@@ -304,12 +304,12 @@ height:80px;
   object-fit: cover;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
   transition: transform 0.2s;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   border:5px solid #fff;
 }
 
 .musica-atual span {
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
 }
 
@@ -331,7 +331,7 @@ height:80px;
 #lista-musicas li {
   display: flex;
   flex-direction: column;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 #lista-musicas li:hover {
@@ -341,18 +341,18 @@ height:80px;
 
 #lista-musicas li .artista {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 #lista-musicas li .album {
   color: #666;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 5px;
 }
 
 #lista-musicas li .musica {
   font-style: italic;
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 5px;
   font-style: italic;
 }
@@ -363,18 +363,18 @@ height:80px;
 
 .musica-atual .artista {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .musica-atual .album {
   color: #666;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 5px;
 }
 
 .musica-atual .musica {
   font-style: italic;
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 5px;
   font-style: italic;
 }
@@ -504,10 +504,10 @@ height:80px;
   display: inline-block;
   margin-right: 10px;
   padding: 5px 10px;
-  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
-  margin-bottom: 10px;
+  padding-top: 10px;
   text-decoration: none;
   color: #000;
 }
@@ -575,7 +575,7 @@ height:80px;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   display:none;
 }
 
@@ -597,7 +597,7 @@ height:80px;
   max-width:500px;
   border-radius: 10px; /* Bordas arredondadas */
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
-  border:10px solid #111;
+  border:7px solid #111;
 }
 
 .informacoes::-webkit-scrollbar {
@@ -638,6 +638,7 @@ height:80px;
 }
 #abrir-informacoes {
   position:absolute;
+  top:13px;
   right:20px;
   float: right;
   margin-left:20px;
@@ -660,11 +661,64 @@ height:80px;
   color: #fa0;
   text-transform: uppercase;
 }
+/* Preloader - Tela de Carregamento */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #222; /* Cor do fundo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Certifique-se de que o preloader fique acima de tudo */
+}
+
+/* Loader - Barras da onda musical */
+.loader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px; /* Espaçamento entre as barras */
+}
+
+.loader span {
+  width: 10px; /* Largura de cada barra */
+  height: 30px; /* Altura inicial */
+  background-color: #fa0; /* Cor das barras */
+  animation: wave 1.2s infinite ease-in-out;
+}
+
+/* Alteração na animação de cada barra */
+.loader span:nth-child(1) { animation-delay: 0s; }
+.loader span:nth-child(2) { animation-delay: 0.2s; }
+.loader span:nth-child(3) { animation-delay: 0.4s; }
+.loader span:nth-child(4) { animation-delay: 0.6s; }
+.loader span:nth-child(5) { animation-delay: 0.8s; }
+
+/* Animação de onda */
+@keyframes wave {
+  0%, 100% {
+    height: 30px; /* Altura inicial */
+  }
+  50% {
+    height: 60px; /* Altura máxima */
+  }
+}
 
   </style>
 </head>
 <body>
-
+<div id="preloader">
+  <div class="loader">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
     <header class="header">
     <div class="logo">
       <div class="logo-icon">
@@ -7493,7 +7547,7 @@ document.getElementById('fechar').addEventListener('click', function() {
 <script>
   setTimeout(() => {
   document.querySelector('.box-informacoes').style.display = 'flex';
-}, 30000); // tempo de delay em milissegundos (30000 = 30 segundos)
+}, 240000); // tempo de delay em milissegundos (30000 = 30 segundos)
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -7549,26 +7603,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 </script>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const audioElement = document.querySelector('audio'); // Seu elemento de áudio
-    const track = audioContext.createMediaElementSource(audioElement);
-
-    // Conectando o áudio à saída do dispositivo
-    track.connect(audioContext.destination);
-
-    // Inicializando o contexto de áudio
-    document.body.addEventListener('click', () => {
-        if (audioContext.state === 'suspended') {
-            audioContext.resume();
-        }
-    });
-
-    console.log('Web Audio API configurado e funcionando');
-});
-
-</script>
-<script>
 self.addEventListener('install', (event) => {
     console.log('Service Worker instalado.');
     self.skipWaiting();
@@ -7588,6 +7622,17 @@ if ('serviceWorker' in navigator) {
         console.error('Falha ao registrar o Service Worker:', error);
     });
 }
+</script>
+<script>
+window.addEventListener('load', function () {
+  const preloader = document.getElementById('preloader');
+  preloader.style.opacity = '0'; // Adicionar transição suave
+  preloader.style.visibility = 'hidden';
+  setTimeout(() => {
+    preloader.style.display = 'none';
+  }, 500); // Aguarda a transição de 0.5s antes de remover do DOM
+});
+
 </script>
 </body>
 </html>
