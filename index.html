@@ -7566,15 +7566,5 @@ window.addEventListener('load', function () {
 });
 
 </script>
-<script>
-const boxPlayer = document.getElementById('playlist');
-const searchInput = document.getElementById('searchInput');
-
-boxPlayer.addEventListener('scroll', function(event) {
-  if (event.isTrusted && event.target === boxPlayer) { // Verifica se o evento foi disparado pelo usuário e se o alvo é a barra de rolagem
-    searchInput.blur();
-  }
-});
-</script>
 </body>
 </html>
