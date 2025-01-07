@@ -7570,8 +7570,8 @@ window.addEventListener('load', function () {
 const boxPlayer = document.getElementById('playlist');
 const searchInput = document.getElementById('searchInput');
 
-boxPlayer.addEventListener('touchmove', function(event) {
-  if (event.isTrusted) { // Verifica se o evento foi disparado pelo usuário
+boxPlayer.addEventListener('scroll', function(event) {
+  if (event.isTrusted && event.target === boxPlayer) { // Verifica se o evento foi disparado pelo usuário e se o alvo é a barra de rolagem
     searchInput.blur();
   }
 });
