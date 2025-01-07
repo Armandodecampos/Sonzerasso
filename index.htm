@@ -741,7 +741,7 @@ height:80px;
         </div>
       <div class="logo-text">
         <span style="color:#fa0;">onzerasso</span>
-        <div class="neon">Discoteca Online</div>v2
+        <div class="neon">Discoteca Online</div>
       </div>
     </div>
  
@@ -7535,6 +7535,16 @@ document.getElementById('fechar').addEventListener('click', function() {
 }, 240000); // tempo de delay em milissegundos (30000 = 30 segundos)
 </script>
 <script>
+window.addEventListener('load', function () {
+  const preloader = document.getElementById('preloader');
+  preloader.style.opacity = '0'; // Adicionar transição suave
+  preloader.style.visibility = 'hidden';
+  setTimeout(() => {
+    preloader.style.display = 'none';
+  }, 500); // Aguarda a transição de 0.5s antes de remover do DOM
+});
+</script>
+<script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js')
       .then((registration) => {
@@ -7544,17 +7554,6 @@ document.getElementById('fechar').addEventListener('click', function() {
         console.error('Falha ao registrar o Service Worker:', error);
       });
   }
-</script>
-<script>
-window.addEventListener('load', function () {
-  const preloader = document.getElementById('preloader');
-  preloader.style.opacity = '0'; // Adicionar transição suave
-  preloader.style.visibility = 'hidden';
-  setTimeout(() => {
-    preloader.style.display = 'none';
-  }, 500); // Aguarda a transição de 0.5s antes de remover do DOM
-});
-
 </script>
 </body>
 </html>
