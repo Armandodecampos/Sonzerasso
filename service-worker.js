@@ -1,19 +1,23 @@
 self.addEventListener('install', (event) => {
-    console.log('Service Worker instalado.');
-    self.skipWaiting();
+  console.log('Service Worker instalado.');
+  event.waitUntil(self.skipWaiting());
+});
+
+self.addEventListener('activate', (event) => {
+  console.log('Service Worker ativado.');
+  event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', (event) => {
-    console.log('Interceptando fetch:', event.request.url);
-    // Permitir que as solicitações de áudio passem
-    if (event.request.url.includes('.mp3') || event.request.url.includes('.wav')) {
-        return;
-    }
+  console.log('Interceptando fetch:', event.request.url);
+  
+  if (event.request.url.match(/\.(mp3|wav)$/)) {
+    return;
+  }
+  
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
 });
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js').then((registration) => {
-        console.log('Service Worker registrado com sucesso:', registration.scope);
-    }).catch((error) => {
-        console.error('Falha ao registrar o Service Worker:', error);
-    });
-}
