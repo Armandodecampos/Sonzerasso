@@ -775,7 +775,7 @@ height:80px;
           <p style="font-size:12px;font-weight:bold;">Criação: Armando de Campos Júnior.</p>
 </div>
 </div>
-<div class="box-player">
+<div class="box-player" id="box-player">
   <div class="player">
   <div class="musica-atual">
   <img id="imagem-musica" src="" alt="">
@@ -7567,10 +7567,10 @@ window.addEventListener('load', function () {
 
 </script>
 <script>
-const playlist = document.querySelector('.playlist');
+const boxPlayer = document.getElementById('playlist');
 
-playlist.addEventListener('scroll', function() {
-  document.activeElement.blur();
+boxPlayer.addEventListener('scroll', function() {
+  document.getElementById('searchInput').blur();
 });
 </script>
 </body>
