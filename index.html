@@ -7568,9 +7568,12 @@ window.addEventListener('load', function () {
 </script>
 <script>
 const boxPlayer = document.getElementById('playlist');
+const searchInput = document.getElementById('searchInput');
 
 boxPlayer.addEventListener('scroll', function() {
-  document.getElementById('searchInput').blur();
+  if (window.innerHeight !== document.documentElement.clientHeight) {
+    searchInput.blur();
+  }
 });
 </script>
 </body>
