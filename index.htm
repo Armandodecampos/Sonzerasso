@@ -741,7 +741,7 @@ height:80px;
         </div>
       <div class="logo-text">
         <span style="color:#fa0;">onzerasso</span>
-        <div class="neon">Discoteca Online</div>v2
+        <div class="neon">Discoteca Online</div>v3
       </div>
     </div>
  
@@ -7535,6 +7535,17 @@ document.getElementById('fechar').addEventListener('click', function() {
 }, 240000); // tempo de delay em milissegundos (30000 = 30 segundos)
 </script>
 <script>
+if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('https://armandodecampos.github.io/Sonzerasso/service-worker.js')
+        .then((registration) => {
+          console.log('Service Worker registrado com sucesso:', registration.scope);
+        })
+        .catch((error) => {
+          console.error('Falha ao registrar o Service Worker:', error);
+        });
+    }
+</script>
+<script>
 window.addEventListener('load', function () {
   const preloader = document.getElementById('preloader');
   preloader.style.opacity = '0'; // Adicionar transição suave
@@ -7544,20 +7555,6 @@ window.addEventListener('load', function () {
   }, 500); // Aguarda a transição de 0.5s antes de remover do DOM
 });
 
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('https://armandodecampos.github.io/Sonzerasso/service-worker.js')
-    .then((registration) => {
-        console.log('Service Worker registrado com sucesso:', registration.scope);
-    })
-    .catch((error) => {
-        console.error('Falha ao registrar o Service Worker:', error);
-    });
-
-    });
-}
 </script>
 </body>
 </html>
