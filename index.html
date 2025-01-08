@@ -7546,6 +7546,12 @@ window.addEventListener('load', function () {
 
 </script>
 <script>
+document.querySelectorAll("img").forEach(img => {
+    img.setAttribute("loading", "lazy"); // Carregamento eficiente
+    img.style.cache = "force"; // Controle adicional (dependendo do navegador)
+});
+</script>
+<script>
 self.addEventListener('install', (event) => {
     console.log('Service Worker instalado.');
     self.skipWaiting();
