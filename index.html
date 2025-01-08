@@ -670,11 +670,26 @@ height:80px;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #222; /* Cor do fundo */
+  background: radial-gradient(#4f4941, #000) fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999; /* Certifique-se de que o preloader fique acima de tudo */
+}
+
+#carregando {
+ position: fixed;
+  bottom: 50%;
+  margin:auto;
+  left: 0;
+  right:0;
+  width: fit-content;
+  height: 90px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; /* Certifique-se de que o preloader fique acima de tudo */
 }
 
 /* Loader - Barras da onda musical */
@@ -686,9 +701,10 @@ height:80px;
 }
 
 .loader span {
-  width: 10px; /* Largura de cada barra */
-  height: 30px; /* Altura inicial */
-  background-color: #fa0; /* Cor das barras */
+opacity:0;
+  width: 20px; /* Largura de cada barra */
+  height: 90px; /* Altura inicial */
+  background-color: transparent; /* Cor das barras */
   animation: wave 1.2s infinite ease-in-out;
 }
 
@@ -703,14 +719,17 @@ height:80px;
 @keyframes wave {
   0%, 100% {
     height: 30px; /* Altura inicial */
+    background-color: transparent;
+  }
+  25% {opacity:1;
     background-color: #fa0;
   }
-  25% {
-    background-color: #a0f;
+  50% {opacity:1;
+    background-color: #ffa;
   }
   
-  75% {
-    height: 60px; /* Altura máxima */
+  75% {opacity:1;
+    height: 90px; /* Altura máxima */
     background-color: #5ff;
   }
 }
@@ -727,25 +746,19 @@ height:80px;
   50% { opacity: 0.7; }
   100% { opacity: 1; }
 }
-#carregando {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24px;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 0 10px #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 10px;
-  background: radial-gradient(#4f4941, #000) fixed;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
-}
   </style>
 </head>
 <body>
 <div id="preloader">
+  <div class="loader">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<div id="carregando">
   <div class="loader">
     <span></span>
     <span></span>
@@ -798,7 +811,6 @@ height:80px;
 <div class="box-player" id="box-player">
   <div class="player">
   <div class="musica-atual">
-  <div id="carregando" style="display:block;">Carregando...</div>
   <img id="imagem-musica" src="" alt="">
   <span class="artista" id="artista-atual"></span>
   <span class="album" id="album-atual"></span>
