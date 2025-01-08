@@ -7065,6 +7065,7 @@ volumeControl.addEventListener('input', ajustaVolume);
 progressoBarra.addEventListener('click', (e) => {
   const progresso = (e.offsetX / progressoBarra.offsetWidth) * audio.duration;
   audio.currentTime = progresso;
+  tempoAtual.textContent = formatarTempo(audio.currentTime);
 });
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
 
