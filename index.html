@@ -7087,9 +7087,14 @@ audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
 progressoBarra.addEventListener('click', (e) => {
   const progresso = (e.offsetX / progressoBarra.offsetWidth) * audio.duration;
+  
+  if (isNaN(progresso) || !isFinite(progresso) || progresso < 0 || progresso > audio.duration) {
+    console.error('Valor inválido para currentTime');
+    return;
+  }
+  
   audio.currentTime = progresso;
-  audio.dispatchEvent(new Event('timeupdate'));
-atualizaProgresso();
+  atualizaProgresso();
 });
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
 
