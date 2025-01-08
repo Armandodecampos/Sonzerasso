@@ -7097,10 +7097,22 @@ audio.addEventListener('timeupdate', atualizaProgresso);
 audio.addEventListener('durationchange', atualizaTempoTotal);
 audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
-progressoBarra.addEventListener('click', (e) => {
+progressoBarra.addEventListener('click', atualizaProgressoClick);
+progressoBarra.addEventListener('touchstart', atualizaProgressoToque);
+
+function atualizaProgressoClick(e) {
   const larguraBarra = progressoBarra.offsetWidth;
-  const cliqueX = e.offsetX;
-  
+  const cliqueX = e.clientX - progressoBarra.offsetLeft;
+  atualizaProgressoBarra(cliqueX, larguraBarra);
+}
+
+function atualizaProgressoToque(e) {
+  const larguraBarra = progressoBarra.offsetWidth;
+  const cliqueX = e.touches[0].clientX - progressoBarra.offsetLeft;
+  atualizaProgressoBarra(cliqueX, larguraBarra);
+}
+
+function atualizaProgressoBarra(cliqueX, larguraBarra) {
   if (cliqueX < 0) {
     audio.currentTime = 0;
   } else if (cliqueX > larguraBarra) {
@@ -7109,9 +7121,8 @@ progressoBarra.addEventListener('click', (e) => {
     const progresso = (cliqueX / larguraBarra) * audio.duration;
     audio.currentTime = progresso;
   }
-  
   atualizaProgresso();
-});
+}
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
 
 // Funções de Controle
