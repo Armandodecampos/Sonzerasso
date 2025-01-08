@@ -20,7 +20,7 @@
 
    
   .header {
-      z-index:1;
+      z-index:2;
       display: flex;
       align-items: left;
       justify-content: left;
@@ -574,7 +574,7 @@ height:80px;
   bottom: 0;
   left: 0;
   right: 0;
-  background:#333;
+  background: radial-gradient(#4f4941, #000) fixed;
   display:none;
 }
 
@@ -727,7 +727,21 @@ height:80px;
   50% { opacity: 0.7; }
   100% { opacity: 1; }
 }
-
+#carregando {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  background: radial-gradient(#4f4941, #000) fixed;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+}
   </style>
 </head>
 <body>
@@ -784,6 +798,7 @@ height:80px;
 <div class="box-player" id="box-player">
   <div class="player">
   <div class="musica-atual">
+  <div id="carregando" style="display:block;">Carregando...</div>
   <img id="imagem-musica" src="" alt="">
   <span class="artista" id="artista-atual"></span>
   <span class="album" id="album-atual"></span>
@@ -7041,6 +7056,14 @@ let musicas = [];
 let aleatorio = false;
 let sequencial = false;
 
+audio.addEventListener('loadedmetadata', atualizaTempoTotal);
+
+audio.addEventListener('canplaythrough', () => {
+  // Áudio carregado, agora pode reproduzir
+  playPauseButton.disabled = false;
+  console.log('Áudio carregado!');
+});
+
 // Carregamento de Músicas
 for (let i = 0; i < listaMusicas.children.length; i++) {
   musicas.push({
@@ -7065,7 +7088,9 @@ volumeControl.addEventListener('input', ajustaVolume);
 progressoBarra.addEventListener('click', (e) => {
   const progresso = (e.offsetX / progressoBarra.offsetWidth) * audio.duration;
   audio.currentTime = progresso;
-  tempoAtual.textContent = formatarTempo(audio.currentTime);
+  setTimeout(() => {
+    tempoAtual.textContent = formatarTempo(audio.currentTime);
+  }, 100);
 });
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
 
@@ -7541,6 +7566,21 @@ document.querySelectorAll("img").forEach(img => {
     img.setAttribute("loading", "lazy"); // Carregamento eficiente
     img.style.cache = "force"; // Controle adicional (dependendo do navegador)
 });
+</script>
+<script>
+// Seleção do elemento
+const carregando = document.getElementById('carregando');
+
+// Função para atualizar o tempo total
+function atualizaTempoTotal() {
+  if (audio.duration > 0) { 
+    tempoTotal.textContent = formatarTempo(audio.duration);
+    carregando.style.display = 'none'; // Esconde a div "Carregando..."
+  } else {
+    tempoTotal.textContent = '00:00';
+    carregando.style.display = 'block'; // Mostra a div "Carregando..."
+  }
+}
 </script>
 <script>
 self.addEventListener('install', (event) => {
