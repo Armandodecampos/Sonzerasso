@@ -7098,7 +7098,11 @@ audio.addEventListener('durationchange', atualizaTempoTotal);
 audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
 progressoBarra.addEventListener('click', atualizaProgressoClick);
-progressoBarra.addEventListener('touchstart', atualizaProgressoToque);
+progressoBarra.addEventListener('touchstart', iniciarToque);
+progressoBarra.addEventListener('touchmove', atualizaProgressoToque);
+progressoBarra.addEventListener('touchend', finalizarToque);
+
+let toqueIniciado = false;
 
 function atualizaProgressoClick(e) {
   const larguraBarra = progressoBarra.offsetWidth;
@@ -7106,10 +7110,21 @@ function atualizaProgressoClick(e) {
   atualizaProgressoBarra(cliqueX, larguraBarra);
 }
 
+function iniciarToque(e) {
+  toqueIniciado = true;
+}
+
 function atualizaProgressoToque(e) {
-  const larguraBarra = progressoBarra.offsetWidth;
-  const cliqueX = e.touches[0].clientX - progressoBarra.offsetLeft;
-  atualizaProgressoBarra(cliqueX, larguraBarra);
+  if (toqueIniciado) {
+    e.preventDefault();
+    const larguraBarra = progressoBarra.offsetWidth;
+    const cliqueX = e.touches[0].clientX - progressoBarra.offsetLeft;
+    atualizaProgressoBarra(cliqueX, larguraBarra);
+  }
+}
+
+function finalizarToque() {
+  toqueIniciado = false;
 }
 
 function atualizaProgressoBarra(cliqueX, larguraBarra) {
