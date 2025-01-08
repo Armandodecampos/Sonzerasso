@@ -112,6 +112,7 @@ height:80px;
   color: #fff;
   border-top: 5px solid #000;
   background: radial-gradient(#4f4941, #000) fixed;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
 }
 
 .controles-principais {
@@ -7170,7 +7171,7 @@ function proximaMusicaAutomatica() {
     selecionarMusicaAleatoria();
   } else if (repetir) {
     audio.currentTime = 0;
-    audio.play();
+    playMusic();
   } else {
     musicaAtual++;
     if (musicaAtual >= musicas.length) {
@@ -7179,7 +7180,6 @@ function proximaMusicaAutomatica() {
     audio.src = musicas[musicaAtual].src;
     document.getElementById('musica-atual-nome').textContent = listaMusicas.children[musicaAtual].textContent;
     audio.load();  // Carrega a nova música
-    playMusic();   // Toca a música automaticamente
   }
   selecionaMusicaAtual();  // Atualiza a interface com a nova música selecionada
   playMusic();
