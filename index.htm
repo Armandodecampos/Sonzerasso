@@ -842,7 +842,7 @@ opacity:0;
  
 <div class="progresso">
    <i class="fas fa-clock" id="icone-tempo"></i>
-  <progress id="progresso-barra" value="0" max="100"></progress>
+   <input type="range" id="progresso-barra" value="0" max="100">
   <span id="tempo-atual">00:00</span> / 
   <span id="tempo-total">00:00</span>
 </div>
@@ -7098,14 +7098,18 @@ audio.addEventListener('durationchange', atualizaTempoTotal);
 audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
 progressoBarra.addEventListener('click', (e) => {
-  const progresso = (e.offsetX / progressoBarra.offsetWidth) * audio.duration;
+  const larguraBarra = progressoBarra.offsetWidth;
+  const cliqueX = e.offsetX;
   
-  if (isNaN(progresso) || !isFinite(progresso) || progresso < 0 || progresso > audio.duration) {
-    console.error('Valor inválido para currentTime');
-    return;
+  if (cliqueX < 0) {
+    audio.currentTime = 0;
+  } else if (cliqueX > larguraBarra) {
+    audio.currentTime = audio.duration;
+  } else {
+    const progresso = (cliqueX / larguraBarra) * audio.duration;
+    audio.currentTime = progresso;
   }
   
-  audio.currentTime = progresso;
   atualizaProgresso();
 });
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
@@ -7285,10 +7289,10 @@ function playMusic() {
 function atualizaProgresso() {
   if (audio.readyState >= 3) {
     const progresso = (audio.currentTime / audio.duration) * 100;
-    progressoBarra.value = progresso;
+    document.getElementById('progresso-barra').value = progresso;
     tempoAtual.textContent = formatarTempo(audio.currentTime);
-    if (tempoTotal.textContent === '00:00') { // Verifique se o tempo total está zerado
-      atualizaTempoTotal(); // Atualize o tempo total
+    if (tempoTotal.textContent === '00:00') {
+      atualizaTempoTotal();
     }
   }
 }
