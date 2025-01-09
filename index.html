@@ -601,8 +601,8 @@ height:80px;
   margin: auto;
   top: 85px;
   bottom: 20px;
-  left: 5%;
-  right: 5%;
+  left: 2%;
+  right: 2%;
   padding: 20px;
   background: #fff;
   overflow-y: scroll;
@@ -631,20 +631,22 @@ height:80px;
 
 #fechar {
   position: fixed;
+  margin:auto;
   top:15px;
-  left: 15px;
-  width: 55px;
+  left: 0;
+  right: 0;
+  width:200px;
   height: 55px;
-  background-color: #e42200;
+  background-color: #fa0;
   color: #fff;
   border: none;
 
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 10px;
   font-weight: bold;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
   border: 2px solid #000;
-  font-size: 30px;
+  font-size: 35px;
 }
 
 
@@ -7070,7 +7072,7 @@ top:45%;
 
   </ul>
   <div id="mensagem-nenhum-resultado"></div>
-    <audio id="audio" preload="auto"></audio>
+    <audio id="audio" preload="auto" playsinline></audio>
     <button id="voltar-topo" aria-label="Voltar ao topo">
       <i class="fas fa-arrow-up"></i> Voltar ao topo
     </button>
