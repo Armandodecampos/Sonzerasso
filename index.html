@@ -38,6 +38,7 @@
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 2px;
+      pointer-events: none;
     }
 
     .logo-icon {
@@ -675,6 +676,7 @@ height:80px;
   justify-content: center;
   align-items: center;
   z-index: 9999; /* Certifique-se de que o preloader fique acima de tudo */
+  pointer-events: none;
 }
 
 #carregando {
@@ -7114,7 +7116,7 @@ function atualizaTempoProgresso() {
   } else {
     console.log('Áudio não carregado ainda.');
     // Opção 1: Esperar até o áudio carregar
-    setTimeout(atualizaTempoProgresso, 100);
+    setTimeout(atualizaTempoProgresso, 200);
     
     // Opção 2: Carregar o áudio novamente
     // audio.load();
