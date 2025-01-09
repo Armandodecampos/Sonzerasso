@@ -156,6 +156,10 @@ height:80px;
   margin-top:5px;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
 }
+.btn:hover {
+animation: mudar-cor 0.3s linear;
+}
+
 .btn2 {
   width: 60px;
   height: 60px;
@@ -165,6 +169,10 @@ height:80px;
   color: #555;
   cursor: pointer;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
+}
+
+.btn2:hover {
+animation: mudar-cor 0.3s linear;
 }
 
 .btn3 {
@@ -177,6 +185,10 @@ width:100%;
     cursor: pointer;
     font-weight:bold;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
+}
+
+.btn3:hover {
+animation: mudar-cor 0.3s linear;
 }
 
 #play-pause i {
@@ -193,7 +205,7 @@ width:100%;
 }
 
 .controles button:hover {
-  background-color: #3e8e41;
+  animation: mudar-cor 0.3s linear;
 }
 
 .box-playlist {
@@ -347,7 +359,7 @@ height:80px;
 }
 
 #lista-musicas li:hover {
-  background:#ddd;
+  animation: mudar-cor 0.3s linear;
 }
 
 
@@ -420,7 +432,7 @@ height:80px;
     box-shadow: 0px 0px 10px rgba(255, 180, 0, 0.9);
   }
    #searchInput:hover {
-    background:#fff;
+    animation: mudar-cor 0.3s linear;
   }
 
 #limpar-pesquisa {
@@ -443,7 +455,7 @@ height:80px;
   }
 
   #limpar-pesquisa:hover {
-    background-color: #d9534f;
+    animation: mudar-cor 0.3s linear;
   }
 
   #mensagem-nenhum-resultado {
@@ -467,8 +479,7 @@ height:80px;
 #play-pause:hover,
 #proxima:hover,
 #modo-reproducao:hover {
-  background-color: #fa0;
-  color: #000; /* Cor do ícone: Cinza escuro */
+  animation: mudar-cor 0.3s linear;
 }
 
 #artistas {
@@ -491,7 +502,7 @@ height:80px;
 }
 
 #artistas::-webkit-scrollbar-thumb:hover {
-  background-color: #ddd;
+  animation: mudar-cor 0.3s linear;
 }
 
 #artistas::-webkit-scrollbar-track {
@@ -507,7 +518,7 @@ height:80px;
 }
 
 #artistas a:hover {
-  color: #fa0;
+  animation: mudar-cor 0.3s linear;
 }
 
 #artistas a.artista-link {
@@ -522,7 +533,7 @@ height:80px;
 }
 
 #artistas a.artista-link:hover {
-  background-color: #fa0;
+  animation: mudar-cor 0.3s linear;
 }
 
 #voltar-topo {
@@ -543,7 +554,7 @@ height:80px;
 }
 
 #voltar-topo:hover {
-  background-color: #000000;
+  animation: mudar-cor 0.3s linear;
 }
 
 .destaque-temporario {
@@ -570,13 +581,13 @@ height:80px;
 }
 
 #fechar-lista:hover {
-  background-color: #d9534f;
+  animation: mudar-cor 0.3s linear;
 }
 
 .box-informacoes {
   position: fixed;
   margin: auto;
-  z-index: 2;
+  z-index: 3;
   top: 0;
   bottom: 0;
   left: 0;
@@ -588,9 +599,8 @@ height:80px;
 .informacoes {
   position: fixed;
   margin: auto;
-  z-index: 2;
-  top: 20px;
-  bottom: 90px;
+  top: 85px;
+  bottom: 20px;
   left: 5%;
   right: 5%;
   padding: 20px;
@@ -621,12 +631,10 @@ height:80px;
 
 #fechar {
   position: fixed;
-  bottom:15px;
-  margin:auto;
-  left:0;
-  right: 0px;
-  width: 65px;
-  height: 65px;
+  top:15px;
+  left: 15px;
+  width: 55px;
+  height: 55px;
   background-color: #e42200;
   color: #fff;
   border: none;
@@ -636,12 +644,12 @@ height:80px;
   font-weight: bold;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
   border: 2px solid #000;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 
 #fechar:hover {
-   background-color: #991700;
+   animation: mudar-cor 0.3s linear;
 }
 #abrir-informacoes {
   position: absolute;
@@ -652,7 +660,7 @@ height:80px;
   color: #fff;
   border: 2px solid #000;
   cursor: pointer;
-  font-size: 44px;
+  font-size: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -662,7 +670,7 @@ height:80px;
 }
 
 #abrir-informacoes:hover {
-  color: #fa0;
+  animation: mudar-cor 0.3s linear;
 }
 .s-minimalista {
   font-size: 50px;
@@ -707,9 +715,8 @@ height:80px;
 /* Loader - Barras da onda musical */
 .loader {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 5px; /* Espaçamento entre as barras */
+  gap: 7px;
 }
 
 .loader span {
@@ -756,6 +763,18 @@ height:80px;
   50% { opacity: 0.7; }
   100% { opacity: 1; }
 }
+@keyframes mudar-cor {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(0.5);
+  }
+  0% {
+    filter: brightness(1);
+  }
+}
+
   </style>
 </head>
 <body>
@@ -784,7 +803,9 @@ height:80px;
   </header>
   <div id="box-informacoes" class="box-informacoes">
   <div id="informacoes" class="informacoes">
-        <h3 style="font-weight:bold;background:#111;color:#fff;border:1px solid #000;padding:15px">Ouça músicas selecionadas de qualidade! Rock, metal, blues, Jazz, Pop, folk e mais! São mais de 6.000 músicas!</h3><p style="font-weight:bold">Contribua com o crescimento do site e a adição de novas músicas.</p>
+        <h3 style="font-weight:bold;color:#000;">Ouça músicas selecionadas de qualidade! Rock, metal, blues, Jazz, Pop, folk e mais! São mais de 6.000 músicas!</h3>
+<p style="font-weight:bold;color:#000;">Contribua com o crescimento do site e a adição de novas músicas!</p>
+
         <br>
         <p>Para contribuir, você pode:</p>
         <br>
@@ -858,7 +879,7 @@ height:80px;
 <div class="box-playlist" id="box-playlist">
 <div class="barra-pesquisa">
   <button id="fechar-lista" title="Fechar lista">
-    <i class="fas fa-arrow-left"></i>
+    <i class="fa fa-reply"></i>
   </button>
     <input type="text" id="searchInput" placeholder="Buscar música">
     <button id="limpar-pesquisa" title="Limpar pesquisa">
