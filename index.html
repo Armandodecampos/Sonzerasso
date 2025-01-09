@@ -7,6 +7,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="preload" href="audio.mp3" as="audio">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -7044,7 +7045,7 @@ opacity:0;
 
   </ul>
   <div id="mensagem-nenhum-resultado"></div>
-    <audio id="audio"></audio>
+    <audio id="audio" preload="auto"></audio>
     <button id="voltar-topo" aria-label="Voltar ao topo">
       <i class="fas fa-arrow-up"></i> Voltar ao topo
     </button>
@@ -7054,6 +7055,8 @@ opacity:0;
   <script>
   // Seleção de Elementos
 const audio = document.getElementById('audio');
+audio.preload = 'auto';
+audio.buffered = true;
 const playPauseButton = document.getElementById('play-pause');
 const anteriorButton = document.getElementById('anterior');
 const proximaButton = document.getElementById('proxima');
@@ -7542,7 +7545,7 @@ function verificarTempoTotal() {
     temporizadorVerificacao = setTimeout(() => {
       proximaMusic();
       tempoTotalVerificado = false;
-    }, 30000); // 30 segundos
+    }, 20000); // 20 segundos
   } else if (tempoTotal.textContent !== '00:00' && tempoTotalVerificado) {
     tempoTotalVerificado = false;
     clearTimeout(temporizadorVerificacao);
