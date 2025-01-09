@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Sonzerasso - Discoteca Online</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
@@ -842,7 +842,7 @@ opacity:0;
  
 <div class="progresso">
    <i class="fas fa-clock" id="icone-tempo"></i>
-  <progress id="progresso-barra" value="0" max="100"></progress>
+   <input type="range" id="progresso-barra" value="0" max="100">
   <span id="tempo-atual">00:00</span> / 
   <span id="tempo-total">00:00</span>
 </div>
@@ -7097,18 +7097,14 @@ audio.addEventListener('timeupdate', atualizaProgresso);
 audio.addEventListener('durationchange', atualizaTempoTotal);
 audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
-progressoBarra.addEventListener('click', (e) => {
-  const progresso = (e.offsetX / progressoBarra.offsetWidth) * audio.duration;
-  
-  if (isNaN(progresso) || !isFinite(progresso) || progresso < 0 || progresso > audio.duration) {
-    console.error('Valor inválido para currentTime');
-    return;
-  }
-  
-  audio.currentTime = progresso;
-  atualizaProgresso();
-});
+progressoBarra.addEventListener('input', atualizaTempoProgresso);
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
+
+function atualizaTempoProgresso() {
+  const progresso = progressoBarra.value;
+  audio.currentTime = (progresso / 100) * audio.duration;
+  tempoAtual.textContent = formatarTempo(audio.currentTime);
+}
 
 // Funções de Controle
 function playPauseMusic() {
@@ -7285,10 +7281,10 @@ function playMusic() {
 function atualizaProgresso() {
   if (audio.readyState >= 3) {
     const progresso = (audio.currentTime / audio.duration) * 100;
-    progressoBarra.value = progresso;
+    document.getElementById('progresso-barra').value = progresso;
     tempoAtual.textContent = formatarTempo(audio.currentTime);
-    if (tempoTotal.textContent === '00:00') { // Verifique se o tempo total está zerado
-      atualizaTempoTotal(); // Atualize o tempo total
+    if (tempoTotal.textContent === '00:00') {
+      atualizaTempoTotal();
     }
   }
 }
@@ -7578,12 +7574,6 @@ window.addEventListener('load', function () {
 });
 </script>
 <script>
-document.querySelectorAll("img").forEach(img => {
-    img.setAttribute("loading", "lazy"); // Carregamento eficiente
-    img.style.cache = "force"; // Controle adicional (dependendo do navegador)
-});
-</script>
-<script>
 // Seleção do elemento
 const carregando = document.getElementById('carregando');
 
@@ -7597,6 +7587,15 @@ function atualizaTempoTotal() {
     carregando.style.display = 'block'; // Mostra a div "Carregando..."
   }
 }
+</script>
+<script>
+  document.addEventListener("visibilitychange", function() {
+  if (document.visibilityState === "visible") {
+    // Ação quando a página fica visível novamente
+  } else {
+    // Ação quando a página fica oculta
+  }
+});
 </script>
 <script>
 self.addEventListener('install', (event) => {
