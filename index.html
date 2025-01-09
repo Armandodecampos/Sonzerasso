@@ -66,12 +66,12 @@
 
     .logo-text span:first-child {
       display: block;
-      font-size: 18px;
+      font-size: 20px;
     }
 
     .logo-text span:last-child {
       display: block;
-      font-size: 12px;
+      font-size: 16px;
       font-weight: normal;
       text-transform: none;
       letter-spacing: normal;
@@ -197,6 +197,7 @@ width:100%;
 }
 
 .box-playlist {
+z-index:2;
 position:fixed;
 top:0;
 left:0;
@@ -220,7 +221,7 @@ position:absolute;
   margin: auto;
   left:10px;
   right:10px;
-  top:80px;
+  top:70px;
   bottom:0px;
   background:#fff;
   overflow-y: auto;
@@ -644,7 +645,7 @@ height:80px;
 }
 #abrir-informacoes {
   position: absolute;
-  top: 11px;
+  top: 12px;
   right: 20px;
   width: fit-content;
   height: fit-content;
@@ -665,9 +666,10 @@ height:80px;
 }
 .s-minimalista {
   font-size: 50px;
-  font-weight: bold;
   color: #fa0;
   text-transform: uppercase;
+  margin-left:2px;
+  transform:rotate(-5deg);
 }
 /* Preloader - Tela de Carregamento */
 #preloader {
@@ -683,20 +685,23 @@ height:80px;
   z-index: 9999; /* Certifique-se de que o preloader fique acima de tudo */
   pointer-events: none;
 }
+.carregando {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #fa0;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: girar 1s linear infinite;
+  margin-left: 10px;
+}
 
-#carregando {
- position: fixed;
-  bottom: 50%;
-  margin:auto;
-  left: 0;
-  right:0;
-  width: fit-content;
-  height: 90px;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1; /* Certifique-se de que o preloader fique acima de tudo */
+@keyframes girar {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Loader - Barras da onda musical */
@@ -708,11 +713,10 @@ height:80px;
 }
 
 .loader span {
-opacity:0;
   width: 20px; /* Largura de cada barra */
-  height: 90px; /* Altura inicial */
-  background-color: transparent; /* Cor das barras */
-  animation: wave 1.2s infinite ease-in-out;
+  height: 0px; /* Altura inicial */
+  border-radius:50px;
+  animation: wave 1.5s infinite ease-in-out;
 }
 
 /* Alteração na animação de cada barra */
@@ -725,23 +729,22 @@ opacity:0;
 /* Animação de onda */
 @keyframes wave {
   0%, 100% {
-    height: 30px; /* Altura inicial */
-    background-color: transparent;
-  }
-  25% {opacity:1;
+    height: 20px;; /* Altura inicial */
     background-color: #fa0;
   }
-  50% {opacity:1;
-    background-color: #ffa;
+  30% {height: 50px;
+    background-color: #0fa;
+  }
+  60% {height: 90px;
+    background-color: #0af;
   }
   
-  75% {opacity:1;
-    height: 90px; /* Altura máxima */
-    background-color: #5ff;
+  75% {height: 20px;
+    background-color: #f92;
   }
 }
 .neon {
-	font-size:10px;
+	font-size:11px;
   color: #fff;
   text-shadow: 0 0 10px #fff;
   animation: piscar 1s infinite;
@@ -757,15 +760,6 @@ opacity:0;
 </head>
 <body>
 <div id="preloader">
-  <div class="loader">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<div id="carregando">
   <div class="loader">
     <span></span>
     <span></span>
@@ -812,7 +806,7 @@ opacity:0;
           <br>
           <p>Os meus sinceros agradecimentos!</p>
           <p style="font-size:12px;font-weight:bold;">Criação: Armando de Campos Júnior.</p>
-          <button id="fechar"><i class="fa fa-times"></i></button>
+          <button id="fechar"><i class="fa fa-reply"></i></button>
 </div>
 </div>
 <div class="box-player" id="box-player">
@@ -852,6 +846,7 @@ opacity:0;
    <input id="progresso-barra" type="range" min="0" max="100" step="1" value="0">
   <span id="tempo-atual">00:00</span> / 
   <span id="tempo-total">00:00</span>
+  <div class="carregando" id="carregando"></div>
 </div>
   <div class="volume">
   <i class="fas fa-volume-up" id="icone-volume"></i>
@@ -7545,7 +7540,7 @@ function verificarTempoTotal() {
     temporizadorVerificacao = setTimeout(() => {
       proximaMusic();
       tempoTotalVerificado = false;
-    }, 20000); // 20 segundos
+    }, 20000); // 30 segundos
   } else if (tempoTotal.textContent !== '00:00' && tempoTotalVerificado) {
     tempoTotalVerificado = false;
     clearTimeout(temporizadorVerificacao);
