@@ -817,7 +817,6 @@ opacity:0;
 <div class="box-player" id="box-player">
   <div class="player">
   <div class="musica-atual">
-working...
   <img id="imagem-musica" src="" alt="">
   <span class="artista" id="artista-atual"></span>
   <span class="album" id="album-atual"></span>
@@ -7610,6 +7609,20 @@ function atualizaTempoTotal() {
     carregando.style.display = 'block'; // Mostra a div "Carregando..."
   }
 }
+</script>
+<script>
+document.getElementById("progresso-barra").addEventListener("touchstart", function(event) {
+    event.preventDefault();
+}, { passive: true });
+
+document.getElementById("progresso-barra").addEventListener("input", function(event) {
+    const audio = document.querySelector("audio"); // Substitua pelo seletor correto
+    const duration = audio.duration;
+    if (!isNaN(duration)) {
+        const newTime = (event.target.value / 100) * duration;
+        audio.currentTime = newTime;
+    }
+});
 </script>
 <script>
   document.addEventListener("visibilitychange", function() {
