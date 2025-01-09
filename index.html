@@ -7106,6 +7106,14 @@ volumeControl.addEventListener('input', ajustaVolume);
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
 progressoBarra.addEventListener('change', atualizaTempoProgresso);
 
+let atualizando = false;
+let debounceTimeout;
+
+progressoBarra.addEventListener('input', () => {
+  clearTimeout(debounceTimeout);
+  debounceTimeout = setTimeout(atualizaTempoProgresso, 100);
+});
+
 function atualizaTempoProgresso() {
   if (!atualizando && audio.readyState >= 3 && audio.duration > 0) {
     atualizando = true;
