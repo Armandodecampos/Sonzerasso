@@ -7097,13 +7097,15 @@ audio.addEventListener('timeupdate', atualizaProgresso);
 audio.addEventListener('durationchange', atualizaTempoTotal);
 audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
-progressoBarra.addEventListener('input', atualizaTempoProgresso);
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
+progressoBarra.addEventListener('input', atualizaTempoProgresso);
 
 function atualizaTempoProgresso() {
-  const progresso = progressoBarra.value;
-  audio.currentTime = (progresso / 100) * audio.duration;
-  tempoAtual.textContent = formatarTempo(audio.currentTime);
+  if (audio.readyState >= 3 && audio.duration > 0) {
+    const progresso = progressoBarra.value;
+    audio.currentTime = (progresso / 100) * audio.duration;
+    tempoAtual.textContent = formatarTempo(audio.currentTime);
+  }
 }
 
 // Funções de Controle
