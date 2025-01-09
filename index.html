@@ -7105,6 +7105,13 @@ function atualizaTempoProgresso() {
     const progresso = progressoBarra.value;
     audio.currentTime = (progresso / 100) * audio.duration;
     tempoAtual.textContent = formatarTempo(audio.currentTime);
+  } else {
+    console.log('Áudio não carregado ainda.');
+    // Opção 1: Esperar até o áudio carregar
+    setTimeout(atualizaTempoProgresso, 100);
+    
+    // Opção 2: Carregar o áudio novamente
+    // audio.load();
   }
 }
 
