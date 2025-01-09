@@ -39,6 +39,10 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       pointer-events: none;
+      user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
     }
 
     .logo-icon {
@@ -7109,6 +7113,7 @@ progressoBarra.addEventListener('input', () => {
 });
 
 function atualizaTempoProgresso() {
+  if (audio.paused) return;
   if (audio.readyState >= 3 && audio.duration > 0) {
     const progresso = progressoBarra.value;
     audio.currentTime = (progresso / 100) * audio.duration;
