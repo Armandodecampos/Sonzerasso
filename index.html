@@ -7104,7 +7104,7 @@ audio.addEventListener('durationchange', atualizaTempoTotal);
 audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
-progressoBarra.addEventListener('change', atualizaTempoProgresso);
+progressoBarra.addEventListener('input', atualizaTempoProgresso);
 
 let atualizando = false;
 let debounceTimeout;
