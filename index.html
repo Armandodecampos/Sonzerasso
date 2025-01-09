@@ -7055,6 +7055,10 @@ opacity:0;
   // Seleção de Elementos
 const audio = document.getElementById('audio');
 const playPauseButton = document.getElementById('play-pause');
+audio.addEventListener('canplaythrough', () => {
+  playPauseButton.disabled = false;
+});
+playPauseButton.disabled = true;
 const anteriorButton = document.getElementById('anterior');
 const proximaButton = document.getElementById('proxima');
 const listaMusicas = document.getElementById('lista-musicas');
@@ -7095,7 +7099,11 @@ selecionaMusicaAtual();
 
 
 // Adiciona Eventos
-playPauseButton.addEventListener('click', playPauseMusic);
+playPauseButton.addEventListener('click', () => {
+  if (audio.readyState === 4) { // 4 significa que o áudio está completamente carregado
+    playPauseMusic();
+  }
+});
 anteriorButton.addEventListener('click', anteriorMusic);
 proximaButton.addEventListener('click', proximaMusic);
 listaMusicas.addEventListener('click', selecionaMusica);
@@ -7296,7 +7304,7 @@ function selecionaMusica(e) {
 
 function playMusic() {
   audio.play();
-  playPauseButton.innerHTML = '<i class="fas fa-pause"></i>'; // Ícone Pause
+  playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
   atualizaTempoTotal();
 }
 
