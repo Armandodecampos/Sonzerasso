@@ -848,7 +848,7 @@ opacity:0;
  
 <div class="progresso">
    <i class="fas fa-clock" id="icone-tempo"></i>
-   <input type="range" id="progresso-barra" value="0" max="100">
+   <input id="progresso-barra" type="range" min="0" max="100" step="1" value="0">
   <span id="tempo-atual">00:00</span> / 
   <span id="tempo-total">00:00</span>
 </div>
@@ -7104,36 +7104,15 @@ audio.addEventListener('durationchange', atualizaTempoTotal);
 audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
-progressoBarra.addEventListener('input', atualizaTempoProgresso);
-let debounceTimeout;
+progressoBarra.addEventListener('change', atualizaTempoProgresso);
 
-progressoBarra.addEventListener('input', () => {
-  clearTimeout(debounceTimeout);
-  debounceTimeout = setTimeout(atualizaTempoProgresso, 100);
-});
-
-let carregando = false;
-
-progressoBarra.addEventListener('input', () => {
-  if (!carregando) {
-    carregando = true;
-    atualizaTempoProgresso();
-    carregando = false;
-  }
-});
 function atualizaTempoProgresso() {
-  if (audio.paused) return;
-  if (audio.readyState >= 3 && audio.duration > 0) {
+  if (!atualizando && audio.readyState >= 3 && audio.duration > 0) {
+    atualizando = true;
     const progresso = progressoBarra.value;
     audio.currentTime = (progresso / 100) * audio.duration;
     tempoAtual.textContent = formatarTempo(audio.currentTime);
-  } else {
-    console.log('Áudio não carregado ainda.');
-    // Opção 1: Esperar até o áudio carregar
-    setTimeout(atualizaTempoProgresso, 200);
-    
-    // Opção 2: Carregar o áudio novamente
-    // audio.load();
+    atualizando = false;
   }
 }
 
