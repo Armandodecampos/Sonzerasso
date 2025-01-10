@@ -1,18 +1,20 @@
+// Instalação do Service Worker
 self.addEventListener('install', (event) => {
-    console.log('Service Worker instalado.');
-    self.skipWaiting();
+  self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
-    console.log('Service Worker ativado.');
-    self.clients.claim();
-});
-
+// Interceptação de requisições de áudio
 self.addEventListener('fetch', (event) => {
-    console.log('Interceptando fetch:', event.request.url);
+  if (event.request.url.endsWith('.mp3')) {
     event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            return cachedResponse || fetch(event.request);
-        })
+      fetch(event.request).catch(() => {
+        return caches.match(event.request);
+      })
     );
+  }
+});
+
+// Ativação do Service Worker
+self.addEventListener('activate', () => {
+  return self.clients.claim();
 });
