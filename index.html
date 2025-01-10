@@ -110,7 +110,7 @@ height:80px;
 
 .box-controles-principais {
   position: fixed;
-  z-index:1;
+  z-index:3;
   bottom: 0;
   margin: auto;
   left: 0;
@@ -125,7 +125,6 @@ height:80px;
 }
 
 .controles-principais {
-
   bottom: 0;
   margin: auto;
   left: 0;
@@ -459,7 +458,7 @@ height:80px;
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #f50;
+    background-color: #fa0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -605,7 +604,7 @@ height:80px;
 .box-informacoes {
   position: fixed;
   margin: auto;
-  z-index: 3;
+  z-index: 4;
   top: 0;
   bottom: 0;
   left: 0;
@@ -628,7 +627,7 @@ height:80px;
   flex-direction: column;
   align-items: left;
   justify-content: left;
-  max-width:600px;
+  max-width:500px;
   border-radius: 10px; /* Bordas arredondadas */
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
   border:5px solid #000;
@@ -650,9 +649,9 @@ height:80px;
   position: fixed;
   margin:auto;
   bottom:17px;
-  left: 0;
-  right: 0;
-  width:150px;
+  left: 10px;
+  right: 10px;
+  max-width:540px;
   height: 55px;
   background-color: #fa0;
   color: #000;
@@ -7087,6 +7086,7 @@ top:45%;
 
 
   </ul>
+  <br><br><br><br><br><br>
   <div id="mensagem-nenhum-resultado"></div>
     <audio id="audio" preload="auto" playsinline></audio>
     <button id="voltar-topo" aria-label="Voltar ao topo">
@@ -7684,6 +7684,12 @@ function atualizaTempoTotal() {
     carregando.style.display = 'block'; // Mostra a div "Carregando..."
   }
 }
+</script>
+<script>
+  window.addEventListener('beforeunload', function(event) {
+    event.preventDefault();
+    event.returnValue = 'Deseja recarregar a página?';
+  });
 </script>
 <script>
   document.addEventListener("visibilitychange", function() {
