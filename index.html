@@ -7169,25 +7169,21 @@ audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
 progressoBarra.addEventListener('input', atualizaTempoProgresso);
+progressoBarra.addEventListener('change', atualizaTempoProgresso);
 
 let atualizando = false;
 let debounceTimeout;
 
 progressoBarra.addEventListener('input', () => {
   clearTimeout(debounceTimeout);
-  debounceTimeout = setTimeout(atualizaTempoProgresso, 100);
 });
 
 function atualizaTempoProgresso() {
-  if (!atualizando && audio.readyState === 4 && audio.duration > 0) {
+  if (audio.readyState === 4 && audio.duration > 0) {
     const progresso = progressoBarra.value;
     const tempoSelecionado = (progresso / 100) * audio.duration;
-    if (tempoSelecionado <= audio.buffered.end(0)) {
-      atualizando = true;
-      audio.currentTime = tempoSelecionado;
-      tempoAtual.textContent = formatarTempo(audio.currentTime);
-      atualizando = false;
-    }
+    audio.currentTime = tempoSelecionado;
+    tempoAtual.textContent = formatarTempo(audio.currentTime);
   }
 }
 
