@@ -7,7 +7,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="preload" href="audio.mp3" as="audio">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -295,7 +294,10 @@ height:80px;
 
 #tempo-atual, #tempo-total {
   font-size: 12px;
-
+      user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 .volume {
@@ -309,6 +311,13 @@ height:80px;
 #volume-control {
   width: 30%;
   accent-color: #fa0;
+}
+
+.volume #volume-nivel .remover-selecao {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 #volume-nivel {
@@ -330,6 +339,11 @@ height:80px;
   transition: transform 0.2s;
   margin-bottom: 30px;
   border:5px solid #fff;
+  pointer-events: none;
+      user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 .musica-atual span {
@@ -349,6 +363,11 @@ height:80px;
   object-fit: cover;
   border-radius: 5px;
   margin-bottom: 5px;
+  pointer-events: none;
+      user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 
@@ -782,7 +801,14 @@ top:45%;
     filter: brightness(1);
   }
 }
-
+.remover-selecao{
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Padrão */
+}
   </style>
 </head>
 <body>
@@ -876,14 +902,14 @@ top:45%;
 <div class="progresso">
    <i class="fas fa-clock" id="icone-tempo"></i>
    <input id="progresso-barra" type="range" min="0" max="100" step="1" value="0">
-  <span id="tempo-atual">00:00</span> / 
+  <span id="tempo-atual">00:00</span><span class="remover-selecao">/</span>
   <span id="tempo-total">00:00</span>
   <div class="carregando" id="carregando"></div>
 </div>
   <div class="volume">
   <i class="fas fa-volume-up" id="icone-volume"></i>
     <input type="range" id="volume-control" min="0" max="100" value="100">
-    <span id="volume-nivel">100%</span>
+    <span id="volume-nivel"><span class="remover-selecao">100%</span></span>
   </div>
 </div>
 </div>
@@ -7082,6 +7108,13 @@ top:45%;
   <script>
   // Seleção de Elementos
 const audio = document.getElementById('audio');
+audio.addEventListener('loadstart', function() {
+  document.getElementById('carregando').style.display = 'block';
+});
+
+audio.addEventListener('canplaythrough', function() {
+  document.getElementById('carregando').style.display = 'none';
+});
 audio.preload = 'auto';
 audio.buffered = true;
 const playPauseButton = document.getElementById('play-pause');
@@ -7140,7 +7173,7 @@ audio.addEventListener('timeupdate', atualizaProgresso);
 audio.addEventListener('durationchange', atualizaTempoTotal);
 audio.addEventListener('error', function(event) {
   console.error('Erro ao carregar áudio:', event);
-  proximaMusic();
+  recarregarMusica();
 });
 audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
@@ -7380,6 +7413,22 @@ function selecionaMusicaAtual() {
   document.getElementById('artista-atual').textContent = artista;
   document.getElementById('album-atual').textContent = album;
   document.getElementById('musica-atual-nome').textContent = musica;
+}
+
+// Função para recarregar a música atual
+function recarregarMusica() {
+  // Obtenha a música atual
+  const musicaAtual = musicas[musicaAtual];
+
+  // Limpe o áudio atual
+  audio.pause();
+  audio.src = '';
+  audio.load();
+
+  // Recarregue a música atual
+  audio.src = musicaAtual.src;
+  audio.load();
+  audio.play();
 }
 
 // Função para alternar a visibilidade da lista de músicas
