@@ -7072,7 +7072,7 @@ top:45%;
 
   </ul>
   <div id="mensagem-nenhum-resultado"></div>
-    <audio id="audio" preload="auto" playsinline></audio>
+    <audio id="audio" preload="none" playsinline></audio>
     <button id="voltar-topo" aria-label="Voltar ao topo">
       <i class="fas fa-arrow-up"></i> Voltar ao topo
     </button>
@@ -7138,6 +7138,10 @@ proximaButton.addEventListener('click', proximaMusic);
 listaMusicas.addEventListener('click', selecionaMusica);
 audio.addEventListener('timeupdate', atualizaProgresso);
 audio.addEventListener('durationchange', atualizaTempoTotal);
+audio.addEventListener('error', function(event) {
+  console.error('Erro ao carregar áudio:', event);
+  selecionarMusicaAleatoria();
+});
 audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
