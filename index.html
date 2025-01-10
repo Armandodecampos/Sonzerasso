@@ -313,15 +313,14 @@ height:80px;
   accent-color: #fa0;
 }
 
-.volume #volume-nivel .remover-selecao {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
 #volume-nivel {
   font-size: 12px;
+    -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Padrao */
 }
 .musica-atual {
   display: flex;
@@ -807,7 +806,7 @@ top:45%;
   -khtml-user-select: none; /* Konqueror */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Padrão */
+  user-select: none; /* Padrao */
 }
   </style>
 </head>
@@ -909,7 +908,7 @@ top:45%;
   <div class="volume">
   <i class="fas fa-volume-up" id="icone-volume"></i>
     <input type="range" id="volume-control" min="0" max="100" value="100">
-    <span id="volume-nivel"><span class="remover-selecao">100%</span></span>
+    <span id="volume-nivel">100%</span>
   </div>
 </div>
 </div>
@@ -7227,7 +7226,7 @@ function selecionarMusicaAleatoria() {
       audio.src = musicas[i].dataset.src;
       document.getElementById('musica-atual-nome').textContent = musicas[i].textContent;
       document.getElementById('imagem-musica').src = musicas[i].dataset.imagem;
-      audio.load(); // Carrega o áudio novamente
+      audio.load();
       break;
     }
   }
