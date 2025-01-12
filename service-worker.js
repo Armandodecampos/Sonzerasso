@@ -1,20 +1,26 @@
-// Instalação do Service Worker
+const CACHE_NAME = 'sonzerasso-cache-v1';
+const urlsToCache = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/style.css',
+  '/script.js',
+  '/icon-192x192.png',
+  '/icon-512x512.png'
+];
+
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(urlsToCache);
+    })
+  );
 });
 
-// Interceptação de requisições de áudio
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.endsWith('.mp3')) {
-    event.respondWith(
-      fetch(event.request).catch(() => {
-        return caches.match(event.request);
-      })
-    );
-  }
-});
-
-// Ativação do Service Worker
-self.addEventListener('activate', () => {
-  return self.clients.claim();
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
 });
