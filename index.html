@@ -835,6 +835,9 @@ top:45%;
 <p style="font-weight:bold;color:#000;">Contribua com o crescimento do site e a adição de novas músicas!</p>
 <button id="installBtn" style="display:none; position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; background: #fa0; color: #000; border: none; border-radius: 5px; cursor: pointer;">Instalar Aplicativo</button>
         <br>
+        <h3>Instale o aplicativo</h3>
+        <button id="installBtn" style="display: none;">Instalar</button>
+        <br>
         <p>Para contribuir, você pode:</p>
         <br>
           <p>🔸 Contribuir com um pix de qualquer valor.</p>
@@ -7689,34 +7692,33 @@ function atualizaTempoTotal() {
   });
 </script>
 <script>
- // Verifique se o navegador suporta a API de Instalação
-if ('beforeinstallprompt' in window) {
-  // Registre o Service Worker
-  navigator.serviceWorker.register('/service-worker.js')
-  .then(reg => console.log('Service Worker registrado!', reg))
-  .catch(err => console.error('Erro ao registrar o Service Worker:', err));
+  // Verifique suporte à API de Instalação
+  if ('beforeinstallprompt' in window) {
+    // Registre o Service Worker
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log('Service Worker registrado!', reg))
+      .catch(err => console.error('Erro ao registrar o Service Worker:', err));
 
-  // Crie o evento de instalação
-  let deferredPrompt;
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    // Mostra o botão de instalação
-    document.getElementById('installBtn').style.display = 'block';
-  });
-
-  // Adicione evento de clique no botão de instalação
-  document.getElementById('installBtn').addEventListener('click', () => {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('Usuário aceitou instalar a PWA');
-      } else {
-        console.log('Usuário recusou instalar a PWA');
-      }
+    // Crie o evento de instalação
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('installBtn').style.display = 'block';
     });
-  });
-}
+
+    // Adicione evento de clique para instalar
+    document.getElementById('installBtn').addEventListener('click', () => {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('Usuário aceitou instalar a PWA');
+        } else {
+          console.log('Usuário recusou instalar a PWA');
+        }
+      });
+    });
+  }
 </script>
 <script>
 document.addEventListener('visibilitychange', () => {
