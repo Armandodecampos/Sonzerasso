@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Sonzerasso - Discoteca Online</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#000">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -7687,28 +7689,14 @@ function atualizaTempoTotal() {
   });
 </script>
 <script>
-  document.addEventListener("visibilitychange", function() {
-  if (document.visibilityState === "visible") {
-    // Ação quando a página fica visível novamente
-  } else {
-    // Ação quando a página fica oculta
-  }
-});
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js').then(() => {
-    console.log('Service Worker registrado com sucesso.');
-  }).catch((error) => {
-    console.error('Falha ao registrar o Service Worker:', error);
-  });
-}
-</script>
-<script>
 document.addEventListener('visibilitychange', () => {
+  const player = document.getElementById('audio');
   if (document.visibilityState === 'visible') {
-    // Retomar reprodução se pausada
-    player.play();
+    if (player && player.paused) {
+      player.play(); // Retomar reprodução ao voltar para a página
+    }
+  } else {
+    console.log('Página em segundo plano');
   }
 });
 </script>
@@ -7721,6 +7709,71 @@ if ('mediaSession' in navigator) {
     player.pause();
   });
 }
+</script>
+<script>
+  if ('mediaSession' in navigator) {
+    // Define os metadados iniciais
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: 'Nome da Música',
+      artist: 'Artista',
+      album: 'Álbum',
+      artwork: [
+        { src: 'capa-192x192.jpg', sizes: '192x192', type: 'image/jpg' },
+        { src: 'capa-512x512.jpg', sizes: '512x512', type: 'image/jpg' }
+      ]
+    });
+  
+    // Define as ações da Media Session API
+    navigator.mediaSession.setActionHandler('play', () => {
+      const player = document.getElementById('audio'); // Substitua pelo ID do elemento correto
+      if (player) {
+        player.play();
+      } else {
+        console.error('Elemento de áudio não encontrado!');
+      }
+    });
+  
+    navigator.mediaSession.setActionHandler('pause', () => {
+      const player = document.getElementById('audio');
+      if (player) {
+        player.pause();
+      } else {
+        console.error('Elemento de áudio não encontrado!');
+      }
+    });
+  
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+      console.log('Próxima faixa'); // Implemente a lógica para avançar a faixa
+    });
+  
+    navigator.mediaSession.setActionHandler('previoustrack', () => {
+      console.log('Faixa anterior'); // Implemente a lógica para retroceder a faixa
+    });
+  
+    // Função para atualizar dinamicamente os metadados
+    function atualizarMetadados(titulo, artista, album, capa) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: titulo,
+        artist: artista,
+        album: album,
+        artwork: [
+          { src: capa, sizes: '512x512', type: 'image/jpg' }
+        ]
+      });
+    }
+  
+    // Exemplo de uso da função para atualizar os metadados
+    // atualizarMetadados('Nova Música', 'Novo Artista', 'Novo Álbum', 'nova-capa.jpg');
+  } else {
+    console.warn('Media Session API não é suportada neste navegador.');
+  }
+  </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log('Service Worker registrado!', reg))
+      .catch(err => console.error('Erro ao registrar o Service Worker:', err));
+  }
 </script>
 </body>
 </html>
