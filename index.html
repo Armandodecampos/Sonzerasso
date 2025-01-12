@@ -833,6 +833,7 @@ top:45%;
   <div id="informacoes" class="informacoes">
         <h3 style="font-weight:bold;color:#000;">Ouça músicas selecionadas de qualidade! Rock, metal, blues, Jazz, Pop, folk e mais! São mais de 6.000 músicas!</h3>
 <p style="font-weight:bold;color:#000;">Contribua com o crescimento do site e a adição de novas músicas!</p>
+<button id="installBtn" style="display:none; position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; background: #fa0; color: #000; border: none; border-radius: 5px; cursor: pointer;">Instalar Aplicativo</button>
         <br>
         <p>Para contribuir, você pode:</p>
         <br>
@@ -7686,6 +7687,36 @@ function atualizaTempoTotal() {
     event.preventDefault();
     event.returnValue = 'Deseja recarregar a página?';
   });
+</script>
+<script>
+ // Verifique se o navegador suporta a API de Instalação
+if ('beforeinstallprompt' in window) {
+  // Registre o Service Worker
+  navigator.serviceWorker.register('/service-worker.js')
+  .then(reg => console.log('Service Worker registrado!', reg))
+  .catch(err => console.error('Erro ao registrar o Service Worker:', err));
+
+  // Crie o evento de instalação
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // Mostra o botão de instalação
+    document.getElementById('installBtn').style.display = 'block';
+  });
+
+  // Adicione evento de clique no botão de instalação
+  document.getElementById('installBtn').addEventListener('click', () => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('Usuário aceitou instalar a PWA');
+      } else {
+        console.log('Usuário recusou instalar a PWA');
+      }
+    });
+  });
+}
 </script>
 <script>
 document.addEventListener('visibilitychange', () => {
