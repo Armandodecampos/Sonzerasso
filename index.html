@@ -7704,5 +7704,23 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+<script>
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    // Retomar reprodução se pausada
+    player.play();
+  }
+});
+</script>
+<script>
+if ('mediaSession' in navigator) {
+  navigator.mediaSession.setActionHandler('play', () => {
+    player.play();
+  });
+  navigator.mediaSession.setActionHandler('pause', () => {
+    player.pause();
+  });
+}
+</script>
 </body>
 </html>
