@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#000",
   "theme_color": "#000",
-  "description": "Discoteca Online - Músicas de qualidade!",
+  "description": "Discoteca Online",
   "icons": [
     {
       "src": "icon-192x192.png",
