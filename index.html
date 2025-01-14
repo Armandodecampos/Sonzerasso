@@ -7168,7 +7168,7 @@ audio.addEventListener('timeupdate', atualizaProgresso);
 audio.addEventListener('durationchange', atualizaTempoTotal);
 audio.addEventListener('error', function(event) {
   console.error('Erro ao carregar áudio:', event);
-  recarregarMusica();
+  audio.load();
 });
 audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
@@ -7404,22 +7404,6 @@ function selecionaMusicaAtual() {
   document.getElementById('artista-atual').textContent = artista;
   document.getElementById('album-atual').textContent = album;
   document.getElementById('musica-atual-nome').textContent = musica;
-}
-
-// Função para recarregar a música atual
-function recarregarMusica() {
-  // Obtenha a música atual
-  const musicaAtual = musicas[musicaAtual];
-
-  // Limpe o áudio atual
-  audio.pause();
-  audio.src = '';
-  audio.load();
-
-  // Recarregue a música atual
-  audio.src = musicaAtual.src;
-  audio.load();
-  audio.play();
 }
 
 // Função para alternar a visibilidade da lista de músicas
