@@ -7675,80 +7675,11 @@ function atualizaTempoTotal() {
   });
 </script>
 <script>
-// Selecionar elementos da playlist
-const musicListElement = document.querySelectorAll('#lista-musicas li');
-let playlist = []; // Array para armazenar a playlist
-
-// Criar playlist extraindo dados das <li>
-musicListElement.forEach((item) => {
-    const musicSrc = item.getAttribute('data-src');
-    const musicTitle = item.querySelector('.musica').textContent.trim();
-    const musicArtist = item.querySelector('.artista').textContent.trim();
-    const musicAlbum = item.querySelector('.album').textContent.trim();
-    const musicArtwork = item.querySelector('img').getAttribute('src');
-
-    playlist.push({
-        src: musicSrc,
-        title: musicTitle,
-        artist: musicArtist,
-        album: musicAlbum,
-        artwork: musicArtwork,
-    });
-});
-
-// Configuração inicial
-const audioElement = new Audio();
-let currentTrackIndex = 0;
-
-// Configuração da Media Session API
-if ('mediaSession' in navigator) {
-    navigator.mediaSession.setActionHandler('play', () => audioElement.play());
-    navigator.mediaSession.setActionHandler('pause', () => audioElement.pause());
-    navigator.mediaSession.setActionHandler('nexttrack', playNextTrack);
-    navigator.mediaSession.setActionHandler('previoustrack', playPreviousTrack);
-}
-
-// Função para tocar a música atual
-function playTrack(index) {
-    if (index >= 0 && index < playlist.length) {
-        const track = playlist[index];
-        currentTrackIndex = index;
-        audioElement.src = track.src;
-        audioElement.play();
-
-        // Atualizar metadados do Media Session
-        if ('mediaSession' in navigator) {
-            navigator.mediaSession.metadata = new MediaMetadata({
-                title: track.title,
-                artist: track.artist,
-                album: track.album,
-                artwork: [
-                    { src: track.artwork, sizes: '96x96', type: 'image/jpeg' },
-                    { src: track.artwork, sizes: '128x128', type: 'image/jpeg' },
-                ],
-            });
-        }
-    }
-}
-
-// Função para tocar a próxima música
-function playNextTrack() {
-    currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-    playTrack(currentTrackIndex);
-}
-
-// Função para tocar a música anterior
-function playPreviousTrack() {
-    currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-    playTrack(currentTrackIndex);
-}
-
-// Reproduzir a próxima música ao final da atual
-audioElement.addEventListener('ended', playNextTrack);
-
-// Iniciar reprodução na música 0
-playTrack(0);
-
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log('Service Worker registrado!', reg))
+      .catch(err => console.error('Erro ao registrar o Service Worker:', err));
+  }
 </script>
 </body>
 </html>
