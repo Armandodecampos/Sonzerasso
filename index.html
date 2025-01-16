@@ -491,6 +491,7 @@ height:80px;
   color: #000;
   border:2px solid #000;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+  font-size:18px;
 }
 
 #menu-musicas:hover,
@@ -7674,87 +7675,20 @@ function atualizaTempoTotal() {
   });
 </script>
 <script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js').then(function(registration) {
-            console.log('Service Worker registrado com sucesso:', registration);
-        }).catch(function(error) {
-            console.error('Falha ao registrar o Service Worker:', error);
-        });
+self.addEventListener('install', function(event) {
+    console.log('Service Worker instalado.');
+});
+
+self.addEventListener('activate', function(event) {
+    console.log('Service Worker ativado.');
+});
+
+// Mantém o áudio tocando em segundo plano
+self.addEventListener('fetch', function(event) {
+    if (event.request.url.includes('audio')) {
+        event.respondWith(fetch(event.request));
     }
-</script>
-<script>
-    // Seleciona o elemento de áudio existente na página
-    const audio = document.getElementById('audio');
-    const playPauseButton = document.getElementById('play-pause');
-    let playlist = [];
-    let currentIndex = 0;
-
-    // Extrair URLs das músicas do <li>
-    document.querySelectorAll('#lista-musicas li').forEach(item => {
-        playlist.push({
-            src: item.getAttribute('data-src'),
-            artista: item.querySelector('.artista').textContent,
-            album: item.querySelector('.album').textContent,
-            musica: item.querySelector('.musica').textContent,
-            imagem: item.getAttribute('data-imagem')
-        });
-    });
-
-    // Carregar e tocar a próxima música
-    function playNext() {
-        if (currentIndex >= playlist.length) {
-            currentIndex = 0; // Reinicia a playlist
-        }
-
-        const currentSong = playlist[currentIndex];
-        audio.src = currentSong.src;
-        document.getElementById('musica-atual-nome').textContent = currentSong.musica;
-        document.getElementById('artista-atual').textContent = currentSong.artista;
-        document.getElementById('album-atual').textContent = currentSong.album;
-        document.getElementById('imagem-musica').src = currentSong.imagem;
-
-        audio.play();
-        currentIndex++;
-    }
-
-    // Configurar eventos para o player
-    playPauseButton.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.play();
-        } else {
-            audio.pause();
-        }
-    });
-
-    audio.addEventListener('ended', playNext);
-
-    // Toca a primeira música ao carregar a página
-    window.addEventListener('DOMContentLoaded', () => {
-        playNext();
-    });
-</script>
-<script>
-    if ('mediaSession' in navigator) {
-        navigator.mediaSession.metadata = new MediaMetadata({
-            title: playlist[0].musica,
-            artist: playlist[0].artista,
-            album: playlist[0].album,
-            artwork: [
-                { src: playlist[0].imagem, sizes: '512x512', type: 'image/png' }
-            ]
-        });
-
-        // Ações da mídia
-        navigator.mediaSession.setActionHandler('play', () => audio.play());
-        navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-        navigator.mediaSession.setActionHandler('previoustrack', () => {
-            currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
-            playNext();
-        });
-        navigator.mediaSession.setActionHandler('nexttrack', () => {
-            playNext();
-        });
-    }
+});
 </script>
 </body>
 </html>
