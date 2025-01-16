@@ -85,17 +85,18 @@
   left: 0;
   right: 0;
   overflow-y: auto;
-  border-left:10px solid #111;
+  border-left:5px solid transparent;
     }
 
     .box-player::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
+  background-color: transparent;
 }
 
 .box-player::-webkit-scrollbar-thumb {
 height:50px;
-  background-color: #111;
-  border:1px solid #000;
+  background-color: #000;
+  border-left:1px solid #fff;
 }
 
     .player {
@@ -249,7 +250,7 @@ position:absolute;
 
 .playlist::-webkit-scrollbar-thumb {
 height:80px;
-  background-color: #ddd;
+  background-color: #fff;
   border-left:1px solid #000;
 }
 
@@ -694,8 +695,6 @@ height:80px;
   font-size: 50px;
   color: #fa0;
   text-transform: uppercase;
-  margin-left:2px;
-
 }
 /* Preloader - Tela de Carregamento */
 #preloader {
@@ -7684,38 +7683,78 @@ function atualizaTempoTotal() {
     }
 </script>
 <script>
-<script>
-    const audioElement = new Audio();
+    // Seleciona o elemento de áudio existente na página
+    const audio = document.getElementById('audio');
+    const playPauseButton = document.getElementById('play-pause');
     let playlist = [];
     let currentIndex = 0;
 
     // Extrair URLs das músicas do <li>
     document.querySelectorAll('#lista-musicas li').forEach(item => {
-        playlist.push(item.getAttribute('data-src'));
+        playlist.push({
+            src: item.getAttribute('data-src'),
+            artista: item.querySelector('.artista').textContent,
+            album: item.querySelector('.album').textContent,
+            musica: item.querySelector('.musica').textContent,
+            imagem: item.getAttribute('data-imagem')
+        });
     });
 
+    // Carregar e tocar a próxima música
     function playNext() {
-        if (currentIndex < playlist.length) {
-            audioElement.src = playlist[currentIndex];
-            audioElement.play();
-            currentIndex++;
-        } else {
+        if (currentIndex >= playlist.length) {
             currentIndex = 0; // Reinicia a playlist
-            playNext();
         }
+
+        const currentSong = playlist[currentIndex];
+        audio.src = currentSong.src;
+        document.getElementById('musica-atual-nome').textContent = currentSong.musica;
+        document.getElementById('artista-atual').textContent = currentSong.artista;
+        document.getElementById('album-atual').textContent = currentSong.album;
+        document.getElementById('imagem-musica').src = currentSong.imagem;
+
+        audio.play();
+        currentIndex++;
     }
 
-    audioElement.addEventListener('ended', playNext);
-
-    // Inicia ou pausa a reprodução
-    document.getElementById('play-pause').addEventListener('click', function () {
-        if (audioElement.paused) {
-            playNext();
+    // Configurar eventos para o player
+    playPauseButton.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
         } else {
-            audioElement.pause();
+            audio.pause();
         }
     });
+
+    audio.addEventListener('ended', playNext);
+
+    // Toca a primeira música ao carregar a página
+    window.addEventListener('DOMContentLoaded', () => {
+        playNext();
+    });
 </script>
+<script>
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: playlist[0].musica,
+            artist: playlist[0].artista,
+            album: playlist[0].album,
+            artwork: [
+                { src: playlist[0].imagem, sizes: '512x512', type: 'image/png' }
+            ]
+        });
+
+        // Ações da mídia
+        navigator.mediaSession.setActionHandler('play', () => audio.play());
+        navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+        navigator.mediaSession.setActionHandler('previoustrack', () => {
+            currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+            playNext();
+        });
+        navigator.mediaSession.setActionHandler('nexttrack', () => {
+            playNext();
+        });
+    }
 </script>
 </body>
 </html>
