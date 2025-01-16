@@ -830,9 +830,8 @@ top:45%;
   <div id="informacoes" class="informacoes">
         <h3 style="font-weight:bold;color:#000;">Ouça músicas selecionadas de qualidade! Rock, metal, blues, Jazz, Pop, folk e mais! São mais de 6.000 músicas!</h3>
 <p style="font-weight:bold;color:#000;">Contribua com o crescimento do site e a adição de novas músicas!</p>
-<button id="installBtn" style="display:none; position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; background: #fa0; color: #000; border: none; border-radius: 5px; cursor: pointer;">Instalar Aplicativo</button>
+<button class="btn" id="install-button" style="display: none;">Instalar Aplicativo</button>
         <br>
-        <h3>Instale o aplicativo</h3>
         <button id="installBtn" style="display: none;">Instalar</button>
         <br>
         <p>Para contribuir, você pode:</p>
@@ -865,6 +864,7 @@ top:45%;
   <span class="artista" id="artista-atual"></span>
   <span class="album" id="album-atual"></span>
   <span class="musica" id="musica-atual-nome"></span>
+  <button class="btn" id="install-button" style="display: none;">Instalar Aplicativo</button>
   <br><br><br><br><br><br>
 </div>
 </div>
@@ -7671,6 +7671,35 @@ function atualizaTempoTotal() {
     event.preventDefault();
     event.returnValue = 'Deseja recarregar a página?';
   });
+</script>
+<script>
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (event) => {
+    // Impede o prompt padrão
+    event.preventDefault();
+    // Salva o evento para usá-lo depois
+    deferredPrompt = event;
+
+    // Mostra o botão ou notificação para instalar o app
+    const installButton = document.getElementById('install-button');
+    installButton.style.display = 'block';
+
+    installButton.addEventListener('click', () => {
+        // Exibe o prompt de instalação
+        deferredPrompt.prompt();
+
+        // Analisa a escolha do usuário
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('Usuário aceitou a instalação.');
+            } else {
+                console.log('Usuário recusou a instalação.');
+            }
+            deferredPrompt = null; // Redefine o prompt
+        });
+    });
+});
 </script>
 <script>
 if ('mediaSession' in navigator) {
