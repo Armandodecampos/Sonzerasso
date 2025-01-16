@@ -7675,120 +7675,80 @@ function atualizaTempoTotal() {
   });
 </script>
 <script>
-  // Verifique suporte à API de Instalação
-  if ('beforeinstallprompt' in window) {
-    // Registre o Service Worker
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => console.log('Service Worker registrado!', reg))
-      .catch(err => console.error('Erro ao registrar o Service Worker:', err));
+// Selecionar elementos da playlist
+const musicListElement = document.querySelectorAll('#lista-musicas li');
+let playlist = []; // Array para armazenar a playlist
 
-    // Crie o evento de instalação
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      document.getElementById('installBtn').style.display = 'block';
-    });
+// Criar playlist extraindo dados das <li>
+musicListElement.forEach((item) => {
+    const musicSrc = item.getAttribute('data-src');
+    const musicTitle = item.querySelector('.musica').textContent.trim();
+    const musicArtist = item.querySelector('.artista').textContent.trim();
+    const musicAlbum = item.querySelector('.album').textContent.trim();
+    const musicArtwork = item.querySelector('img').getAttribute('src');
 
-    // Adicione evento de clique para instalar
-    document.getElementById('installBtn').addEventListener('click', () => {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('Usuário aceitou instalar a PWA');
-        } else {
-          console.log('Usuário recusou instalar a PWA');
-        }
-      });
+    playlist.push({
+        src: musicSrc,
+        title: musicTitle,
+        artist: musicArtist,
+        album: musicAlbum,
+        artwork: musicArtwork,
     });
-  }
-</script>
-<script>
-document.addEventListener('visibilitychange', () => {
-  const player = document.getElementById('audio');
-  if (document.visibilityState === 'visible') {
-    if (player && player.paused) {
-      player.play(); // Retomar reprodução ao voltar para a página
-    }
-  } else {
-    console.log('Página em segundo plano');
-  }
 });
-</script>
-<script>
+
+// Configuração inicial
+const audioElement = new Audio();
+let currentTrackIndex = 0;
+
+// Configuração da Media Session API
 if ('mediaSession' in navigator) {
-  navigator.mediaSession.setActionHandler('play', () => {
-    player.play();
-  });
-  navigator.mediaSession.setActionHandler('pause', () => {
-    player.pause();
-  });
+    navigator.mediaSession.setActionHandler('play', () => audioElement.play());
+    navigator.mediaSession.setActionHandler('pause', () => audioElement.pause());
+    navigator.mediaSession.setActionHandler('nexttrack', playNextTrack);
+    navigator.mediaSession.setActionHandler('previoustrack', playPreviousTrack);
 }
-</script>
-<script>
-  if ('mediaSession' in navigator) {
-    // Define os metadados iniciais
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: 'Nome da Música',
-      artist: 'Artista',
-      album: 'Álbum',
-      artwork: [
-        { src: 'capa-192x192.jpg', sizes: '192x192', type: 'image/jpg' },
-        { src: 'capa-512x512.jpg', sizes: '512x512', type: 'image/jpg' }
-      ]
-    });
-  
-    // Define as ações da Media Session API
-    navigator.mediaSession.setActionHandler('play', () => {
-      const player = document.getElementById('audio'); // Substitua pelo ID do elemento correto
-      if (player) {
-        player.play();
-      } else {
-        console.error('Elemento de áudio não encontrado!');
-      }
-    });
-  
-    navigator.mediaSession.setActionHandler('pause', () => {
-      const player = document.getElementById('audio');
-      if (player) {
-        player.pause();
-      } else {
-        console.error('Elemento de áudio não encontrado!');
-      }
-    });
-  
-    navigator.mediaSession.setActionHandler('nexttrack', () => {
-      console.log('Próxima faixa'); // Implemente a lógica para avançar a faixa
-    });
-  
-    navigator.mediaSession.setActionHandler('previoustrack', () => {
-      console.log('Faixa anterior'); // Implemente a lógica para retroceder a faixa
-    });
-  
-    // Função para atualizar dinamicamente os metadados
-    function atualizarMetadados(titulo, artista, album, capa) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: titulo,
-        artist: artista,
-        album: album,
-        artwork: [
-          { src: capa, sizes: '512x512', type: 'image/jpg' }
-        ]
-      });
+
+// Função para tocar a música atual
+function playTrack(index) {
+    if (index >= 0 && index < playlist.length) {
+        const track = playlist[index];
+        currentTrackIndex = index;
+        audioElement.src = track.src;
+        audioElement.play();
+
+        // Atualizar metadados do Media Session
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: track.title,
+                artist: track.artist,
+                album: track.album,
+                artwork: [
+                    { src: track.artwork, sizes: '96x96', type: 'image/jpeg' },
+                    { src: track.artwork, sizes: '128x128', type: 'image/jpeg' },
+                ],
+            });
+        }
     }
-  
-    // Exemplo de uso da função para atualizar os metadados
-    // atualizarMetadados('Nova Música', 'Novo Artista', 'Novo Álbum', 'nova-capa.jpg');
-  } else {
-    console.warn('Media Session API não é suportada neste navegador.');
-  }
-  </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => console.log('Service Worker registrado!', reg))
-      .catch(err => console.error('Erro ao registrar o Service Worker:', err));
-  }
+}
+
+// Função para tocar a próxima música
+function playNextTrack() {
+    currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+    playTrack(currentTrackIndex);
+}
+
+// Função para tocar a música anterior
+function playPreviousTrack() {
+    currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+    playTrack(currentTrackIndex);
+}
+
+// Reproduzir a próxima música ao final da atual
+audioElement.addEventListener('ended', playNextTrack);
+
+// Iniciar reprodução na música 0
+playTrack(0);
+
 </script>
 </body>
 </html>
