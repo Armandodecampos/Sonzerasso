@@ -14,12 +14,10 @@ workflows:
     scripts:
       - name: Install Cordova CLI
         script: npm install -g cordova
-        
-      - name: Install Android tools
-        script: |
-          yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "platforms;android-31"
-        
+
+      - name: Accept Android Licenses
+        script: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+
       - name: Install dependencies
         script: npm install
 
@@ -29,4 +27,4 @@ workflows:
       - name: Build APK
         script: cordova build android --release
     artifacts:
-      - build/outputs/**/*.apk
+      - platforms/android/app/build/outputs/**/*.apk
