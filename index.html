@@ -7771,13 +7771,6 @@ if ('mediaSession' in navigator) {
   }
 </script>
 <script>
-// Adicione o seguinte código para evitar que a música pare quando a tela está bloqueada
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'hidden') {
-    audio.play();
-  }
-});
-
 // Além disso, você precisa solicitar permissão para reproduzir áudio em segundo plano
 // Adicione o seguinte código para solicitar permissão
 async function solicitarPermissao() {
