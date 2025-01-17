@@ -1,0 +1,29 @@
+workflows:
+  cordova_android_build:
+    name: Build Cordova Android APK
+    environment:
+      vars:
+        CORDOVA_PLATFORM: "android"
+      node: 14.17.0 # Specify a Node.js version compatible with Cordova
+    triggering:
+      events:
+        - push
+        - pull_request
+    scripts:
+      # Install Cordova CLI globally
+      - name: Install Cordova CLI
+        script: npm install -g cordova
+        
+      # Install project dependencies
+      - name: Install dependencies
+        script: npm install
+
+      # Add Android platform
+      - name: Add Android platform
+        script: cordova platform add android
+
+      # Build APK
+      - name: Build APK
+        script: cordova build android --release
+    artifacts:
+      - build/outputs/**/*.apk # Path to the APK file
