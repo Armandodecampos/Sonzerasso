@@ -7770,29 +7770,20 @@ if ('mediaSession' in navigator) {
 
 </script>
 <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => console.log('Service Worker registrado!', reg))
-      .catch(err => console.error('Erro ao registrar o Service Worker:', err));
-  }
-</script>
-<script>
-// Além disso, você precisa solicitar permissão para reproduzir áudio em segundo plano
-// Adicione o seguinte código para solicitar permissão
-async function solicitarPermissao() {
-  try {
-    await navigator.mediaSession.setActionHandler('play', () => {
-      audio.play();
-    });
-    await navigator.mediaSession.setActionHandler('pause', () => {
-      audio.pause();
-    });
-  } catch (error) {
-    console.error('Erro ao solicitar permissão:', error);
-  }
-}
+self.addEventListener('install', function(event) {
+    console.log('Service Worker instalado.');
+});
 
-solicitarPermissao();
+self.addEventListener('activate', function(event) {
+    console.log('Service Worker ativado.');
+});
+
+// Mantém o áudio tocando em segundo plano
+self.addEventListener('fetch', function(event) {
+    if (event.request.url.includes('audio')) {
+        event.respondWith(fetch(event.request));
+    }
+});
 </script>
 </body>
 </html>
