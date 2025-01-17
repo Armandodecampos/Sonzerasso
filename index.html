@@ -7133,27 +7133,11 @@ top:45%;
   <script>
   // Seleção de Elementos
 const audio = document.getElementById('audio');
-audio.addEventListener('loadstart', function() {
-  document.getElementById('carregando').style.display = 'block';
-});
-
-audio.addEventListener('canplaythrough', function() {
-  document.getElementById('carregando').style.display = 'none';
-});
-audio.preload = 'auto';
-audio.buffered = true;
 const playPauseButton = document.getElementById('play-pause');
 const anteriorButton = document.getElementById('anterior');
 const proximaButton = document.getElementById('proxima');
 const listaMusicas = document.getElementById('lista-musicas');
 const progressoBarra = document.getElementById('progresso-barra');
-audio.addEventListener('canplaythrough', () => {
-  progressoBarra.disabled = false;
-  console.log('Áudio carregado!');
-});
-
-// Inicialmente, desabilite a barra de progresso
-progressoBarra.disabled = true;
 const tempoAtual = document.getElementById('tempo-atual');
 const tempoTotal = document.getElementById('tempo-total');
 const volumeControl = document.getElementById('volume-control');
@@ -7196,31 +7180,20 @@ proximaButton.addEventListener('click', proximaMusic);
 listaMusicas.addEventListener('click', selecionaMusica);
 audio.addEventListener('timeupdate', atualizaProgresso);
 audio.addEventListener('durationchange', atualizaTempoTotal);
-audio.addEventListener('error', function(event) {
-  console.error('Erro ao carregar áudio:', event);
-  audio.load();
-});
 audio.addEventListener('ended', proximaMusicaAutomatica);
 volumeControl.addEventListener('input', ajustaVolume);
-modoReproducaoButton.addEventListener('click', toggleModoReproducao);
-progressoBarra.addEventListener('input', atualizaTempoProgresso);
-progressoBarra.addEventListener('change', atualizaTempoProgresso);
-
-let atualizando = false;
-let debounceTimeout;
-
-progressoBarra.addEventListener('input', () => {
-  clearTimeout(debounceTimeout);
-});
-
-function atualizaTempoProgresso() {
-  if (audio.readyState === 4 && audio.duration > 0) {
-    const progresso = progressoBarra.value;
-    const tempoSelecionado = (progresso / 100) * audio.duration;
-    audio.currentTime = tempoSelecionado;
-    tempoAtual.textContent = formatarTempo(audio.currentTime);
+progressoBarra.addEventListener('click', (e) => {
+  const progresso = (e.offsetX / progressoBarra.offsetWidth) * audio.duration;
+  
+  if (isNaN(progresso) || !isFinite(progresso) || progresso < 0 || progresso > audio.duration) {
+    console.error('Valor inválido para currentTime');
+    return;
   }
-}
+  
+  audio.currentTime = progresso;
+  atualizaProgresso();
+});
+modoReproducaoButton.addEventListener('click', toggleModoReproducao);
 
 // Funções de Controle
 function playPauseMusic() {
@@ -7248,7 +7221,7 @@ function selecionarMusicaAleatoria() {
       audio.src = musicas[i].dataset.src;
       document.getElementById('musica-atual-nome').textContent = musicas[i].textContent;
       document.getElementById('imagem-musica').src = musicas[i].dataset.imagem;
-      audio.load();
+      audio.load(); // Carrega o áudio novamente
       break;
     }
   }
@@ -7283,9 +7256,9 @@ function proximaMusic() {
       audio.src = musicas[musicaAtual].src;
     }
     audio.load();
-    playMusic(); // Adicionei essa linha
   }
   selecionaMusicaAtual();
+  playMusic();
 }
 
 function anteriorMusic() {
@@ -7315,10 +7288,9 @@ function anteriorMusic() {
       }
       audio.src = musicas[musicaAtual].src;
     }
-    audio.load();
-    playMusic(); // Adicionei essa linha
   }
   selecionaMusicaAtual();
+  playMusic();
 }
 
 
@@ -7340,9 +7312,9 @@ function proximaMusicaAutomatica() {
     audio.src = musicas[musicaAtual].src;
     document.getElementById('musica-atual-nome').textContent = listaMusicas.children[musicaAtual].textContent;
     audio.load();  // Carrega a nova música
-    playMusic(); // Adicionei essa linha
   }
   selecionaMusicaAtual();  // Atualiza a interface com a nova música selecionada
+  playMusic();
 }
 
 function toggleModoReproducao() {
@@ -7390,12 +7362,6 @@ function selecionaMusica(e) {
 }
 
 function playMusic() {
-  if ('AudioContext' in window) {
-  const audioContext = new AudioContext();
-  const source = audioContext.createMediaElementSource(audio);
-  source.connect(audioContext.destination);
-  audio.play();
-}
   audio.play();
   playPauseButton.innerHTML = '<i class="fas fa-pause"></i>'; // Ícone Pause
   atualizaTempoTotal();
@@ -7404,10 +7370,10 @@ function playMusic() {
 function atualizaProgresso() {
   if (audio.readyState >= 3) {
     const progresso = (audio.currentTime / audio.duration) * 100;
-    document.getElementById('progresso-barra').value = progresso;
+    progressoBarra.value = progresso;
     tempoAtual.textContent = formatarTempo(audio.currentTime);
-    if (tempoTotal.textContent === '00:00') {
-      atualizaTempoTotal();
+    if (tempoTotal.textContent === '00:00') { // Verifique se o tempo total está zerado
+      atualizaTempoTotal(); // Atualize o tempo total
     }
   }
 }
@@ -7771,36 +7737,34 @@ if ('mediaSession' in navigator) {
 
 </script>
 <script>
-const playlist = document.querySelectorAll('#playlist li');
-const audioPlayer = document.getElementById('audioPlayer');
+  document.addEventListener("visibilitychange", function() {
+  if (document.visibilityState === "visible") {
+    // Ação quando a página fica visível novamente
+  } else {
+    // Ação quando a página fica oculta
+  }
+});
+</script>
+<script>
+self.addEventListener('install', (event) => {
+    console.log('Service Worker instalado.');
+    self.skipWaiting();
+});
 
-let currentIndex = 0;
-
-function playSong(index) {
-  const song = playlist[index];
-  audioPlayer.src = song.getAttribute('data-src');
-  audioPlayer.play();
-
-  song.classList.add('playing');
-  playlist.forEach((item, i) => {
-    if (i !== index) item.classList.remove('playing');
-  });
+self.addEventListener('fetch', (event) => {
+    console.log('Interceptando fetch:', event.request.url);
+    // Permitir que as solicitações de áudio passem
+    if (event.request.url.includes('.mp3') || event.request.url.includes('.wav')) {
+        return;
+    }
+});
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+        console.log('Service Worker registrado com sucesso:', registration.scope);
+    }).catch((error) => {
+        console.error('Falha ao registrar o Service Worker:', error);
+    });
 }
-
-audioPlayer.addEventListener('ended', () => {
-  currentIndex = (currentIndex + 1) % playlist.length;
-  playSong(currentIndex);
-});
-
-playlist.forEach((item, index) => {
-  item.addEventListener('click', () => {
-    currentIndex = index;
-    playSong(currentIndex);
-  });
-});
-
-// Initial load
-playSong(currentIndex);
 </script>
 </body>
 </html>
