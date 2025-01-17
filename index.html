@@ -7140,6 +7140,9 @@ audio.addEventListener('loadstart', function() {
 audio.addEventListener('canplaythrough', function() {
   document.getElementById('carregando').style.display = 'none';
 });
+audio.addEventListener('suspend', () => {
+  audio.play();
+});
 audio.preload = 'auto';
 audio.buffered = true;
 const playPauseButton = document.getElementById('play-pause');
@@ -7389,6 +7392,12 @@ function selecionaMusica(e) {
 }
 
 function playMusic() {
+  if ('AudioContext' in window) {
+  const audioContext = new AudioContext();
+  const source = audioContext.createMediaElementSource(audio);
+  source.connect(audioContext.destination);
+  audio.play();
+}
   audio.play();
   playPauseButton.innerHTML = '<i class="fas fa-pause"></i>'; // Ícone Pause
   atualizaTempoTotal();
