@@ -7771,20 +7771,36 @@ if ('mediaSession' in navigator) {
 
 </script>
 <script>
-self.addEventListener('install', function(event) {
-    console.log('Service Worker instalado.');
+const playlist = document.querySelectorAll('#playlist li');
+const audioPlayer = document.getElementById('audioPlayer');
+
+let currentIndex = 0;
+
+function playSong(index) {
+  const song = playlist[index];
+  audioPlayer.src = song.getAttribute('data-src');
+  audioPlayer.play();
+
+  song.classList.add('playing');
+  playlist.forEach((item, i) => {
+    if (i !== index) item.classList.remove('playing');
+  });
+}
+
+audioPlayer.addEventListener('ended', () => {
+  currentIndex = (currentIndex + 1) % playlist.length;
+  playSong(currentIndex);
 });
 
-self.addEventListener('activate', function(event) {
-    console.log('Service Worker ativado.');
+playlist.forEach((item, index) => {
+  item.addEventListener('click', () => {
+    currentIndex = index;
+    playSong(currentIndex);
+  });
 });
 
-// Mantém o áudio tocando em segundo plano
-self.addEventListener('fetch', function(event) {
-    if (event.request.url.includes('audio')) {
-        event.respondWith(fetch(event.request));
-    }
-});
+// Initial load
+playSong(currentIndex);
 </script>
 </body>
 </html>
