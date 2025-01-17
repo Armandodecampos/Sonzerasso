@@ -800,30 +800,30 @@ top:45%;
   user-select: none; /* Padrao */
 }
 
-.installBtn {
-  z-index:1;
-  position:fixed;
-  bottom:160px;
-  margin:auto;
-  left:0;
-  right:0;
-  display: inline-block;
-  padding: 15px 30px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
-  background: linear-gradient(45deg, #ff6a00, #ffa500);
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 106, 0, 0.7);
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-  animation: pulsate 1.5s infinite;
+#install-button {
+    z-index: 1;
+    position: fixed;
+    bottom: 160px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(45deg, #ff6a00, #ffa500);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 106, 0, 0.7);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: pulsate 1.5s infinite;
 }
 
-.installBtn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 25px rgba(255, 106, 0, 1);
+#install-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 106, 0, 1);
 }
 
 @keyframes pulsate {
@@ -896,7 +896,7 @@ top:45%;
   <span class="artista" id="artista-atual"></span>
   <span class="album" id="album-atual"></span>
   <span class="musica" id="musica-atual-nome"></span>
-<button class="install-button" id="install-button" style="display: none;">Instalar aplicativo</button>
+<button id="install-button" style="display: none;">Instalar aplicativo</button>
   <br><br><br><br><br><br>
 </div>
 </div>
