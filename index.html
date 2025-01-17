@@ -7283,9 +7283,9 @@ function proximaMusic() {
       audio.src = musicas[musicaAtual].src;
     }
     audio.load();
+    playMusic(); // Adicionei essa linha
   }
   selecionaMusicaAtual();
-  playMusic();
 }
 
 function anteriorMusic() {
@@ -7315,9 +7315,10 @@ function anteriorMusic() {
       }
       audio.src = musicas[musicaAtual].src;
     }
+    audio.load();
+    playMusic(); // Adicionei essa linha
   }
   selecionaMusicaAtual();
-  playMusic();
 }
 
 
@@ -7339,9 +7340,9 @@ function proximaMusicaAutomatica() {
     audio.src = musicas[musicaAtual].src;
     document.getElementById('musica-atual-nome').textContent = listaMusicas.children[musicaAtual].textContent;
     audio.load();  // Carrega a nova música
+    playMusic(); // Adicionei essa linha
   }
   selecionaMusicaAtual();  // Atualiza a interface com a nova música selecionada
-  playMusic();
 }
 
 function toggleModoReproducao() {
