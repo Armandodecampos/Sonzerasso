@@ -7770,5 +7770,30 @@ if ('mediaSession' in navigator) {
       .catch(err => console.error('Erro ao registrar o Service Worker:', err));
   }
 </script>
+<script>
+// Adicione o seguinte código para evitar que a música pare quando a tela está bloqueada
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') {
+    audio.play();
+  }
+});
+
+// Além disso, você precisa solicitar permissão para reproduzir áudio em segundo plano
+// Adicione o seguinte código para solicitar permissão
+async function solicitarPermissao() {
+  try {
+    await navigator.mediaSession.setActionHandler('play', () => {
+      audio.play();
+    });
+    await navigator.mediaSession.setActionHandler('pause', () => {
+      audio.pause();
+    });
+  } catch (error) {
+    console.error('Erro ao solicitar permissão:', error);
+  }
+}
+
+solicitarPermissao();
+</script>
 </body>
 </html>
