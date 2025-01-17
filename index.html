@@ -7123,7 +7123,7 @@ top:45%;
   </ul>
   <br><br><br><br><br><br>
   <div id="mensagem-nenhum-resultado"></div>
-    <audio id="audio" preload="auto" playsinline></audio>
+    <audio id="audio" preload="auto" playsinline ignoreNative></audio>
     <button id="voltar-topo" aria-label="Voltar ao topo">
       <i class="fas fa-arrow-up"></i> Voltar ao topo
     </button>
@@ -7139,9 +7139,6 @@ audio.addEventListener('loadstart', function() {
 
 audio.addEventListener('canplaythrough', function() {
   document.getElementById('carregando').style.display = 'none';
-});
-audio.addEventListener('suspend', () => {
-  audio.play();
 });
 audio.preload = 'auto';
 audio.buffered = true;
