@@ -7134,6 +7134,7 @@ top:45%;
   <script>
   // Seleção de Elementos
 const audio = document.getElementById('audio');
+const carregando = document.getElementById('carregando');
 const playPauseButton = document.getElementById('play-pause');
 const anteriorButton = document.getElementById('anterior');
 const proximaButton = document.getElementById('proxima');
@@ -7182,6 +7183,11 @@ listaMusicas.addEventListener('click', selecionaMusica);
 audio.addEventListener('timeupdate', atualizaProgresso);
 audio.addEventListener('durationchange', atualizaTempoTotal);
 audio.addEventListener('ended', proximaMusicaAutomatica);
+audio.addEventListener('canplaythrough', () => {
+  carregando.style.display = 'none'; // Esconde a div de carregando
+  playPauseButton.disabled = false;
+  console.log('Áudio carregado!');
+});
 volumeControl.addEventListener('input', ajustaVolume);
 progressoBarra.addEventListener('click', (e) => {
   if (audio.readyState >= 3) { // Verifica se o áudio está completamente carregado
@@ -7257,6 +7263,8 @@ function proximaMusic() {
   if (!audio.paused) {
     if (modoReproducao === 'aleatorio') {
       selecionarMusicaAleatoria();
+    } else if (modoReproducao === 'repetir') {
+      // Não faça nada, apenas reinicie a música atual
     } else {
       musicaAtual++;
       if (musicaAtual >= musicas.length) {
@@ -7269,6 +7277,8 @@ function proximaMusic() {
   } else {
     if (modoReproducao === 'aleatorio') {
       selecionarMusicaAleatoria();
+    } else if (modoReproducao === 'repetir') {
+      // Não faça nada, apenas reinicie a música atual
     } else {
       musicaAtual++;
       if (musicaAtual >= musicas.length) {
@@ -7290,6 +7300,8 @@ function anteriorMusic() {
   if (!audio.paused) {
     if (modoReproducao === 'aleatorio') {
       selecionarMusicaAleatoria();
+    } else if (modoReproducao === 'repetir') {
+      // Não faça nada, apenas reinicie a música atual
     } else {
       musicaAtual--;
       if (musicaAtual < 0) {
@@ -7302,6 +7314,8 @@ function anteriorMusic() {
   } else {
     if (modoReproducao === 'aleatorio') {
       selecionarMusicaAleatoria();
+    } else if (modoReproducao === 'repetir') {
+      // Não faça nada, apenas reinicie a música atual
     } else {
       musicaAtual--;
       if (musicaAtual < 0) {
@@ -7309,6 +7323,7 @@ function anteriorMusic() {
       }
       audio.src = musicas[musicaAtual].src;
     }
+    audio.load();
   }
   selecionaMusicaAtual();
   playMusic();
@@ -7322,9 +7337,8 @@ function proximaMusicaAutomatica() {
   tempoTotal.textContent = '00:00';
   if (modoReproducao === 'aleatorio') {
     selecionarMusicaAleatoria();
-  } else if (repetir) {
-    audio.currentTime = 0;
-    playMusic();
+  } else if (modoReproducao === 'repetir') {
+    playMusic(); // Repita a música atual
   } else {
     musicaAtual++;
     if (musicaAtual >= musicas.length) {
@@ -7383,6 +7397,7 @@ function selecionaMusica(e) {
 }
 
 function playMusic() {
+  carregando.style.display = 'block'; // Mostra a div de carregando
   audio.play();
   playPauseButton.innerHTML = '<i class="fas fa-pause"></i>'; // Ícone Pause
   atualizaTempoTotal();
