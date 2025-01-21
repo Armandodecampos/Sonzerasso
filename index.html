@@ -329,6 +329,7 @@ height:80px;
 }
 
 .musica-atual img {
+  z-index:0;
   width:85%;
   max-width: 300px;
   max-height: 300px;
@@ -338,7 +339,6 @@ height:80px;
   transition: transform 0.2s;
   margin-bottom: 30px;
   border:5px solid #fff;
-  pointer-events: none;
       user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -362,7 +362,6 @@ height:80px;
   object-fit: cover;
   border-radius: 5px;
   margin-bottom: 5px;
-  pointer-events: none;
       user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -374,10 +373,16 @@ height:80px;
   display: flex;
   flex-direction: column;
   font-size: 20px;
+  visibility:hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 #lista-musicas li:hover {
   animation: mudar-cor 0.3s linear;
+}
+
+#lista-musicas li.visivel {
+  visibility:visible;
 }
 
 
@@ -7773,13 +7778,29 @@ if ('mediaSession' in navigator) {
 
 </script>
 <script>
-  document.addEventListener("visibilitychange", function() {
-  if (document.visibilityState === "visible") {
-    // Ação quando a página fica visível novamente
-  } else {
-    // Ação quando a página fica oculta
-  }
+document.addEventListener("DOMContentLoaded", () => {
+  const playlistItems = document.querySelectorAll("#lista-musicas li");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visivel");
+        } else {
+          entry.target.classList.remove("visivel");
+        }
+      });
+    },
+    {
+      root: document.querySelector("#playlist"), // Define o contêiner como viewport
+      rootMargin: "0px",
+      threshold: 0.5, // Detecta quando 10% do elemento está visível
+    }
+  );
+
+  playlistItems.forEach((item) => observer.observe(item));
 });
+
 </script>
 <script>
 self.addEventListener('install', (event) => {
