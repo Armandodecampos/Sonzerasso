@@ -233,7 +233,7 @@ position:absolute;
   left:10px;
   right:10px;
   top:70px;
-  bottom:0px;
+  bottom:20px;
   background:#fff;
   overflow-y: auto;
   max-width: 700px;
@@ -373,18 +373,11 @@ height:80px;
   display: flex;
   flex-direction: column;
   font-size: 20px;
-  visibility:hidden;
-  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 #lista-musicas li:hover {
   animation: mudar-cor 0.3s linear;
 }
-
-#lista-musicas li.visivel {
-  visibility:visible;
-}
-
 
 #lista-musicas li .artista {
   font-weight: bold;
@@ -569,12 +562,11 @@ height:80px;
   left:0;
   right: 0;
   background-color: #252525;
-  color: #ffffff;
+  color: #fa0;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
 }
 
 #voltar-topo:hover {
@@ -624,7 +616,7 @@ height:80px;
   position: fixed;
   margin: auto;
   top: 10px;
-  bottom: 75px;
+  bottom: 80px;
   left: 10px;
   right: 10px;
   padding: 20px;
@@ -657,8 +649,9 @@ height:80px;
   bottom:12px;
   left: 10px;
   right: 10px;
-  max-width:540px;
+  width:60px;
   height: 60px;
+  border-radius:50px;
   background-color: #fa0;
   color: #000;
   border: none;
@@ -7783,31 +7776,6 @@ if ('mediaSession' in navigator) {
         updateMediaSessionMetadata();
     });
 }
-
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const playlistItems = document.querySelectorAll("#lista-musicas li");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visivel");
-        } else {
-          entry.target.classList.remove("visivel");
-        }
-      });
-    },
-    {
-      root: document.querySelector("#playlist"), // Define o contêiner como viewport
-      rootMargin: "0px",
-      threshold: 0.5, // Detecta quando 10% do elemento está visível
-    }
-  );
-
-  playlistItems.forEach((item) => observer.observe(item));
-});
 
 </script>
 <script>
