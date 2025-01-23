@@ -1,44 +1,33 @@
-const CACHE_NAME = 'audio-player-cache-v1';
-
-// Evento de instalação
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Instalado');
-  self.skipWaiting();
-});
-
-// Evento de ativação
-self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Ativado');
+  console.log('Service Worker instalado.');
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            console.log('[Service Worker] Removendo cache antigo:', key);
-            return caches.delete(key);
-          }
-        })
-      )
-    )
-  );
-  return self.clients.claim();
-});
-
-// Evento de busca (Cache falling back to Network)
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-
-  event.respondWith(
-    caches.match(event.request).then((cacheResponse) => {
-      return (
-        cacheResponse ||
-        fetch(event.request).then((networkResponse) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
-          });
-        })
-      );
+    caches.open('sonzerasso-v1').then((cache) => {
+      return cache.addAll([
+        '/', 
+        '/index.html', 
+        '/style.css', 
+        '/script.js',
+        '/manifest.json'
+      ]);
     })
   );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
+});
+
+// Background Sync para ressincronizar dados offline
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-audio') {
+    event.waitUntil(
+      fetch('/sync-audio-endpoint').then(() => {
+        console.log('Áudio sincronizado em segundo plano.');
+      })
+    );
+  }
 });
