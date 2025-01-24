@@ -1,14 +1,26 @@
-const CACHE_NAME = 'audio-player-cache-v1';
+const CACHE_NAME = 'audio-player-cache-v2'; // Incrementar a versão do cache força o navegador a recarregar tudo
 
-// Evento de instalação
+const ASSETS = [
+  '/', // Certifique-se de incluir a raiz
+  '/index.html', // Verificação direta no HTML
+  '/styles.css',
+  '/script.js',
+  '/favicon.ico',
+];
+
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Instalado');
+  console.log('[Service Worker] Instalando...');
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log('[Service Worker] Pré-carregando arquivos...');
+      return cache.addAll(ASSETS);
+    })
+  );
   self.skipWaiting();
 });
 
-// Evento de ativação
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Ativado');
+  console.log('[Service Worker] Ativando...');
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(
@@ -21,24 +33,25 @@ self.addEventListener('activate', (event) => {
       )
     )
   );
-  return self.clients.claim();
+  self.clients.claim();
 });
 
-// Evento de busca (Cache falling back to Network)
 self.addEventListener('fetch', (event) => {
+  // Verifique se a requisição é de um recurso válido
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
-    caches.match(event.request).then((cacheResponse) => {
-      return (
-        cacheResponse ||
-        fetch(event.request).then((networkResponse) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
-          });
-        })
-      );
-    })
+    fetch(event.request)
+      .then((networkResponse) => {
+        // Atualiza o cache para este recurso
+        return caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
+      })
+      .catch(() => {
+        // Fallback no cache caso a rede falhe
+        return caches.match(event.request);
+      })
   );
 });
