@@ -28,6 +28,7 @@
       padding: 10px 20px;
       border-bottom: 5px solid #000;
   	  background: radial-gradient(#4f4941, #000) fixed;
+      background:#222;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
     }
 
@@ -122,6 +123,7 @@ height:50px;
   color: #fff;
   border-top: 5px solid #000;
   background: radial-gradient(#4f4941, #000) fixed;
+  background:#222;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
 }
 
@@ -610,6 +612,7 @@ height:80px;
   left: 0;
   right: 0;
   background: radial-gradient(#4f4941, #000) fixed;
+  background:#222;
   display:none;
 }
 
@@ -640,7 +643,7 @@ height:80px;
 
 .informacoes::-webkit-scrollbar-thumb {
 height:80px;
-  background-color: #ddd;
+  background-color: #fff;
   border-left:1px solid #000;
 }
 
@@ -701,6 +704,7 @@ height:80px;
   width: 100vw;
   height: 100vh;
   background: radial-gradient(#4f4941, #000) fixed;
+  background:#222;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7701,9 +7705,6 @@ async function criarlinkartistas() {
 
 </script>
 <script>
-// Seleção do elemento
-const carregando = document.getElementById('carregando');
-
 // Função para atualizar o tempo total
 function atualizaTempoTotal() {
   if (audio.duration > 0) { 
@@ -7802,7 +7803,7 @@ window.addEventListener('load', function () {
 <script>
   setInterval(() => {
     console.log('Mantendo o navegador ativo...');
-  }, 5000); // Executa a cada 5 segundos
+  }, 1000); // Executa a cada 1 segundos
 </script>
 </body>
 </html>
