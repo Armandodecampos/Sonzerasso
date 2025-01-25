@@ -408,9 +408,19 @@ height:80px;
   font-style: italic;
 }
 /* Estilo da barra de pesquisa */
+.box-barra-pesquisa {
+  position: fixed;
+    top: 0px; /* Ajuste conforme necessário */
+    margin:auto;
+    padding:10px;
+    left:0;
+    right:0;
+  border-bottom: 5px solid #000;
+      background:#222;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+}
+
 .barra-pesquisa {
-    position: fixed;
-    top: 20px; /* Ajuste conforme necessário */
     margin:auto;
     left:0;
     right:0;
@@ -928,6 +938,7 @@ top:45%;
 </div>
 </div>
 <div class="box-playlist" id="box-playlist">
+  <div class="box-barra-pesquisa">
 <div class="barra-pesquisa">
   <button id="fechar-lista" title="Fechar lista">
     <i class="fa fa-reply"></i>
@@ -937,6 +948,7 @@ top:45%;
   <i class="fas fa-trash"></i>
 </button>
   </div>
+</div>
     <div class="playlist" id="playlist">
     
     <div id="artistas"></div>
