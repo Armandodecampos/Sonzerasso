@@ -334,8 +334,8 @@ height:80px;
   z-index:0;
   width:85%;
   max-width: 300px;
-  max-height: 300px;
-  border-radius: 10px;
+  aspect-ratio:1/1;
+  border-radius: 0px;
   object-fit: cover;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
   transition: transform 0.2s;
@@ -7197,6 +7197,7 @@ progressoBarra.addEventListener('click', (e) => {
 });
 modoReproducaoButton.addEventListener('click', toggleModoReproducao);
 
+
 function mudarTempo(event) {
   const progressoBarra = document.getElementById('progresso-barra');
   const audio = document.getElementById('audio');
@@ -7423,6 +7424,7 @@ function formatarTempo(segundos) {
 
 // Função para atualizar música atual
 function selecionaMusicaAtual() {
+  document.getElementById('imagem-musica').src = "";
   Array.from(listaMusicas.children).forEach((musica) => musica.classList.remove('selecionada'));
   listaMusicas.children[musicaAtual].classList.add('selecionada');
   const musicaAtualElement = listaMusicas.children[musicaAtual];
