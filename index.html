@@ -8217,14 +8217,32 @@ margin-top:70px;
   </script>
   <script>
     let wakeLock = null;
+
 async function requestWakeLock() {
     try {
         wakeLock = await navigator.wakeLock.request('screen');
+
+        // Se o wakeLock for liberado, tentar novamente
+        wakeLock.addEventListener('release', () => {
+            console.log("Wake Lock foi liberado. Tentando reativar...");
+            requestWakeLock();
+        });
+
+        console.log("Wake Lock ativado!");
     } catch (err) {
-        console.error(`${err.name}, ${err.message}`);
+        console.error(`Erro ao ativar Wake Lock: ${err.name}, ${err.message}`);
     }
 }
-requestWakeLock();
+
+// Ativar Wake Lock ao carregar a página
+document.addEventListener("DOMContentLoaded", requestWakeLock);
+
+// Caso o usuário volte para a aba, reativar
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        requestWakeLock();
+    }
+});
   </script>
 </body>
 </html>
