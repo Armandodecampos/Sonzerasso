@@ -855,9 +855,13 @@ top:45%;
 }
 
 #contador {
+color:#0af;
+}
+
+.maisinfo {
 z-index:1;
 position:absolute;
-top:-55px;
+top:-50px;
 left:10px;
 color:#fa0;
 font-weight:bold;
@@ -866,24 +870,7 @@ margin-bottom:30px;
 background:#111;
 border:0px solid #000;
 box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9);
-padding:3px;
-font-size:13px;
-max-width:50%;
-}
-
-.maisinfo {
-z-index:1;
-position:absolute;
-top:-50px;
-right:10px;
-color:#fa0;
-font-weight:bold;
-transform:rotate(5deg);
-margin-bottom:30px;
-background:#111;
-border:0px solid #000;
-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9);
-padding:3px;
+padding:7px;
 font-size:13px;
 max-width:50%;
 margin-bottom:50px;
@@ -945,8 +932,7 @@ margin-bottom:50px;
 </div>
 <div class="box-player" id="box-player">
   <div class="player">
-  <div id="contador"></div>
-  <div class="maisinfo">Rock, metal, blues, Jazz, pop, folk e mais!</div>
+  <div class="maisinfo"><span id="contador"></span>Rock, metal, blues, Jazz, pop, folk e mais!</div>
   <div class="musica-atual">
   <img id="imagem-musica" src="" alt="">
   <span class="artista" id="artista-atual"></span>
@@ -8210,7 +8196,7 @@ margin-bottom:50px;
       // Conta diretamente os filhos <li> da <ul>
       function atualizarContador() {
         const numeroDeMusicas = listaMusicas.children.length; // Mais eficiente para grandes listas
-        contadorDiv.innerText = `${numeroDeMusicas} músicas.`;
+        contadorDiv.innerText = `${numeroDeMusicas} músicas. `;
       }
   
       // Atualiza o contador ao carregar a página
