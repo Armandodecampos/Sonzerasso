@@ -502,9 +502,6 @@ height:80px;
     cursor: pointer;
   }
 
-#play-pause{
-background:#fa0;
-}
   #menu-musicas:hover,
   #modo-reproducao:hover {
     animation: mudar-cor 0.3s linear;
@@ -855,6 +852,7 @@ top:45%;
     box-shadow: 0 0 25px rgba(255, 106, 0, 1);
   }
 }
+
 #contador {
 z-index:1;
 position:fixed;
@@ -985,6 +983,7 @@ font-size:14px;
   </div>
 </div>
     <div class="playlist" id="playlist">
+    
     <div id="artistas"></div>
   <ul id="lista-musicas">
 
@@ -7456,7 +7455,7 @@ function playPauseMusic() {
     audio.pause();
     playPauseButton.innerHTML = '<i class="fas fa-play"></i>'; 
   }
-  verificarTempoTotal();
+verificarTempoTotal();
 }
 
 // Função para selecionar música aleatória com base em pesos
@@ -7683,42 +7682,38 @@ const menuMusicasButton = document.getElementById('menu-musicas');
 menuMusicasButton.addEventListener('click', toggleListaMusicas);
 
   </script>
-  <script>
+<script>
   document.addEventListener("DOMContentLoaded", () => {
-  // Seleciona todos os <li> dentro da lista de músicas
-  const listaMusicas = document.querySelectorAll('#lista-musicas li');
+    // Seleciona a lista <ul> e a div para exibir o número
+    const listaMusicas = document.getElementById('lista-musicas');
+    const contadorDiv = document.getElementById('contador');
 
-  // Objeto para armazenar cores exclusivas para cada artista
-  const artistaCores = {};
-  const coresDisponiveis = [
-    '#FF5733', '#33FF57', '#5733FF', '#F1C40F', '#8E44AD', '#16A085', '#C0392B'
-  ];
-
-  // Função para atribuir cores únicas para cada artista
-  function getCorParaArtista(artista) {
-    if (!artistaCores[artista]) {
-      // Seleciona uma cor única e associa ao artista
-      const cor = coresDisponiveis[Object.keys(artistaCores).length % coresDisponiveis.length];
-      artistaCores[artista] = cor;
+    // Conta diretamente os filhos <li> da <ul>
+    function atualizarContador() {
+      const numeroDeMusicas = listaMusicas.children.length; // Mais eficiente para grandes listas
+      contadorDiv.innerText = `${numeroDeMusicas} músicas.`;
     }
-    return artistaCores[artista];
-  }
 
-  // Percorre todos os <li> para aplicar a cor com base no artista
-  listaMusicas.forEach((li) => {
-    const artistaSpan = li.querySelector('.artista'); // Localiza o elemento com o nome do artista
-    if (artistaSpan) {
-      const artista = artistaSpan.innerText.trim(); // Nome do artista sem espaços extras
-      const cor = getCorParaArtista(artista); // Obtém ou cria a cor do artista
-      li.style.backgroundColor = cor; // Aplica a cor ao fundo do <li>
-      li.style.color = '#fff'; // Ajusta a cor do texto para visibilidade
-      li.style.padding = '5px'; // Adiciona espaçamento (opcional)
-      li.style.borderRadius = '5px'; // Bordas arredondadas (opcional)
-    }
+    // Atualiza o contador ao carregar a página
+    atualizarContador();
   });
-});
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Seleciona a lista <ul> e a div para exibir o número
+    const listaMusicas = document.getElementById('lista-musicas');
+    const contadorDiv = document.getElementById('contador2');
 
-  </script>
+    // Conta diretamente os filhos <li> da <ul>
+    function atualizarContador() {
+      const numeroDeMusicas = listaMusicas.children.length; // Mais eficiente para grandes listas
+      contadorDiv.innerText = `${numeroDeMusicas} músicas`;
+    }
+
+    // Atualiza o contador ao carregar a página
+    atualizarContador();
+  });
+</script>
   <script>
 // Seleção de Elementos
 const searchInput = document.getElementById("searchInput");
@@ -7945,38 +7940,6 @@ document.getElementById('fechar').addEventListener('click', function() {
 });
 </script>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // Seleciona a lista <ul> e a div para exibir o número
-    const listaMusicas = document.getElementById('lista-musicas');
-    const contadorDiv = document.getElementById('contador');
-
-    // Conta diretamente os filhos <li> da <ul>
-    function atualizarContador() {
-      const numeroDeMusicas = listaMusicas.children.length; // Mais eficiente para grandes listas
-      contadorDiv.innerText = `${numeroDeMusicas} músicas.`;
-    }
-
-    // Atualiza o contador ao carregar a página
-    atualizarContador();
-  });
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // Seleciona a lista <ul> e a div para exibir o número
-    const listaMusicas = document.getElementById('lista-musicas');
-    const contadorDiv = document.getElementById('contador2');
-
-    // Conta diretamente os filhos <li> da <ul>
-    function atualizarContador() {
-      const numeroDeMusicas = listaMusicas.children.length; // Mais eficiente para grandes listas
-      contadorDiv.innerText = `${numeroDeMusicas} músicas`;
-    }
-
-    // Atualiza o contador ao carregar a página
-    atualizarContador();
-  });
-</script>
-<script>
 async function criarlinkartistas() {
   const cache = await caches.open('artistas-cache-v1');
   const cachedLinks = await cache.match('links-artistas');
@@ -8043,102 +8006,80 @@ window.addEventListener('beforeinstallprompt', (event) => {
 });
 </script>
 <script>
-// Seleção de elementos
-const audio = document.getElementById('audio');
-const playlist = [...document.querySelectorAll('#lista-musicas li')]; // Playlist baseada nos <li>
-let currentTrack = 0;
+  // Mantém o navegador ativo com mensagens no console
+  setInterval(() => {
+    console.log('Mantendo o navegador ativo...');
+  }, 1000); // Executa a cada 1 segundo
 
-// Configurar a primeira música
-function loadTrack(index) {
-  const track = playlist[index];
-  audio.src = track.getAttribute('data-src'); // Pega o atributo data-src com o link do áudio
-  updateMediaSession(track);
-}
+  // Seleção de elementos e configuração inicial
+  const playlist = [...document.querySelectorAll('#lista-musicas li')]; // Playlist baseada nos <li>
+  let currentTrack = 0; // Índice da música atual
+  const audio = document.getElementById('audio-player'); // Supondo que exista um <audio id="audio-player">
 
-// Atualizar o MediaSession API
-function updateMediaSession(track) {
-  if ('mediaSession' in navigator) {
-    const artist = track.querySelector('.artista').innerText;
-    const album = track.querySelector('.album').innerText;
-    const title = track.querySelector('.musica').innerText;
-    const artwork = [
-      { src: track.getAttribute('data-imagem'), sizes: '512x512', type: 'image/png' }
-    ];
-
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title,
-      artist,
-      album,
-      artwork
-    });
+  // Função para carregar uma música
+  function loadTrack(index) {
+    const track = playlist[index];
+    audio.src = track.getAttribute('data-src'); // Pega o atributo data-src com o link do áudio
+    updateMediaSession(track);
   }
-}
 
-// Avançar para a próxima música
-function nextTrack() {
-  currentTrack = (currentTrack + 1) % playlist.length; // Próxima música (looping)
-  loadTrack(currentTrack);
-  audio.play();
-}
+  // Atualiza os metadados do MediaSession API
+  function updateMediaSession(track) {
+    if ('mediaSession' in navigator) {
+      const title = track.querySelector('.musica').textContent;
+      const artist = track.querySelector('.artista').textContent;
+      const album = track.querySelector('.album').textContent;
+      const artwork = [{ src: track.getAttribute('data-imagem'), sizes: '512x512', type: 'image/png' }];
 
-// Voltar para a música anterior
-function previousTrack() {
-  currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; // Música anterior (looping)
-  loadTrack(currentTrack);
-  audio.play();
-}
-
-// Adicionar eventos de controle do MediaSession API
-if ('mediaSession' in navigator) {
-  navigator.mediaSession.setActionHandler('play', () => audio.play());
-  navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-  navigator.mediaSession.setActionHandler('previoustrack', () => previousTrack());
-  navigator.mediaSession.setActionHandler('nexttrack', () => nextTrack());
-}
-
-// Reproduzir música atual ao clicar
-document.getElementById('play-pause').addEventListener('click', () => {
-  if (audio.paused) {
-    audio.play();
-  } else {
-    audio.pause();
-  }
-});
-
-// Carregar a próxima música ao terminar
-audio.addEventListener('ended', nextTrack);
-
-// Carregar e iniciar a primeira música
-loadTrack(currentTrack);
-
-</script>
-<script>
-if ('mediaSession' in navigator) {
-    function updateMediaSessionMetadata() {
-        const currentTrack = musicas[musicaAtual];
-        navigator.mediaSession.metadata = new MediaMetadata({
-            title: listaMusicas.children[musicaAtual].querySelector('.musica').textContent,
-            artist: listaMusicas.children[musicaAtual].querySelector('.artista').textContent,
-            album: listaMusicas.children[musicaAtual].querySelector('.album').textContent,
-            artwork: [
-                { src: currentTrack.imagem, sizes: '512x512', type: 'image/png' },
-            ],
-        });
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title,
+        artist,
+        album,
+        artwork,
+      });
     }
+  }
 
-    // Set media session action handlers
+  // Avança para a próxima música
+  function nextTrack() {
+    currentTrack = (currentTrack + 1) % playlist.length; // Próxima música (looping)
+    loadTrack(currentTrack);
+    audio.play();
+  }
+
+  // Volta para a música anterior
+  function previousTrack() {
+    currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; // Música anterior (looping)
+    loadTrack(currentTrack);
+    audio.play();
+  }
+
+  // Adiciona handlers para os controles de ação do MediaSession API
+  if ('mediaSession' in navigator) {
     navigator.mediaSession.setActionHandler('play', () => audio.play());
     navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-    navigator.mediaSession.setActionHandler('previoustrack', anteriorMusic);
-    navigator.mediaSession.setActionHandler('nexttrack', proximaMusic);
+    navigator.mediaSession.setActionHandler('previoustrack', previousTrack);
+    navigator.mediaSession.setActionHandler('nexttrack', nextTrack);
 
-    // Update media session metadata whenever a new track is played
-    audio.addEventListener('play', updateMediaSessionMetadata);
+    // Atualiza metadados ao iniciar uma nova reprodução
+    audio.addEventListener('play', () => updateMediaSession(playlist[currentTrack]));
     audio.addEventListener('ended', () => {
-        proximaMusic();
-        updateMediaSessionMetadata();
+      nextTrack();
+      updateMediaSession(playlist[currentTrack]);
     });
-}
+  }
+
+  // Controle de reprodução por botão
+  document.getElementById('play-pause').addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  });
+
+  // Carrega e inicia a primeira música
+  loadTrack(currentTrack);
 </script>
 <script>
 if ('serviceWorker' in navigator) {
@@ -8159,45 +8100,6 @@ window.addEventListener('load', function () {
     }, 500); // Tempo da transição em milissegundos (0.5s)
   }
 });
-</script>
-<script>
-  setInterval(() => {
-    console.log('Mantendo o navegador ativo...');
-  }, 1000); // Executa a cada 1 segundos
-</script>
-<script>
-let intervalId;
-
-// Função a ser chamada periodicamente
-function verificarTempoTotal() {
-  console.log('Executando verificarTempoTotal...');
-  // Adicione aqui o código da função verificarTempoTotal()
-}
-
-// Envia uma mensagem para o Service Worker
-function notificarServiceWorker() {
-  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage({ type: 'verificarTempoTotal' });
-  }
-}
-
-// Configura o intervalo de tempo para chamar verificarTempoTotal()
-function iniciarVerificacaoEmSegundoPlano() {
-  intervalId = setInterval(() => {
-    verificarTempoTotal();
-    notificarServiceWorker(); // Notifica o Service Worker
-  }, 5000); // Intervalo de 1 segundo (ajuste conforme necessário)
-}
-
-// Listener para mensagens do Service Worker
-navigator.serviceWorker.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'executarVerificacao') {
-    verificarTempoTotal();
-  }
-});
-
-// Inicia a verificação ao carregar a página
-iniciarVerificacaoEmSegundoPlano();
 </script>
 </body>
 </html>
