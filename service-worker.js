@@ -56,14 +56,5 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'verificarTempoTotal') {
-    self.clients.matchAll().then((clients) => {
-      clients.forEach((client) => {
-        client.postMessage({ type: 'executarVerificacao' });
-      });
-    });
-  }
-});
 
 
