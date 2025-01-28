@@ -1,59 +1,56 @@
-const CACHE_NAME = 'audio-player-cache-v2'; // Incrementar a versão do cache força o navegador a recarregar tudo
-
-const ASSETS = [
-  '/', // Certifique-se de incluir a raiz
-  '/index.html', // Verificação direta no HTML
-  '/styles.css',
-  '/script.js',
-  '/favicon.ico',
+const CACHE_NAME = 'sonzerasso-cache-v1';
+const urlsToCache = [
+  '/', // Página inicial
+  '/index.html', // Substitua pelo caminho do seu arquivo HTML
+  '/manifest.json',
+  '/favicon-32x32.png',
+  '/apple-touch-icon.png',
+  '/favicon-16x16.png',
+  '/site.webmanifest',
+  '/styles.css', // Substitua pelo caminho do seu CSS (separado)
+  '/script.js', // Substitua pelo caminho do seu JS principal
 ];
 
+// Instalar o Service Worker
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Instalando...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Pré-carregando arquivos...');
-      return cache.addAll(ASSETS);
+      console.log('Abrindo cache');
+      return cache.addAll(urlsToCache);
     })
   );
-  self.skipWaiting();
 });
 
+// Interceptar requisições e servir do cache
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
+});
+
+// Ativar o Service Worker e limpar caches antigos
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Ativando...');
+  const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then((keys) =>
+    caches.keys().then((cacheNames) =>
       Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            console.log('[Service Worker] Removendo cache antigo:', key);
-            return caches.delete(key);
+        cacheNames.map((cacheName) => {
+          if (!cacheWhitelist.includes(cacheName)) {
+            return caches.delete(cacheName);
           }
         })
       )
     )
   );
-  self.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
-  // Verifique se a requisição é de um recurso válido
-  if (event.request.method !== 'GET') return;
-
-  event.respondWith(
-    fetch(event.request)
-      .then((networkResponse) => {
-        // Atualiza o cache para este recurso
-        return caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, networkResponse.clone());
-          return networkResponse;
-        });
-      })
-      .catch(() => {
-        // Fallback no cache caso a rede falhe
-        return caches.match(event.request);
-      })
-  );
+// Manter a música tocando com sincronização em segundo plano
+self.addEventListener('message', (event) => {
+  if (event.data === 'keep-alive') {
+    console.log('Manter ativo no segundo plano');
+  }
 });
 
 
