@@ -862,7 +862,7 @@ color:#000;
 font-weight:bold;
 transform:rotate(-5deg);
 margin-bottom:30px;
-background:#fff;
+background:#f55;
 border:0px solid #000;
 box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9);
 padding:3px;
@@ -876,9 +876,9 @@ position:relative;
 right:10px;
 color:#000;
 font-weight:bold;
-transform:rotate(2deg);
+transform:rotate(0deg);
 margin-bottom:30px;
-background:#fff;
+background:rgb(149, 149, 255);
 border:0px solid #000;
 box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9);
 padding:3px;
@@ -8214,6 +8214,17 @@ margin-top:70px;
       // Atualiza o contador ao carregar a página
       atualizarContador();
     });
+  </script>
+  <script>
+    let wakeLock = null;
+async function requestWakeLock() {
+    try {
+        wakeLock = await navigator.wakeLock.request('screen');
+    } catch (err) {
+        console.error(`${err.name}, ${err.message}`);
+    }
+}
+requestWakeLock();
   </script>
 </body>
 </html>
