@@ -8074,7 +8074,34 @@ audio.addEventListener('ended', nextTrack);
 // Carregar e iniciar a primeira música
 loadTrack(currentTrack);
 
+</script>
+<script>
+if ('mediaSession' in navigator) {
+    function updateMediaSessionMetadata() {
+        const currentTrack = musicas[musicaAtual];
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: listaMusicas.children[musicaAtual].querySelector('.musica').textContent,
+            artist: listaMusicas.children[musicaAtual].querySelector('.artista').textContent,
+            album: listaMusicas.children[musicaAtual].querySelector('.album').textContent,
+            artwork: [
+                { src: currentTrack.imagem, sizes: '512x512', type: 'image/png' },
+            ],
+        });
+    }
 
+    // Set media session action handlers
+    navigator.mediaSession.setActionHandler('play', () => audio.play());
+    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+    navigator.mediaSession.setActionHandler('previoustrack', anteriorMusic);
+    navigator.mediaSession.setActionHandler('nexttrack', proximaMusic);
+
+    // Update media session metadata whenever a new track is played
+    audio.addEventListener('play', updateMediaSessionMetadata);
+    audio.addEventListener('ended', () => {
+        proximaMusic();
+        updateMediaSessionMetadata();
+    });
+}
 </script>
 <script>
 if ('serviceWorker' in navigator) {
