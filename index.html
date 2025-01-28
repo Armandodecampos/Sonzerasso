@@ -502,6 +502,9 @@ height:80px;
     cursor: pointer;
   }
 
+#play-pause{
+background:#fa0;
+}
   #menu-musicas:hover,
   #modo-reproducao:hover {
     animation: mudar-cor 0.3s linear;
@@ -852,6 +855,21 @@ top:45%;
     box-shadow: 0 0 25px rgba(255, 106, 0, 1);
   }
 }
+#contador {
+z-index:1;
+position:fixed;
+top:90px;
+left:10px;
+color:#adf;
+font-weight:bold;
+transform:rotate(-5deg);
+margin-bottom:30px;
+background:#222;
+border:2px solid #000;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+padding:3px;
+font-size:14px;
+}
   </style>
 </head>
 <body>
@@ -863,7 +881,6 @@ top:45%;
     <span></span>
     <span></span>
   </div>
-  <span style="color:#fa0;position:fixed;bottom:50px">Carregando... Aguarde.</span>
 </div>
     <header class="header">
     <div class="logo">
@@ -881,7 +898,7 @@ top:45%;
   </header>
   <div id="box-informacoes" class="box-informacoes">
   <div id="informacoes" class="informacoes">
-        <h3 style="font-weight:bold;color:#000;">Ouça músicas selecionadas de qualidade! Rock, metal, blues, Jazz, Pop, folk e mais! São mais de 6.000 músicas!</h3>
+        <h3 style="font-weight:bold;color:#000;">Ouça músicas selecionadas de qualidade! Rock, metal, blues, Jazz, Pop, folk e mais! São <span id="contador2"></span>!</h3>
 <p style="font-weight:bold;color:#000;">Contribua com o crescimento do site e a adição de novas músicas!</p>
         <br>
         <br>
@@ -910,6 +927,7 @@ top:45%;
 </div>
 <div class="box-player" id="box-player">
   <div class="player">
+  <div id="contador"></div>
   <div class="musica-atual">
   <img id="imagem-musica" src="" alt="">
   <span class="artista" id="artista-atual"></span>
@@ -967,7 +985,6 @@ top:45%;
   </div>
 </div>
     <div class="playlist" id="playlist">
-    
     <div id="artistas"></div>
   <ul id="lista-musicas">
 
@@ -7846,7 +7863,7 @@ function verificarTempoTotal() {
     temporizadorVerificacao = setTimeout(() => {
       proximaMusic();
       tempoTotalVerificado = false;
-    }, 20000); // 30 segundos
+    }, 20000); // 20 segundos
   } else if (tempoTotal.textContent !== '00:00' && tempoTotalVerificado) {
     tempoTotalVerificado = false;
     clearTimeout(temporizadorVerificacao);
@@ -7889,6 +7906,38 @@ document.getElementById('fechar').addEventListener('click', function() {
     document.getElementById('copiarlink').innerText = 'Copiar link';
   }, 2000);
 });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Seleciona a lista <ul> e a div para exibir o número
+    const listaMusicas = document.getElementById('lista-musicas');
+    const contadorDiv = document.getElementById('contador');
+
+    // Conta diretamente os filhos <li> da <ul>
+    function atualizarContador() {
+      const numeroDeMusicas = listaMusicas.children.length; // Mais eficiente para grandes listas
+      contadorDiv.innerText = `${numeroDeMusicas} músicas.`;
+    }
+
+    // Atualiza o contador ao carregar a página
+    atualizarContador();
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Seleciona a lista <ul> e a div para exibir o número
+    const listaMusicas = document.getElementById('lista-musicas');
+    const contadorDiv = document.getElementById('contador2');
+
+    // Conta diretamente os filhos <li> da <ul>
+    function atualizarContador() {
+      const numeroDeMusicas = listaMusicas.children.length; // Mais eficiente para grandes listas
+      contadorDiv.innerText = `${numeroDeMusicas} músicas`;
+    }
+
+    // Atualiza o contador ao carregar a página
+    atualizarContador();
+  });
 </script>
 <script>
 async function criarlinkartistas() {
@@ -7957,32 +8006,74 @@ window.addEventListener('beforeinstallprompt', (event) => {
 });
 </script>
 <script>
-if ('mediaSession' in navigator) {
-    function updateMediaSessionMetadata() {
-        const currentTrack = musicas[musicaAtual];
-        navigator.mediaSession.metadata = new MediaMetadata({
-            title: listaMusicas.children[musicaAtual].querySelector('.musica').textContent,
-            artist: listaMusicas.children[musicaAtual].querySelector('.artista').textContent,
-            album: listaMusicas.children[musicaAtual].querySelector('.album').textContent,
-            artwork: [
-                { src: currentTrack.imagem, sizes: '512x512', type: 'image/png' },
-            ],
-        });
-    }
+// Seleção de elementos
+const audio = document.getElementById('audio');
+const playlist = [...document.querySelectorAll('#lista-musicas li')]; // Playlist baseada nos <li>
+let currentTrack = 0;
 
-    // Set media session action handlers
-    navigator.mediaSession.setActionHandler('play', () => audio.play());
-    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-    navigator.mediaSession.setActionHandler('previoustrack', anteriorMusic);
-    navigator.mediaSession.setActionHandler('nexttrack', proximaMusic);
-
-    // Update media session metadata whenever a new track is played
-    audio.addEventListener('play', updateMediaSessionMetadata);
-    audio.addEventListener('ended', () => {
-        proximaMusic();
-        updateMediaSessionMetadata();
-    });
+// Configurar a primeira música
+function loadTrack(index) {
+  const track = playlist[index];
+  audio.src = track.getAttribute('data-src'); // Pega o atributo data-src com o link do áudio
+  updateMediaSession(track);
 }
+
+// Atualizar o MediaSession API
+function updateMediaSession(track) {
+  if ('mediaSession' in navigator) {
+    const artist = track.querySelector('.artista').innerText;
+    const album = track.querySelector('.album').innerText;
+    const title = track.querySelector('.musica').innerText;
+    const artwork = [
+      { src: track.getAttribute('data-imagem'), sizes: '512x512', type: 'image/png' }
+    ];
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title,
+      artist,
+      album,
+      artwork
+    });
+  }
+}
+
+// Avançar para a próxima música
+function nextTrack() {
+  currentTrack = (currentTrack + 1) % playlist.length; // Próxima música (looping)
+  loadTrack(currentTrack);
+  audio.play();
+}
+
+// Voltar para a música anterior
+function previousTrack() {
+  currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; // Música anterior (looping)
+  loadTrack(currentTrack);
+  audio.play();
+}
+
+// Adicionar eventos de controle do MediaSession API
+if ('mediaSession' in navigator) {
+  navigator.mediaSession.setActionHandler('play', () => audio.play());
+  navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+  navigator.mediaSession.setActionHandler('previoustrack', () => previousTrack());
+  navigator.mediaSession.setActionHandler('nexttrack', () => nextTrack());
+}
+
+// Reproduzir música atual ao clicar
+document.getElementById('play-pause').addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+});
+
+// Carregar a próxima música ao terminar
+audio.addEventListener('ended', nextTrack);
+
+// Carregar e iniciar a primeira música
+loadTrack(currentTrack);
+
 
 </script>
 <script>
