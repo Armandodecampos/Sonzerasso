@@ -7684,6 +7684,42 @@ menuMusicasButton.addEventListener('click', toggleListaMusicas);
 
   </script>
   <script>
+  document.addEventListener("DOMContentLoaded", () => {
+  // Seleciona todos os <li> dentro da lista de músicas
+  const listaMusicas = document.querySelectorAll('#lista-musicas li');
+
+  // Objeto para armazenar cores exclusivas para cada artista
+  const artistaCores = {};
+  const coresDisponiveis = [
+    '#FF5733', '#33FF57', '#5733FF', '#F1C40F', '#8E44AD', '#16A085', '#C0392B'
+  ];
+
+  // Função para atribuir cores únicas para cada artista
+  function getCorParaArtista(artista) {
+    if (!artistaCores[artista]) {
+      // Seleciona uma cor única e associa ao artista
+      const cor = coresDisponiveis[Object.keys(artistaCores).length % coresDisponiveis.length];
+      artistaCores[artista] = cor;
+    }
+    return artistaCores[artista];
+  }
+
+  // Percorre todos os <li> para aplicar a cor com base no artista
+  listaMusicas.forEach((li) => {
+    const artistaSpan = li.querySelector('.artista'); // Localiza o elemento com o nome do artista
+    if (artistaSpan) {
+      const artista = artistaSpan.innerText.trim(); // Nome do artista sem espaços extras
+      const cor = getCorParaArtista(artista); // Obtém ou cria a cor do artista
+      li.style.backgroundColor = cor; // Aplica a cor ao fundo do <li>
+      li.style.color = '#fff'; // Ajusta a cor do texto para visibilidade
+      li.style.padding = '5px'; // Adiciona espaçamento (opcional)
+      li.style.borderRadius = '5px'; // Bordas arredondadas (opcional)
+    }
+  });
+});
+
+  </script>
+  <script>
 // Seleção de Elementos
 const searchInput = document.getElementById("searchInput");
 const playlist = document.getElementById("playlist");
@@ -8128,6 +8164,40 @@ window.addEventListener('load', function () {
   setInterval(() => {
     console.log('Mantendo o navegador ativo...');
   }, 1000); // Executa a cada 1 segundos
+</script>
+<script>
+let intervalId;
+
+// Função a ser chamada periodicamente
+function verificarTempoTotal() {
+  console.log('Executando verificarTempoTotal...');
+  // Adicione aqui o código da função verificarTempoTotal()
+}
+
+// Envia uma mensagem para o Service Worker
+function notificarServiceWorker() {
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({ type: 'verificarTempoTotal' });
+  }
+}
+
+// Configura o intervalo de tempo para chamar verificarTempoTotal()
+function iniciarVerificacaoEmSegundoPlano() {
+  intervalId = setInterval(() => {
+    verificarTempoTotal();
+    notificarServiceWorker(); // Notifica o Service Worker
+  }, 1000); // Intervalo de 1 segundo (ajuste conforme necessário)
+}
+
+// Listener para mensagens do Service Worker
+navigator.serviceWorker.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'executarVerificacao') {
+    verificarTempoTotal();
+  }
+});
+
+// Inicia a verificação ao carregar a página
+iniciarVerificacaoEmSegundoPlano();
 </script>
 </body>
 </html>
