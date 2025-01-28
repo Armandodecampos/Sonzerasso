@@ -1,57 +1,55 @@
 const CACHE_NAME = 'sonzerasso-cache-v1';
 const urlsToCache = [
   '/', // Página inicial
-  '/index.html', // Substitua pelo caminho do seu arquivo HTML
-  '/manifest.json',
+  '/index.html', // Página principal
+  '/manifest.json', // Manifest do PWA
+  '/apple-touch-icon.png', // Ícones
   '/favicon-32x32.png',
-  '/apple-touch-icon.png',
   '/favicon-16x16.png',
   '/site.webmanifest',
-  '/styles.css', // Substitua pelo caminho do seu CSS (separado)
-  '/script.js', // Substitua pelo caminho do seu JS principal
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css', // Font Awesome
+  'https://cdn.jsdelivr.net/npm/fuse.js@6.6.2', // Biblioteca Fuse.js para busca
+  // Adicione mais URLs estáticas ou músicas aqui para cache
 ];
 
-// Instalar o Service Worker
-self.addEventListener('install', (event) => {
+// Instalação do Service Worker
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('Abrindo cache');
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('Cache criado com sucesso!');
       return cache.addAll(urlsToCache);
     })
   );
 });
 
-// Interceptar requisições e servir do cache
-self.addEventListener('fetch', (event) => {
+// Ativação do Service Worker
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cache => {
+          if (cache !== CACHE_NAME) {
+            console.log('Cache antigo removido:', cache);
+            return caches.delete(cache);
+          }
+        })
+      );
+    })
+  );
+});
+
+// Interceptação de solicitações para servir do cache
+self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
+    caches.match(event.request).then(response => {
       return response || fetch(event.request);
     })
   );
 });
 
-// Ativar o Service Worker e limpar caches antigos
-self.addEventListener('activate', (event) => {
-  const cacheWhitelist = [CACHE_NAME];
-  event.waitUntil(
-    caches.keys().then((cacheNames) =>
-      Promise.all(
-        cacheNames.map((cacheName) => {
-          if (!cacheWhitelist.includes(cacheName)) {
-            return caches.delete(cacheName);
-          }
-        })
-      )
-    )
-  );
-});
-
-// Manter a música tocando com sincronização em segundo plano
-self.addEventListener('message', (event) => {
-  if (event.data === 'keep-alive') {
-    console.log('Manter ativo no segundo plano');
+// Manter a reprodução em segundo plano
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
   }
 });
-
-
-
