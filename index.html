@@ -324,6 +324,7 @@ height:80px;
   user-select: none; /* Padrao */
 }
 .musica-atual {
+  margin-top:60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -858,11 +859,11 @@ z-index:1;
 position:absolute;
 top:-55px;
 left:10px;
-color:#111;
+color:#fa0;
 font-weight:bold;
 transform:rotate(-5deg);
 margin-bottom:30px;
-background:#fff;
+background:#111;
 border:0px solid #000;
 box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9);
 padding:3px;
@@ -872,19 +873,20 @@ max-width:50%;
 
 .maisinfo {
 z-index:1;
-position:relative;
+position:absolute;
+top:-50px;
 right:10px;
-color:#111;
+color:#fa0;
 font-weight:bold;
-transform:rotate(0deg);
+transform:rotate(5deg);
 margin-bottom:30px;
-background:#fff;
+background:#111;
 border:0px solid #000;
 box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9);
 padding:3px;
 font-size:13px;
 max-width:50%;
-margin-top:70px;
+margin-bottom:50px;
 }
   </style>
 </head>
@@ -944,12 +946,12 @@ margin-top:70px;
 <div class="box-player" id="box-player">
   <div class="player">
   <div id="contador"></div>
+  <div class="maisinfo">Rock, metal, blues, Jazz, pop, folk e mais!</div>
   <div class="musica-atual">
   <img id="imagem-musica" src="" alt="">
   <span class="artista" id="artista-atual"></span>
   <span class="album" id="album-atual"></span>
   <span class="musica" id="musica-atual-nome"></span>
-  <div class="maisinfo">Rock, metal, blues, Jazz, pop, folk e mais!</div>
 <button id="install-button" style="display: none;">Instale o aplicativo</button>
   <br><br><br><br><br><br>
 </div>
