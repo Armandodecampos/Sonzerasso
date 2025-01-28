@@ -8010,7 +8010,8 @@ window.addEventListener('beforeinstallprompt', (event) => {
   setInterval(() => {
     console.log('Mantendo o navegador ativo...');
   }, 1000); // Executa a cada 1 segundo
-
+</script>
+<script>
   // Seleção de elementos e configuração inicial
   const playlist = [...document.querySelectorAll('#lista-musicas li')]; // Playlist baseada nos <li>
   let currentTrack = 0; // Índice da música atual
@@ -8029,7 +8030,12 @@ window.addEventListener('beforeinstallprompt', (event) => {
       const title = track.querySelector('.musica').textContent;
       const artist = track.querySelector('.artista').textContent;
       const album = track.querySelector('.album').textContent;
-      const artwork = [{ src: track.getAttribute('data-imagem'), sizes: '512x512', type: 'image/png' }];
+      const artwork = [
+        { src: track.getAttribute('data-imagem'), sizes: '96x96', type: 'image/png' },
+        { src: track.getAttribute('data-imagem'), sizes: '128x128', type: 'image/png' },
+        { src: track.getAttribute('data-imagem'), sizes: '256x256', type: 'image/png' },
+        { src: track.getAttribute('data-imagem'), sizes: '512x512', type: 'image/png' },
+      ];
 
       navigator.mediaSession.metadata = new MediaMetadata({
         title,
@@ -8037,7 +8043,27 @@ window.addEventListener('beforeinstallprompt', (event) => {
         album,
         artwork,
       });
+
+      // Adiciona ações específicas de controle
+      navigator.mediaSession.setActionHandler('play', () => audio.play());
+      navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+      navigator.mediaSession.setActionHandler('previoustrack', previousTrack);
+      navigator.mediaSession.setActionHandler('nexttrack', nextTrack);
+      navigator.mediaSession.setActionHandler('seekbackward', () => seekAudio(-10)); // Retrocede 10 segundos
+      navigator.mediaSession.setActionHandler('seekforward', () => seekAudio(10));  // Avança 10 segundos
+      navigator.mediaSession.setActionHandler('seekto', (details) => {
+        if (details.fastSeek && 'fastSeek' in audio) {
+          audio.fastSeek(details.seekTime);
+        } else {
+          audio.currentTime = details.seekTime;
+        }
+      });
     }
+  }
+
+  // Avança ou retrocede no áudio
+  function seekAudio(seconds) {
+    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + seconds));
   }
 
   // Avança para a próxima música
@@ -8054,21 +8080,6 @@ window.addEventListener('beforeinstallprompt', (event) => {
     audio.play();
   }
 
-  // Adiciona handlers para os controles de ação do MediaSession API
-  if ('mediaSession' in navigator) {
-    navigator.mediaSession.setActionHandler('play', () => audio.play());
-    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-    navigator.mediaSession.setActionHandler('previoustrack', previousTrack);
-    navigator.mediaSession.setActionHandler('nexttrack', nextTrack);
-
-    // Atualiza metadados ao iniciar uma nova reprodução
-    audio.addEventListener('play', () => updateMediaSession(playlist[currentTrack]));
-    audio.addEventListener('ended', () => {
-      nextTrack();
-      updateMediaSession(playlist[currentTrack]);
-    });
-  }
-
   // Controle de reprodução por botão
   document.getElementById('play-pause').addEventListener('click', () => {
     if (audio.paused) {
@@ -8078,28 +8089,27 @@ window.addEventListener('beforeinstallprompt', (event) => {
     }
   });
 
+  // Atualiza barra de progresso em tempo real
+  audio.addEventListener('timeupdate', () => {
+    const progress = document.getElementById('progress-bar');
+    progress.value = (audio.currentTime / audio.duration) * 100 || 0;
+  });
+
+  // Avança para o ponto clicado na barra de progresso
+  document.getElementById('progress-bar').addEventListener('input', (event) => {
+    const progress = event.target.value;
+    audio.currentTime = (progress / 100) * audio.duration;
+  });
+
+  // Atualiza metadados ao iniciar uma nova reprodução
+  audio.addEventListener('play', () => updateMediaSession(playlist[currentTrack]));
+  audio.addEventListener('ended', () => {
+    nextTrack();
+    updateMediaSession(playlist[currentTrack]);
+  });
+
   // Carrega e inicia a primeira música
   loadTrack(currentTrack);
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('/service-worker.js')
-    .then(() => console.log('Service Worker registrado com sucesso.'))
-    .catch((error) => console.error('Erro ao registrar o Service Worker:', error));
-}
-</script>
-<script>
-// Espera o carregamento completo da página
-window.addEventListener('load', function () {
-  const preloader = document.getElementById('preloader');
-  if (preloader) {
-    preloader.style.opacity = '0'; // Faz o preloader desaparecer
-    setTimeout(() => {
-      preloader.style.display = 'none'; // Remove o preloader após o efeito de transição
-    }, 500); // Tempo da transição em milissegundos (0.5s)
-  }
-});
 </script>
 </body>
 </html>
