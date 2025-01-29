@@ -8164,6 +8164,7 @@ navigator.mediaSession.setActionHandler('previoustrack', function() {
 if ('mediaSession' in navigator) {
     function updateMediaSessionMetadata() {
         const currentTrack = musicas[musicaAtual];
+
         navigator.mediaSession.metadata = new MediaMetadata({
             title: listaMusicas.children[musicaAtual].querySelector('.musica').textContent,
             artist: listaMusicas.children[musicaAtual].querySelector('.artista').textContent,
@@ -8174,32 +8175,53 @@ if ('mediaSession' in navigator) {
         });
 
         // Atualiza a posição da música na tela de bloqueio
-        navigator.mediaSession.setPositionState({
-            duration: audio.duration || 0,
-            playbackRate: audio.playbackRate || 1,
-            position: audio.currentTime || 0
-        });
+        updateMediaSessionPosition();
     }
 
-    // Definir os controles de mídia na tela de bloqueio
-    navigator.mediaSession.setActionHandler('play', () => audio.play());
-    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-    navigator.mediaSession.setActionHandler('previoustrack', anteriorMusic);
-    navigator.mediaSession.setActionHandler('nexttrack', proximaMusic);
-    
-    navigator.mediaSession.setActionHandler("seekbackward", function () {
+    function updateMediaSessionPosition() {
+        if ('setPositionState' in navigator.mediaSession && !isNaN(audio.duration)) {
+            navigator.mediaSession.setPositionState({
+                duration: audio.duration || 0,
+                playbackRate: audio.playbackRate || 1,
+                position: audio.currentTime || 0
+            });
+        }
+    }
+
+    // Configura os controles da tela de bloqueio
+    navigator.mediaSession.setActionHandler('play', () => {
+        audio.play();
+        updateMediaSessionPosition(); // Atualiza posição ao dar play
+    });
+
+    navigator.mediaSession.setActionHandler('pause', () => {
+        audio.pause();
+        updateMediaSessionPosition(); // Atualiza posição ao pausar
+    });
+
+    navigator.mediaSession.setActionHandler('previoustrack', () => {
+        anteriorMusic();
+        updateMediaSessionMetadata(); // Atualiza metadados ao trocar de faixa
+    });
+
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+        proximaMusic();
+        updateMediaSessionMetadata(); // Atualiza metadados ao trocar de faixa
+    });
+
+    navigator.mediaSession.setActionHandler("seekbackward", () => {
         audio.currentTime = Math.max(audio.currentTime - 10, 0);
-        updateMediaSessionMetadata(); // Atualiza o progresso ao retroceder
+        updateMediaSessionPosition(); // Atualiza a posição ao retroceder
     });
 
-    navigator.mediaSession.setActionHandler("seekforward", function () {
+    navigator.mediaSession.setActionHandler("seekforward", () => {
         audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
-        updateMediaSessionMetadata(); // Atualiza o progresso ao avançar
+        updateMediaSessionPosition(); // Atualiza a posição ao avançar
     });
 
-    // Atualiza os metadados sempre que a música for reproduzida ou avançada
+    // Atualiza os metadados e a posição da música regularmente
     audio.addEventListener('play', updateMediaSessionMetadata);
-    audio.addEventListener('timeupdate', updateMediaSessionMetadata);
+    audio.addEventListener('timeupdate', updateMediaSessionPosition);
     audio.addEventListener('loadedmetadata', updateMediaSessionMetadata);
     audio.addEventListener('ended', () => {
         proximaMusic();
