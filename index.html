@@ -862,17 +862,19 @@ color:#0af;
 z-index:1;
 position:absolute;
 top:-50px;
-left:10px;
+margin:auto;
+left:0;
+right:0;
 color:#fa0;
 font-weight:bold;
-transform:rotate(-5deg);
+transform:rotate(-2deg);
 margin-bottom:30px;
 background:#111;
 border:0px solid #000;
 box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9);
 padding:7px;
 font-size:13px;
-max-width:50%;
+max-width:80%;
 margin-bottom:50px;
 }
   </style>
@@ -7545,6 +7547,31 @@ margin-bottom:50px;
     playPauseButton.disabled = false;
     console.log('Áudio carregado!');
   });
+
+  // Inicio - teste para ver se a musica não para com o fone de ouvido bluetooth.
+  navigator.mediaSession.setActionHandler('play', function() {
+    audioElement.play();
+});
+navigator.mediaSession.setActionHandler('pause', function() {
+    audioElement.pause();
+});
+
+navigator.mediaSession.setActionHandler('seekbackward', function() {
+    audioElement.currentTime = Math.max(audioElement.currentTime - 10, 0);
+});
+
+navigator.mediaSession.setActionHandler('seekforward', function() {
+    audioElement.currentTime = Math.min(audioElement.currentTime + 10, audioElement.duration);
+});
+
+navigator.mediaSession.setActionHandler('nexttrack', function() {
+    proximaMusica();
+});
+
+navigator.mediaSession.setActionHandler('previoustrack', function() {
+    musicaAnterior();
+});
+// Fim - teste para ver se a musica não para com o fone de ouvido bluetooth.
   
   // Carregamento de Músicas
   for (let i = 0; i < listaMusicas.children.length; i++) {
