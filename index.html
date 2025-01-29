@@ -7572,7 +7572,16 @@ navigator.mediaSession.setActionHandler('previoustrack', function() {
     musicaAnterior();
 });
 // Fim - teste para ver se a musica não para com o fone de ouvido bluetooth.
-  
+  // Configurar ações de controle no bloqueio de tela
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.setActionHandler("seekbackward", function () {
+      audioElement.currentTime = Math.max(audioElement.currentTime - 10, 0);
+    });
+
+    navigator.mediaSession.setActionHandler("seekforward", function () {
+      audioElement.currentTime = Math.min(audioElement.currentTime + 10, audioElement.duration);
+    });
+  }
   // Carregamento de Músicas
   for (let i = 0; i < listaMusicas.children.length; i++) {
     musicas.push({
