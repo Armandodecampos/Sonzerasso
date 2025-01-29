@@ -7572,16 +7572,7 @@ navigator.mediaSession.setActionHandler('previoustrack', function() {
     musicaAnterior();
 });
 // Fim - teste para ver se a musica não para com o fone de ouvido bluetooth.
-  // Configurar ações de controle no bloqueio de tela
-  if ("mediaSession" in navigator) {
-    navigator.mediaSession.setActionHandler("seekbackward", function () {
-      audioElement.currentTime = Math.max(audioElement.currentTime - 10, 0);
-    });
-
-    navigator.mediaSession.setActionHandler("seekforward", function () {
-      audioElement.currentTime = Math.min(audioElement.currentTime + 10, audioElement.duration);
-    });
-  }
+  
   // Carregamento de Músicas
   for (let i = 0; i < listaMusicas.children.length; i++) {
     musicas.push({
@@ -8170,33 +8161,51 @@ navigator.mediaSession.setActionHandler('previoustrack', function() {
   });
   </script>
   <script>
-  if ('mediaSession' in navigator) {
-      function updateMediaSessionMetadata() {
-          const currentTrack = musicas[musicaAtual];
-          navigator.mediaSession.metadata = new MediaMetadata({
-              title: listaMusicas.children[musicaAtual].querySelector('.musica').textContent,
-              artist: listaMusicas.children[musicaAtual].querySelector('.artista').textContent,
-              album: listaMusicas.children[musicaAtual].querySelector('.album').textContent,
-              artwork: [
-                  { src: currentTrack.imagem, sizes: '512x512', type: 'image/png' },
-              ],
-          });
-      }
-  
-      // Set media session action handlers
-      navigator.mediaSession.setActionHandler('play', () => audio.play());
-      navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-      navigator.mediaSession.setActionHandler('previoustrack', anteriorMusic);
-      navigator.mediaSession.setActionHandler('nexttrack', proximaMusic);
-  
-      // Update media session metadata whenever a new track is played
-      audio.addEventListener('play', updateMediaSessionMetadata);
-      audio.addEventListener('ended', () => {
-          proximaMusic();
-          updateMediaSessionMetadata();
-      });
-  }
-  
+if ('mediaSession' in navigator) {
+    function updateMediaSessionMetadata() {
+        const currentTrack = musicas[musicaAtual];
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: listaMusicas.children[musicaAtual].querySelector('.musica').textContent,
+            artist: listaMusicas.children[musicaAtual].querySelector('.artista').textContent,
+            album: listaMusicas.children[musicaAtual].querySelector('.album').textContent,
+            artwork: [
+                { src: currentTrack.imagem, sizes: '512x512', type: 'image/png' },
+            ],
+        });
+
+        // Atualiza a posição da música na tela de bloqueio
+        navigator.mediaSession.setPositionState({
+            duration: audio.duration || 0,
+            playbackRate: audio.playbackRate || 1,
+            position: audio.currentTime || 0
+        });
+    }
+
+    // Definir os controles de mídia na tela de bloqueio
+    navigator.mediaSession.setActionHandler('play', () => audio.play());
+    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+    navigator.mediaSession.setActionHandler('previoustrack', anteriorMusic);
+    navigator.mediaSession.setActionHandler('nexttrack', proximaMusic);
+    
+    navigator.mediaSession.setActionHandler("seekbackward", function () {
+        audio.currentTime = Math.max(audio.currentTime - 10, 0);
+        updateMediaSessionMetadata(); // Atualiza o progresso ao retroceder
+    });
+
+    navigator.mediaSession.setActionHandler("seekforward", function () {
+        audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
+        updateMediaSessionMetadata(); // Atualiza o progresso ao avançar
+    });
+
+    // Atualiza os metadados sempre que a música for reproduzida ou avançada
+    audio.addEventListener('play', updateMediaSessionMetadata);
+    audio.addEventListener('timeupdate', updateMediaSessionMetadata);
+    audio.addEventListener('loadedmetadata', updateMediaSessionMetadata);
+    audio.addEventListener('ended', () => {
+        proximaMusic();
+        updateMediaSessionMetadata();
+    });
+}
   </script>
   <script>
 if ('serviceWorker' in navigator) {
