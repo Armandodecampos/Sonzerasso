@@ -854,20 +854,16 @@ top:45%;
   }
 }
 
-#contador {
-color:#000;
-}
-
 .maisinfo {
 z-index:1;
 top:0px;
 margin:auto;
 left:0;
 right:0;
-color:#000;
+color:#333;
 font-weight:bold;
 margin-bottom:30px;
-font-size:17px;
+font-size:18px;
 max-width:80%;
 margin-top:20px;
 margin-bottom:10px;
@@ -929,6 +925,7 @@ margin-bottom:10px;
 </div>
 <div class="box-player" id="box-player">
   <div class="player">
+  <div class="maisinfo" id="maisinfo"><span id="contador"></span>músicas! Uma seleção de rock, metal, blues, jazz, pop, folk e muito mais.</div>
   <div class="musica-atual">
   <img id="imagem-musica" src="" alt="">
   <span class="artista" id="artista-atual"></span>
@@ -986,8 +983,6 @@ margin-bottom:10px;
   </div>
 </div>
     <div class="playlist" id="playlist">
-    <span style="font-size:23px;color:#d80;font-weight:bold" >DESCUBRA NOVAS MÚSICAS!</span>
-    <div class="maisinfo" id="maisinfo"><span id="contador"></span>músicas para você ouvir! Uma vasta seleção de rock, metal, blues, jazz, pop, folk e muito mais.</div>
     <div id="artistas"></div>
   <ul id="lista-musicas">
 
@@ -8286,21 +8281,21 @@ if ('serviceWorker' in navigator) {
     }, 1000); // Executa a cada 1 segundos
   </script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Seleciona a lista <ul> e a div para exibir o número
-      const listaMusicas = document.getElementById('lista-musicas');
-      const contadorDiv = document.getElementById('contador');
-  
-      // Conta diretamente os filhos <li> da <ul>
-      function atualizarContador() {
-        const numeroDeMusicas = listaMusicas.children.length; // Mais eficiente para grandes listas
-        contadorDiv.innerText = `${numeroDeMusicas} `;
-      }
-  
-      // Atualiza o contador ao carregar a página
-      atualizarContador();
-    });
-  </script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Seleciona a lista <ul> e a div para exibir o número
+    const listaMusicas = document.getElementById('lista-musicas');
+    const contadorDiv = document.getElementById('contador');
+
+    // Conta diretamente os filhos <li> da <ul>
+    function atualizarContador() {
+      const numeroDeMusicas = listaMusicas.children.length; 
+      contadorDiv.innerText = `${numeroDeMusicas.toLocaleString('pt-BR')} `;
+    }
+
+    // Atualiza o contador ao carregar a página
+    atualizarContador();
+  });
+</script>
   <script>
     let wakeLock = null;
 
