@@ -861,22 +861,23 @@ color:#0af;
 .maisinfo {
 z-index:1;
 position:absolute;
-top:-50px;
+top:0px;
 margin:auto;
 left:0;
 right:0;
-color:#fa0;
+color:#d80;
 font-weight:bold;
 transform:rotate(-2deg);
 margin-bottom:30px;
-background:#111;
-border:0px solid #000;
-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9);
-padding:7px;
-font-size:13px;
+font-size:14px;
 max-width:80%;
-margin-bottom:50px;
+margin-bottom:30px;
+opacity: 0;
+transition: opacity 0.5s;
 }
+.maisinfo.visivel {
+    opacity: 1;
+  }
   </style>
 </head>
 <body>
@@ -934,7 +935,7 @@ margin-bottom:50px;
 </div>
 <div class="box-player" id="box-player">
   <div class="player">
-  <div class="maisinfo"><span id="contador"></span>Rock, metal, blues, jazz, pop, folk e mais!</div>
+  <div class="maisinfo" id="maisinfo"><span id="contador"></span>Rock, metal, blues, jazz, pop, folk e mais!</div>
   <div class="musica-atual">
   <img id="imagem-musica" src="" alt="">
   <span class="artista" id="artista-atual"></span>
@@ -8335,5 +8336,19 @@ document.addEventListener("visibilitychange", () => {
     }
 });
   </script>
+  <script>
+  const maisinfo = document.getElementById('maisinfo');
+  let visivel = false;
+
+  setInterval(() => {
+    if (visivel) {
+      maisinfo.classList.remove('visivel');
+      visivel = false;
+    } else {
+      maisinfo.classList.add('visivel');
+      visivel = true;
+    }
+  }, 10000); // 30 segundos
+</script>
 </body>
 </html>
