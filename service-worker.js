@@ -1,14 +1,14 @@
 const CACHE_NAME = 'sonzerasso-cache-v1';
 const urlsToCache = [
-  '/', // Página inicial
-  '/index.html', // Substitua pelo caminho do seu arquivo HTML
+  '/', 
+  '/index.html', 
   '/manifest.json',
   '/favicon-32x32.png',
-  '/apple-touch-icon.png',
+  '/apple-touchs-icon.png',
   '/favicon-16x16.png',
   '/site.webmanifest',
-  '/styles.css', // Substitua pelo caminho do seu CSS (separado)
-  '/script.js', // Substitua pelo caminho do seu JS principal
+  '/styles.css', 
+  '/script.js', 
 ];
 
 // Instalar o Service Worker
@@ -24,13 +24,13 @@ self.addEventListener('install', (event) => {
 // Interceptar requisições e servir do cache
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
+    caches.match(event.event.request).then((response) => {
       return response || fetch(event.request);
     })
   );
 });
 
-// Ativar o Service Worker e limpar caches antigos
+// Ativar o Service Worker, limpar caches antigos e verificar atualizações
 self.addEventListener('activate', (event) => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -44,6 +44,22 @@ self.addEventListener('activate', (event) => {
       )
     )
   );
+
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.keys().then((keys) => {
+        return Promise.all(
+          keys.map((key) => {
+            return fetch(key.url).then((response) => {
+              if (response.status === 200) {
+                cache.put(key, response);
+              }
+            });
+          })
+        );
+      });
+    })
+  );
 });
 
 // Manter a música tocando com sincronização em segundo plano
@@ -52,6 +68,3 @@ self.addEventListener('message', (event) => {
     console.log('Manter ativo no segundo plano');
   }
 });
-
-
-
