@@ -101,7 +101,7 @@ height:50px;
 
     .player {
       position: absolute;
-  top: 71px; /* Ajuste conforme necessário */
+  top: 11px; /* Ajuste conforme necessário */
   bottom: 170px; /* Altura da barra de controles */
   left: 0;
   right: 0;
@@ -855,29 +855,23 @@ top:45%;
 }
 
 #contador {
-color:#0af;
+color:#000;
 }
 
 .maisinfo {
 z-index:1;
-position:absolute;
 top:0px;
 margin:auto;
 left:0;
 right:0;
-color:#d80;
+color:#000;
 font-weight:bold;
-transform:rotate(-2deg);
 margin-bottom:30px;
-font-size:14px;
+font-size:17px;
 max-width:80%;
-margin-bottom:30px;
-opacity: 0;
-transition: opacity 0.5s;
+margin-top:20px;
+margin-bottom:10px;
 }
-.maisinfo.visivel {
-    opacity: 1;
-  }
   </style>
 </head>
 <body>
@@ -935,7 +929,6 @@ transition: opacity 0.5s;
 </div>
 <div class="box-player" id="box-player">
   <div class="player">
-  <div class="maisinfo" id="maisinfo"><span id="contador"></span>Rock, metal, blues, jazz, pop, folk e mais!</div>
   <div class="musica-atual">
   <img id="imagem-musica" src="" alt="">
   <span class="artista" id="artista-atual"></span>
@@ -993,7 +986,8 @@ transition: opacity 0.5s;
   </div>
 </div>
     <div class="playlist" id="playlist">
-    
+    <span style="font-size:23px;color:#d80;font-weight:bold" >DESCUBRA NOVAS MÚSICAS!</span>
+    <div class="maisinfo" id="maisinfo"><span id="contador"></span>músicas para você ouvir! Uma vasta seleção de rock, metal, blues, jazz, pop, folk e muito mais.</div>
     <div id="artistas"></div>
   <ul id="lista-musicas">
 
@@ -8300,7 +8294,7 @@ if ('serviceWorker' in navigator) {
       // Conta diretamente os filhos <li> da <ul>
       function atualizarContador() {
         const numeroDeMusicas = listaMusicas.children.length; // Mais eficiente para grandes listas
-        contadorDiv.innerText = `${numeroDeMusicas} músicas. `;
+        contadorDiv.innerText = `${numeroDeMusicas} `;
       }
   
       // Atualiza o contador ao carregar a página
@@ -8336,19 +8330,5 @@ document.addEventListener("visibilitychange", () => {
     }
 });
   </script>
-  <script>
-  const maisinfo = document.getElementById('maisinfo');
-  let visivel = false;
-
-  setInterval(() => {
-    if (visivel) {
-      maisinfo.classList.remove('visivel');
-      visivel = false;
-    } else {
-      maisinfo.classList.add('visivel');
-      visivel = true;
-    }
-  }, 10000); // 30 segundos
-</script>
 </body>
 </html>
