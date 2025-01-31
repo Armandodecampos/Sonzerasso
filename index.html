@@ -8140,16 +8140,6 @@ function debounceUpdateMediaSession() {
     debounceTimeout = setTimeout(updateMediaSessionPosition, 300);
 }
 
-function gerarImagemFundo(cor, largura = 512, altura = 512) {
-    const canvas = document.createElement("canvas");
-    canvas.width = largura;
-    canvas.height = altura;
-    const ctx = canvas.getContext("2d");
-    ctx.fillStyle = cor;
-    ctx.fillRect(0, 0, largura, altura);
-    return canvas.toDataURL("image/png");
-}
-
 navigator.mediaSession.metadata = new MediaMetadata({
     title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
     artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
@@ -8160,6 +8150,7 @@ navigator.mediaSession.metadata = new MediaMetadata({
         type: "image/png"
     }]
 });
+
 
 
 
@@ -8361,6 +8352,17 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
+  </script>
+  <script>
+  function gerarImagemFundo(cor, largura = 512, altura = 512) {
+    const canvas = document.createElement("canvas");
+    canvas.width = largura;
+    canvas.height = altura;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = cor;
+    ctx.fillRect(0, 0, largura, altura);
+    return canvas.toDataURL("image/png");
+}
   </script>
 </body>
 </html>
