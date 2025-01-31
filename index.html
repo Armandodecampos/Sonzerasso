@@ -8141,120 +8141,75 @@ function debounceUpdateMediaSession() {
 }
 
 if ("mediaSession" in navigator) {
-  function updateMediaSessionMetadata() {
-    if (!musicas || musicaAtual < 0 || musicaAtual >= musicas.length) return;
+    function updateMediaSessionMetadata() {
+        if (!musicas || musicaAtual < 0 || musicaAtual >= musicas.length) return;
 
-    const currentTrack = musicas[musicaAtual];
+        const currentTrack = musicas[musicaAtual];
 
-    navigator.mediaSession.metadata = new MediaMetadata({
-        title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
-        artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
-        album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
-        artwork: [{ src: currentTrack.imagem || "", sizes: "512x512", type: "image/png" }],
-    });
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
+            artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
+            album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
+            artwork: [
+                { src: `${currentTrack.imagem}?t=${Date.now()}` || "", sizes: "512x512", type: "image/png" }
+            ],
+        });
 
-    updateMediaSessionPosition();
-}
-
-// Adiciona o evento de atualização do tempo **apenas uma vez**
-audio.addEventListener("timeupdate", debounceUpdateMediaSession);
+        updateMediaSessionPosition();
+    }
 
     function updateMediaSessionPosition() {
-    if (!("setPositionState" in navigator.mediaSession)) return;
-    if (isNaN(audio.duration) || audio.duration <= 0 || isNaN(audio.currentTime)) return;
+        if (!("setPositionState" in navigator.mediaSession)) return;
+        if (isNaN(audio.duration) || audio.duration <= 0 || isNaN(audio.currentTime)) return;
 
-    try {
-        navigator.mediaSession.setPositionState({
-            duration: audio.duration || 0,
-            playbackRate: audio.playbackRate || 1,
-            position: audio.currentTime || 0
-        });
-    } catch (error) {
-        console.warn("Erro ao atualizar setPositionState:", error);
-    }
-}
-
-
-    let mediaSessionLoop; // Variável para armazenar o loop
-
-    function startMediaSessionLoop() {
-        if (mediaSessionLoop) clearInterval(mediaSessionLoop); // Evita múltiplas execuções
-
-        mediaSessionLoop = setInterval(() => {
-            if (!audio.paused) {
-                updateMediaSessionPosition();
-            }
-        }, 1000);
+        try {
+            navigator.mediaSession.setPositionState({
+                duration: audio.duration || 0,
+                playbackRate: audio.playbackRate || 1,
+                position: audio.currentTime || 0
+            });
+        } catch (error) {
+            console.warn("Erro ao atualizar setPositionState:", error);
+        }
     }
 
-    // Configura os controles da tela de bloqueio
-    navigator.mediaSession.setActionHandler("play", () => {
+    // Atualiza os metadados logo após a música mudar
+    function trocarMusica(novaMusicaIndex) {
+        musicaAtual = novaMusicaIndex;
+        audio.src = musicas[musicaAtual].src;
         audio.play();
-        updateMediaSessionMetadata();
-        startMediaSessionLoop();
-    });
 
-    navigator.mediaSession.setActionHandler("pause", () => {
-        audio.pause();
-        updateMediaSessionMetadata();
-    });
+        // Pequeno atraso para garantir que os metadados atualizem corretamente
+        setTimeout(updateMediaSessionMetadata, 500);
+    }
 
+    // Handlers da tela de bloqueio
     navigator.mediaSession.setActionHandler("previoustrack", () => {
-        anteriorMusic();
-        updateMediaSessionMetadata();
+        trocarMusica(musicaAtual - 1);
     });
 
     navigator.mediaSession.setActionHandler("nexttrack", () => {
-        proximaMusic();
-        updateMediaSessionMetadata();
+        trocarMusica(musicaAtual + 1);
     });
 
-    navigator.mediaSession.setActionHandler("seekbackward", () => {
-        audio.currentTime = Math.max(audio.currentTime - 10, 0);
-        updateMediaSessionPosition();
-    });
-
-    navigator.mediaSession.setActionHandler("seekforward", () => {
-        audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
-        updateMediaSessionPosition();
-    });
-    navigator.mediaSession.setActionHandler("seekbackward", () => {
-    requestAnimationFrame(() => {
-        audio.currentTime = Math.max(audio.currentTime - 10, 0);
-        debounceUpdateMediaSession();
-    });
-});
-
-navigator.mediaSession.setActionHandler("seekforward", () => {
-    requestAnimationFrame(() => {
-        audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
-        debounceUpdateMediaSession();
-    });
-});
-
-    // Eventos para atualizar metadados e posição
+    // Eventos para atualização automática
     audio.addEventListener("play", () => {
         updateMediaSessionMetadata();
-        startMediaSessionLoop();
     });
 
-    audio.addEventListener("pause", () => {
-        updateMediaSessionMetadata();
+    audio.addEventListener("loadedmetadata", () => {
+        setTimeout(updateMediaSessionMetadata, 500);
     });
 
-    audio.addEventListener("timeupdate", updateMediaSessionPosition);
-    audio.addEventListener("loadedmetadata", updateMediaSessionMetadata);
     audio.addEventListener("ended", () => {
-        proximaMusic();
-        updateMediaSessionMetadata();
+        trocarMusica(musicaAtual + 1);
     });
 
-    // Inicia o loop apenas se o áudio já estiver tocando ao carregar a página
+    // Forçar atualização se o áudio já estiver tocando ao carregar a página
     if (!audio.paused) {
-        startMediaSessionLoop();
+        setTimeout(updateMediaSessionMetadata, 500);
     }
 }
-
   </script>
   <script>
 if ('serviceWorker' in navigator) {
