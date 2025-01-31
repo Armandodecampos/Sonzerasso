@@ -7558,7 +7558,7 @@ margin-bottom:10px;
   audio.addEventListener('canplaythrough', () => {
     carregando.style.display = 'none'; // Esconde a div de carregando
     playPauseButton.disabled = false;
-    updateMediaSessionMetadata();
+    debounceUpdateMediaSession();
     console.log('Áudio carregado!');
   });
   volumeControl.addEventListener('input', ajustaVolume);
