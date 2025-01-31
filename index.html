@@ -8178,6 +8178,15 @@ if (details.seekTime !== undefined) {
     updateMediaSessionPosition();
 }
 });
+navigator.mediaSession.setActionHandler("previoustrack", () => {
+      anteriorMusic();
+      updateMediaSessionMetadata();
+  });
+
+  navigator.mediaSession.setActionHandler("nexttrack", () => {
+      proximaMusic();
+      updateMediaSessionMetadata();
+  });
 
 // Atualiza os metadados e posição ao iniciar uma nova música
 audio.addEventListener("loadedmetadata", updateMediaSessionMetadata);
