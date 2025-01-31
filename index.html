@@ -6682,7 +6682,7 @@ margin-bottom:10px;
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	09. Dusted.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Dusted	</span></li>
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	10. Born Stubborn.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Born Stubborn	</span></li>
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	11. Jasco.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Jasco	</span></li>
-<li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	12. Its ri.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Its ri	</span></li>
+<li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	12. Its ri.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Its ri	</span></li>
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	13. Ambush.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Ambush	</span></li>
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	14. Endangered Species.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Endangered Species	</span></li>
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	15. Dictatorshit.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Dictatorshit	</span></li>
@@ -7731,7 +7731,6 @@ margin-bottom:10px;
       audio.load();  // Carrega a nova música
     }
     selecionaMusicaAtual();  // Atualiza a interface com a nova música selecionada
-    updateMediaSessionMetadata();
     playMusic();
   }
   
@@ -8186,16 +8185,7 @@ if ("mediaSession" in navigator) {
     }
 
     // Configura os controles da tela de bloqueio
-    navigator.mediaSession.setActionHandler("play", () => {
-        audio.play();
-        updateMediaSessionMetadata();
-        startMediaSessionLoop();
-    });
 
-    navigator.mediaSession.setActionHandler("pause", () => {
-        audio.pause();
-        updateMediaSessionMetadata();
-    });
 
     navigator.mediaSession.setActionHandler("previoustrack", () => {
         anteriorMusic();
