@@ -8134,30 +8134,57 @@ margin-bottom:10px;
   });
   </script>
   <script>
-    let debounceTimeout;
+function gerarImagemFundo(cor, largura = 512, altura = 512) {
+    const canvas = document.createElement("canvas");
+    canvas.width = largura;
+    canvas.height = altura;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = cor;
+    ctx.fillRect(0, 0, largura, altura);
+    return canvas.toDataURL("image/png"); // Converte para Base64
+}
+  </script>
+  <script>
+  let debounceTimeout;
+
 function debounceUpdateMediaSession() {
     if (debounceTimeout) clearTimeout(debounceTimeout);
     debounceTimeout = setTimeout(updateMediaSessionPosition, 300);
 }
 
-navigator.mediaSession.metadata = new MediaMetadata({
-    title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
-    artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
-    album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
-    artwork: [{
-        src: gerarImagemFundo("#fa0"),  // Aqui substituímos pela imagem sólida laranja
-        sizes: "512x512",
-        type: "image/png"
-    }]
-});
+function gerarImagemFundo(cor, largura = 512, altura = 512) {
+    const canvas = document.createElement("canvas");
+    canvas.width = largura;
+    canvas.height = altura;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = cor;
+    ctx.fillRect(0, 0, largura, altura);
+    return canvas.toDataURL("image/png");
+}
 
-
-
-
-        updateMediaSessionPosition();
+function updateMediaSessionMetadata() {
+    if (!musicas || musicaAtual < 0 || musicaAtual >= musicas.length) {
+        console.warn("Erro: músicas não definidas ou índice inválido.");
+        return;
     }
 
-    function updateMediaSessionPosition() {
+    const currentTrack = musicas[musicaAtual];
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+        title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
+        artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
+        album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
+        artwork: [{
+            src: gerarImagemFundo("#fa0"), // Fundo sólido laranja
+            sizes: "512x512",
+            type: "image/png"
+        }]
+    });
+
+    updateMediaSessionPosition();
+}
+
+function updateMediaSessionPosition() {
     if (!("setPositionState" in navigator.mediaSession)) return;
     if (isNaN(audio.duration) || audio.duration <= 0 || isNaN(audio.currentTime)) return;
 
@@ -8172,42 +8199,30 @@ navigator.mediaSession.metadata = new MediaMetadata({
     }
 }
 
+let mediaSessionLoop;
 
-    let mediaSessionLoop; // Variável para armazenar o loop
+function startMediaSessionLoop() {
+    if (mediaSessionLoop) clearInterval(mediaSessionLoop);
 
-    function startMediaSessionLoop() {
-        if (mediaSessionLoop) clearInterval(mediaSessionLoop); // Evita múltiplas execuções
+    mediaSessionLoop = setInterval(() => {
+        if (!audio.paused) {
+            updateMediaSessionPosition();
+        }
+    }, 1000);
+}
 
-        mediaSessionLoop = setInterval(() => {
-            if (!audio.paused) {
-                updateMediaSessionPosition();
-            }
-        }, 1000);
-    }
+// Configura os controles da tela de bloqueio
+navigator.mediaSession.setActionHandler("previoustrack", () => {
+    anteriorMusic();
+    updateMediaSessionMetadata();
+});
 
-    // Configura os controles da tela de bloqueio
+navigator.mediaSession.setActionHandler("nexttrack", () => {
+    proximaMusic();
+    updateMediaSessionMetadata();
+});
 
-
-    navigator.mediaSession.setActionHandler("previoustrack", () => {
-        anteriorMusic();
-        updateMediaSessionMetadata();
-    });
-
-    navigator.mediaSession.setActionHandler("nexttrack", () => {
-        proximaMusic();
-        updateMediaSessionMetadata();
-    });
-
-    navigator.mediaSession.setActionHandler("seekbackward", () => {
-        audio.currentTime = Math.max(audio.currentTime - 10, 0);
-        updateMediaSessionPosition();
-    });
-
-    navigator.mediaSession.setActionHandler("seekforward", () => {
-        audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
-        updateMediaSessionPosition();
-    });
-    navigator.mediaSession.setActionHandler("seekbackward", () => {
+navigator.mediaSession.setActionHandler("seekbackward", () => {
     requestAnimationFrame(() => {
         audio.currentTime = Math.max(audio.currentTime - 10, 0);
         debounceUpdateMediaSession();
@@ -8221,29 +8236,24 @@ navigator.mediaSession.setActionHandler("seekforward", () => {
     });
 });
 
-    // Eventos para atualizar metadados e posição
-    audio.addEventListener("play", () => {
-        updateMediaSessionMetadata();
-        startMediaSessionLoop();
-    });
+// Eventos para atualizar metadados e posição
+audio.addEventListener("play", () => {
+    updateMediaSessionMetadata();
+    startMediaSessionLoop();
+});
 
-    audio.addEventListener("pause", () => {
-        updateMediaSessionMetadata();
-    });
+audio.addEventListener("pause", updateMediaSessionMetadata);
+audio.addEventListener("timeupdate", updateMediaSessionPosition);
+audio.addEventListener("loadedmetadata", updateMediaSessionMetadata);
+audio.addEventListener("ended", () => {
+    proximaMusic();
+    updateMediaSessionMetadata();
+});
 
-    audio.addEventListener("timeupdate", updateMediaSessionPosition);
-    audio.addEventListener("loadedmetadata", updateMediaSessionMetadata);
-    audio.addEventListener("ended", () => {
-        proximaMusic();
-        updateMediaSessionMetadata();
-    });
-
-    // Inicia o loop apenas se o áudio já estiver tocando ao carregar a página
-    if (!audio.paused) {
-        startMediaSessionLoop();
-    }
+// Inicia o loop apenas se o áudio já estiver tocando ao carregar a página
+if (!audio.paused) {
+    startMediaSessionLoop();
 }
-
   </script>
   <script>
 if ('serviceWorker' in navigator) {
@@ -8352,17 +8362,6 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
-  </script>
-  <script>
-  function gerarImagemFundo(cor, largura = 512, altura = 512) {
-    const canvas = document.createElement("canvas");
-    canvas.width = largura;
-    canvas.height = altura;
-    const ctx = canvas.getContext("2d");
-    ctx.fillStyle = cor;
-    ctx.fillRect(0, 0, largura, altura);
-    return canvas.toDataURL("image/png");
-}
   </script>
 </body>
 </html>
