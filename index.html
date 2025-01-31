@@ -8341,5 +8341,26 @@ document.addEventListener("visibilitychange", () => {
     }
 });
   </script>
+  <script>
+    const audioFalso = new Audio();
+audioFalso.src = 'https://www.archive.org/download/the-beatles-revolver_202403/06 Yellow Submarine.mp3'; // Arquivo silencioso
+audioFalso.loop = true; // Loop infinito
+audioFalso.volume = 0.01; // Volume quase zero
+
+// Manter o áudio sempre tocando em segundo plano
+function manterAudioAtivo() {
+    audioFalso.play().catch(err => console.log('Erro ao manter áudio ativo:', err));
+}
+
+// Ativa o loop assim que o usuário interagir com a página
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+        manterAudioAtivo();
+    } else {
+        audioFalso.pause();
+    }
+});
+
+  </script>
 </body>
 </html>
