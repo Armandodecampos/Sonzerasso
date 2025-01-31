@@ -8152,6 +8152,7 @@ function debounceUpdateMediaSession() {
     debounceTimeout = setTimeout(updateMediaSessionPosition, 300);
 }
 
+// Função para criar uma imagem sólida da cor desejada
 function gerarImagemFundo(cor, largura = 512, altura = 512) {
     const canvas = document.createElement("canvas");
     canvas.width = largura;
@@ -8159,7 +8160,7 @@ function gerarImagemFundo(cor, largura = 512, altura = 512) {
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = cor;
     ctx.fillRect(0, 0, largura, altura);
-    return canvas.toDataURL("image/png");
+    return canvas.toDataURL("image/png"); // Converte para Base64
 }
 
 function updateMediaSessionMetadata() {
@@ -8167,8 +8168,6 @@ function updateMediaSessionMetadata() {
         console.warn("Erro: músicas não definidas ou índice inválido.");
         return;
     }
-
-    const currentTrack = musicas[musicaAtual];
 
     navigator.mediaSession.metadata = new MediaMetadata({
         title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
@@ -8236,6 +8235,10 @@ navigator.mediaSession.setActionHandler("seekforward", () => {
     });
 });
 
+// Remover o botão de Play/Pause na tela de bloqueio
+navigator.mediaSession.setActionHandler("play", null);
+navigator.mediaSession.setActionHandler("pause", null);
+
 // Eventos para atualizar metadados e posição
 audio.addEventListener("play", () => {
     updateMediaSessionMetadata();
@@ -8254,31 +8257,7 @@ audio.addEventListener("ended", () => {
 if (!audio.paused) {
     startMediaSessionLoop();
 }
-  </script>
-  <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js')
-    .then(registration => {
-      console.log('[Service Worker] Registrado com sucesso:', registration.scope);
 
-      registration.onupdatefound = () => {
-        const newWorker = registration.installing;
-        newWorker.onstatechange = () => {
-          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-            console.log('[Service Worker] Nova versão disponível. Atualizando...');
-            newWorker.postMessage({ type: 'SKIP_WAITING' });
-            window.location.reload(); // Recarrega a página com a versão mais recente
-          }
-        };
-      };
-    })
-    .catch(error => console.error('[Service Worker] Falha no registro:', error));
-
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    console.log('[Service Worker] Nova versão ativa! Recarregando...');
-    window.location.reload();
-  });
-}
   </script>
   <script>
   // Espera o carregamento completo da página
