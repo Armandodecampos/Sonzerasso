@@ -7630,7 +7630,7 @@ margin-bottom:10px;
         musicaAtual = i;
         audio.src = musicas[i].dataset.src;
         document.getElementById('musica-atual-nome').textContent = musicas[i].textContent;
-        document.getElementById('imagem-musica').src = musicas[i].dataset.imagem + "?t=" + new Date().getTime();
+        document.getElementById('imagem-musica').src = musicas[i].dataset.imagem;
         break;
       }
     }
@@ -7671,7 +7671,6 @@ margin-bottom:10px;
       audio.load();
     }
     selecionaMusicaAtual();
-    updateMediaSessionMetadata();
     playMusic();
   }
   
@@ -8149,15 +8148,11 @@ if ("mediaSession" in navigator) {
         const currentTrack = musicas[musicaAtual];
 
         navigator.mediaSession.metadata = new MediaMetadata({
-    title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
-    artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
-    album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
-    artwork: [{
-        src: currentTrack.imagem ? currentTrack.imagem + "?t=" + new Date().getTime() : "",
-        sizes: "512x512",
-        type: "image/png"
-    }]
-});
+            title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
+            artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
+            album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
+            artwork: [{ src: currentTrack.imagem || "", sizes: "512x512", type: "image/png" }],
+        });
 
         updateMediaSessionPosition();
     }
@@ -8358,6 +8353,13 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
+  </script>
+  <script>
+  setInterval(() => {
+    if (!audio.paused) {
+        updateMediaSessionMetadata();
+    }
+}, 2000); // Atualiza a cada 2 segundos
   </script>
 </body>
 </html>
