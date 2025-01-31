@@ -8134,113 +8134,16 @@ margin-bottom:10px;
   });
   </script>
   <script>
-function gerarImagemFundo(cor, largura = 512, altura = 512) {
-    const canvas = document.createElement("canvas");
-    canvas.width = largura;
-    canvas.height = altura;
-    const ctx = canvas.getContext("2d");
-    ctx.fillStyle = cor;
-    ctx.fillRect(0, 0, largura, altura);
-    return canvas.toDataURL("image/png"); // Converte para Base64
-}
-  </script>
-  <script>
-  let debounceTimeout;
+  // Remove os metadados da mídia
+navigator.mediaSession.metadata = null;
 
-function debounceUpdateMediaSession() {
-    if (debounceTimeout) clearTimeout(debounceTimeout);
-    debounceTimeout = setTimeout(updateMediaSessionPosition, 300);
-}
-
-function updateMediaSessionMetadata() {
-    if (!musicas || musicaAtual < 0 || musicaAtual >= musicas.length) return;
-
-    navigator.mediaSession.metadata = new MediaMetadata({
-        title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
-        artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
-        artwork: [] // 🔴 Remove a imagem de fundo
-    });
-
-    updateMediaSessionPosition();
-
-    // 🔴 Remover Play/Pause forçando handlers vazios
-    setTimeout(() => {
-        navigator.mediaSession.setActionHandler("play", () => {});
-        navigator.mediaSession.setActionHandler("pause", () => {});
-    }, 500);
-}
-
-function updateMediaSessionPosition() {
-    if (!("setPositionState" in navigator.mediaSession)) return;
-    if (isNaN(audio.duration) || audio.duration <= 0 || isNaN(audio.currentTime)) return;
-
-    try {
-        navigator.mediaSession.setPositionState({
-            duration: audio.duration || 0,
-            playbackRate: audio.playbackRate || 1,
-            position: audio.currentTime || 0
-        });
-    } catch (error) {
-        console.warn("Erro ao atualizar setPositionState:", error);
-    }
-}
-
-let mediaSessionLoop;
-
-function startMediaSessionLoop() {
-    if (mediaSessionLoop) clearInterval(mediaSessionLoop);
-
-    mediaSessionLoop = setInterval(() => {
-        if (!audio.paused) {
-            updateMediaSessionPosition();
-        }
-    }, 1000);
-}
-
-// Configura os controles da tela de bloqueio (mantém "Próxima" e "Anterior")
-navigator.mediaSession.setActionHandler("previoustrack", () => {
-    anteriorMusic();
-    updateMediaSessionMetadata();
-});
-
-navigator.mediaSession.setActionHandler("nexttrack", () => {
-    proximaMusic();
-    updateMediaSessionMetadata();
-});
-
-navigator.mediaSession.setActionHandler("seekbackward", () => {
-    requestAnimationFrame(() => {
-        audio.currentTime = Math.max(audio.currentTime - 10, 0);
-        debounceUpdateMediaSession();
-    });
-});
-
-navigator.mediaSession.setActionHandler("seekforward", () => {
-    requestAnimationFrame(() => {
-        audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
-        debounceUpdateMediaSession();
-    });
-});
-
-// Eventos para atualizar metadados e posição
-audio.addEventListener("play", () => {
-    updateMediaSessionMetadata();
-    startMediaSessionLoop();
-});
-
-audio.addEventListener("pause", updateMediaSessionMetadata);
-audio.addEventListener("timeupdate", updateMediaSessionPosition);
-audio.addEventListener("loadedmetadata", updateMediaSessionMetadata);
-audio.addEventListener("ended", () => {
-    proximaMusic();
-    updateMediaSessionMetadata();
-});
-
-// Inicia o loop apenas se o áudio já estiver tocando ao carregar a página
-if (!audio.paused) {
-    startMediaSessionLoop();
-}
-
+// Remove todos os botões de controle da tela de bloqueio
+navigator.mediaSession.setActionHandler("play", null);
+navigator.mediaSession.setActionHandler("pause", null);
+navigator.mediaSession.setActionHandler("previoustrack", null);
+navigator.mediaSession.setActionHandler("nexttrack", null);
+navigator.mediaSession.setActionHandler("seekbackward", null);
+navigator.mediaSession.setActionHandler("seekforward", null);
   </script>
   <script>
   // Espera o carregamento completo da página
