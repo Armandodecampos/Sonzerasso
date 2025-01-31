@@ -18,7 +18,7 @@
     }
   ],
   "permissions": ["background-sync", "audio"],
-  "description": "Ouça músicas selecionadas no Sonzerasso, mesmo com a tela bloqueada!",
+  "description": "Ouça músicas selecionadas no Sonzerasso!",
   "categories": ["music", "entertainment"],
   "related_applications": [],
   "prefer_related_applications": false
