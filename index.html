@@ -8134,16 +8134,29 @@ margin-bottom:10px;
   });
   </script>
   <script>
-  // Remove os metadados da mídia
-navigator.mediaSession.metadata = null;
+if ('mediaSession' in navigator) {
+  function atualizarMediaSession(titulo, artista, capa) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: titulo,
+      artist: artista,
+      album: 'Desconhecido',
+      artwork: [{ src: capa, sizes: '300x300', type: 'image/jpeg' }]
+    });
+  }
 
-// Remove todos os botões de controle da tela de bloqueio
-navigator.mediaSession.setActionHandler("play", null);
-navigator.mediaSession.setActionHandler("pause", null);
-navigator.mediaSession.setActionHandler("previoustrack", null);
-navigator.mediaSession.setActionHandler("nexttrack", null);
-navigator.mediaSession.setActionHandler("seekbackward", null);
-navigator.mediaSession.setActionHandler("seekforward", null);
+  // Exemplo: Atualizando com a música atual
+  document.addEventListener('musicaTocando', function(event) {
+    atualizarMediaSession(event.detail.titulo, event.detail.artista, event.detail.capa);
+  });
+
+  // Remove os controles
+  navigator.mediaSession.setActionHandler("play", null);
+  navigator.mediaSession.setActionHandler("pause", null);
+  navigator.mediaSession.setActionHandler("previoustrack", null);
+  navigator.mediaSession.setActionHandler("nexttrack", null);
+  navigator.mediaSession.setActionHandler("seekbackward", null);
+  navigator.mediaSession.setActionHandler("seekforward", null);
+}
   </script>
   <script>
   // Espera o carregamento completo da página
