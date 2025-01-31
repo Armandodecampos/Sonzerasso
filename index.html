@@ -8152,35 +8152,22 @@ function debounceUpdateMediaSession() {
     debounceTimeout = setTimeout(updateMediaSessionPosition, 300);
 }
 
-// Função para criar uma imagem sólida da cor desejada
-function gerarImagemFundo(cor, largura = 512, altura = 512) {
-    const canvas = document.createElement("canvas");
-    canvas.width = largura;
-    canvas.height = altura;
-    const ctx = canvas.getContext("2d");
-    ctx.fillStyle = cor;
-    ctx.fillRect(0, 0, largura, altura);
-    return canvas.toDataURL("image/png"); // Converte para Base64
-}
-
 function updateMediaSessionMetadata() {
-    if (!musicas || musicaAtual < 0 || musicaAtual >= musicas.length) {
-        console.warn("Erro: músicas não definidas ou índice inválido.");
-        return;
-    }
+    if (!musicas || musicaAtual < 0 || musicaAtual >= musicas.length) return;
 
     navigator.mediaSession.metadata = new MediaMetadata({
         title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
         artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
-        album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
-        artwork: [{
-            src: gerarImagemFundo("#fa0"), // Fundo sólido laranja
-            sizes: "512x512",
-            type: "image/png"
-        }]
+        artwork: [] // 🔴 Remove a imagem de fundo
     });
 
     updateMediaSessionPosition();
+
+    // 🔴 Remover Play/Pause forçando handlers vazios
+    setTimeout(() => {
+        navigator.mediaSession.setActionHandler("play", () => {});
+        navigator.mediaSession.setActionHandler("pause", () => {});
+    }, 500);
 }
 
 function updateMediaSessionPosition() {
@@ -8210,7 +8197,7 @@ function startMediaSessionLoop() {
     }, 1000);
 }
 
-// Configura os controles da tela de bloqueio
+// Configura os controles da tela de bloqueio (mantém "Próxima" e "Anterior")
 navigator.mediaSession.setActionHandler("previoustrack", () => {
     anteriorMusic();
     updateMediaSessionMetadata();
@@ -8234,10 +8221,6 @@ navigator.mediaSession.setActionHandler("seekforward", () => {
         debounceUpdateMediaSession();
     });
 });
-
-// Remover o botão de Play/Pause na tela de bloqueio
-navigator.mediaSession.setActionHandler("play", null);
-navigator.mediaSession.setActionHandler("pause", null);
 
 // Eventos para atualizar metadados e posição
 audio.addEventListener("play", () => {
