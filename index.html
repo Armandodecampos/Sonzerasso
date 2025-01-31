@@ -7672,6 +7672,7 @@ margin-bottom:10px;
       audio.load();
     }
     selecionaMusicaAtual();
+    setTimeout(updateMediaSessionMetadata, 100);
     playMusic();
   }
   
@@ -8149,11 +8150,15 @@ if ("mediaSession" in navigator) {
         const currentTrack = musicas[musicaAtual];
 
         navigator.mediaSession.metadata = new MediaMetadata({
-            title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
-            artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
-            album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
-            artwork: [{ src: currentTrack.imagem || "", sizes: "512x512", type: "image/png" }],
-        });
+    title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
+    artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
+    album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
+    artwork: [{
+        src: currentTrack.imagem ? currentTrack.imagem + "?t=" + new Date().getTime() : "",
+        sizes: "512x512",
+        type: "image/png"
+    }]
+});
 
         updateMediaSessionPosition();
     }
