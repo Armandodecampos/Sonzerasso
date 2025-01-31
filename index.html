@@ -8191,16 +8191,8 @@ if ("mediaSession" in navigator) {
     }
 
     // Configura os controles da tela de bloqueio
-    navigator.mediaSession.setActionHandler("play", () => {
-        audio.play();
-        updateMediaSessionMetadata();
-        startMediaSessionLoop();
-    });
-
-    navigator.mediaSession.setActionHandler("pause", () => {
-        audio.pause();
-        updateMediaSessionMetadata();
-    });
+    navigator.mediaSession.setActionHandler("play", null);
+navigator.mediaSession.setActionHandler("pause", null);
 
     navigator.mediaSession.setActionHandler("previoustrack", () => {
         anteriorMusic();
