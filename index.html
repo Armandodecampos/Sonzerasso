@@ -620,7 +620,7 @@ height:80px;
   position: fixed;
   margin: auto;
   z-index: 4;
-  top: 0;
+  top: 75px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -632,8 +632,8 @@ height:80px;
 .informacoes {
   position: fixed;
   margin: auto;
-  top: 10px;
-  bottom: 80px;
+  top: 80px;
+  bottom: 8px;
   left: 10px;
   right: 10px;
   padding: 20px;
@@ -661,22 +661,21 @@ height:80px;
 }
 
 #fechar {
-  position: fixed;
-  margin:auto;
-  bottom:12px;
-  left: 10px;
-  right: 10px;
-  width:60px;
-  height: 60px;
-  border-radius:50px;
-  background-color: #fa0;
+position: fixed;
+  top: 10px;
+  right: 17px;
+  width: 50px;
+  height: 50px;
   color: #000;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
   border: 2px solid #000;
-  font-size: 35px;
+  cursor: pointer;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius:50%;
+  background:#fa0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
 }
 
 #fechar:hover {
@@ -684,10 +683,10 @@ height:80px;
 }
 #abrir-informacoes {
   position: absolute;
-  top: 14px;
+  top: 12px;
   right: 20px;
-  width: fit-content;
-  height: fit-content;
+  width: 40px;
+  height: 40px;
   color: #fa0;
   border: 2px solid #000;
   cursor: pointer;
@@ -7631,7 +7630,7 @@ margin-bottom:10px;
         musicaAtual = i;
         audio.src = musicas[i].dataset.src;
         document.getElementById('musica-atual-nome').textContent = musicas[i].textContent;
-        document.getElementById('imagem-musica').src = musicas[i].dataset.imagem;
+        document.getElementById('imagem-musica').src = musicas[i].dataset.imagem + "?t=" + new Date().getTime();
         break;
       }
     }
@@ -7672,7 +7671,7 @@ margin-bottom:10px;
       audio.load();
     }
     selecionaMusicaAtual();
-    setTimeout(updateMediaSessionMetadata, 100);
+    updateMediaSessionMetadata();
     playMusic();
   }
   
