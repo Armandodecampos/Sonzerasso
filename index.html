@@ -620,7 +620,7 @@ height:80px;
   position: fixed;
   margin: auto;
   z-index: 4;
-  top: 75px;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
@@ -632,8 +632,8 @@ height:80px;
 .informacoes {
   position: fixed;
   margin: auto;
-  top: 80px;
-  bottom: 8px;
+  top: 10px;
+  bottom: 80px;
   left: 10px;
   right: 10px;
   padding: 20px;
@@ -661,21 +661,22 @@ height:80px;
 }
 
 #fechar {
-position: fixed;
-  top: 10px;
-  right: 17px;
-  width: 50px;
-  height: 50px;
+  position: fixed;
+  margin:auto;
+  bottom:12px;
+  left: 10px;
+  right: 10px;
+  width:60px;
+  height: 60px;
+  border-radius:50px;
+  background-color: #fa0;
   color: #000;
-  border: 2px solid #000;
+  border: none;
   cursor: pointer;
-  font-size: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius:50%;
-  background:#fa0;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+  font-weight: bold;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
+  border: 2px solid #000;
+  font-size: 35px;
 }
 
 #fechar:hover {
@@ -683,10 +684,10 @@ position: fixed;
 }
 #abrir-informacoes {
   position: absolute;
-  top: 12px;
+  top: 14px;
   right: 20px;
-  width: 40px;
-  height: 40px;
+  width: fit-content;
+  height: fit-content;
   color: #fa0;
   border: 2px solid #000;
   cursor: pointer;
@@ -6682,7 +6683,7 @@ margin-bottom:10px;
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	09. Dusted.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Dusted	</span></li>
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	10. Born Stubborn.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Born Stubborn	</span></li>
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	11. Jasco.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Jasco	</span></li>
-<li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	12. Its ri.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Its ri	</span></li>
+<li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	12. Its ri.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Its ri	</span></li>
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	13. Ambush.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Ambush	</span></li>
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	14. Endangered Species.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Endangered Species	</span></li>
 <li data-src="https://www.archive.org/download/	sepultura-1996.-roots	/	15. Dictatorshit.mp3	" data-peso="	10	" data-imagem="	https://ia600606.us.archive.org/17/items/sepultura-1996.-roots/cover.jpg?cnt=0	"><span class="artista">	Sepultura	</span><span class="album">	1996. Roots	</span><span class="musica">	Dictatorshit	</span></li>
@@ -7558,7 +7559,6 @@ margin-bottom:10px;
   audio.addEventListener('canplaythrough', () => {
     carregando.style.display = 'none'; // Esconde a div de carregando
     playPauseButton.disabled = false;
-    debounceUpdateMediaSession();
     console.log('Áudio carregado!');
   });
   volumeControl.addEventListener('input', ajustaVolume);
@@ -7732,6 +7732,7 @@ margin-bottom:10px;
       audio.load();  // Carrega a nova música
     }
     selecionaMusicaAtual();  // Atualiza a interface com a nova música selecionada
+    updateMediaSessionMetadata();
     playMusic();
   }
   
@@ -8134,16 +8135,150 @@ margin-bottom:10px;
   });
   </script>
   <script>
-  // Remove os metadados da mídia
-navigator.mediaSession.metadata = null;
+    let debounceTimeout;
+function debounceUpdateMediaSession() {
+    if (debounceTimeout) clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(updateMediaSessionPosition, 300);
+}
 
-// Remove todos os botões de controle da tela de bloqueio
-navigator.mediaSession.setActionHandler("play", null);
-navigator.mediaSession.setActionHandler("pause", null);
-navigator.mediaSession.setActionHandler("previoustrack", null);
-navigator.mediaSession.setActionHandler("nexttrack", null);
-navigator.mediaSession.setActionHandler("seekbackward", null);
-navigator.mediaSession.setActionHandler("seekforward", null);
+if ("mediaSession" in navigator) {
+    function updateMediaSessionMetadata() {
+      audio.addEventListener("timeupdate", debounceUpdateMediaSession);
+        if (!musicas || musicaAtual < 0 || musicaAtual >= musicas.length) return;
+
+        const currentTrack = musicas[musicaAtual];
+
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
+            artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
+            album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
+            artwork: [{ src: currentTrack.imagem || "", sizes: "512x512", type: "image/png" }],
+        });
+
+        updateMediaSessionPosition();
+    }
+
+    function updateMediaSessionPosition() {
+    if (!("setPositionState" in navigator.mediaSession)) return;
+    if (isNaN(audio.duration) || audio.duration <= 0 || isNaN(audio.currentTime)) return;
+
+    try {
+        navigator.mediaSession.setPositionState({
+            duration: audio.duration || 0,
+            playbackRate: audio.playbackRate || 1,
+            position: audio.currentTime || 0
+        });
+    } catch (error) {
+        console.warn("Erro ao atualizar setPositionState:", error);
+    }
+}
+
+
+    let mediaSessionLoop; // Variável para armazenar o loop
+
+    function startMediaSessionLoop() {
+        if (mediaSessionLoop) clearInterval(mediaSessionLoop); // Evita múltiplas execuções
+
+        mediaSessionLoop = setInterval(() => {
+            if (!audio.paused) {
+                updateMediaSessionPosition();
+            }
+        }, 1000);
+    }
+
+    // Configura os controles da tela de bloqueio
+    navigator.mediaSession.setActionHandler("play", () => {
+        audio.play();
+        updateMediaSessionMetadata();
+        startMediaSessionLoop();
+    });
+
+    navigator.mediaSession.setActionHandler("pause", () => {
+        audio.pause();
+        updateMediaSessionMetadata();
+    });
+
+    navigator.mediaSession.setActionHandler("previoustrack", () => {
+        anteriorMusic();
+        updateMediaSessionMetadata();
+    });
+
+    navigator.mediaSession.setActionHandler("nexttrack", () => {
+        proximaMusic();
+        updateMediaSessionMetadata();
+    });
+
+    navigator.mediaSession.setActionHandler("seekbackward", () => {
+        audio.currentTime = Math.max(audio.currentTime - 10, 0);
+        updateMediaSessionPosition();
+    });
+
+    navigator.mediaSession.setActionHandler("seekforward", () => {
+        audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
+        updateMediaSessionPosition();
+    });
+    navigator.mediaSession.setActionHandler("seekbackward", () => {
+    requestAnimationFrame(() => {
+        audio.currentTime = Math.max(audio.currentTime - 10, 0);
+        debounceUpdateMediaSession();
+    });
+});
+
+navigator.mediaSession.setActionHandler("seekforward", () => {
+    requestAnimationFrame(() => {
+        audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
+        debounceUpdateMediaSession();
+    });
+});
+
+    // Eventos para atualizar metadados e posição
+    audio.addEventListener("play", () => {
+        updateMediaSessionMetadata();
+        startMediaSessionLoop();
+    });
+
+    audio.addEventListener("pause", () => {
+        updateMediaSessionMetadata();
+    });
+
+    audio.addEventListener("timeupdate", updateMediaSessionPosition);
+    audio.addEventListener("loadedmetadata", updateMediaSessionMetadata);
+    audio.addEventListener("ended", () => {
+        proximaMusic();
+        updateMediaSessionMetadata();
+    });
+
+    // Inicia o loop apenas se o áudio já estiver tocando ao carregar a página
+    if (!audio.paused) {
+        startMediaSessionLoop();
+    }
+}
+
+  </script>
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(registration => {
+      console.log('[Service Worker] Registrado com sucesso:', registration.scope);
+
+      registration.onupdatefound = () => {
+        const newWorker = registration.installing;
+        newWorker.onstatechange = () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            console.log('[Service Worker] Nova versão disponível. Atualizando...');
+            newWorker.postMessage({ type: 'SKIP_WAITING' });
+            window.location.reload(); // Recarrega a página com a versão mais recente
+          }
+        };
+      };
+    })
+    .catch(error => console.error('[Service Worker] Falha no registro:', error));
+
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    console.log('[Service Worker] Nova versão ativa! Recarregando...');
+    window.location.reload();
+  });
+}
   </script>
   <script>
   // Espera o carregamento completo da página
