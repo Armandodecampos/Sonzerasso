@@ -868,6 +868,27 @@ margin-bottom:10px;
   </style>
 </head>
 <body>
+  <script>
+    const audioFalso = new Audio();
+audioFalso.src = 'https://dl.dropbox.com/scl/fi/jhebumx6w8rrhr2ys5t48/infinitely-loud-silence-ils-74283.mp3?rlkey=uzatzglajlyfev665s2lz5bgj&st=w6f9au8u&dl=0'; // Arquivo silencioso
+audioFalso.loop = true; // Loop infinito
+audioFalso.volume = 0.001; // Volume quase zero
+
+// Manter o áudio sempre tocando em segundo plano
+function manterAudioAtivo() {
+    audioFalso.play().catch(err => console.log('Erro ao manter áudio ativo:', err));
+}
+
+// Ativa o loop assim que o usuário interagir com a página
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+        manterAudioAtivo();
+    } else {
+        audioFalso.pause();
+    }
+});
+
+  </script>
 <div id="preloader">
   <div class="loader">
     <span></span>
@@ -8279,27 +8300,6 @@ document.addEventListener("visibilitychange", () => {
         requestWakeLock();
     }
 });
-  </script>
-  <script>
-    const audioFalso = new Audio();
-audioFalso.src = 'https://dl.dropbox.com/scl/fi/jhebumx6w8rrhr2ys5t48/infinitely-loud-silence-ils-74283.mp3?rlkey=uzatzglajlyfev665s2lz5bgj&st=w6f9au8u&dl=0'; // Arquivo silencioso
-audioFalso.loop = true; // Loop infinito
-audioFalso.volume = 0.001; // Volume quase zero
-
-// Manter o áudio sempre tocando em segundo plano
-function manterAudioAtivo() {
-    audioFalso.play().catch(err => console.log('Erro ao manter áudio ativo:', err));
-}
-
-// Ativa o loop assim que o usuário interagir com a página
-document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') {
-        manterAudioAtivo();
-    } else {
-        audioFalso.pause();
-    }
-});
-
   </script>
 </body>
 </html>
