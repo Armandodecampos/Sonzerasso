@@ -8140,23 +8140,27 @@ function debounceUpdateMediaSession() {
     debounceTimeout = setTimeout(updateMediaSessionPosition, 300);
 }
 
-if ("mediaSession" in navigator) {
-    function updateMediaSessionMetadata() {
-      audio.addEventListener("timeupdate", debounceUpdateMediaSession);
-        if (!musicas || musicaAtual < 0 || musicaAtual >= musicas.length) return;
+function gerarImagemFundo(cor, largura = 512, altura = 512) {
+    const canvas = document.createElement("canvas");
+    canvas.width = largura;
+    canvas.height = altura;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = cor;
+    ctx.fillRect(0, 0, largura, altura);
+    return canvas.toDataURL("image/png");
+}
 
-        const currentTrack = musicas[musicaAtual];
-
-        navigator.mediaSession.metadata = new MediaMetadata({
+navigator.mediaSession.metadata = new MediaMetadata({
     title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
     artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
     album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
     artwork: [{
-        src: currentTrack.imagem + "?t=" + new Date().getTime(),  // Adicionando timestamp para evitar cache
+        src: gerarImagemFundo("#fa0"),  // Aqui substituímos pela imagem sólida laranja
         sizes: "512x512",
         type: "image/png"
-    }],
+    }]
 });
+
 
 
         updateMediaSessionPosition();
