@@ -7578,6 +7578,10 @@ margin-bottom:10px;
     }
   });
   modoReproducaoButton.addEventListener('click', toggleModoReproducao);
+  document.addEventListener('click', function() {
+    audio.play().catch(error => console.log('Erro ao iniciar a reprodução:', error));
+}, { once: true });
+
   
   
   function mudarTempo(event) {
