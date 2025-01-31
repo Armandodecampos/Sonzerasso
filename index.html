@@ -8134,6 +8134,12 @@ margin-bottom:10px;
   });
   </script>
   <script>
+    let debounceTimeout;
+function debounceUpdateMediaSession() {
+    if (debounceTimeout) clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(updateMediaSessionPosition, 300);
+}
+
 if ("mediaSession" in navigator) {
     function updateMediaSessionMetadata() {
       audio.addEventListener("timeupdate", debounceUpdateMediaSession);
