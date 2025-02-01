@@ -8168,53 +8168,55 @@ if ("mediaSession" in navigator) {
         const currentTrack = musicas[musicaAtual];
 
         navigator.mediaSession.metadata = new MediaMetadata({
-            title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Desconhecido",
+            title: listaMusicas.children[musicaAtual]?.querySelector(".musica")?.textContent || "Música Desconhecida",
             artist: listaMusicas.children[musicaAtual]?.querySelector(".artista")?.textContent || "Artista Desconhecido",
             album: listaMusicas.children[musicaAtual]?.querySelector(".album")?.textContent || "Álbum Desconhecido",
             artwork: [{ src: "https://dl.dropbox.com/scl/fi/ydz3eisc4gwpfj8l83kfg/black.png?rlkey=kxxk45ol7k05lapwnqsn6yfwj&st=xswhl4qc&dl=0", sizes: "512x512", type: "image/png" }],
-        });
+          });
 
-        updateMediaSessionPosition();
-    }
-
-    function updateMediaSessionPosition() {
-        if (!("setPositionState" in navigator.mediaSession)) return;
-        if (isNaN(audio.duration) || audio.duration <= 0 || isNaN(audio.currentTime)) return;
-
-        try {
-            navigator.mediaSession.setPositionState({
-                duration: audio.duration,
-                playbackRate: audio.playbackRate,
-                position: audio.currentTime
-            });
-        } catch (error) {
-            console.warn("Erro ao atualizar setPositionState:", error);
-        }
-    }
-
-    // Adicionando funcionalidade de buscar na barra de progresso da tela bloqueada
-    navigator.mediaSession.setActionHandler("seekto", (details) => {
-        if (details.seekTime !== undefined) {
-            audio.currentTime = details.seekTime;
-            updateMediaSessionPosition();
-        }
-    });
-    
-    navigator.mediaSession.setActionHandler("previoustrack", () => {
-        anteriorMusic();
-        updateMediaSessionMetadata();
-    });
-
-    navigator.mediaSession.setActionHandler("nexttrack", () => {
-        proximaMusic();
-        updateMediaSessionMetadata();
-    });
-
-    // Atualiza os metadados e posição ao iniciar uma nova música
-    audio.addEventListener("loadedmetadata", updateMediaSessionMetadata);
-    audio.addEventListener("timeupdate", updateMediaSessionPosition);
+updateMediaSessionPosition();
 }
 
+function updateMediaSessionPosition() {
+if (!("setPositionState" in navigator.mediaSession)) return;
+if (isNaN(audio.duration) || audio.duration <= 0 || isNaN(audio.currentTime)) return;
+
+try {
+    navigator.mediaSession.setPositionState({
+        duration: audio.duration,
+        playbackRate: audio.playbackRate,
+        position: audio.currentTime
+    });
+} catch (error) {
+    console.warn("Erro ao atualizar setPositionState:", error);
+}
+}
+
+// Adicionando funcionalidade de buscar na barra de progresso da tela bloqueada
+navigator.mediaSession.setActionHandler("seekto", (details) => {
+if (details.seekTime !== undefined) {
+    audio.currentTime = details.seekTime;
+    updateMediaSessionPosition();
+}
+});
+
+navigator.mediaSession.setActionHandler("previoustrack", () => {
+anteriorMusic();
+updateMediaSessionMetadata();
+});
+
+navigator.mediaSession.setActionHandler("nexttrack", () => {
+proximaMusic();
+updateMediaSessionMetadata();
+});
+
+// Chama a atualização de metadados assim que a primeira música carregar
+audio.addEventListener("loadedmetadata", () => {
+setTimeout(updateMediaSessionMetadata, 500);
+});
+
+audio.addEventListener("timeupdate", updateMediaSessionPosition);
+}
   </script>
   <script>
 if ('serviceWorker' in navigator) {
