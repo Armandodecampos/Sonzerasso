@@ -8192,13 +8192,11 @@ try {
 }
 }
 
-// Adicionando funcionalidade de buscar na barra de progresso da tela bloqueada
-navigator.mediaSession.setActionHandler("seekto", (details) => {
-if (details.seekTime !== undefined) {
-    audio.currentTime = details.seekTime;
-    updateMediaSessionPosition();
-}
+// Não permita que o usuário altere a posição da música
+navigator.mediaSession.setActionHandler("seekto", () => {
+    // Não faça nada ao tentar mudar a posição
 });
+
 
 navigator.mediaSession.setActionHandler("previoustrack", () => {
 anteriorMusic();
