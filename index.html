@@ -8305,25 +8305,32 @@ document.addEventListener("visibilitychange", () => {
   </script>
 <script>
 // Função para recarregar a música mantendo o progresso
+<script>
+// Função para recarregar a música mantendo o progresso
 function recarregarMusica() {
-    console.warn("Erro detectado! Tentando recarregar a música...");
+    if (audio.paused) {
+        // Não faz nada se a música estiver pausada
+        return;
+    } else {
+        console.warn("Erro detectado! Tentando recarregar a música...");
 
-    if (!audio.src) return; // Evita erro caso não haja uma música carregada
+        if (!audio.src) return; // Evita erro caso não haja uma música carregada
 
-    const tempoAtual = audio.currentTime; // Salva o tempo atual da música
+        const tempoAtual = audio.currentTime; // Salva o tempo atual da música
 
-    audio.load(); // Recarrega o áudio
+        audio.load(); // Recarrega o áudio
 
-    audio.addEventListener("loadeddata", function restaurarTempo() {
-        audio.currentTime = tempoAtual; // Restaura o tempo
-        audio.play().catch(err => console.warn("Erro ao tentar reproduzir novamente:", err));
-        audio.removeEventListener("loadeddata", restaurarTempo); // Remove o evento após a execução
-    });
+        audio.addEventListener("loadeddata", function restaurarTempo() {
+            audio.currentTime = tempoAtual; // Restaura o tempo
+            audio.play().catch(err => console.warn("Erro ao tentar reproduzir novamente:", err));
+            audio.removeEventListener("loadeddata", restaurarTempo); // Remove o evento após a execução
+        });
+    }
 }
 
 // Adiciona eventos para detectar erro ou travamento
 audio.addEventListener("error", recarregarMusica);
 audio.addEventListener("stalled", recarregarMusica);
-  </script>
+</script>
 </body>
 </html>
