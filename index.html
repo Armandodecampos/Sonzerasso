@@ -8303,20 +8303,5 @@ document.addEventListener("visibilitychange", () => {
     }
 });
   </script>
-<script>
-  // Função para recarregar o áudio em caso de erro ou travamento
-function recarregarMusica() {
-    console.warn("Erro detectado! Tentando recarregar a música...");
-
-    if (!audio.src) return; // Evita erro caso não haja uma música carregada
-
-    audio.load();
-    audio.play().catch(err => console.warn("Erro ao tentar reproduzir novamente:", err));
-}
-
-// Adiciona eventos para detectar erro ou travamento
-audio.addEventListener("error", recarregarMusica);
-audio.addEventListener("stalled", recarregarMusica);
-  </script>
 </body>
 </html>
