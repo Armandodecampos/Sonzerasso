@@ -7598,9 +7598,7 @@ document.addEventListener('visibilitychange', () => {
     }
   });
   modoReproducaoButton.addEventListener('click', toggleModoReproducao);
-  document.addEventListener('click', function() {
-    audio.play().catch(error => console.log('Erro ao iniciar a reprodução:', error));
-}, { once: true });
+  
 
   
   
@@ -8044,7 +8042,7 @@ document.addEventListener('visibilitychange', () => {
       temporizadorVerificacao = setTimeout(() => {
         proximaMusic();
         tempoTotalVerificado = false;
-      }, 20000); // 30 segundos
+      }, 20000); // 20 segundos
     } else if (tempoTotal.textContent !== '00:00' && tempoTotalVerificado) {
       tempoTotalVerificado = false;
       clearTimeout(temporizadorVerificacao);
