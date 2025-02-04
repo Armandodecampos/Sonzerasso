@@ -8252,11 +8252,6 @@ if ('serviceWorker' in navigator) {
   });
   </script>
   <script>
-    setInterval(() => {
-      console.log('Mantendo o navegador ativo...');
-    }, 1000); // Executa a cada 1 segundos
-  </script>
-  <script>
   document.addEventListener("DOMContentLoaded", () => {
     // Seleciona a lista <ul> e a div para exibir o número
     const listaMusicas = document.getElementById('lista-musicas');
@@ -8272,35 +8267,6 @@ if ('serviceWorker' in navigator) {
     atualizarContador();
   });
 </script>
-  <script>
-    let wakeLock = null;
-
-async function requestWakeLock() {
-    try {
-        wakeLock = await navigator.wakeLock.request('screen');
-
-        // Se o wakeLock for liberado, tentar novamente
-        wakeLock.addEventListener('release', () => {
-            console.log("Wake Lock foi liberado. Tentando reativar...");
-            requestWakeLock();
-        });
-
-        console.log("Wake Lock ativado!");
-    } catch (err) {
-        console.error(`Erro ao ativar Wake Lock: ${err.name}, ${err.message}`);
-    }
-}
-
-// Ativar Wake Lock ao carregar a página
-document.addEventListener("DOMContentLoaded", requestWakeLock);
-
-// Caso o usuário volte para a aba, reativar
-document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") {
-        requestWakeLock();
-    }
-});
-  </script>
 <script>
   let ultimoTempo = 0;
   let contadorTempo = 0;
