@@ -8302,26 +8302,56 @@ document.addEventListener("visibilitychange", () => {
 });
   </script>
 <script>
+  let ultimoTempo = 0;
+  let contadorTempo = 0;
+  const tempoLimite = 20; // Tempo limite em segundos para detectar travamento
+
+  function verificarTempoParado() {
+      if (!audio || audio.paused || audio.ended) return;
+
+      if (audio.currentTime === ultimoTempo) {
+          contadorTempo++;
+      } else {
+          contadorTempo = 0;
+      }
+
+      if (contadorTempo >= tempoLimite) {
+          console.warn("Música travada! Reiniciando...");
+          audio.currentTime = 0; // Reinicia a barra de progresso
+          recarregarMusica();
+      }
+
+      ultimoTempo = audio.currentTime;
+      setTimeout(verificarTempoParado, 1000);
+  }
+
+  // Inicia a verificação quando a música começa a tocar
+  audio.addEventListener("play", () => {
+      ultimoTempo = audio.currentTime;
+      contadorTempo = 0;
+      verificarTempoParado();
+  });
+
   // Função para recarregar a música mantendo o progresso
   function recarregarMusica() {
       console.warn("Erro detectado! Tentando recarregar a música...");
-  
+
       if (!audio.src) return; // Evita erro caso não haja uma música carregada
-  
+
       const tempoAtual = audio.currentTime; // Salva o tempo atual da música
-  
+
       audio.load(); // Recarrega o áudio
-  
+
       audio.addEventListener("loadeddata", function restaurarTempo() {
           audio.currentTime = tempoAtual; // Restaura o tempo
           audio.play().catch(err => console.warn("Erro ao tentar reproduzir novamente:", err));
           audio.removeEventListener("loadeddata", restaurarTempo); // Remove o evento após a execução
       });
   }
-  
+
   // Adiciona eventos para detectar erro ou travamento
   audio.addEventListener("error", recarregarMusica);
   audio.addEventListener("stalled", recarregarMusica);
-    </script>
+</script>
 </body>
 </html>
