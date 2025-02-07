@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
   <title>Sonzerasso - Discoteca Online</title>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#000">
@@ -349,6 +349,13 @@ background-size: cover;
 background-position: center;
 }
 
+.box-musica-atual-span {
+color:#ddd;
+padding: 10px;
+background-color: #222;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
 .musica-atual span {
   font-size: 18px;
   text-align: center;
@@ -394,10 +401,11 @@ background-position: center;
 
 .musica-atual .artista {
   font-size: 20px;
+  color:#d80;
 }
 
 .musica-atual .album {
-  color: #444;
+  color: #999;
   font-size: 18px;
   margin-top: 5px;
 }
@@ -408,6 +416,7 @@ background-position: center;
   margin-top: 5px;
   font-style: italic;
   font-weight: bold;
+  color:#fff;
 }
 /* Estilo da barra de pesquisa */
 .box-barra-pesquisa {
@@ -708,9 +717,11 @@ position: fixed;
 }
 
 .s-minimalista {
-  font-size: 50px;
+  font-size: 45px;
   color: #fa0;
   text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  margin-right:8px;
 }
 /* Preloader - Tela de Carregamento */
 #preloader {
@@ -857,50 +868,34 @@ top:45%;
 
 .maisinfo {
 z-index:1;
+font-family: 'Orbitron', sans-serif;
 top:0px;
 margin:auto;
 left:0;
 right:0;
-color:#333;
+color:#ddd;
 font-weight:bold;
 margin-bottom:30px;
 font-size:17px;
 max-width:80%;
 margin-top:20px;
-margin-bottom:10px;
+text-align: center;
+padding: 10px;
+background-color: #222;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
 }
-
-    #letra-musica {
-      font-family: cursive;
-      font-size: 18px;
-      line-height: 1.6;
-      background-color: #f4f4f4;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      margin: 20px auto;
-      max-width: 800px;
-    }
-    /* Estilo para a div maisinfo */
-    .maisinfo {
-      font-family: 'Orbitron', sans-serif; /* Usando a fonte Orbitron para um estilo futurista e ousado */
-      font-size: 18px;
-      color: #ddd; /* Cor vibrante para chamar a atenção */
-      text-align: center; /* Alinha o texto no centro */
-      padding: 10px;
-      background-color: #222; /* Fundo escuro para destacar o texto */
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para dar um efeito de profundidade */
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Sombra no texto para dar destaque */
-    }
 
     /* Animação para o contador */
     #contador {
       font-family: 'Bangers', cursive; /* Fonte mais divertida e ousada para o contador */
       color: #FFD700; /* Cor dourada para o contador */
-      font-size: 25px;
+      font-size: 22px;
       margin-right: 5px;
     }
-
+#texto-letra{
+font-size:18px;
+}
   </style>
 </head>
 <body>
@@ -940,7 +935,7 @@ document.addEventListener('visibilitychange', () => {
         <span class="s-minimalista">S</span>
         </div>
       <div class="logo-text">
-        <span style="color:#fa0;">onzerasso</span>
+        <span style="color:#fa0; font-family: 'Orbitron', sans-serif;">onzerasso</span>
         <div class="neon">Discoteca Online</div>
       </div>
     </div>
@@ -981,12 +976,13 @@ document.addEventListener('visibilitychange', () => {
   <div class="player">
   <div class="maisinfo" id="maisinfo"><span id="contador"></span>músicas! Uma seleção de rock, metal, blues, jazz, pop, folk e muito mais.</div>
   <div class="musica-atual">
-  <span>Música atual:</span>
-  <br>
   <img id="imagem-musica" src="" alt="">
+  <h4>Música atual:</h4>
+  <div class="box-musica-atual-span">
   <span class="artista" id="artista-atual"></span>
   <span class="album" id="album-atual"></span>
   <span class="musica" id="musica-atual-nome"></span>
+  </div>
   <br>
   <br>
 <div id="letra-musica" style="display:none; margin: auto; text-align: center;">
