@@ -7,6 +7,7 @@
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#000">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Bangers&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -349,7 +350,7 @@ background-position: center;
 }
 
 .musica-atual span {
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 }
 
@@ -392,18 +393,18 @@ background-position: center;
 }
 
 .musica-atual .artista {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .musica-atual .album {
   color: #444;
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 5px;
 }
 
 .musica-atual .musica {
   font-style: italic;
-  font-size: 18px;
+  font-size: 22px;
   margin-top: 5px;
   font-style: italic;
   font-weight: bold;
@@ -868,6 +869,38 @@ max-width:80%;
 margin-top:20px;
 margin-bottom:10px;
 }
+
+    #letra-musica {
+      font-family: cursive;
+      font-size: 18px;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      max-width: 800px;
+    }
+    /* Estilo para a div maisinfo */
+    .maisinfo {
+      font-family: 'Orbitron', sans-serif; /* Usando a fonte Orbitron para um estilo futurista e ousado */
+      font-size: 18px;
+      color: #ddd; /* Cor vibrante para chamar a atenção */
+      text-align: center; /* Alinha o texto no centro */
+      padding: 10px;
+      background-color: #222; /* Fundo escuro para destacar o texto */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para dar um efeito de profundidade */
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Sombra no texto para dar destaque */
+    }
+
+    /* Animação para o contador */
+    #contador {
+      font-family: 'Bangers', cursive; /* Fonte mais divertida e ousada para o contador */
+      color: #FFD700; /* Cor dourada para o contador */
+      font-size: 25px;
+      margin-right: 5px;
+    }
+
   </style>
 </head>
 <body>
@@ -948,10 +981,18 @@ document.addEventListener('visibilitychange', () => {
   <div class="player">
   <div class="maisinfo" id="maisinfo"><span id="contador"></span>músicas! Uma seleção de rock, metal, blues, jazz, pop, folk e muito mais.</div>
   <div class="musica-atual">
+  <span>Música atual:</span>
+  <br>
   <img id="imagem-musica" src="" alt="">
   <span class="artista" id="artista-atual"></span>
   <span class="album" id="album-atual"></span>
   <span class="musica" id="musica-atual-nome"></span>
+  <br>
+  <br>
+<div id="letra-musica" style="display:none; margin: auto; text-align: center;">
+  <h4>Letra da Música:</h4>
+  <p id="texto-letra">Carregando...</p>
+</div>
 <button id="install-button" style="display: none;">Instale o aplicativo</button>
   <br><br><br><br><br><br>
 </div>
@@ -8039,6 +8080,7 @@ document.addEventListener('visibilitychange', () => {
       audio.pause();
       playPauseButton.innerHTML = '<i class="fas fa-play"></i>'; 
     }
+    carregarLetraInicial();
   }
   
   // Função para selecionar música aleatória com base em pesos
@@ -8096,6 +8138,7 @@ document.addEventListener('visibilitychange', () => {
     }
     selecionaMusicaAtual();
     playMusic();
+    carregarLetraInicial();
   }
   
   function anteriorMusic() {
@@ -8133,6 +8176,7 @@ document.addEventListener('visibilitychange', () => {
     }
     selecionaMusicaAtual();
     playMusic();
+    carregarLetraInicial();
   }
   
   
@@ -8157,6 +8201,7 @@ document.addEventListener('visibilitychange', () => {
     selecionaMusicaAtual();  // Atualiza a interface com a nova música selecionada
     updateMediaSessionMetadata();
     playMusic();
+    carregarLetraInicial();
   }
   
   function toggleModoReproducao() {
@@ -8201,6 +8246,7 @@ document.addEventListener('visibilitychange', () => {
       playMusic(); 
       selecionaMusicaAtual();
     }
+    carregarLetraInicial();
   }
   
   function playMusic() {
@@ -8726,6 +8772,52 @@ function recarregarMusica() {
 // Adiciona eventos para detectar erro ou travamento
 audio.addEventListener("error", recarregarMusica);
 audio.addEventListener("stalled", recarregarMusica);
+</script>
+<script>
+async function buscarLetra(artista, musica) {
+    try {
+        const response = await fetch(`https://api.lyrics.ovh/v1/${artista}/${musica}`);
+        const data = await response.json();
+
+        if (data.lyrics) {
+            document.getElementById("texto-letra").innerText = data.lyrics;
+            document.getElementById("letra-musica").style.display = "block"; // Exibe a div
+        } else {
+            document.getElementById("texto-letra").innerText = "Letra não encontrada.";
+        }
+    } catch (error) {
+        console.error("Erro ao buscar letra:", error);
+        document.getElementById("texto-letra").innerText = "Erro ao carregar letra.";
+    }
+}
+
+function carregarLetraInicial() {
+    let artista = document.getElementById("artista-atual") ? document.getElementById("artista-atual").innerText.trim() : null;
+    let musica = document.getElementById("musica-atual-nome") ? document.getElementById("musica-atual-nome").innerText.trim() : null;
+
+    if (artista && musica) {
+        buscarLetra(artista, musica);
+    } else {
+        console.warn("Música ou artista não encontrados no carregamento inicial.");
+    }
+}
+
+// Função para verificar quando os dados estão prontos
+function verificarDadosCarregados() {
+    const artista = document.getElementById("artista-atual");
+    const musica = document.getElementById("musica-atual-nome");
+
+    if (artista && musica && artista.innerText.trim() && musica.innerText.trim()) {
+        // Chama a função de carregar letra assim que os dados estiverem disponíveis
+        carregarLetraInicial();
+    } else {
+        // Aguarda um tempo e tenta novamente
+        setTimeout(verificarDadosCarregados, 200); // Tenta novamente a cada 200ms
+    }
+}
+
+// Inicia a verificação assim que o DOM for carregado
+document.addEventListener("DOMContentLoaded", verificarDadosCarregados);
 </script>
 </body>
 </html>
