@@ -8775,11 +8775,11 @@ async function buscarLetra(artista, musica) {
             document.getElementById("texto-letra").innerText = data.lyrics;
             document.getElementById("letra-musica").style.display = "block"; // Exibe a div
         } else {
-            document.getElementById("texto-letra").innerText = "Letra não encontrada.";
+          document.getElementById("letra-musica").style.display = "none";
         }
     } catch (error) {
         console.error("Erro ao buscar letra:", error);
-        document.getElementById("texto-letra").innerText = "Erro ao carregar letra.";
+        document.getElementById("letra-musica").style.display = "none";
     }
 }
 
