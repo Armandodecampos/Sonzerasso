@@ -8478,6 +8478,7 @@ document.addEventListener('visibilitychange', () => {
     selecionaMusicaAtual();
     playMusic();
     carregarLetraInicial();
+    document.getElementById('box-player').scrollTo({ top: 0, behavior: 'smooth' });
   }
   
   function anteriorMusic() {
@@ -8516,6 +8517,7 @@ document.addEventListener('visibilitychange', () => {
     selecionaMusicaAtual();
     playMusic();
     carregarLetraInicial();
+    document.getElementById('box-player').scrollTo({ top: 0, behavior: 'smooth' });
   }
   
   
@@ -8541,6 +8543,7 @@ document.addEventListener('visibilitychange', () => {
     updateMediaSessionMetadata();
     playMusic();
     carregarLetraInicial();
+    document.getElementById('box-player').scrollTo({ top: 0, behavior: 'smooth' });
   }
   
   function toggleModoReproducao() {
@@ -8586,6 +8589,7 @@ document.addEventListener('visibilitychange', () => {
       selecionaMusicaAtual();
     }
     carregarLetraInicial();
+    document.getElementById('box-player').scrollTo({ top: 0, behavior: 'smooth' });
   }
   
   function playMusic() {
