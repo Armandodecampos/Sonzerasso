@@ -981,7 +981,10 @@ document.addEventListener('visibilitychange', () => {
 <div id="letra-musica" style="display:none; margin: auto; text-align: center;">
   <h4>Letra da Música:</h4>
   <p id="texto-letra">Carregando...</p>
+  <button onclick="traduzirComGoogle()" class="btn3">Traduzir</button>
 </div>
+
+
 <button id="install-button" style="display: none;">Instale o aplicativo</button>
   <br><br><br><br><br><br>
 </div>
@@ -9100,11 +9103,23 @@ async function buscarLetra(artista, musica) {
             document.getElementById("texto-letra").innerText = data.lyrics;
             document.getElementById("letra-musica").style.display = "block"; // Exibe a div
         } else {
-          document.getElementById("letra-musica").style.display = "none";
+            document.getElementById("letra-musica").style.display = "none";
         }
     } catch (error) {
         console.error("Erro ao buscar letra:", error);
         document.getElementById("letra-musica").style.display = "none";
+    }
+}
+
+function traduzirComGoogle() {
+    let letraOriginal = document.getElementById("texto-letra").innerText;
+
+    if (letraOriginal.trim() !== "") {
+        // Abrir o Google Tradutor com a letra da música já preenchida
+        let url = `https://translate.google.com/?sl=en&tl=pt&text=${encodeURIComponent(letraOriginal)}&op=translate`;
+        window.open(url, '_blank');
+    } else {
+        alert("A letra ainda não foi carregada.");
     }
 }
 
@@ -9125,16 +9140,15 @@ function verificarDadosCarregados() {
     const musica = document.getElementById("musica-atual-nome");
 
     if (artista && musica && artista.innerText.trim() && musica.innerText.trim()) {
-        // Chama a função de carregar letra assim que os dados estiverem disponíveis
         carregarLetraInicial();
     } else {
-        // Aguarda um tempo e tenta novamente
         setTimeout(verificarDadosCarregados, 200); // Tenta novamente a cada 200ms
     }
 }
 
 // Inicia a verificação assim que o DOM for carregado
 document.addEventListener("DOMContentLoaded", verificarDadosCarregados);
+
 </script>
 </body>
 </html>
