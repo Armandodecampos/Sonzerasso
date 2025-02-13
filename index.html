@@ -653,46 +653,43 @@ height:80px;
   bottom: 0;
   left: 0;
   right: 0;
-  background: radial-gradient(#4f4941, #000) fixed;
-  background:#111;
-  display:none;
-}
-
-.informacoes {
-  position: fixed;
-  margin: auto;
-  top: 80px;
-  bottom: 8px;
-  left: 10px;
-  right: 10px;
-  padding: 20px;
   background: #fff;
+  display:none;
   overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: left;
-  max-width:500px;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.9);
-  border:5px solid #000;
 }
 
-.informacoes::-webkit-scrollbar {
+.box-informacoes::-webkit-scrollbar {
   width: 40px;
   background-color: #333;
   border-left:1px solid #000;
 }
 
-.informacoes::-webkit-scrollbar-thumb {
+.box-informacoes::-webkit-scrollbar-thumb {
 height:80px;
   background-color: #fff;
   border-left:1px solid #000;
 }
 
+.informacoes {
+  position: absolute;
+  margin: auto;
+  top: 40px;
+  left: 10px;
+  right: 10px;
+  padding: 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  max-width:500px;
+}
+
+
 #fechar {
-position: fixed;
-  top: 10px;
-  right: 17px;
+  margin:auto;
+  left:0;
+  right:0;
   width: 50px;
   height: 50px;
   color: #000;
@@ -710,6 +707,29 @@ position: fixed;
 #fechar:hover {
    animation: mudar-cor 0.3s linear;
 }
+
+#fechar2 {
+position: fixed;
+  top: 10px;
+  right: 17px;
+  width: 50px;
+  height: 50px;
+  color: #000;
+  border: 2px solid #000;
+  cursor: pointer;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius:50%;
+  background:#fa0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+}
+
+#fechar2:hover {
+   animation: mudar-cor 0.3s linear;
+}
+
 #abrir-informacoes {
   position: absolute;
   top: 12px;
@@ -906,6 +926,47 @@ text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
 #texto-letra{
 font-size:20px;
 }
+.mural-noticias {
+    background: #222;
+    color: white;
+    padding: 20px;
+    border-top: 5px solid #d80;
+    margin-top: 20px;
+    overflow-y: scroll;
+    height:300px;
+    border:5px solid #000;
+  }
+  
+  .mural-noticias::-webkit-scrollbar {
+  width: 40px;
+  background-color: #333;
+  border-left:1px solid #000;
+}
+
+.mural-noticias::-webkit-scrollbar-thumb {
+height:80px;
+  background-color: #fff;
+  border-left:1px solid #000;
+}
+
+  .mural-noticias h2 {
+    text-align: center;
+    font-size: 24px;
+  }
+
+  .noticia {
+    border-bottom: 1px solid #555;
+    padding: 10px 0;
+  }
+
+  .noticia h3 {
+    color: #fa0;
+    font-size: 20px;
+  }
+
+  .noticia p {
+    font-size: 16px;
+  }
   </style>
 </head>
 <body>
@@ -955,6 +1016,60 @@ document.addEventListener('visibilitychange', () => {
   </header>
   <div id="box-informacoes" class="box-informacoes">
   <div id="informacoes" class="informacoes">
+  
+  
+  <!-- Início mural -->
+  
+  <div class="mural-noticias">
+  <h2>Mural das notícias</h2>
+  <div class="noticia">
+    <h3>Gloryhammer pela primeira vez na América do Sul</h3>
+    <p>A aguardada primeira passagem da banda inglesa de Power Metal sinfônico Gloryhammer pela América do Sul está confirmada! A turnê, intitulada South America Hoots Patrol, vai transportar os fãs para uma jornada épica.</p>
+  </div>
+  <div class="noticia">
+    <h3>Sting confirma três shows no Brasil em 2025</h3>
+    <p>STING, vencedor de 17 prêmios Grammy, continua a todo vapor com a turnê “STING 3.0”. Acompanhado do guitarrista virtuoso e colaborador de longa data, Dominic Miller, e do baterista dinâmico Chris, ele realizará três shows no Brasil em 2025.</p>
+  </div>
+  <div class="noticia">
+    <h3>Linkin Park confirma show no Brasil com a 'From Zero World Tour'</h3>
+    <p>Os gigantes do rock alternativo, Linkin Park, estão de volta ao Brasil com a aguardada #FromZeroWorldTour! A banda promete um show inesquecível no dia 15 de novembro de 2024, no país.</p>
+  </div>
+  <div class="noticia">
+    <h3>Leprous anuncia turnê pela América Latina com três shows no Brasil em 2025</h3>
+    <p>Os reis noruegueses do metal progressivo, Leprous, acabam de anunciar uma extensa turnê mundial como parte da promoção de seu novo álbum, no ciclo “Melodies of Atonement”. E claro, a América Latina está na rota, com três shows confirmados no Brasil em 2025.</p>
+  </div>
+  <div class="noticia">
+    <h3>Discos clássicos de rock e metal ganham novas edições nas lojas brasileiras</h3>
+    <p>A parceria entre Wikimetal e Oporto da Música continua a todo vapor, trazendo ao mercado brasileiro mais uma leva de CDs de rock e metal, disponíveis em novas edições especiais com slipcase. Os primeiros lançamentos do ano são discos de artistas icônicos como Van Halen, Whiplash, Winger, David Lee Roth e Overkill.</p>
+  </div>
+  <div class="noticia">
+    <h3>Pink Floyd pode lançar material inédito</h3>
+    <p>Fontes próximas à banda indicam que gravações raras dos anos 70 podem ser lançadas em uma edição especial, trazendo versões alternativas e demos inéditas.</p>
+  </div>
+  <div class="noticia">
+    <h3>Rolling Stones preparam novo álbum</h3>
+    <p>Após quase duas décadas sem um álbum de inéditas, os Rolling Stones estão finalizando um novo disco, com participações especiais e uma sonoridade clássica.</p>
+  </div>
+  <div class="noticia">
+    <h3>Guitarra de Jimi Hendrix será leiloada</h3>
+    <p>Uma das guitarras usadas por Jimi Hendrix no icônico festival de Woodstock será leiloada em breve. Especialistas estimam que o valor pode ultrapassar os milhões de dólares.</p>
+  </div>
+  <div class="noticia">
+    <h3>Led Zeppelin: documentário sobre a banda será lançado</h3>
+    <p>Um novo documentário detalhando a trajetória do Led Zeppelin, com imagens inéditas e depoimentos exclusivos, está previsto para estrear ainda este ano.</p>
+  </div>
+  <div class="noticia">
+    <h3>Beatles: versão restaurada do filme 'Let It Be' chega ao público</h3>
+    <p>O clássico documentário 'Let It Be', dos Beatles, será relançado com qualidade restaurada e cenas inéditas, trazendo um olhar mais íntimo sobre as gravações do álbum.</p>
+  </div>
+</div>
+
+<!-- Fim mural -->
+
+
+
+<br>
+<br>
 <h3 style="font-weight:bold;color:#000;">Contribua com o crescimento do site e a adição de novas músicas!</h3>
         <br>
           <p>🔸 Contribuir com um pix de qualquer valor:</p>
@@ -979,7 +1094,14 @@ document.addEventListener('visibilitychange', () => {
           <br>
           <p>Os meus sinceros agradecimentos!</p>
           <p style="font-size:12px;font-weight:bold;">Criador do site: Armando de Campos Júnior.</p>
+          <br>
+          <br>
+          <br>
           <button id="fechar"><i class="fa fa-reply"></i></button>
+          <br>
+          <br>
+          <br>
+          <button id="fechar2"><i class="fa fa-reply"></i></button>
 </div>
 </div>
 <div class="box-player" id="box-player">
@@ -8859,6 +8981,10 @@ document.addEventListener('visibilitychange', () => {
   });
   
   document.getElementById('fechar').addEventListener('click', function() {
+      document.getElementById('box-informacoes').style.display = 'none';
+  });
+  
+  document.getElementById('fechar2').addEventListener('click', function() {
       document.getElementById('box-informacoes').style.display = 'none';
   });
   </script>
