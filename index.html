@@ -9890,5 +9890,43 @@ function verificarDadosCarregados() {
 document.addEventListener("DOMContentLoaded", verificarDadosCarregados);
 
 </script>
+<script>
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+const gainNode = audioContext.createGain();
+gainNode.connect(audioContext.destination);
+
+document.querySelectorAll('li[data-src]').forEach(item => {
+    item.addEventListener('click', function() {
+        let audioElement = new Audio(this.getAttribute('data-src'));
+
+        let source = audioContext.createMediaElementSource(audioElement);
+        source.connect(gainNode);
+
+        let analyser = audioContext.createAnalyser();
+        source.connect(analyser);
+        analyser.fftSize = 256;
+
+        let bufferLength = analyser.frequencyBinCount;
+        let dataArray = new Uint8Array(bufferLength);
+
+        function adjustVolume() {
+            analyser.getByteFrequencyData(dataArray);
+            let avgVolume = dataArray.reduce((a, b) => a + b, 0) / bufferLength;
+
+            // Ajusta o volume com base no nível médio detectado
+            let targetGain = 1 / (avgVolume / 128);
+            gainNode.gain.setTargetAtTime(targetGain, audioContext.currentTime, 0.1);
+        }
+
+        audioElement.addEventListener('play', function() {
+            audioContext.resume().then(() => {
+                adjustVolume();
+            });
+        });
+
+        audioElement.play();
+    });
+});
+</script>
 </body>
 </html>
