@@ -1290,9 +1290,10 @@ document.addEventListener('visibilitychange', () => {
   <p id="texto-letra">Carregando...</p>
   <br>
   <br>
-  <button onclick="traduzirComGoogle()" class="btn4">Traduzir</button>
+  <button onclick="traduzirComGoogle()" class="btn4">Traduzir com Google</button>
+  <br><br>
 </div>
-
+<button onclick="pesquisarLetraNoNavegador()" class="btn4">Pesquisar letra no navegador</button>
 
 <button id="install-button" style="display: none;">Instale o aplicativo</button>
   <br><br><br><br><br><br>
@@ -10186,6 +10187,20 @@ function traduzirComGoogle() {
     }
 }
 
+// Nova função para pesquisar a letra no navegador
+function pesquisarLetraNoNavegador() {
+    const artista = document.getElementById("artista-atual") ? document.getElementById("artista-atual").innerText.trim() : null;
+    const musica = document.getElementById("musica-atual-nome") ? document.getElementById("musica-atual-nome").innerText.trim() : null;
+
+    if (artista && musica) {
+        const query = `${artista} - ${musica} (letra/lyrics)`;
+        const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        window.open(url, '_blank');
+    } else {
+        alert("Informações da música não disponíveis.");
+    }
+}
+
 function carregarLetraInicial() {
     let artista = document.getElementById("artista-atual") ? document.getElementById("artista-atual").innerText.trim() : null;
     let musica = document.getElementById("musica-atual-nome") ? document.getElementById("musica-atual-nome").innerText.trim() : null;
@@ -10211,8 +10226,17 @@ function verificarDadosCarregados() {
 
 // Inicia a verificação assim que o DOM for carregado
 document.addEventListener("DOMContentLoaded", verificarDadosCarregados);
-
 </script>
+
+<!-- Exemplo de elementos que podem conter os dados da música -->
+<div id="artista-atual" style="display:none;">Nome do Artista</div>
+<div id="musica-atual-nome" style="display:none;">Nome da Música</div>
+
+<!-- Div onde a letra será exibida -->
+<div id="letra-musica" style="display:none;">
+    <pre id="texto-letra"></pre>
+</div>
+
 <script>
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const gainNode = audioContext.createGain();
