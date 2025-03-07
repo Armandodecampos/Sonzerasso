@@ -28,7 +28,7 @@
       align-items: left;
       justify-content: left;
       padding: 10px 20px;
-      border-bottom: 5px solid #d80;
+      border-bottom: 5px solid #000;
   	  background: radial-gradient(#4f4941, #000) fixed;
       background:#111;
     }
@@ -122,7 +122,7 @@ height:50px;
   padding: 10px;
   background-color: #222;
   color: #fff;
-  border-top: 5px solid #d80;
+  border-top: 5px solid #000;
   background: radial-gradient(#4f4941, #000) fixed;
   background:#111;
 }
@@ -177,7 +177,10 @@ animation: mudar-cor 0.3s linear;
 }
 
 .btn3 {
-width:100%;
+width:fit-content;
+margin:auto;
+left:0;
+right:0;
   background-color: #111;
     color: #fff;
     padding: 10px 20px;
@@ -306,7 +309,7 @@ height:80px;
 
 #progresso-barra {
   max-width: 300px;
-  accent-color: #fa0;
+  accent-color: #fff;
   margin: 5px;
 }
 
@@ -328,7 +331,7 @@ height:80px;
 
 #volume-control {
   width: 30%;
-  accent-color: #fa0;
+  accent-color: #fff;
 }
 
 #volume-nivel {
@@ -484,7 +487,7 @@ width:100%;
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #fa0;
+    background-color: #f55;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -607,7 +610,7 @@ height:80px;
   left:0;
   right: 0;
   background-color: #111;
-  color: #fa0;
+  color: #fff;
   padding: 12px 22px;
   border: none;
   cursor: pointer;
@@ -629,7 +632,7 @@ height:80px;
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background-color: #fa0;
+  background-color: #f55;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -701,7 +704,7 @@ height:80px;
   justify-content: center;
   align-items: center;
   border-radius:50%;
-  background:#fa0;
+  background:#f55;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
 }
 
@@ -723,7 +726,7 @@ position: fixed;
   justify-content: center;
   align-items: center;
   border-radius:50%;
-  background:#fa0;
+  background:#f55;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
 }
 
@@ -737,7 +740,7 @@ position: fixed;
   right: 20px;
   width: 40px;
   height: 40px;
-  color: #fa0;
+  color: #fff;
   border: 2px solid #000;
   cursor: pointer;
   font-size: 40px;
@@ -755,7 +758,7 @@ position: fixed;
 
 .s-minimalista {
   font-size: 45px;
-  color: #fa0;
+  color: #fff;
   text-transform: uppercase;
 }
 /* Preloader - Tela de Carregamento */
@@ -819,23 +822,23 @@ top:45%;
 @keyframes wave {
   0%, 100% {
     height: 20px;; /* Altura inicial */
-    background-color: #fa0;
+    background-color: #fff;
   }
   30% {height: 50px;
-    background-color: #0fa;
+    background-color: #000;
   }
   60% {height: 90px;
-    background-color: #0af;
+    background-color: #fff;
   }
   
   75% {height: 20px;
-    background-color: #f92;
+    background-color: #000;
   }
 }
 .neon {
 	font-size:11px;
-  color: #fff;
-  text-shadow: 0 0 10px #fff;
+  color: #f55;
+  text-shadow: 0 0 10px #f55;
   animation: piscar 1s infinite;
   margin-left:2px;
 }
@@ -921,11 +924,47 @@ text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
 
     /* Animação para o contador */
     #contador {
-      color: #FFD700; /* Cor dourada para o contador */
+      color: #fff; /* Cor dourada para o contador */
       font-size: 22px;
     }
 #texto-letra{
 font-size:20px;
+}
+.mascote{
+position:fixed;
+margin:auto;
+bottom:155px;
+left:0;
+z-index:2;
+height:70px;
+animation: subirMascote 30s ease-in-out infinite; /* Ciclo infinito */
+        }
+
+        /* Definindo as fases da animação */
+        @keyframes subirMascote {
+            0% {
+                bottom: -70px; /* Inicia abaixo da tela */
+            }
+            30% {
+                bottom: 155px; /* Sobe rapidamente até a posição final */
+            }
+            50% {
+                bottom: 155px; /* Fica parado por 5 segundos (50% de 10s é 5s) */
+            }
+            80% {
+                bottom: -70px; /* Desce rapidamente até fora da tela */
+            }
+            100% {
+                bottom: -70px; /* Fica fora da tela */
+            }
+        }
+.mascote2{
+margin:auto;
+bottom:155px;
+right:0;
+left:0;
+z-index:2;
+height:150px;
 }
 
   </style>
@@ -967,11 +1006,12 @@ document.addEventListener('visibilitychange', () => {
         <span class="s-minimalista">S</span>
         </div>
       <div class="logo-text">
-        <span style="color:#fa0;">onzerasso</span>
+        <span style="color:#fff;">onzerasso</span>
         <div class="neon">Discoteca Online</div>
+        
       </div>
     </div>
- 
+ <img class= "mascote" src="https://dl.dropbox.com/s/qgz82clprx9y7oc/Panda_-_Sonzerasso%20-%20fundo%20transparente.png?st=l5al30ux&dl=0"/>
     <i id="abrir-informacoes" class="fa fa-plus-circle"></i>
 
   </header>
@@ -984,8 +1024,10 @@ document.addEventListener('visibilitychange', () => {
 
 <br>
 <br>
+<center>
 <h3 style="font-weight:bold;color:#000;">Contribua com o crescimento do site e a adição de novas músicas!</h3>
         <br>
+        <img class= "mascote2" src="https://dl.dropbox.com/s/qgz82clprx9y7oc/Panda_-_Sonzerasso%20-%20fundo%20transparente.png?st=l5al30ux&dl=0"/>
           <p>🔸 Contribuir com um pix de qualquer valor:</p>
           <br>
           <div style="margin:auto;left:0;right:0">
@@ -1016,6 +1058,7 @@ document.addEventListener('visibilitychange', () => {
           <br>
           <br>
           <button id="fechar2"><i class="fa fa-reply"></i></button>
+          </center>
 </div>
 </div>
 <div class="box-player" id="box-player">
