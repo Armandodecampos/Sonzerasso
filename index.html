@@ -67,7 +67,7 @@
     }
 
     .logo-text {
-      margin-left:20px;
+      margin-left:0px;
       font-size: 40px;
     }
 
@@ -911,7 +911,10 @@ top:45%;
     box-shadow: 0 0 25px rgba(255, 106, 0, 1);
   }
 }
-
+.boxmaisinfo{
+display: flex;
+  align-items: center;
+}
 .maisinfo {
 z-index:1;
 top:0px;
@@ -921,7 +924,9 @@ right:0;
 color:#ddd;
 margin-bottom:30px;
 font-size:17px;
-max-width:80%;
+width:80%;
+max-width: 300px;
+border-radius:10px;
 text-align: center;
 padding: 10px;
 background-color: #222;
@@ -940,7 +945,8 @@ font-size:20px;
 }
 
 .mascote{
-height:50px;
+height:100px;
+margin-right: 10px;
         }
 
 
@@ -950,7 +956,7 @@ bottom:155px;
 right:0;
 left:0;
 z-index:2;
-height:150px;
+height:250px;
 }
 
   </style>
@@ -989,7 +995,7 @@ document.addEventListener('visibilitychange', () => {
     <header class="header">
     <div class="logo">
       <div class="logo-icon">
-        <img class= "mascote" src="https://dl.dropbox.com/s/qgz82clprx9y7oc/Panda_-_Sonzerasso%20-%20fundo%20transparente.png?st=l5al30ux&dl=0"/>
+
         </div>
       <div class="logo-text">
         <span style="color:#fff;">Sonzerasso</span>
@@ -1011,7 +1017,7 @@ document.addEventListener('visibilitychange', () => {
 <center>
 <h3 style="font-weight:bold;color:#000;">Contribua com o crescimento do site e a adição de novas músicas!</h3>
         <br>
-        <img class= "mascote2" src="https://dl.dropbox.com/s/qgz82clprx9y7oc/Panda_-_Sonzerasso%20-%20fundo%20transparente.png?st=l5al30ux&dl=0"/>
+        <img class= "mascote2" src="https://dl.dropbox.com/s/dfd066a3fy4l3gy/Mascote%20raccon.png?st=afoixlqv&dl=0"/>
           <p>🔸 Contribuir com um pix de qualquer valor:</p>
           <br>
           <div style="margin:auto;left:0;right:0">
@@ -1057,7 +1063,12 @@ document.addEventListener('visibilitychange', () => {
 <button id="fechar2"><i class="fa fa-reply"></i></button>
 <div class="box-player" id="box-player">
   <div class="player">
-  <div class="maisinfo" id="maisinfo"><span id="contador"></span>músicas! Uma seleção de rock, metal, blues, jazz, pop, folk e muito mais.</div>
+<div class="boxmaisinfo">
+<img class= "mascote" src="https://dl.dropbox.com/s/dfd066a3fy4l3gy/Mascote%20raccon.png?st=afoixlqv&dl=0"/>
+  <div class="maisinfo" id="maisinfo">
+<span id="contador"></span>músicas! Uma seleção de rock, metal, blues, jazz, pop, folk e muito mais.
+</div>
+</div>
   <div class="musica-atual">
   <h4 style="color:#555" >Música atual:</h4>
   <img id="imagem-musica" src="" alt="">
