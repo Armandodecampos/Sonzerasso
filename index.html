@@ -311,9 +311,10 @@ height:80px;
 .inputRange {
   appearance: none;
   height: 12px;
-  border: 1px solid #555;
+  border: 1px solid #222;
   border-radius: 9999px;
   cursor: pointer;
+background:#999;
 }
 
 /* Thumb: for Chrome, Safari, Edge */
@@ -967,7 +968,28 @@ left:0;
 z-index:2;
 height:250px;
 }
+.estrela {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 40px;
+      background-image: url('https://dl.dropbox.com/scl/fi/5t5gs0dj4akxq3otsyn6n/star-2.png?rlkey=780sq5unk9rchsqkxku7eg6aq&st=2cf3i6el&dl=0');
+      background-size: cover;
+      background-position: center;
+      animation: girar 10s linear infinite;
+      transform-origin: center center;
+margin-right:5px;
+    }
 
+    @keyframes girar {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(-360deg);
+      }
+    }
   </style>
 </head>
 <body>
@@ -1004,7 +1026,7 @@ document.addEventListener('visibilitychange', () => {
     <header class="header">
     <div class="logo">
       <div class="logo-icon">
-<span style="color: #Fa0;">&#9733;</span>
+<div class="estrela"></div>
         </div>
       <div class="logo-text">
         <span style="color:#fff;">Sonzerasso</span>
