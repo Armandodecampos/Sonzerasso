@@ -56,7 +56,6 @@
       display: inline-block;
       width: 50px;
       height: 50px;
-      margin-right: -8px;
       color: #ff6a00;
       border-radius: 50%;
       display: flex;
@@ -67,7 +66,6 @@
     }
 
     .logo-text {
-      margin-left:0px;
       font-size: 40px;
     }
 
@@ -310,16 +308,36 @@ height:80px;
   gap:5px;
 }
 
-.progresso-icon {
-  font-size: 18px;
-  color: #fff;
+.inputRange {
+  appearance: none;
+  height: 12px;
+  border: 1px solid #555;
+  border-radius: 9999px;
+  cursor: pointer;
 }
 
-#progresso-barra {
-  max-width: 300px;
-  accent-color: #fff;
-  margin: 5px;
+/* Thumb: for Chrome, Safari, Edge */
+.inputRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #333333;
+  border-radius: 9999px;
+  background: #fff;
+  box-shadow: none;
 }
+
+/* Thumb: for Firefox */
+.inputRange::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #333333;
+  border-radius: 9999px;
+  background: #fff;
+  box-shadow: none;
+}
+
 
 #tempo-atual, #tempo-total {
   font-size: 12px;
@@ -337,20 +355,8 @@ height:80px;
   gap:5px;
 }
 
-#volume-control {
-  width: 30%;
-  accent-color: #fff;
-}
 
-#volume-nivel {
-  font-size: 12px;
-    -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Padrao */
-}
+
 .musica-atual {
   display: flex;
   flex-direction: column;
@@ -631,7 +637,7 @@ height:80px;
 }
 
 .destaque-temporario {
-  border-top:7px solid #f33;
+  border-top:7px solid #fa0;
 }
 
 #fechar-lista {
@@ -640,7 +646,7 @@ height:80px;
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background-color: #f33;
+  background-color: #fa0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -712,7 +718,7 @@ height:80px;
   justify-content: center;
   align-items: center;
   border-radius:50%;
-  background:#f33;
+  background:#fa0;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
 }
 
@@ -735,7 +741,7 @@ position: fixed;
   justify-content: center;
   align-items: center;
   border-radius:50%;
-  background:#f33;
+  background:#fa0;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
   display:none;
 }
@@ -766,11 +772,6 @@ position: fixed;
   animation: mudar-cor 0.3s linear;
 }
 
-.s-minimalista {
-  font-size: 45px;
-  color: #fff;
-  text-transform: uppercase;
-}
 /* Preloader - Tela de Carregamento */
 #preloader {
   position: fixed;
@@ -916,26 +917,34 @@ display: flex;
   align-items: center;
 }
 .maisinfo {
-z-index:1;
-top:0px;
-margin:auto;
-left:0;
-right:0;
-color:#ddd;
-margin-bottom:30px;
-font-size:17px;
-width:80%;
-max-width: 300px;
-border-radius:10px;
-text-align: center;
-padding: 10px;
-background-color: #222;
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
- text-transform: uppercase;
+  position: relative;
+  background: #222;
+  color: #ddd;
+  font-size: 17px;
+  width: 80%;
+  max-width: 300px;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
 }
 
-    /* Animação para o contador */
+.maisinfo::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -15px; /* Posição da seta */
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 15px solid #222; /* Cor da seta */
+  transform: translateY(-50%);
+}
+
+
     #contador {
       color: #fff; /* Cor dourada para o contador */
       font-size: 22px;
@@ -995,7 +1004,7 @@ document.addEventListener('visibilitychange', () => {
     <header class="header">
     <div class="logo">
       <div class="logo-icon">
-
+<span style="color: #Fa0;">&#9733;</span>
         </div>
       <div class="logo-text">
         <span style="color:#fff;">Sonzerasso</span>
@@ -1117,13 +1126,13 @@ document.addEventListener('visibilitychange', () => {
  
 <div class="progresso">
    <i class="fas fa-clock" id="icone-tempo"></i>
-   <input id="progresso-barra" type="range" min="0" max="100" step="1" value="0" oninput="mudarTempo(event)" ontouchmove="mudarTempo(event)">  <span id="tempo-atual">00:00</span><span class="remover-selecao">/</span>
+   <input class="inputRange" id="progresso-barra" type="range" min="0" max="100" step="1" value="0" oninput="mudarTempo(event)" ontouchmove="mudarTempo(event)">  <span id="tempo-atual">00:00</span><span class="remover-selecao">/</span>
   <span id="tempo-total">00:00</span>
   <div class="carregando" id="carregando"></div>
 </div>
   <div class="volume">
   <i class="fas fa-volume-up" id="icone-volume"></i>
-    <input type="range" id="volume-control" min="0" max="100" value="100">
+    <input class="inputRange" type="range" id="volume-control" min="0" max="100" value="100">
     <span id="volume-nivel">100%</span>
   </div>
 </div>
