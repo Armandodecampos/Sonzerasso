@@ -306,6 +306,7 @@ height:80px;
 
 .inputRange {
   appearance: none;
+  width:60%;
   height: 5px;
   border: 1px solid #000;
   border-radius: 9999px;
@@ -611,18 +612,19 @@ height:80px;
 #voltar-topo {
   display: none;
   position: fixed;
-  bottom: 200px;
-  width:fit-content;
+  bottom: 190px;
+  width:60px;
+  height:60px;
   margin:auto;
   left:0;
   right: 0;
-  background-color: #111;
-  color: #fff;
-  padding: 12px 22px;
+  background-color: #fa0;
+  color: #000;
+  padding: 15px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
-  font-size:16px;
+  border-radius: 50px;
+  font-size:20px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.9);
 }
 
@@ -685,7 +687,7 @@ height:80px;
   position: absolute;
   margin: auto;
   top: 40px;
-  left: 10px;
+  left: 50px;
   right: 10px;
   padding: 20px;
   background: #eee;
@@ -778,13 +780,20 @@ position: fixed;
   pointer-events: none;
 }
 .carregando {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #fa0;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: girar 1s linear infinite;
-  margin-left: 10px;
+  position: fixed;
+  bottom: 190px;
+  width:fit-content;
+  margin:auto;
+  left:0;
+  right: 0;
+  background-color: #111;
+  color: #fff;
+  padding: 12px 22px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size:16px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.9);
 }
 
 @keyframes girar {
@@ -1141,7 +1150,7 @@ document.addEventListener('visibilitychange', () => {
    <i class="fas fa-clock" id="icone-tempo"></i>
    <input class="inputRange" id="progresso-barra" type="range" min="0" max="100" step="1" value="0" oninput="mudarTempo(event)" ontouchmove="mudarTempo(event)">  <span id="tempo-atual">00:00</span><span class="remover-selecao">/</span>
   <span id="tempo-total">00:00</span>
-  <div class="carregando" id="carregando"></div>
+  <div class="carregando" id="carregando">Carregando...</div>
 </div>
   <div class="volume">
   <i class="fas fa-volume-up" id="icone-volume"></i>
@@ -9879,7 +9888,7 @@ document.addEventListener('visibilitychange', () => {
   <div id="mensagem-nenhum-resultado"></div>
     <audio id="audio" preload="auto"></audio>
     <button id="voltar-topo" aria-label="Voltar ao topo">
-      <i class="fas fa-arrow-up"></i> Voltar ao topo
+      <i class="fas fa-arrow-up"></i>
     </button>
   </div>
   </div>
@@ -9937,9 +9946,10 @@ document.addEventListener('visibilitychange', () => {
   audio.addEventListener('durationchange', atualizaTempoTotal);
   audio.addEventListener('ended', proximaMusic);
   audio.addEventListener('canplaythrough', () => {
-    carregando.style.display = 'none'; // Esconde a div de carregando
     playPauseButton.disabled = false;
     console.log('Áudio carregado!');
+    carregando.style.display = 'none';
+    atualizaTempoTotal();
   });
   volumeControl.addEventListener('input', ajustaVolume);
   progressoBarra.addEventListener('click', (e) => {
@@ -9958,6 +9968,18 @@ document.addEventListener('visibilitychange', () => {
     }
   });
   modoReproducaoButton.addEventListener('click', toggleModoReproducao);
+  
+  
+  // Exibe "Carregando..." sempre que uma nova música for carregada
+audio.addEventListener('loadstart', () => {
+    carregando.style.display = 'block';
+});
+
+
+// Se houver erro no carregamento, mantém a div visível
+audio.addEventListener('error', () => {
+    carregando.style.display = 'block';
+});
   
 
   
@@ -10143,7 +10165,6 @@ document.addEventListener('visibilitychange', () => {
 
   
   function playMusic() {
-    carregando.style.display = 'block'; // Mostra a div de carregando
     audio.play();
     playPauseButton.innerHTML = '<i class="fas fa-pause"></i>'; // Ícone Pause
     atualizaTempoTotal();
@@ -10161,10 +10182,16 @@ document.addEventListener('visibilitychange', () => {
   }
   
   function atualizaTempoTotal() {
-    if (audio.duration > 0) { // Garante que o tempo total seja válido
-      tempoTotal.textContent = formatarTempo(audio.duration);
+    carregando.style.display = 'block'; // Exibe a div "Carregando..." assim que a função for chamada
+
+    if (!isNaN(audio.duration) && audio.duration > 0) { 
+        tempoTotal.textContent = formatarTempo(audio.duration);
+        carregando.style.display = 'none'; // Esconde a div quando o tempo total for carregado
+    } else {
+        tempoTotal.textContent = '00:00';
     }
-  }
+}
+
   
   function ajustaVolume() {
     audio.volume = volumeControl.value / 100;
