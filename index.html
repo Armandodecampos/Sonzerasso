@@ -686,7 +686,6 @@ height:80px;
 .informacoes {
   position: absolute;
   margin: auto;
-  top: 40px;
   left: 50px;
   right: 10px;
   padding: 20px;
@@ -696,6 +695,31 @@ height:80px;
   align-items: left;
   justify-content: left;
   max-width:500px;
+}
+
+.titulo-informacoes {
+  position: relative;
+  background: #222;
+  color: #ddd;
+  font-size: 20px;
+  width: 90%;
+  max-width: 300px;
+  border-radius: 30px;
+  text-align: center;
+  padding: 15px;
+}
+
+.titulo-informacoes::before {
+  content: "";
+  position: absolute;
+  bottom: -15px; /* Posiciona a seta abaixo do balão */
+  left: 50%; /* Centraliza a seta */
+  transform: translateX(-50%); /* Ajusta a posição da seta */
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid #222; /* Cor da seta */
 }
 
 
@@ -939,13 +963,12 @@ display: flex;
   border-bottom: 10px solid transparent;
   border-right: 15px solid #222; /* Cor da seta */
   transform: translateY(-50%);
-  
 }
 
 
     #contador {
       color: #fff; /* Cor dourada para o contador */
-      font-size: 22px;
+      font-size: 20px;
     }
 #texto-letra{
 font-size:20px;
@@ -1042,11 +1065,12 @@ document.addEventListener('visibilitychange', () => {
   
 
 
-
 <br>
 <br>
 <center>
-<h3 style="font-weight:bold;color:#000;">Contribua com o crescimento do site e a adição de novas músicas!</h3>
+<div class="titulo-informacoes">
+Contribua com o crescimento do site e a adição de novas músicas!
+</div>
         <br>
         <img class= "mascote2" src="https://dl.dropbox.com/s/dfd066a3fy4l3gy/Mascote%20raccon.png?st=afoixlqv&dl=0"/>
           <p>🔸 Contribuir com um pix de qualquer valor:</p>
