@@ -12318,37 +12318,106 @@ document.querySelectorAll('li[data-src]').forEach(item => {
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("texto-letra").addEventListener("click", async function (event) {
-      let selecionado = window.getSelection().toString().trim();
-      if (!selecionado) return;
+      // Obter o texto completo da posição onde foi clicado
+      let palavra = getClickedWord(event);
 
-      // 🔹 Ajuste: Permitir apóstrofos e remover outros caracteres especiais
-      let palavra = selecionado.replace(/[^a-zA-ZÀ-ÿ0-9']/g, "");
+      // Se não houver palavra clicada, retorna
       if (!palavra) return;
 
       console.log(`🔹 Palavra clicada: ${palavra}`);
 
       try {
-        // 🔹 Passo 1: Detectar o idioma corretamente
+        // Passo 1: Detectar o idioma corretamente
         let detectLangResponse = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(palavra)}&langpair=auto|en`);
         let detectLangData = await detectLangResponse.json();
-        
+
         // Se o idioma não for detectado ou for detectado como "não detectado", assumimos que a palavra é inglesa.
         let idiomaDetectado = detectLangData.responseData?.detectedLanguage || "en";
 
-        // 🔹 Passo 2: Traduzir sempre do inglês para o português
+        // Passo 2: Traduzir sempre do inglês para o português
         let translateResponse = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(palavra)}&langpair=${idiomaDetectado}|pt`);
         let translateData = await translateResponse.json();
 
         let traducao = translateData.responseData?.translatedText || "Erro na tradução"; // Se falhar, retorna erro
 
-        // 🔹 Exibe apenas a tradução no alert
-        alert(`Tradução: ${traducao}`);
+        // Exibe a tradução em uma div centralizada com botão de fechar
+        displayTranslation(traducao);
       } catch (error) {
         console.error("❌ Erro ao traduzir:", error);
         alert("Erro ao traduzir a palavra. Verifique sua conexão.");
       }
     });
   });
+
+  // Função para capturar a palavra clicada a partir da seleção do texto
+  function getClickedWord(event) {
+    const textContent = event.target.textContent; // Texto do elemento clicado
+
+    // Encontrar a palavra mais próxima ao ponto de clique
+    let palavra = '';
+    let range = window.getSelection().getRangeAt(0);
+    if (range) {
+      // Pegar o texto da seleção e dividir por espaços
+      let selectedText = range.toString().trim();
+      if (selectedText) {
+        palavra = selectedText.split(/\s+/)[0]; // Pega a primeira palavra da seleção
+      }
+    }
+
+    // Retorna a palavra ou vazio caso não tenha encontrado
+    return palavra;
+  }
+
+  // Função para exibir a tradução em uma div centralizada
+  function displayTranslation(traducao) {
+    // Verificar se já existe uma div para evitar duplicação
+    let existingDiv = document.getElementById('translation-div');
+    if (existingDiv) {
+      existingDiv.remove();  // Remover div existente antes de criar uma nova
+    }
+
+    // Criar a div de tradução
+    const div = document.createElement('div');
+    div.id = 'translation-div';
+    div.style.position = 'fixed';
+    div.style.top = '50%';
+    div.style.left = '50%';
+    div.style.transform = 'translate(-50%, -50%)';
+    div.style.backgroundColor = '#fff';
+    div.style.padding = '20px';
+    div.style.borderRadius = '8px';
+    div.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+    div.style.zIndex = '9999';
+    div.style.textAlign = 'center';
+    div.style.maxWidth = '300px';
+    div.style.minWidth = '200px';
+
+    // Adicionar o texto da tradução
+    const translationText = document.createElement('p');
+    translationText.innerText = `Tradução: ${traducao}`;
+    div.appendChild(translationText);
+
+    // Criar o botão de fechar
+    const closeButton = document.createElement('button');
+    closeButton.innerText = 'Fechar';
+    closeButton.style.marginTop = '10px';
+    closeButton.style.padding = '8px 16px';
+    closeButton.style.backgroundColor = '#007bff';
+    closeButton.style.color = '#fff';
+    closeButton.style.border = 'none';
+    closeButton.style.borderRadius = '4px';
+    closeButton.style.cursor = 'pointer';
+
+    // Adicionar evento para fechar a div
+    closeButton.addEventListener('click', function() {
+      div.remove();
+    });
+
+    div.appendChild(closeButton);
+
+    // Adicionar a div ao body
+    document.body.appendChild(div);
+  }
 </script>
 
 
