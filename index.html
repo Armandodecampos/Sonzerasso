@@ -12316,40 +12316,38 @@ document.querySelectorAll('li[data-src]').forEach(item => {
   });
 </script>
 <script>
-  document.getElementById("texto-letra").addEventListener("click", async function(event) {
-      let selecionado = window.getSelection().toString().trim(); // Captura a palavra exata clicada
-
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("texto-letra").addEventListener("click", async function (event) {
+      let selecionado = window.getSelection().toString().trim();
       if (!selecionado) return;
 
-      // 🔹 Remove caracteres especiais para evitar erros na API
-      let palavra = selecionado.replace(/[^a-zA-ZÀ-ÿ0-9]/g, "");
+      // 🔹 Ajuste: Permitir apóstrofos e remover outros caracteres especiais
+      let palavra = selecionado.replace(/[^a-zA-ZÀ-ÿ0-9']/g, "");
+      if (!palavra) return;
 
-      if (!palavra) return; // Evita enviar string vazia
-
-      console.log(`Palavra clicada: ${palavra}`);
+      console.log(`🔹 Palavra clicada: ${palavra}`);
 
       try {
-          // 🔹 Passo 1: Detectar o idioma corretamente
-          let detectResponse = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(palavra)}&langpair=en|pt`);
-          let detectData = await detectResponse.json();
-          
-          let idiomaDetectado = detectData.responseData.detectedLanguage || "en"; // Se não detectar, assume inglês
+        // 🔹 Passo 1: Detectar o idioma corretamente
+        let detectLangResponse = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(palavra)}&langpair=auto|en`);
+        let detectLangData = await detectLangResponse.json();
+        
+        // Se o idioma não for detectado ou for detectado como "não detectado", assumimos que a palavra é inglesa.
+        let idiomaDetectado = detectLangData.responseData?.detectedLanguage || "en";
 
-          console.log(`Idioma detectado: ${idiomaDetectado}`);
+        // 🔹 Passo 2: Traduzir sempre do inglês para o português
+        let translateResponse = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(palavra)}&langpair=${idiomaDetectado}|pt`);
+        let translateData = await translateResponse.json();
 
-          // 🔹 Passo 2: Traduzir a palavra para português
-          let translateResponse = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(palavra)}&langpair=${idiomaDetectado}|pt`);
-          let translateData = await translateResponse.json();
+        let traducao = translateData.responseData?.translatedText || "Erro na tradução"; // Se falhar, retorna erro
 
-          let traducao = translateData.responseData.translatedText || "Erro na tradução";
-
-          console.log(`Tradução: ${traducao}`);
-
-          alert(`Palavra: ${palavra}\nIdioma: ${idiomaDetectado.toUpperCase()}\nTradução: ${traducao}`);
+        // 🔹 Exibe apenas a tradução no alert
+        alert(`Tradução: ${traducao}`);
       } catch (error) {
-          console.error("Erro ao traduzir:", error);
-          alert("Erro ao traduzir a palavra.");
+        console.error("❌ Erro ao traduzir:", error);
+        alert("Erro ao traduzir a palavra. Verifique sua conexão.");
       }
+    });
   });
 </script>
 
