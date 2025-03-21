@@ -12318,30 +12318,43 @@ document.querySelectorAll('li[data-src]').forEach(item => {
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("texto-letra").addEventListener("click", async function (event) {
-      // Obter o texto completo da posição onde foi clicado
       let palavra = getClickedWord(event);
-
-      // Se não houver palavra clicada, retorna
       if (!palavra) return;
 
       console.log(`🔹 Palavra clicada: ${palavra}`);
 
       try {
-        // Passo 1: Detectar o idioma corretamente
-        let detectLangResponse = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(palavra)}&langpair=auto|en`);
+        // Passo 1: Detectar idioma via Google Translate (proxy)
+        let detectLangResponse = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=${encodeURIComponent(palavra)}`);
         let detectLangData = await detectLangResponse.json();
 
-        // Se o idioma não for detectado ou for detectado como "não detectado", assumimos que a palavra é inglesa.
-        let idiomaDetectado = detectLangData.responseData?.detectedLanguage || "en";
+        let idiomaDetectado = detectLangData[2] || "unknown";
 
-        // Passo 2: Traduzir sempre do inglês para o português
-        let translateResponse = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(palavra)}&langpair=${idiomaDetectado}|pt`);
+        console.log(`🌍 Idioma detectado: ${idiomaDetectado}`);
+
+        // Apenas traduzir palavras detectadas como inglês
+        if (idiomaDetectado !== "en") {
+          displayTranslation("Não foi possível traduzir");
+          return;
+        }
+
+        // Passo 2: Traduzir do inglês para o português usando Google Translate (proxy)
+        let translateResponse = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(palavra)}`);
         let translateData = await translateResponse.json();
 
-        let traducao = translateData.responseData?.translatedText || "Erro na tradução"; // Se falhar, retorna erro
+        // Captura todas as traduções possíveis
+        let traducoes = translateData[0].map(item => item[0]);
 
-        // Exibe a tradução em uma div centralizada com botão de fechar
-        displayTranslation(traducao);
+        // Remove duplicatas e junta todas as traduções com ", "
+        let todasTraducoes = [...new Set(traducoes)].join(", ");
+
+        // Exibir tradução ou erro se não houver resultado
+        if (!todasTraducoes.trim()) {
+          displayTranslation("Não foi possível traduzir");
+        } else {
+          displayTranslation(todasTraducoes);
+        }
+
       } catch (error) {
         console.error("❌ Erro ao traduzir:", error);
         alert("Erro ao traduzir a palavra. Verifique sua conexão.");
@@ -12349,34 +12362,40 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     });
   });
 
-  // Função para capturar a palavra clicada a partir da seleção do texto
+  // Função para capturar a palavra clicada corretamente
   function getClickedWord(event) {
-    const textContent = event.target.textContent; // Texto do elemento clicado
-
-    // Encontrar a palavra mais próxima ao ponto de clique
-    let palavra = '';
-    let range = window.getSelection().getRangeAt(0);
-    if (range) {
-      // Pegar o texto da seleção e dividir por espaços
-      let selectedText = range.toString().trim();
-      if (selectedText) {
-        palavra = selectedText.split(/\s+/)[0]; // Pega a primeira palavra da seleção
-      }
+    let range;
+    if (document.caretRangeFromPoint) {
+      range = document.caretRangeFromPoint(event.clientX, event.clientY);
+    } else if (document.caretPositionFromPoint) {
+      let caret = document.caretPositionFromPoint(event.clientX, event.clientY);
+      range = document.createRange();
+      range.setStart(caret.offsetNode, caret.offset);
     }
 
-    // Retorna a palavra ou vazio caso não tenha encontrado
-    return palavra;
+    if (!range) return '';
+
+    let textNode = range.startContainer;
+    let offset = range.startOffset;
+
+    if (textNode.nodeType !== 3) return ''; // Garante que é um nó de texto
+
+    let text = textNode.textContent;
+    let start = offset;
+    let end = offset;
+
+    // Expande para encontrar a palavra completa
+    while (start > 0 && /\S/.test(text[start - 1])) start--;
+    while (end < text.length && /\S/.test(text[end])) end++;
+
+    return text.substring(start, end).trim();
   }
 
   // Função para exibir a tradução em uma div centralizada
   function displayTranslation(traducao) {
-    // Verificar se já existe uma div para evitar duplicação
     let existingDiv = document.getElementById('translation-div');
-    if (existingDiv) {
-      existingDiv.remove();  // Remover div existente antes de criar uma nova
-    }
+    if (existingDiv) existingDiv.remove();
 
-    // Criar a div de tradução
     const div = document.createElement('div');
     div.id = 'translation-div';
     div.style.position = 'fixed';
@@ -12392,12 +12411,10 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     div.style.maxWidth = '300px';
     div.style.minWidth = '200px';
 
-    // Adicionar o texto da tradução
     const translationText = document.createElement('p');
-    translationText.innerText = `Tradução: ${traducao}`;
+    translationText.innerText = `Traduções: ${traducao}`;
     div.appendChild(translationText);
 
-    // Criar o botão de fechar
     const closeButton = document.createElement('button');
     closeButton.innerText = 'Fechar';
     closeButton.style.marginTop = '10px';
@@ -12408,18 +12425,14 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     closeButton.style.borderRadius = '4px';
     closeButton.style.cursor = 'pointer';
 
-    // Adicionar evento para fechar a div
     closeButton.addEventListener('click', function() {
       div.remove();
     });
 
     div.appendChild(closeButton);
-
-    // Adicionar a div ao body
     document.body.appendChild(div);
   }
 </script>
-
 
 </body>
 </html>
