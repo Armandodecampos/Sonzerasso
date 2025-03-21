@@ -12324,36 +12324,22 @@ document.querySelectorAll('li[data-src]').forEach(item => {
       console.log(`🔹 Palavra clicada: ${palavra}`);
 
       try {
-        // Passo 1: Detectar idioma via Google Translate (proxy)
-        let detectLangResponse = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=${encodeURIComponent(palavra)}`);
-        let detectLangData = await detectLangResponse.json();
-
-        let idiomaDetectado = detectLangData[2] || "unknown";
-
-        console.log(`🌍 Idioma detectado: ${idiomaDetectado}`);
-
-        // Apenas traduzir palavras detectadas como inglês
-        if (idiomaDetectado !== "en") {
-          displayTranslation("Não foi possível traduzir");
-          return;
-        }
-
-        // Passo 2: Traduzir do inglês para o português usando Google Translate (proxy)
-        let translateResponse = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(palavra)}`);
+        // Traduzir apenas a palavra isolada (Forçando contexto para melhor tradução)
+        let translateResponse = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(" " + palavra + " ")}`);
         let translateData = await translateResponse.json();
 
-        // Captura todas as traduções possíveis
-        let traducoes = translateData[0].map(item => item[0]);
+        let traducao = translateData[0][0][0] || "Não foi possível traduzir";
 
-        // Remove duplicatas e exibe cada tradução em uma nova linha
-        let todasTraducoes = [...new Set(traducoes)].join("\n");
+        // Corrigir traduções erradas como "doente" para "I'll"
+        if (palavra.toLowerCase() === "i'll") traducao = "eu irei";
+        if (palavra.toLowerCase() === "we'll") traducao = "nós iremos";
+        if (palavra.toLowerCase() === "he'll") traducao = "ele irá";
+        if (palavra.toLowerCase() === "she'll") traducao = "ela irá";
+        if (palavra.toLowerCase() === "they'll") traducao = "eles irão";
+        if (palavra.toLowerCase() === "you'll") traducao = "você irá";
+        if (palavra.toLowerCase() === "begun") traducao = "começado"; // Corrigindo erro de transliteração
 
-        // Exibir tradução ou erro se não houver resultado
-        if (!todasTraducoes.trim()) {
-          displayTranslation("Não foi possível traduzir");
-        } else {
-          displayTranslation(todasTraducoes);
-        }
+        displayTranslation(traducao);
 
       } catch (error) {
         console.error("❌ Erro ao traduzir:", error);
@@ -12362,7 +12348,7 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     });
   });
 
-  // Função para capturar a palavra clicada corretamente
+  // Função para capturar a palavra clicada corretamente (incluindo apóstrofos)
   function getClickedWord(event) {
     let range;
     if (document.caretRangeFromPoint) {
@@ -12384,9 +12370,9 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     let start = offset;
     let end = offset;
 
-    // Expande para encontrar a palavra completa
-    while (start > 0 && /\S/.test(text[start - 1])) start--;
-    while (end < text.length && /\S/.test(text[end])) end++;
+    // Expande para capturar a palavra completa, incluindo apóstrofos ( ' )
+    while (start > 0 && /[\w'’]/.test(text[start - 1])) start--;
+    while (end < text.length && /[\w'’]/.test(text[end])) end++;
 
     return text.substring(start, end).trim();
   }
@@ -12436,6 +12422,7 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     document.body.appendChild(div);
   }
 </script>
+
 
 
 </body>
