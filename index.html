@@ -12345,8 +12345,8 @@ document.querySelectorAll('li[data-src]').forEach(item => {
         // Captura todas as traduções possíveis
         let traducoes = translateData[0].map(item => item[0]);
 
-        // Remove duplicatas e junta todas as traduções com ", "
-        let todasTraducoes = [...new Set(traducoes)].join(", ");
+        // Remove duplicatas e exibe cada tradução em uma nova linha
+        let todasTraducoes = [...new Set(traducoes)].join("\n");
 
         // Exibir tradução ou erro se não houver resultado
         if (!todasTraducoes.trim()) {
@@ -12410,9 +12410,12 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     div.style.textAlign = 'center';
     div.style.maxWidth = '300px';
     div.style.minWidth = '200px';
+    div.style.maxHeight = '300px'; // Limite de altura
+    div.style.overflowY = 'auto'; // Ativa rolagem vertical se necessário
 
     const translationText = document.createElement('p');
-    translationText.innerText = `Traduções: ${traducao}`;
+    translationText.style.whiteSpace = 'pre-line'; // Mantém quebras de linha
+    translationText.innerText = `Tradução:\n${traducao}`;
     div.appendChild(translationText);
 
     const closeButton = document.createElement('button');
@@ -12433,6 +12436,7 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     document.body.appendChild(div);
   }
 </script>
+
 
 </body>
 </html>
