@@ -1141,6 +1141,9 @@ Contribua com o crescimento do site e a adição de novas músicas!
   <br>
   <button onclick="traduzirComGoogle()" class="btn4">Traduzir com Google</button>
   <br><br>
+"Clique em uma palavra em inglês na letra da música para ver a tradução sugerida em português.
+<br>
+<br>
 </div>
 <button onclick="pesquisarLetraNoNavegador()" class="btn4">Pesquisar letra no navegador</button>
 
@@ -12323,24 +12326,45 @@ document.querySelectorAll('li[data-src]').forEach(item => {
 
       console.log(`🔹 Palavra clicada: ${palavra}`);
 
+      // Lista de palavras que não devem ter o apóstrofo removido
+      const palavrasComApostrofo = ["blowin'", "draggin'", "slammin'", "crunchin'"];
+      
+      // Remover apóstrofo no final, mas manter contrações e palavras que necessitam do apóstrofo
+      let palavraCorrigida = palavrasComApostrofo.includes(palavra.toLowerCase()) ? palavra : palavra.replace(/'$/, "");
+
       try {
-        // Traduzir apenas a palavra isolada (Forçando contexto para melhor tradução)
-        let translateResponse = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(" " + palavra + " ")}`);
-        let translateData = await translateResponse.json();
+        // Traduzir a palavra corrigida (sem apóstrofo final)
+        let traducao = await traduzirPalavra(palavraCorrigida);
 
-        let traducao = translateData[0][0][0] || "Não foi possível traduzir";
+        // Se a tradução for idêntica à palavra original, tenta traduzir novamente
+        if (traducao.toLowerCase() === palavra.toLowerCase()) {
+          palavraCorrigida = palavra.replace(/['’]/g, ""); // Remove todos os apóstrofos
+          traducao = await traduzirPalavra(palavraCorrigida);
+        }
 
-        // Corrigir traduções erradas como "doente" para "I'll"
-        if (palavra.toLowerCase() === "i'll") traducao = "eu irei";
-        if (palavra.toLowerCase() === "we'll") traducao = "nós iremos";
-        if (palavra.toLowerCase() === "he'll") traducao = "ele irá";
-        if (palavra.toLowerCase() === "she'll") traducao = "ela irá";
-        if (palavra.toLowerCase() === "they'll") traducao = "eles irão";
-        if (palavra.toLowerCase() === "you'll") traducao = "você irá";
-        if (palavra.toLowerCase() === "begun") traducao = "começado"; // Corrigindo erro de transliteração
+        // Corrigir casos específicos (contrações que a API erra)
+        let correcoes = {
+          "i'll": "eu irei",
+          "we'll": "nós iremos",
+          "he'll": "ele irá",
+          "she'll": "ela irá",
+          "they'll": "eles irão",
+          "you'll": "você irá",
+          "begun": "começado",
+          "slammin'": "batendo", // Ajustar o caso de "slammin'"
+          "draggin'": "arrastando", // Ajustar o caso de "draggin'"
+        };
+
+        if (correcoes[palavra.toLowerCase()]) {
+          traducao = correcoes[palavra.toLowerCase()];
+        }
+
+        // Se a palavra ainda for a mesma, ou seja, sem tradução, apenas exibe ela mesma
+        if (traducao === palavra) {
+          traducao = `Não há tradução disponível para "${palavra}".`;
+        }
 
         displayTranslation(traducao);
-
       } catch (error) {
         console.error("❌ Erro ao traduzir:", error);
         alert("Erro ao traduzir a palavra. Verifique sua conexão.");
@@ -12377,7 +12401,14 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     return text.substring(start, end).trim();
   }
 
-  // Função para exibir a tradução em uma div centralizada
+  // Função para traduzir a palavra usando a API do Google
+  async function traduzirPalavra(palavra) {
+    let response = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(" " + palavra + " ")}`);
+    let data = await response.json();
+    return data[0][0][0] || "Não foi possível traduzir";
+  }
+
+  // Função para exibir a tradução em uma div fixa na parte inferior
   function displayTranslation(traducao) {
     let existingDiv = document.getElementById('translation-div');
     if (existingDiv) existingDiv.remove();
@@ -12385,10 +12416,11 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     const div = document.createElement('div');
     div.id = 'translation-div';
     div.style.position = 'fixed';
-    div.style.top = '50%';
+    div.style.bottom = '200px'; // Ajuste de altura conforme solicitado
     div.style.left = '50%';
-    div.style.transform = 'translate(-50%, -50%)';
-    div.style.backgroundColor = '#fff';
+    div.style.transform = 'translateX(-50%)';
+    div.style.backgroundColor = '#111';
+    div.style.color = '#fa0';
     div.style.padding = '20px';
     div.style.borderRadius = '8px';
     div.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
@@ -12408,8 +12440,8 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     closeButton.innerText = 'Fechar';
     closeButton.style.marginTop = '10px';
     closeButton.style.padding = '8px 16px';
-    closeButton.style.backgroundColor = '#007bff';
-    closeButton.style.color = '#fff';
+    closeButton.style.backgroundColor = '#fa0';
+    closeButton.style.color = '#000';
     closeButton.style.border = 'none';
     closeButton.style.borderRadius = '4px';
     closeButton.style.cursor = 'pointer';
@@ -12422,6 +12454,8 @@ document.querySelectorAll('li[data-src]').forEach(item => {
     document.body.appendChild(div);
   }
 </script>
+
+
 
 
 
